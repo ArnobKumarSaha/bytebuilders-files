@@ -1,0 +1,23 @@
+apiVersion: core.kubestash.com/v1alpha1
+kind: RestoreSession
+metadata:
+  name: sample-restoresession
+  namespace: demo
+spec:
+  manifestOptions:
+    restoreNamespace: demo2
+    mongoDB:
+      db: true
+      dbName: new-mongodb
+      authSecret: true
+      configSecret: true
+  dataSource:
+    snapshot: s3-repo-bc-frequent-backup-1683879840
+    repository: s3-repo
+    encryptionSecret:
+      name: encry-secret # some addon may not support encryption
+      namespace: demo
+  addon:
+    name: kubedb-manifest-addon
+    tasks:
+      - name: manifest-restore

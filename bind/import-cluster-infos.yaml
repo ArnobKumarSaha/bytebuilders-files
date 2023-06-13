@@ -1,0 +1,77 @@
+apiVersion: v1
+items:
+- apiVersion: cluster.bytebuilders.dev/v1alpha1
+  kind: ClusterInfo
+  metadata:
+    creationTimestamp: "2023-05-19T06:12:50Z"
+    generation: 2
+    labels:
+      byte.builders/cluster-external-id: "108715"
+      byte.builders/cluster-import-type: public
+      byte.builders/cluster-owner-id: "2"
+      byte.builders/cluster-provider: Linode
+      byte.builders/cluster-uid: 24083951-094e-404f-a189-e810ca61ae67
+      byte.builders/resource-name: arnob-kube-bind-linode
+    name: arnob-kube-bind-linode-ap-west-2
+    resourceVersion: "85372"
+    uid: feee4582-99a8-4db7-b3c1-804664e1d061
+  spec:
+    createdAt: 1684300565
+    displayName: arnob-kube-bind
+    endpoint: https://b17d9922-ad53-4fdc-a0c9-ad4c518700ec.ap-west-2.linodelke.net:443
+    externalID: "108715"
+    kubernetesVersion: v1.26.3
+    location: ap-west
+    name: arnob-kube-bind-linode
+    nodeCount: 0
+    ownerID: 2
+    ownerName: appscode
+    provider: Linode
+    uid: 24083951-094e-404f-a189-e810ca61ae67
+
+
+
+
+
+
+- apiVersion: cluster.bytebuilders.dev/v1alpha1
+  kind: ClusterUserAuth
+  metadata:
+    creationTimestamp: "2023-05-19T06:12:50Z"
+    generation: 1
+    labels:
+      byte.builders/cluster-owner-id: "2"
+      byte.builders/cluster-provider: Linode
+      byte.builders/cluster-uid: 24083951-094e-404f-a189-e810ca61ae67
+      byte.builders/cluster-user-id: "2"
+    name: 2.arnob-kube-bind-linode-ap-west-2
+    resourceVersion: "84836"
+    uid: 03d739dd-51fa-4cb0-b1c0-57b79c47cab1
+  spec:
+    clusterUID: 24083951-094e-404f-a189-e810ca61ae67
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IlkwUWctRUtwTmo4a0g4MVp2WEhtbGlkU0VQMFRoYzJaOENEUFlOc3JLMVUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJsa2UtYWRtaW4tdG9rZW4tOWw0d2giLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoibGtlLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiMjAyMDg0OGYtMDI4My00YmU2LTgzNzgtODJmZTQxNmQ5ODc3Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmxrZS1hZG1pbiJ9.jfZr3aygbJKf9m2JR15FKbi-R8-tk57ADOokOhBtWQ-GG4ml5hhdav8yBA5Iy4Y2iCp21dPEmy56cyEWzVuB2Aj78mZziV-93hAlZv1y7U8Fd8n-3kF-5bYaSVNq-wbA_Yy9CPI1tEXtTOBBxAFgjMPeeltQgHvG1Igseg404oe4gpCDZ0IFpiKuFOLuAzkFwmZYrIhfA2von0Qr73auJOa-72ec22VedkFr473b1sqcxXQEZIMTD52punvnY5aSKrcmeQKQuJdc-mvt1D4JFd7iMjX7I9nozxDRPaYbnlMJpCaYBTH_k1X15A_d36Y49XCALGwlmUyeZZRgCvNzcA
+    userID: 2
+
+
+
+
+- apiVersion: cluster.bytebuilders.dev/v1alpha1
+  kind: ClusterAuthInfoTemplate
+  metadata:
+    creationTimestamp: "2023-05-19T06:12:50Z"
+    generation: 1
+    labels:
+      byte.builders/cluster-owner-id: "2"
+      byte.builders/cluster-provider: Linode
+      byte.builders/cluster-uid: 24083951-094e-404f-a189-e810ca61ae67
+    name: arnob-kube-bind-linode-ap-west-2
+    resourceVersion: "84837"
+    uid: 0cb48be3-688a-4f6d-bda5-7fae65439add
+  spec:
+    certificateAuthorityData: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1EVXhOekExTVRZeE4xb1hEVE16TURVeE5EQTFNVFl4TjFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTHlCCkhtazRCN0FqemlRK2MzK1pjYTlsM3hWRHFjQnpXbWNXZHM1QWRRbEtDMjdtU2Z1NjUvRzNhY2pCNGNHUEtrd1MKVExjbG1LU0ltY1p4bDFhTVBqRjNJTDlEeFJobUtvdS9tTk5IY3ZTSnYzM0RNOWdlU1dKTmF4N242cE9NYkJWZApJWVFPWXlyTWtpNlZSbnVZQ1dzSW4wdU5jYmp1czFheU80ajBuZDM3RjRicExuRXlNWDFSS1RjYzZjOXoyc3dWCmZpOW42L2N3Zzh3VjhiUWpuL2ZERUxXS2VFQk13TzFNeEQwUENISmwzRGlMb1h5K0k2L2VJczZiSVVzT1diWTQKcjBFcWJJZlFpK2V4emY4d1JSMlAybmFxZ294Uk1Pc0s1RTNPaDg0R2hHSmMvKzBxcjB1dkJ3VzFTZ1J2RHJ5ZgoxTjEyOEsxRDBMdzVzV1lkOHVNQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZCT2lQTFRyd0RhZHc1ajBreGxPaUhsNDVOblJNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBSU5TN2I0VHc0V0EzQXRFOWhhTwpXS3NSZ1I3WE1pTjcwWStCcjlHWXYvcWJhKzExN2VxSDNLWjNheHpLZHVEaXFVdElVNTF4WjZ2RTBMUlU5bTI5CktiK2p1RTJHSVptVlVGR0JGclRPRmpNSUlwUVFtb0szUXpzYVBoQlgxdGlDWjVRb1lhSFRkVGpTNEJjbWI2TnIKalJqTG5sbjhDZG1jWjUzMW9YOWNlYjgyZWJDNE8vMjlmbncraGhsaHVXUmRiOUJTUm56VTV3akxsTk1Xb3lJbwpZdkxKUVIzelpBZU1pMkMvcC95TlAvTGMrTW1qeEpaV2hXT1BHb0QvNVBHTmd4cHdmNEVxUWhlUzluNXoxbkVUCmVFOFpCd0kzbGFyd1BzYit3QmdmQUhoOFJ2emo4NWpQQVNWa0lHRytBQ1JNYk9oMDR6S0ZMcWJpclVjZjkvdysKa0Y4PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    ownerID: 2
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IlkwUWctRUtwTmo4a0g4MVp2WEhtbGlkU0VQMFRoYzJaOENEUFlOc3JLMVUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJsa2UtYWRtaW4tdG9rZW4tOWw0d2giLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoibGtlLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiMjAyMDg0OGYtMDI4My00YmU2LTgzNzgtODJmZTQxNmQ5ODc3Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmxrZS1hZG1pbiJ9.jfZr3aygbJKf9m2JR15FKbi-R8-tk57ADOokOhBtWQ-GG4ml5hhdav8yBA5Iy4Y2iCp21dPEmy56cyEWzVuB2Aj78mZziV-93hAlZv1y7U8Fd8n-3kF-5bYaSVNq-wbA_Yy9CPI1tEXtTOBBxAFgjMPeeltQgHvG1Igseg404oe4gpCDZ0IFpiKuFOLuAzkFwmZYrIhfA2von0Qr73auJOa-72ec22VedkFr473b1sqcxXQEZIMTD52punvnY5aSKrcmeQKQuJdc-mvt1D4JFd7iMjX7I9nozxDRPaYbnlMJpCaYBTH_k1X15A_d36Y49XCALGwlmUyeZZRgCvNzcA
+    uid: 24083951-094e-404f-a189-e810ca61ae67
+kind: List
+metadata:
+  resourceVersion: ""

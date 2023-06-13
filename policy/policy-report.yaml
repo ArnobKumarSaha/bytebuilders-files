@@ -1,0 +1,60 @@
+
+apiVersion: policy.k8s.appscode.com/v1alpha1
+kind: PolicyReport
+# request:
+#   ref:
+#     name: kubeops
+#   resource:
+#     group: 
+#     kind: Namespace
+#     name: namespaces
+#     version: v1
+
+request:
+  ref:
+    name: kube-ui-server
+    namespace: kubeops
+  resource:
+    group: "core"
+    kind: Service
+    name: services
+    version: v1
+
+# request:
+#   ref:
+#     name: kube-ui-server-586c76898f-slf9f
+#     namespace: kubeops
+#   resource:
+#     group: "core"
+#     kind: Pod
+#     name: pods
+#     version: v1
+
+# request:
+#   ref:
+#     name: kube-ui-server
+#     namespace: kubeops
+#   resource:
+#     group: apps
+#     kind: Deployment
+#     name: deployments
+#     version: v1
+
+
+
+# console.log(encodeURIComponent(JSON.stringify({
+#   apiVersion: "policy.k8s.appscode.com/v1alpha1",
+#   kind: "PolicyReport",
+#   request: {
+#     ref: {
+#       name: "kube-ui-server",
+#       namespace: "kubeops"
+#     },
+#     resource: {
+#       group: "apps",
+#       kind: "Deployment",
+#       name: "deployments",
+#       version: "v1"
+#     }
+#   }
+# })));

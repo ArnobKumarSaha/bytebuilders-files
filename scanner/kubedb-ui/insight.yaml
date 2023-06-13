@@ -1,0 +1,57 @@
+apiVersion: ui.kubedb.com/v1alpha1
+kind: MongoDBInsight
+metadata:
+  creationTimestamp: "2022-12-28T05:25:02Z"
+  generation: 3
+  name: mg-rs
+  namespace: demo
+  resourceVersion: "99732"
+  uid: mgin-7eb23fa2-c0a9-46ce-98f5-278d17873cf7
+spec:
+  connections:
+    activeConnections: 12
+    availableConnections: 838825
+    currentConnections: 35
+    totalConnections: 236
+  dbStats:
+    dataSize: 104971
+    indexSize: 253952
+    totalCollections: 16
+    totalIndexes: 14
+  replicaSetInfo:
+    numberOfReplicas: 3
+  status: Ready
+  type: ReplicaSet
+  version: 4.4.6
+status:
+  conditions:
+  - lastTransitionTime: "2022-12-28T05:25:02Z"
+    message: 'The KubeDB operator has started the provisioning of MongoDB: demo/mg-rs'
+    reason: DatabaseProvisioningStartedSuccessfully
+    status: "True"
+    type: ProvisioningStarted
+  - lastTransitionTime: "2022-12-28T05:28:07Z"
+    message: All desired replicas are ready.
+    reason: AllReplicasReady
+    status: "True"
+    type: ReplicaReady
+  - lastTransitionTime: "2022-12-28T05:28:28Z"
+    message: 'The MongoDB: demo/mg-rs is accepting client requests.'
+    observedGeneration: 3
+    reason: DatabaseAcceptingConnectionRequest
+    status: "True"
+    type: AcceptingConnection
+  - lastTransitionTime: "2022-12-28T05:28:28Z"
+    message: 'The MongoDB: demo/mg-rs is ready.'
+    observedGeneration: 3
+    reason: ReadinessCheckSucceeded
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2022-12-28T05:28:36Z"
+    message: 'The MongoDB: demo/mg-rs is successfully provisioned.'
+    observedGeneration: 3
+    reason: DatabaseSuccessfullyProvisioned
+    status: "True"
+    type: Provisioned
+  observedGeneration: 3
+  phase: Ready

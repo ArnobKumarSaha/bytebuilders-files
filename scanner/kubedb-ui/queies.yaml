@@ -1,0 +1,43 @@
+apiVersion: ui.kubedb.com/v1alpha1
+kind: MongoDBQueries
+metadata:
+  creationTimestamp: "2022-12-28T05:25:02Z"
+  generation: 3
+  name: mg-rs
+  namespace: demo
+  resourceVersion: "99732"
+  uid: mgqr-7eb23fa2-c0a9-46ce-98f5-278d17873cf7
+spec:
+  queries:
+  - avgExecutionTimeMilliSeconds: 0
+    collectionName: ""
+    command: '{"$clusterTime":{"clusterTime":{"$timestamp":{"i":4,"t":1672205308}},"signature":{"hash":{"$binary":{"base64":"1avBZYW+/XyJjIbg9jgqFfcjv5g=","subType":"00"}},"keyId":{"$numberLong":"7182066573186695172"}}},"$db":"kubedb-system","$readPreference":{"mode":"primaryPreferred"},"dbStats":{"$numberInt":"1"},"lsid":{"id":{"$binary":{"base64":"64PZqdNATzemMdlI+4y6kQ==","subType":"04"}}}}'
+    count: 1
+    databaseName: kubedb-system
+    maxExecutionTimeMilliSeconds: 0
+    minExecutionTimeMilliSeconds: 0
+    operation: command
+  - avgExecutionTimeMilliSeconds: 0
+    collectionName: ""
+    command: '{"$clusterTime":{"clusterTime":{"$timestamp":{"i":4,"t":1672205308}},"signature":{"hash":{"$binary":{"base64":"1avBZYW+/XyJjIbg9jgqFfcjv5g=","subType":"00"}},"keyId":{"$numberLong":"7182066573186695172"}}},"$db":"kubedb-system","$readPreference":{"mode":"primaryPreferred"},"dbStats":{"$numberInt":"1"},"lsid":{"id":{"$binary":{"base64":"dlQ1mpJDRTWksgBsF+N8lw==","subType":"04"}}}}'
+    count: 1
+    databaseName: kubedb-system
+    maxExecutionTimeMilliSeconds: 0
+    minExecutionTimeMilliSeconds: 0
+    operation: command
+  - avgExecutionTimeMilliSeconds: 0
+    collectionName: ""
+    command: '{"$clusterTime":{"clusterTime":{"$timestamp":{"i":4,"t":1672205308}},"signature":{"hash":{"$binary":{"base64":"1avBZYW+/XyJjIbg9jgqFfcjv5g=","subType":"00"}},"keyId":{"$numberLong":"7182066573186695172"}}},"$db":"kubedb-system","$readPreference":{"mode":"primaryPreferred"},"dbStats":{"$numberInt":"1"},"lsid":{"id":{"$binary":{"base64":"h+7dHCQKRNKq5CrBR9tM0g==","subType":"04"}}}}'
+    count: 1
+    databaseName: kubedb-system
+    maxExecutionTimeMilliSeconds: 0
+    minExecutionTimeMilliSeconds: 0
+    operation: command
+  - avgExecutionTimeMilliSeconds: 0
+    collectionName: ""
+    command: '{"$clusterTime":{"clusterTime":{"$timestamp":{"i":1,"t":1672205343}},"signature":{"hash":{"$binary":{"base64":"iyjgXYa+d61zXaHpywe0WVUU8nQ=","subType":"00"}},"keyId":{"$numberLong":"7182066573186695172"}}},"$db":"kubedb-system","$readPreference":{"mode":"primaryPreferred"},"dbStats":{"$numberInt":"1"},"lsid":{"id":{"$binary":{"base64":"J8vbYwu5SvWttkHS9RISUA==","subType":"04"}}}}'
+    count: 1
+    databaseName: kubedb-system
+    maxExecutionTimeMilliSeconds: 0
+    minExecutionTimeMilliSeconds: 0
+    operation: command

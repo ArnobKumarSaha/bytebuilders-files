@@ -1,0 +1,59 @@
+apiVersion: ui.kubedb.com/v1alpha1
+kind: MongoDBSchemaOverview
+metadata:
+  creationTimestamp: "2022-12-28T05:25:02Z"
+  generation: 3
+  name: mg-rs
+  namespace: demo
+  resourceVersion: "99732"
+  uid: mgsc-7eb23fa2-c0a9-46ce-98f5-278d17873cf7
+spec:
+  collections:
+  - name: health-check
+    size:
+    - 135
+  - name: oplog.rs
+    size:
+    - 5238
+  - name: replset.election
+    size:
+    - 60
+  - name: replset.initialSyncId
+    size:
+    - 49
+  - name: replset.minvalid
+    size:
+    - 45
+  - name: replset.oplogTruncateAfterPoint
+    size:
+    - 71
+  - name: startup_log
+    size:
+    - 2163
+  - name: system.indexBuilds
+    size:
+    - 0
+  - name: system.keys
+    size:
+    - 170
+  - name: system.profile
+    size:
+    - 59585
+  - name: system.profile
+    size:
+    - 53498
+  - name: system.replset
+    size:
+    - 907
+  - name: system.rollback.id
+    size:
+    - 41
+  - name: system.users
+    size:
+    - 522
+  - name: system.version
+    size:
+    - 104
+  - name: transactions
+    size:
+    - 166

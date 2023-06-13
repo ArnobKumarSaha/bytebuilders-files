@@ -1,0 +1,37 @@
+apiVersion: reports.scanner.appscode.com/v1alpha1
+kind: Image
+request:
+  ref:
+    name: etcd-kind-control-plane
+    namespace: kube-system
+  resource:
+    group: ""
+    kind: Pod
+    name: pods
+    version: v1
+response:
+  images:
+  - image: registry.k8s.io/etcd:3.5.4-0
+    lineages:
+    - chain:
+      - ref:
+          name: kind-control-plane
+        resource:
+          group: ""
+          kind: Node
+          name: nodes
+          scope: Cluster
+          version: v1
+      - ref:
+          name: etcd-kind-control-plane
+          namespace: kube-system
+        resource:
+          group: ""
+          kind: Pod
+          name: pods
+          scope: Namespaced
+          version: v1
+      containers:
+      - etcd
+    pullCredentials:
+      namespace: kube-system

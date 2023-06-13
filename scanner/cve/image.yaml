@@ -1,0 +1,12 @@
+apiVersion: reports.scanner.appscode.com/v1alpha1
+kind: Image
+request:
+  resource:
+    group: ""
+    version: v1
+    name: pods
+    kind: Pod
+  ref:
+    name: etcd-kind-control-plane
+    namespace: kube-system
+

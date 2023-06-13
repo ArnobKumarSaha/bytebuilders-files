@@ -1,0 +1,6 @@
+apiVersion: mangodb.com/v1alpha1
+kind: MangoDB
+metadata:
+  name: m1
+spec:
+  tier: "Dedicated"

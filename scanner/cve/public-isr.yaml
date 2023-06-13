@@ -1,0 +1,6 @@
+apiVersion: scanner.appscode.com/v1alpha1
+kind: ImageScanRequest
+metadata:
+  name: pub
+spec:
+  image: mysql:8.0.31

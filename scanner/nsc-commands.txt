@@ -1,0 +1,22 @@
+
+In reverse way :
+
+
+nsc list users
+nsc delete operator appscode
+nsc list operators
+nats-server -p 4222 -m 8222 -js
+nsc list accounts
+nsc list keys
+cd .local/share/nats/nsc/
+nsc env --account SYS
+nsc push -u nats://localhost:4222 -A
+nsc list account -A
+nats-server -p 4222 -m 8222 -js -c server.conf
+nsc generate config --config-file server.conf --nats-resolver
+nsc list keys -A
+nsc describe operator
+nsc describe
+nsc init
+echo 'export PATH="$PATH:/home/arnob/.nsccli/bin"' >> $HOME/.bashrc
+curl -L https://raw.githubusercontent.com/nats-io/nsc/master/install.py | python3

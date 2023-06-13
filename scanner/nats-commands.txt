@@ -1,0 +1,39 @@
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 request scanner-test.queue.scan index.docker.io/library/mysql:8.0.31
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con info scanner-test workers
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con info test
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con ls test
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 request "test.queue.scan" hello
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con next test workers
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con add test
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con add workers
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 str add test
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 reply "scanner-test.queue.>" ""
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con next scanner-test workers
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con next scanner workers
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con info scanner workers
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 reply "scanner.queue.>" hello
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con ls scanner
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 str ls -a
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 con next scanner workers --no-ack
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 sub "scanner.>"
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 kv ls scanner
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 kv ls
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 kv get scanner-reports xyz
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 kv get scanner-reports
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 object ls trivy
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 object ls
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 stream ls
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 stream rm scanner
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 object put trivy db.tar.gz
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 object add trivy
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 pub scanner.queue.scan nginx
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 request scanner.report alpine
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 request scanner.report nginx
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 pub scanner.report nginx
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 stream subjects scanner
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 stream info scanner
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 stream scanner info
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 stream scanner ls
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 js stream
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 js stream ls
+nats -s this-is-nats.appscode.ninja:4222 --user admin --password 22fRK1EIWMdGfpcbw5J3 js ls

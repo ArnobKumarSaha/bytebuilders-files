@@ -1,0 +1,303 @@
+apiVersion: v1
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIC/jCCAeagAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+    cm5ldGVzMB4XDTIzMDUxMjE2MTAzOVoXDTMzMDUwOTE2MTAzOVowFTETMBEGA1UE
+    AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKRl
+    5KpUs8lF9ppDUoVaQO2aeC0xJ+cqXGSQePtG5IxZAsryrluOX+mUVgRULt1QAQFk
+    6bPTYsyVTSs9cFJU9zCe3gpJOUQf6crm69O60CoIJXyPdbBjGdq6ARD1oyGpE1Nk
+    ql8TZaZefTXK/+cquBHSLXty21ZNpxinwO0pkmX2zryLd8fTlmQBCxq2YhIfWzrr
+    XS6wGQdmzQiQlpfYFP4GCaP+y/odoS/U4xODzWqF9k3lYIK/S2js7plIzNbBG+Jm
+    tB0wjPKn8fbHez86MpP2eY0G4n9sMX42XnpPhwOEl2VZ4PYgiKvILjwJXZXzclNz
+    xjg9xcxNhV81uks7TOcCAwEAAaNZMFcwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+    /wQFMAMBAf8wHQYDVR0OBBYEFJtQn3KS4ZKhrrGSofmTOjxyIue/MBUGA1UdEQQO
+    MAyCCmt1YmVybmV0ZXMwDQYJKoZIhvcNAQELBQADggEBAEIK0ER3r43Re8+kzxAw
+    wiKcJFUGv4DDnCp3xq7OKMdo48TFhS4zVUqDCX8nynXVJp1pxs6cOwLb41XXxxC+
+    ozyLQpHZM/sGmswUCyL3KZ0pmHaI3Zzv/ac1qoiFK3SFBzWKaDqpDbIKXn2tEiJF
+    EeZn3XeRXKdHD/9JK8Rc7LxRR6Q+vzNDn9ptwLy6s+08K7XlWLoyKEDe/6RwuUCN
+    w2ckwnFJLdjSyePva/1hU0QSJIKUMh7WuSGaB9gU6jhPKOA5A3lWcWGfxwKlO4t7
+    YNP0KRHURmWG6pudZVMjR+3qMh/qWu29Ui7cINTeAjcXlyeAkNpZElxlcBr/F+4L
+    n6I=
+    -----END CERTIFICATE-----
+kind: ConfigMap
+metadata:
+  annotations:
+    kubernetes.io/description: Contains a CA bundle that can be used to verify the
+      kube-apiserver when using internal endpoints such as the internal service IP
+      or kubernetes.default.svc. No other usage is guaranteed across distributions
+      of Kubernetes clusters.
+  creationTimestamp: "2023-05-12T17:30:12Z"
+  name: kube-root-ca.crt
+  namespace: bb-cpl9q
+  resourceVersion: "4789"
+  uid: d6b3e8f4-e223-4afc-8f62-5a6d3cd3d18c
+---
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1EVXhNakUyTVRBek9Wb1hEVE16TURVd09URTJNVEF6T1Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBS1JsCjVLcFVzOGxGOXBwRFVvVmFRTzJhZUMweEorY3FYR1NRZVB0RzVJeFpBc3J5cmx1T1grbVVWZ1JVTHQxUUFRRmsKNmJQVFlzeVZUU3M5Y0ZKVTl6Q2UzZ3BKT1VRZjZjcm02OU82MENvSUpYeVBkYkJqR2RxNkFSRDFveUdwRTFOawpxbDhUWmFaZWZUWEsvK2NxdUJIU0xYdHkyMVpOcHhpbndPMHBrbVgyenJ5TGQ4ZlRsbVFCQ3hxMlloSWZXenJyClhTNndHUWRtelFpUWxwZllGUDRHQ2FQK3kvb2RvUy9VNHhPRHpXcUY5azNsWUlLL1MyanM3cGxJek5iQkcrSm0KdEIwd2pQS244ZmJIZXo4Nk1wUDJlWTBHNG45c01YNDJYbnBQaHdPRWwyVlo0UFlnaUt2SUxqd0pYWlh6Y2xOegp4amc5eGN4TmhWODF1a3M3VE9jQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZKdFFuM0tTNFpLaHJyR1NvZm1UT2p4eUl1ZS9NQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBRUlLMEVSM3I0M1JlOCtrenhBdwp3aUtjSkZVR3Y0RERuQ3AzeHE3T0tNZG80OFRGaFM0elZVcURDWDhueW5YVkpwMXB4czZjT3dMYjQxWFh4eEMrCm96eUxRcEhaTS9zR21zd1VDeUwzS1owcG1IYUkzWnp2L2FjMXFvaUZLM1NGQnpXS2FEcXBEYklLWG4ydEVpSkYKRWVabjNYZVJYS2RIRC85Sks4UmM3THhSUjZRK3Z6TkRuOXB0d0x5NnMrMDhLN1hsV0xveUtFRGUvNlJ3dVVDTgp3MmNrd25GSkxkalN5ZVB2YS8xaFUwUVNKSUtVTWg3V3VTR2FCOWdVNmpoUEtPQTVBM2xXY1dHZnh3S2xPNHQ3CllOUDBLUkhVUm1XRzZwdWRaVk1qUiszcU1oL3FXdTI5VWk3Y0lOVGVBamNYbHllQWtOcFpFbHhsY0JyL0YrNEwKbjZJPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  namespace: YmItY3BsOXE=
+  token: ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklrWm9WMlV6TkVSUVkySnRkR2xvYW0xaU9XaEtaMGxLUW1GcVEyaFpYMjFuTW5kdFVXcFVRVUZMTVRBaWZRLmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUppWWkxamNHdzVjU0lzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVmpjbVYwTG01aGJXVWlPaUprWldaaGRXeDBMWFJ2YTJWdUxUWTROamw2SWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXpaWEoyYVdObExXRmpZMjkxYm5RdWJtRnRaU0k2SW1SbFptRjFiSFFpTENKcmRXSmxjbTVsZEdWekxtbHZMM05sY25acFkyVmhZMk52ZFc1MEwzTmxjblpwWTJVdFlXTmpiM1Z1ZEM1MWFXUWlPaUkxTkRVM1l6TTNPQzFtWlRnM0xUUmpaVFl0T0RGaU9DMHhOamRoTnpGbVpHRTBNemdpTENKemRXSWlPaUp6ZVhOMFpXMDZjMlZ5ZG1salpXRmpZMjkxYm5RNlltSXRZM0JzT1hFNlpHVm1ZWFZzZENKOS5XLUZaZkdMN0NtLUFXQ0l4b2paY29paVgzRndVR1htcDdRQ25QWVpXU2p2SHdJcWQ3bVNNMWlHM3ByaDJOck1QQ2k5WHVQNkNLelFDU3RQcV80S29LZDF1eFFqWkZPOWcxTkVHNFRDck5xTmttV05veW1yTHhaa1dVdzVXRmFvY0djNG9zUnU5eWZ4OGVDWVZmSmo0RVZMQzRPSmM0SDY5TDRKWFVjcUtWWHByWDM5T0pQckRFS1J5X0NHN1l3VkxSOWVMdjFpRXZnSHJ3TTdUV0EtMXVyS1ZsMXNzRVNkOXFBeDVaZGdtQy1wLWY0VzhNSF81X2h2V3h0WndqM1UxR05QWVNaUFJNX2pDY0NFc0xZcGhyOGhWeUJ2SFUyOXpIN0FmZGZvbTFUUlRSV3RKUTJ2OFZDZTR1WW1nbDAxc25KU3VrdGk0ZzlDa0lmc1UtNDZQbUE=
+kind: Secret
+metadata:
+  annotations:
+    kubernetes.io/service-account.name: default
+    kubernetes.io/service-account.uid: 5457c378-fe87-4ce6-81b8-167a71fda438
+  creationTimestamp: "2023-05-12T17:30:12Z"
+  name: default-token-6869z
+  namespace: bb-cpl9q
+  resourceVersion: "4791"
+  uid: da80ade8-8ee4-4782-abd0-c809606fb7bb
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1EVXhNakUyTVRBek9Wb1hEVE16TURVd09URTJNVEF6T1Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBS1JsCjVLcFVzOGxGOXBwRFVvVmFRTzJhZUMweEorY3FYR1NRZVB0RzVJeFpBc3J5cmx1T1grbVVWZ1JVTHQxUUFRRmsKNmJQVFlzeVZUU3M5Y0ZKVTl6Q2UzZ3BKT1VRZjZjcm02OU82MENvSUpYeVBkYkJqR2RxNkFSRDFveUdwRTFOawpxbDhUWmFaZWZUWEsvK2NxdUJIU0xYdHkyMVpOcHhpbndPMHBrbVgyenJ5TGQ4ZlRsbVFCQ3hxMlloSWZXenJyClhTNndHUWRtelFpUWxwZllGUDRHQ2FQK3kvb2RvUy9VNHhPRHpXcUY5azNsWUlLL1MyanM3cGxJek5iQkcrSm0KdEIwd2pQS244ZmJIZXo4Nk1wUDJlWTBHNG45c01YNDJYbnBQaHdPRWwyVlo0UFlnaUt2SUxqd0pYWlh6Y2xOegp4amc5eGN4TmhWODF1a3M3VE9jQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZKdFFuM0tTNFpLaHJyR1NvZm1UT2p4eUl1ZS9NQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBRUlLMEVSM3I0M1JlOCtrenhBdwp3aUtjSkZVR3Y0RERuQ3AzeHE3T0tNZG80OFRGaFM0elZVcURDWDhueW5YVkpwMXB4czZjT3dMYjQxWFh4eEMrCm96eUxRcEhaTS9zR21zd1VDeUwzS1owcG1IYUkzWnp2L2FjMXFvaUZLM1NGQnpXS2FEcXBEYklLWG4ydEVpSkYKRWVabjNYZVJYS2RIRC85Sks4UmM3THhSUjZRK3Z6TkRuOXB0d0x5NnMrMDhLN1hsV0xveUtFRGUvNlJ3dVVDTgp3MmNrd25GSkxkalN5ZVB2YS8xaFUwUVNKSUtVTWg3V3VTR2FCOWdVNmpoUEtPQTVBM2xXY1dHZnh3S2xPNHQ3CllOUDBLUkhVUm1XRzZwdWRaVk1qUiszcU1oL3FXdTI5VWk3Y0lOVGVBamNYbHllQWtOcFpFbHhsY0JyL0YrNEwKbjZJPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  namespace: YmItY3BsOXE=
+  token: ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklrWm9WMlV6TkVSUVkySnRkR2xvYW0xaU9XaEtaMGxLUW1GcVEyaFpYMjFuTW5kdFVXcFVRVUZMTVRBaWZRLmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUppWWkxamNHdzVjU0lzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVmpjbVYwTG01aGJXVWlPaUpyZFdKbExXSnBibVJsY2lJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZ5ZG1salpTMWhZMk52ZFc1MExtNWhiV1VpT2lKcmRXSmxMV0pwYm1SbGNpSXNJbXQxWW1WeWJtVjBaWE11YVc4dmMyVnlkbWxqWldGalkyOTFiblF2YzJWeWRtbGpaUzFoWTJOdmRXNTBMblZwWkNJNkltUmpaR0psT1dFMExXUTBZVGt0TkdRek9DMWhNR1l5TFdKbE9EbGpaVE15TkRFd1l5SXNJbk4xWWlJNkluTjVjM1JsYlRwelpYSjJhV05sWVdOamIzVnVkRHBpWWkxamNHdzVjVHByZFdKbExXSnBibVJsY2lKOS5QbERUTzFCdkNVaHlrWUkyeGtOYzZJR24wMXkwNzV0Rk5iMFJxeGlhSDJZT19QSGtxbjdfbnlRZE1wQ0loLWdfVmo0dUhRdlNRQ1YtU3UxQ1N0bkJ3NlBDYjJOeGpJZlR4WlM2X04xLUVRN1RDbWJ5YkJFQXozbFVpQVRDVmRHcjlJY2hhTXlmeE1pcnk1NlZmcXVaWnA1R3IzU04wTkgyRVJlMnRzaFB0aHNhSjgzRzViUXIyUG5UTlA1dWhvQWRKYS0wcEJQLVIwVHdYU3M1TE9STjJ3Y2pJejVBN2g2Um9mckNZeGlGZnJGVkdrV1VJZllPX3pPRFhsZ1dmREVBS0J1ZThfUVJjbnVHajY2WmxyZUtwNUlyd05SNkxsaTlPUG1TakJuei1qS0dVblV5QmZ4bnRUaEljWUxkT0dvdU54cW5sVEk3OW0zSWIyZWpLNGdON1E=
+kind: Secret
+metadata:
+  annotations:
+    kubernetes.io/service-account.name: kube-binder
+    kubernetes.io/service-account.uid: dcdbe9a4-d4a9-4d38-a0f2-be89ce32410c
+  creationTimestamp: "2023-05-12T17:30:13Z"
+  name: kube-binder
+  namespace: bb-cpl9q
+  resourceVersion: "4800"
+  uid: 701404bb-2f97-42a8-b0b1-c7207c1a12f2
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1EVXhNakUyTVRBek9Wb1hEVE16TURVd09URTJNVEF6T1Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBS1JsCjVLcFVzOGxGOXBwRFVvVmFRTzJhZUMweEorY3FYR1NRZVB0RzVJeFpBc3J5cmx1T1grbVVWZ1JVTHQxUUFRRmsKNmJQVFlzeVZUU3M5Y0ZKVTl6Q2UzZ3BKT1VRZjZjcm02OU82MENvSUpYeVBkYkJqR2RxNkFSRDFveUdwRTFOawpxbDhUWmFaZWZUWEsvK2NxdUJIU0xYdHkyMVpOcHhpbndPMHBrbVgyenJ5TGQ4ZlRsbVFCQ3hxMlloSWZXenJyClhTNndHUWRtelFpUWxwZllGUDRHQ2FQK3kvb2RvUy9VNHhPRHpXcUY5azNsWUlLL1MyanM3cGxJek5iQkcrSm0KdEIwd2pQS244ZmJIZXo4Nk1wUDJlWTBHNG45c01YNDJYbnBQaHdPRWwyVlo0UFlnaUt2SUxqd0pYWlh6Y2xOegp4amc5eGN4TmhWODF1a3M3VE9jQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZKdFFuM0tTNFpLaHJyR1NvZm1UT2p4eUl1ZS9NQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBRUlLMEVSM3I0M1JlOCtrenhBdwp3aUtjSkZVR3Y0RERuQ3AzeHE3T0tNZG80OFRGaFM0elZVcURDWDhueW5YVkpwMXB4czZjT3dMYjQxWFh4eEMrCm96eUxRcEhaTS9zR21zd1VDeUwzS1owcG1IYUkzWnp2L2FjMXFvaUZLM1NGQnpXS2FEcXBEYklLWG4ydEVpSkYKRWVabjNYZVJYS2RIRC85Sks4UmM3THhSUjZRK3Z6TkRuOXB0d0x5NnMrMDhLN1hsV0xveUtFRGUvNlJ3dVVDTgp3MmNrd25GSkxkalN5ZVB2YS8xaFUwUVNKSUtVTWg3V3VTR2FCOWdVNmpoUEtPQTVBM2xXY1dHZnh3S2xPNHQ3CllOUDBLUkhVUm1XRzZwdWRaVk1qUiszcU1oL3FXdTI5VWk3Y0lOVGVBamNYbHllQWtOcFpFbHhsY0JyL0YrNEwKbjZJPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  namespace: YmItY3BsOXE=
+  token: ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklrWm9WMlV6TkVSUVkySnRkR2xvYW0xaU9XaEtaMGxLUW1GcVEyaFpYMjFuTW5kdFVXcFVRVUZMTVRBaWZRLmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUppWWkxamNHdzVjU0lzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVmpjbVYwTG01aGJXVWlPaUpyZFdKbExXSnBibVJsY2kxMGIydGxiaTFrZDNKaU9TSXNJbXQxWW1WeWJtVjBaWE11YVc4dmMyVnlkbWxqWldGalkyOTFiblF2YzJWeWRtbGpaUzFoWTJOdmRXNTBMbTVoYldVaU9pSnJkV0psTFdKcGJtUmxjaUlzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVnlkbWxqWlMxaFkyTnZkVzUwTG5WcFpDSTZJbVJqWkdKbE9XRTBMV1EwWVRrdE5HUXpPQzFoTUdZeUxXSmxPRGxqWlRNeU5ERXdZeUlzSW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZERwaVlpMWpjR3c1Y1RwcmRXSmxMV0pwYm1SbGNpSjkuanhUWDhJcnpaVWZsNlpnUkp5N09sSFlkcXd0Tjl1NmFSTTF1RzJ5bmdfX3IyN3h4bXkwZURoS0JuWlFGaW4zSE1FcWFjb1MzbVp2YzNfNUNtNmlablNGUlhKc2Q1Wk5kUmc3UWhRTnlLb01KNzYyaG5sSVZ1dTZKOWkyMmZ3R210aVhtNXg4VFVYS1lHcTJOTnlsNDRiZWlEc2ZSVWxoYWxXVTY2ekI4VUdNZmdraVF1d29fblVLOVZ3U2JEdHgya1J2OHhvUjZuS3ZndEU1TzlMUDNPNUNydGhJQ3ZIRGl5Q190cFh6THpYWVk5c2NzNU9wRDJNTG5qNzUtWlNyWTd3cVhEMV84N1Q0SHJuQkVuZmEzMkZ1OUYwb3lTU1dmUDFTNFZMWG8zQ3Q1eDZuMEFIaHM4ckExcGVIcmlDaExQUTczYjNiZEtHZDZyLXlZZGVNX1ZR
+kind: Secret
+metadata:
+  annotations:
+    kubernetes.io/service-account.name: kube-binder
+    kubernetes.io/service-account.uid: dcdbe9a4-d4a9-4d38-a0f2-be89ce32410c
+  creationTimestamp: "2023-05-12T17:30:13Z"
+  name: kube-binder-token-dwrb9
+  namespace: bb-cpl9q
+  resourceVersion: "4797"
+  uid: d88e3d44-1ffd-49d7-bf2b-1d0249f85aa2
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+data:
+  kubeconfig: YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNdmFrTkRRV1ZoWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplazFFVlhoTmFrVXlUVlJCZWs5V2IxaEVWRTE2VFVSVmQwOVVSVEpOVkVGNlQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG5SVUpCUzFKc0NqVkxjRlZ6T0d4R09YQndSRlZ2Vm1GUlR6SmhaVU13ZUVvclkzRllSMU5SWlZCMFJ6VkplRnBCYzNKNWNteDFUMWdyYlZWV1oxSlZUSFF4VVVGUlJtc0tObUpRVkZsemVWWlVVM001WTBaS1ZUbDZRMlV6WjNCS1QxVlJaalpqY20wMk9VODJNRU52U1VwWWVWQmtZa0pxUjJSeE5rRlNSREZ2ZVVkd1JURk9hd3B4YkRoVVdtRmFaV1pVV0VzdksyTnhkVUpJVTB4WWRIa3lNVnBPY0hocGJuZFBNSEJyYlZneWVuSjVUR1E0WmxSc2JWRkNRM2h4TWxsb1NXWlhlbkp5Q2xoVE5uZEhVV1J0ZWxGcFVXeHdabGxHVURSSFEyRlFLM2t2YjJSdlV5OVZOSGhQUkhwWGNVWTVhek5zV1VsTEwxTXlhbk0zY0d4SmVrNWlRa2NyU20wS2RFSXdkMnBRUzI0NFptSklaWG80Tmsxd1VESmxXVEJITkc0NWMwMVlOREpZYm5CUWFIZFBSV3d5VmxvMFVGbG5hVXQyU1V4cWQwcFlXbGg2WTJ4T2VncDRhbWM1ZUdONFRtaFdPREYxYTNNM1ZFOWpRMEYzUlVGQllVNWFUVVpqZDBSbldVUldVakJRUVZGSUwwSkJVVVJCWjB0clRVRTRSMEV4VldSRmQwVkNDaTkzVVVaTlFVMUNRV1k0ZDBoUldVUldVakJQUWtKWlJVWktkRkZ1TTB0VE5GcExhSEp5UjFOdlptMVVUMnA0ZVVsMVpTOU5RbFZIUVRGVlpFVlJVVThLVFVGNVEwTnRkREZaYlZaNVltMVdNRnBZVFhkRVVWbEtTMjlhU1doMlkwNUJVVVZNUWxGQlJHZG5SVUpCUlVsTE1FVlNNM0kwTTFKbE9DdHJlbmhCZHdwM2FVdGpTa1pWUjNZMFJFUnVRM0F6ZUhFM1QwdE5aRzgwT0ZSR2FGTTBlbFpWY1VSRFdEaHVlVzVZVmtwd01YQjRjelpqVDNkTVlqUXhXRmg0ZUVNckNtOTZlVXhSY0VoYVRTOXpSMjF6ZDFWRGVVd3pTMW93Y0cxSVlVa3pXbnAyTDJGak1YRnZhVVpMTTFOR1FucFhTMkZFY1hCRVlrbExXRzR5ZEVWcFNrWUtSV1ZhYmpOWVpWSllTMlJJUkM4NVNrczRVbU0zVEhoU1VqWlJLM1o2VGtSdU9YQjBkMHg1Tm5Nck1EaExOMWhzVjB4dmVVdEZSR1V2TmxKM2RWVkRUZ3AzTW1OcmQyNUdTa3hrYWxONVpWQjJZUzh4YUZVd1VWTktTVXRWVFdnM1YzVlRSMkZDT1dkVk5tcG9VRXRQUVRWQk0yeFhZMWRIWm5oM1MyeFBOSFEzQ2xsT1VEQkxVa2hWVW0xWFJ6WndkV1JhVmsxcVVpc3pjVTFvTDNGWGRUSTVWV2szWTBsT1ZHVkJhbU5ZYkhsbFFXdE9jRnBGYkhoc1kwSnlMMFlyTkV3S2JqWkpQUW90TFMwdExVVk9SQ0JEUlZKVVNVWkpRMEZVUlMwdExTMHRDZz09CiAgICBzZXJ2ZXI6IGh0dHBzOi8vYTliZWU2NjAtNWE3OC00YjA0LTkyNzgtZjI2NWYxZTM2NzFmLmFwLXdlc3QtMi5saW5vZGVsa2UubmV0OjQ0MwogIG5hbWU6IGRlZmF1bHQKY29udGV4dHM6Ci0gY29udGV4dDoKICAgIGNsdXN0ZXI6IGRlZmF1bHQKICAgIG5hbWVzcGFjZTogYmItY3BsOXEKICAgIHVzZXI6IGRlZmF1bHQKICBuYW1lOiBkZWZhdWx0CmN1cnJlbnQtY29udGV4dDogZGVmYXVsdApraW5kOiBDb25maWcKcHJlZmVyZW5jZXM6IHt9CnVzZXJzOgotIG5hbWU6IGRlZmF1bHQKICB1c2VyOgogICAgdG9rZW46IGV5SmhiR2NpT2lKU1V6STFOaUlzSW10cFpDSTZJa1pvVjJVek5FUlFZMkp0ZEdsb2FtMWlPV2hLWjBsS1FtRnFRMmhaWDIxbk1uZHRVV3BVUVVGTE1UQWlmUS5leUpwYzNNaU9pSnJkV0psY201bGRHVnpMM05sY25acFkyVmhZMk52ZFc1MElpd2lhM1ZpWlhKdVpYUmxjeTVwYnk5elpYSjJhV05sWVdOamIzVnVkQzl1WVcxbGMzQmhZMlVpT2lKaVlpMWpjR3c1Y1NJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZqY21WMExtNWhiV1VpT2lKcmRXSmxMV0pwYm1SbGNpSXNJbXQxWW1WeWJtVjBaWE11YVc4dmMyVnlkbWxqWldGalkyOTFiblF2YzJWeWRtbGpaUzFoWTJOdmRXNTBMbTVoYldVaU9pSnJkV0psTFdKcGJtUmxjaUlzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVnlkbWxqWlMxaFkyTnZkVzUwTG5WcFpDSTZJbVJqWkdKbE9XRTBMV1EwWVRrdE5HUXpPQzFoTUdZeUxXSmxPRGxqWlRNeU5ERXdZeUlzSW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZERwaVlpMWpjR3c1Y1RwcmRXSmxMV0pwYm1SbGNpSjkuUGxEVE8xQnZDVWh5a1lJMnhrTmM2SUduMDF5MDc1dEZOYjBScXhpYUgyWU9fUEhrcW43X255UWRNcENJaC1nX1ZqNHVIUXZTUUNWLVN1MUNTdG5CdzZQQ2IyTnhqSWZUeFpTNl9OMS1FUTdUQ21ieWJCRUF6M2xVaUFUQ1ZkR3I5SWNoYU15ZnhNaXJ5NTZWZnF1WlpwNUdyM1NOME5IMkVSZTJ0c2hQdGhzYUo4M0c1YlFyMlBuVE5QNXVob0FkSmEtMHBCUC1SMFR3WFNzNUxPUk4yd2NqSXo1QTdoNlJvZnJDWXhpRmZyRlZHa1dVSWZZT196T0RYbGdXZkRFQUtCdWU4X1FSY251R2o2NlpscmVLcDVJcndOUjZMbGk5T1BtU2pCbnotaktHVW5VeUJmeG50VGhJY1lMZE9Hb3VOeHFubFRJNzltM0liMmVqSzRnTjdRCg==
+kind: Secret
+metadata:
+  creationTimestamp: "2023-05-12T17:30:13Z"
+  name: kubeconfig
+  namespace: bb-cpl9q
+  resourceVersion: "4803"
+  uid: 1cab0075-2cc4-49d3-b91a-d655d073de84
+type: Opaque
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-12T17:30:12Z"
+  name: default
+  namespace: bb-cpl9q
+  resourceVersion: "4792"
+  uid: 5457c378-fe87-4ce6-81b8-167a71fda438
+secrets:
+- name: default-token-6869z
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-12T17:30:13Z"
+  name: kube-binder
+  namespace: bb-cpl9q
+  resourceVersion: "4798"
+  uid: dcdbe9a4-d4a9-4d38-a0f2-be89ce32410c
+secrets:
+- name: kube-binder-token-dwrb9
+---
+apiVersion: kube-bind.io/v1alpha1
+kind: APIServiceExportRequest
+metadata:
+  creationTimestamp: "2023-05-12T17:30:13Z"
+  generation: 1
+  name: mangodbs.mangodb.com
+  namespace: bb-cpl9q
+  resourceVersion: "4809"
+  uid: 0e3beaaf-6f0a-4f54-a9a8-58492df2d0f7
+spec:
+  resources:
+  - group: mangodb.com
+    resource: mangodbs
+status:
+  conditions:
+  - lastTransitionTime: "2023-05-12T17:30:13Z"
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2023-05-12T17:30:13Z"
+    status: "True"
+    type: ExportsReady
+  phase: Succeeded
+---
+apiVersion: kube-bind.io/v1alpha1
+kind: APIServiceExport
+metadata:
+  annotations:
+    kube-bind.io/source-spec-hash: 8XQ7ZpXT8iHW6yeytGl3xgPB0LuTFTfNK831I4
+  creationTimestamp: "2023-05-12T17:30:13Z"
+  generation: 1
+  name: mangodbs.mangodb.com
+  namespace: bb-cpl9q
+  resourceVersion: "4889"
+  uid: f925ff62-924f-4d2c-a695-bfe2436919cc
+spec:
+  group: mangodb.com
+  informerScope: Namespaced
+  names:
+    kind: MangoDB
+    listKind: MangoDBList
+    plural: mangodbs
+    singular: mangodb
+  permissionClaims:
+  - labels:
+    - exposed_by
+    level: Owner
+    namespacePath: metadata.namespace
+    selector:
+      matchLabels:
+        app.kubernetes.io/instance: '{.metadata.name}'
+        app.kubernetes.io/managed-by: kubedb.com
+        app.kubernetes.io/name: mangodbs.mangodb.com
+    target:
+      apiVersion: v1
+      kind: Secret
+    type: MatchSelector
+    verbs:
+      consumer:
+      - get
+      - list
+      - watch
+      provider:
+      - '*'
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              tier:
+                default: Shared
+                enum:
+                - Dedicated
+                - Shared
+                type: string
+            type: object
+          status:
+            properties:
+              phase:
+                type: string
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: MangoDB
+    listKind: MangoDBList
+    plural: mangodbs
+    singular: mangodb
+  conditions:
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    message: APIServiceBinding mangodbs.mangodb.com in the consumer cluster does not
+      have a SchemaInSync condition.
+    reason: Unknown
+    severity: Info
+    status: "False"
+    type: Ready
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    status: "True"
+    type: Connected
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    message: APIServiceBinding mangodbs.mangodb.com in the consumer cluster does not
+      have a SchemaInSync condition.
+    reason: Unknown
+    severity: Info
+    status: "False"
+    type: ConsumerInSync
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    message: the initial names have been accepted
+    reason: InitialNamesAccepted
+    status: "True"
+    type: Established
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    message: no conflicts found
+    reason: NoConflicts
+    status: "True"
+    type: NamesAccepted
+  - lastTransitionTime: "2023-05-12T17:30:13Z"
+    status: "True"
+    type: ProviderInSync
+  storedVersions:
+  - v1alpha1
+---
+apiVersion: kube-bind.io/v1alpha1
+kind: ClusterBinding
+metadata:
+  creationTimestamp: "2023-05-12T17:30:12Z"
+  generation: 1
+  name: cluster
+  namespace: bb-cpl9q
+  resourceVersion: "4890"
+  uid: 0b2bb4d5-3768-4ef3-9554-ec47747883c5
+spec:
+  kubeconfigSecretRef:
+    key: kubeconfig
+    name: kubeconfig
+  providerPrettyName: arnob.com
+status:
+  conditions:
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    message: Clocks of consumer cluster and service account cluster seem to be off
+      by more than 10s
+    reason: HeartbeatTimeDrift
+    severity: Warning
+    status: "False"
+    type: Ready
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    message: Clocks of consumer cluster and service account cluster seem to be off
+      by more than 10s
+    reason: HeartbeatTimeDrift
+    severity: Warning
+    status: "False"
+    type: Healthy
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    status: "True"
+    type: ValidVersion
+  heartbeatInterval: 5m0s
+  konnectorVersion: v0.3.0
+  lastHeartbeatTime: "2023-05-12T17:31:46Z"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  creationTimestamp: "2023-05-12T17:30:13Z"
+  name: kube-binder
+  namespace: bb-cpl9q
+  resourceVersion: "4794"
+  uid: b7f84a4b-ad32-4496-b86b-e67bd9cfb903
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kube-binder
+subjects:
+- kind: ServiceAccount
+  name: kube-binder
+  namespace: bb-cpl9q

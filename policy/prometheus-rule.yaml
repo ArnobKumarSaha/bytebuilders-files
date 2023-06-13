@@ -1,0 +1,493 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"monitoring.coreos.com/v1","kind":"PrometheusRule","metadata":{"annotations":{"meta.helm.sh/release-name":"mongo-test","meta.helm.sh/release-namespace":"demo"},"labels":{"app.kubernetes.io/instance":"mongo-test","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"mongodbs.kubedb.com","release":"kube-prometheus-stack"},"name":"mongo-test","namespace":"demo"},"spec":{"groups":[{"name":"mongodb.database.demo.mongo-test.rules","rules":[{"alert":"MongodbVirtualMemoryUsage","annotations":{"description":"High memory usage\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB virtual memory usage (instance {{ $labels.instance }})"},"expr":"sum(mongodb_ss_mem_virtual{job=\"mongo-test-stats\",namespace=\"demo\"}) BY (job) \u003e 2.097152e+06","for":"1m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongodbReplicationLag","annotations":{"description":"Mongodb replication lag is more than 10\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB database has replication lag (instance {{ $labels.instance }})"},"expr":"mongodb_mongod_replset_member_replication_lag{job=\"mongo-test-stats\",namespace=\"demo\"} \u003e 10","for":"0m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"critical"}},{"alert":"MongodbNumberCursorsOpen","annotations":{"description":"Too many cursors opened by MongoDB for clients (\u003e 10k)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB number cursors open (instance {{ $labels.instance }})"},"expr":"mongodb_ss_metrics_cursor_open{csr_type=\"total\",job=\"mongo-test-stats\",namespace=\"demo\"} \u003e 10000","for":"2m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongodbCursorsTimeouts","annotations":{"description":"Too many cursors are timing out\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB cursors timeouts (instance {{ $labels.instance }})"},"expr":"increase(mongodb_ss_metrics_cursor_timedOut{job=\"mongo-test-stats\",namespace=\"demo\"}[1m]) \u003e 100","for":"2m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongodbTooManyConnections","annotations":{"description":"Too many connections (\u003e 80%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB too many connections (instance {{ $labels.instance }})"},"expr":"avg by(instance) (rate(mongodb_ss_connections{conn_type=\"current\",job=\"mongo-test-stats\",namespace=\"demo\"}[1m])) / avg by(instance) (sum (mongodb_ss_connections) by (instance)) * 100 \u003e 80","for":"2m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongoDBPhaseCritical","annotations":{"description":"Database in Critical state, one or more database nodes are not working properly.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB database is in Critical state (instance {{ $labels.instance }})"},"expr":"kubedb_com_mongodb_status_phase{app=\"mongo-test\", namespace=\"demo\",phase=\"Critical\"} \u003e= 1","for":"3m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongoDBDown","annotations":{"description":"Database in NotReady state, database read/write is failing.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB database is in NotReady state (instance {{ $labels.instance }})"},"expr":"kubedb_com_mongodb_status_phase{app=\"mongo-test\", namespace=\"demo\",phase=\"NotReady\"} \u003e= 1","for":"30s","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"critical"}},{"alert":"MongoDBHighLatency","annotations":{"description":"High latency in instances\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"High latency in mongodb instances {{ $labels.instance }}"},"expr":"rate(mongodb_ss_opLatencies_latency{job=\"mongo-test-stats\",namespace=\"demo\"}[5m]) /\nrate(mongodb_ss_opLatencies_ops{job=\"mongo-test-stats\",namespace=\"demo\"}[5m]) \u003e 250000\n","for":"10m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongoDBHighTicketUtilization","annotations":{"description":"Ticket usage over 75%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"Ticket usage over 75% {{ $labels.instance }}"},"expr":"(mongodb_ss_wt_concurrentTransactions_out{job=\"mongo-test-stats\",namespace=\"demo\"} /\nmongodb_ss_wt_concurrentTransactions_totalTickets{job=\"mongo-test-stats\",namespace=\"demo\"}) * 100\n\u003e 75\n","for":"10m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongoDBRecurrentCursorTimeout","annotations":{"description":"Recurrent cursors timeout\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"Recurrent cursors timeout in instance {{ $labels.instance }}"},"expr":"rate(mongodb_ss_metrics_cursor_timedOut{job=\"mongo-test-stats\",namespace=\"demo\"}[5m]) \u003e 0","for":"30m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongoDBRecurrentMemoryPageFaults","annotations":{"description":"Recurrent memory page faults\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"Recurrent memory page faults in instance {{ $labels.instance }}"},"expr":"rate(mongodb_ss_extra_info_page_faults{job=\"mongo-test-stats\",namespace=\"demo\"}[5m]) \u003e 0","for":"30m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}}]},{"name":"mongodb.provisioner.demo.mongo-test.rules","rules":[{"alert":"KubeDBMongoDBPhaseNotReady","annotations":{"description":"KubeDB MongoDB Phase not ready on {{ $labels.mongodb }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"KubeDB MongoDB Phase NotReady (mongodb {{ $labels.mongodb }})"},"expr":"kubedb_com_mongodb_status_phase{phase=\"NotReady\",app=\"mongo-test\",namespace=\"demo\"} == 1","for":"1m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"critical"}},{"alert":"KubeDBMongoDBPhaseCritical","annotations":{"description":"KubeDB MongoDB Phase Critical {{ $labels.mongodb }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"KubeDB MongoDB Phase Critical (mongodb {{ $labels.mongodb }})"},"expr":"kubedb_com_mongodb_status_phase{phase=\"Critical\",app=\"mongo-test\",namespace=\"demo\"} == 1","for":"15m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}}]},{"name":"mongodb.opsManager.demo.mongo-test.rules","rules":[{"alert":"KubeDBMongoDBOpsRequestStatusProgressingToLong","annotations":{"description":"MaraiDBOpsRequest {{ $labels.mongodbopsrequest }} is in progressing status for too long\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDBOpsRequest is in progressing status for too long (mongodbopsrequest {{ $labels.mongodbopsrequest }})"},"expr":"ops_kubedb_com_mongodbopsrequest_status_phase{phase=\"Progressing\",app=\"mongo-test\",namespace=\"demo\"} == 1","for":"30m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"critical"}},{"alert":"KubeDBMongoDBOpsRequestFailed","annotations":{"description":"MaraiDBOpsRequest {{ $labels.mongodbopsrequest }} failed \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDBOpsRequest failed (mongodbopsrequest {{ $labels.mongodbopsrequest }})"},"expr":"ops_kubedb_com_mongodbopsrequest_status_phase{phase=\"Failed\",app=\"mongo-test\",namespace=\"demo\"} == 1","for":"0m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"critical"}}]},{"name":"mongodb.stash.demo.mongo-test.rules","rules":[{"alert":"MongoDBStashBackupSessionFailed","annotations":{"description":"MongoDB Stash backupsession failed {{ $labels.invoker_name }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB Stash backup session failed (invoker_name {{ $labels.invoker_name }})"},"expr":"stash_backup_session_success * on(invoker_name, invoker_kind) group_left(target_name, target_kind) stash_appscode_com_backupconfiguration_info{target_name=\"mongo-test\", target_kind=\"AppBinding\", namespace=\"demo\"} == 0","for":"0m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"critical"}},{"alert":"MongoDBStashRestoreSessionFailed","annotations":{"description":"MongoDB Stash restore session failed {{ $labels.invoker_name }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB Stash restore session failed (invoker_name {{ $labels.invoker_name }})"},"expr":"stash_restore_session_success * on(invoker_name, invoker_kind) group_left(target_name, target_kind) stash_appscode_com_restoresession_info{target_name=\"mongo-test\", target_kind=\"AppBinding\", namespace=\"demo\"} == 0","for":"0m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"critical"}},{"alert":"MongoDBStashNoBackupSessionForTooLong","annotations":{"description":"MongoDB Stash no backup for too long {{ $labels.invoker_name }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB Stash no backup for last 18000 second (invoker_name {{ $labels.invoker_name }})"},"expr":"time() - stash_backup_last_success_time_seconds + on(invoker_name, invoker_kind) group_left(target_name, target_kind) stash_appscode_com_backupconfiguration_info{target_name=\"mongo-test\", target_kind=\"AppBinding\", namespace=\"demo\"} - 1 \u003e 18000","for":"0m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongoDBStashRepositoryCorrupted","annotations":{"description":"MongoDB Stash repository corrupted {{ $labels.invoker_name }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB Stash repository corrupted (invoker_name {{ $labels.invoker_name }})"},"expr":"stash_repository_integrity * on(invoker_name, invoker_kind) group_left(target_name, target_kind, repository) stash_appscode_com_backupconfiguration_info{target_name=\"mongo-test\", target_kind=\"AppBinding\", namespace=\"demo\"}","for":"5m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"critical"}},{"alert":"MongoDBStashRepositoryStorageRunningLow","annotations":{"description":"MongoDB Stash Repository storage running low {{ $labels.invoker_name }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB Stash Repository storage more than 1.073741824e+10 byte. (invoker_name {{ $labels.invoker_name }})"},"expr":"stash_repository_size_bytes * on(invoker_name, invoker_kind) group_left(target_name, target_kind, repository) stash_appscode_com_backupconfiguration_info{target_name=\"mongo-test\", target_kind=\"AppBinding\", namespace=\"demo\"} \u003e 1.073741824e+10","for":"5m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongoDBStashBackupSessionPeriodTooLong","annotations":{"description":"MongoDB Stash backup session taking to long to complete {{ $labels.invoker_name }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB Stash backup session took more than 1800 second to complete. (invoker_name {{ $labels.invoker_name }})"},"expr":"stash_backup_session_duration_seconds * on(invoker_name, invoker_kind) group_left(target_name, target_kind, repository) stash_appscode_com_backupconfiguration_info{target_name=\"mongo-test\", target_kind=\"AppBinding\", namespace=\"demo\"} \u003e 1800","for":"0m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"MongoDBStashRestoreSessionPeriodTooLong","annotations":{"description":"MongoDB Stash restore session taking to long to complete {{ $labels.invoker_name }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"MongoDB Stash restore session took more than 1800 second to complete. (invoker_name {{ $labels.invoker_name }})"},"expr":"stash_restore_session_duration_seconds * on(invoker_name, invoker_kind) group_left(target_name, target_kind, repository) stash_appscode_com_restoresession_info{target_name=\"mongo-test\", target_kind=\"AppBinding\", namespace=\"demo\"} \u003e 1800","for":"0m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}}]},{"name":"mongodb.schemaManager.demo.mongo-test.rules","rules":[{"alert":"KubeDBMongoDBSchemaPendingForTooLong","annotations":{"description":"KubeDB schema pending for too long.\n {{ $labels.mongodbdatabase }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"KubeDB schema pending for too long for (mongodbdatabase {{ $labels.mongodbdatabase }})"},"expr":"schema_kubedb_com_mongodbdatabase_status_phase{phase=\"Pending\",app=\"mongo-test\",app_namespace=\"demo\"} == 1","for":"30m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"KubeDBMongoDBSchemaInProgressForTooLong","annotations":{"description":"KubeDB schema is in progress for too long.\n {{ $labels.mongodbdatabase }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"KubeDB schema is in progress for too long for (mongodbdatabase {{ $labels.mongodbdatabase }})"},"expr":"schema_kubedb_com_mongodbdatabase_status_phase{phase=\"InProgress\",app=\"mongo-test\",app_namespace=\"demo\"} == 1","for":"30m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"KubeDBMongoDBSchemaTerminatingForTooLong","annotations":{"description":"KubeDB schema terminating for too long.\n {{ $labels.mongodbdatabase }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"KubeDB schema terminating for too long for (mongodbdatabase {{ $labels.mongodbdatabase }})"},"expr":"schema_kubedb_com_mongodbdatabase_status_phase{phase=\"Terminating\",app=\"mongo-test\",app_namespace=\"demo\"} == 1","for":"30m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"KubeDBMongoDBSchemaFailed","annotations":{"description":"KubeDB schema failed.\n {{ $labels.mongodbdatabase }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"KubeDB schema failed for (mongodbdatabase {{ $labels.mongodbdatabase }})"},"expr":"schema_kubedb_com_mongodbdatabase_status_phase{phase=\"Failed\",app=\"mongo-test\",app_namespace=\"demo\"} == 1","for":"0m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}},{"alert":"KubeDBMongoDBSchemaExpired","annotations":{"description":"KubeDB schema expired.\n {{ $labels.mongodbdatabase }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}","summary":"KubeDB schema expired for (mongodbdatabase {{ $labels.mongodbdatabase }})"},"expr":"schema_kubedb_com_mongodbdatabase_status_phase{phase=\"Expired\",app=\"mongo-test\",app_namespace=\"demo\"} == 1","for":"0m","labels":{"app":"mongo-test","app_namespace":"demo","k8s_group":"kubedb.com","k8s_kind":"MongoDB","k8s_resource":"mongodbs","severity":"warning"}}]}]}}
+    meta.helm.sh/release-name: mongo-test
+    meta.helm.sh/release-namespace: demo
+    prometheus-operator-validated: "true"
+  creationTimestamp: "2023-05-18T09:58:23Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: mongo-test
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: mongodbs.kubedb.com
+    release: kube-prometheus-stack
+  name: mongo-test
+  namespace: demo
+  resourceVersion: "25596274"
+  uid: 26e7d4b8-c582-413a-8578-050ba94654f5
+spec:
+  groups:
+  - name: mongodb.database.demo.mongo-test.rules
+    rules:
+    - alert: MongodbVirtualMemoryUsage
+      annotations:
+        description: |-
+          High memory usage
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: MongoDB virtual memory usage (instance {{ $labels.instance }})
+      expr: sum(mongodb_ss_mem_virtual{job="mongo-test-stats",namespace="demo"}) BY
+        (job) > 2.097152e+06
+      for: 1m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongodbReplicationLag
+      annotations:
+        description: |-
+          Mongodb replication lag is more than 10
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: MongoDB database has replication lag (instance {{ $labels.instance
+          }})
+      expr: mongodb_mongod_replset_member_replication_lag{job="mongo-test-stats",namespace="demo"}
+        > 10
+      for: 0m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: critical
+    - alert: MongodbNumberCursorsOpen
+      annotations:
+        description: |-
+          Too many cursors opened by MongoDB for clients (> 10k)
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: MongoDB number cursors open (instance {{ $labels.instance }})
+      expr: mongodb_ss_metrics_cursor_open{csr_type="total",job="mongo-test-stats",namespace="demo"}
+        > 10000
+      for: 2m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongodbCursorsTimeouts
+      annotations:
+        description: |-
+          Too many cursors are timing out
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: MongoDB cursors timeouts (instance {{ $labels.instance }})
+      expr: increase(mongodb_ss_metrics_cursor_timedOut{job="mongo-test-stats",namespace="demo"}[1m])
+        > 100
+      for: 2m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongodbTooManyConnections
+      annotations:
+        description: |-
+          Too many connections (> 80%)
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: MongoDB too many connections (instance {{ $labels.instance }})
+      expr: avg by(instance) (rate(mongodb_ss_connections{conn_type="current",job="mongo-test-stats",namespace="demo"}[1m]))
+        / avg by(instance) (sum (mongodb_ss_connections) by (instance)) * 100 > 80
+      for: 2m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongoDBPhaseCritical
+      annotations:
+        description: |-
+          Database in Critical state, one or more database nodes are not working properly.
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: MongoDB database is in Critical state (instance {{ $labels.instance
+          }})
+      expr: kubedb_com_mongodb_status_phase{app="mongo-test", namespace="demo",phase="Critical"}
+        >= 1
+      for: 3m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongoDBDown
+      annotations:
+        description: |-
+          Database in NotReady state, database read/write is failing.
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: MongoDB database is in NotReady state (instance {{ $labels.instance
+          }})
+      expr: kubedb_com_mongodb_status_phase{app="mongo-test", namespace="demo",phase="NotReady"}
+        >= 1
+      for: 30s
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: critical
+    - alert: MongoDBHighLatency
+      annotations:
+        description: |-
+          High latency in instances
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: High latency in mongodb instances {{ $labels.instance }}
+      expr: |
+        rate(mongodb_ss_opLatencies_latency{job="mongo-test-stats",namespace="demo"}[5m]) /
+        rate(mongodb_ss_opLatencies_ops{job="mongo-test-stats",namespace="demo"}[5m]) > 250000
+      for: 10m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongoDBHighTicketUtilization
+      annotations:
+        description: |-
+          Ticket usage over 75%
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: Ticket usage over 75% {{ $labels.instance }}
+      expr: |
+        (mongodb_ss_wt_concurrentTransactions_out{job="mongo-test-stats",namespace="demo"} /
+        mongodb_ss_wt_concurrentTransactions_totalTickets{job="mongo-test-stats",namespace="demo"}) * 100
+        > 75
+      for: 10m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongoDBRecurrentCursorTimeout
+      annotations:
+        description: |-
+          Recurrent cursors timeout
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: Recurrent cursors timeout in instance {{ $labels.instance }}
+      expr: rate(mongodb_ss_metrics_cursor_timedOut{job="mongo-test-stats",namespace="demo"}[5m])
+        > 0
+      for: 30m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongoDBRecurrentMemoryPageFaults
+      annotations:
+        description: |-
+          Recurrent memory page faults
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: Recurrent memory page faults in instance {{ $labels.instance }}
+      expr: rate(mongodb_ss_extra_info_page_faults{job="mongo-test-stats",namespace="demo"}[5m])
+        > 0
+      for: 30m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+  - name: mongodb.provisioner.demo.mongo-test.rules
+    rules:
+    - alert: KubeDBMongoDBPhaseNotReady
+      annotations:
+        description: |-
+          KubeDB MongoDB Phase not ready on {{ $labels.mongodb }}
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: KubeDB MongoDB Phase NotReady (mongodb {{ $labels.mongodb }})
+      expr: kubedb_com_mongodb_status_phase{phase="NotReady",app="mongo-test",namespace="demo"}
+        == 1
+      for: 1m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: critical
+    - alert: KubeDBMongoDBPhaseCritical
+      annotations:
+        description: |-
+          KubeDB MongoDB Phase Critical {{ $labels.mongodb }}
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: KubeDB MongoDB Phase Critical (mongodb {{ $labels.mongodb }})
+      expr: kubedb_com_mongodb_status_phase{phase="Critical",app="mongo-test",namespace="demo"}
+        == 1
+      for: 15m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+  - name: mongodb.opsManager.demo.mongo-test.rules
+    rules:
+    - alert: KubeDBMongoDBOpsRequestStatusProgressingToLong
+      annotations:
+        description: |-
+          MaraiDBOpsRequest {{ $labels.mongodbopsrequest }} is in progressing status for too long
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: MongoDBOpsRequest is in progressing status for too long (mongodbopsrequest
+          {{ $labels.mongodbopsrequest }})
+      expr: ops_kubedb_com_mongodbopsrequest_status_phase{phase="Progressing",app="mongo-test",namespace="demo"}
+        == 1
+      for: 30m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: critical
+    - alert: KubeDBMongoDBOpsRequestFailed
+      annotations:
+        description: "MaraiDBOpsRequest {{ $labels.mongodbopsrequest }} failed \n
+          \ VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: MongoDBOpsRequest failed (mongodbopsrequest {{ $labels.mongodbopsrequest
+          }})
+      expr: ops_kubedb_com_mongodbopsrequest_status_phase{phase="Failed",app="mongo-test",namespace="demo"}
+        == 1
+      for: 0m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: critical
+  - name: mongodb.stash.demo.mongo-test.rules
+    rules:
+    - alert: MongoDBStashBackupSessionFailed
+      annotations:
+        description: "MongoDB Stash backupsession failed {{ $labels.invoker_name }}
+          \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: MongoDB Stash backup session failed (invoker_name {{ $labels.invoker_name
+          }})
+      expr: stash_backup_session_success * on(invoker_name, invoker_kind) group_left(target_name,
+        target_kind) stash_appscode_com_backupconfiguration_info{target_name="mongo-test",
+        target_kind="AppBinding", namespace="demo"} == 0
+      for: 0m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: critical
+    - alert: MongoDBStashRestoreSessionFailed
+      annotations:
+        description: "MongoDB Stash restore session failed {{ $labels.invoker_name
+          }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: MongoDB Stash restore session failed (invoker_name {{ $labels.invoker_name
+          }})
+      expr: stash_restore_session_success * on(invoker_name, invoker_kind) group_left(target_name,
+        target_kind) stash_appscode_com_restoresession_info{target_name="mongo-test",
+        target_kind="AppBinding", namespace="demo"} == 0
+      for: 0m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: critical
+    - alert: MongoDBStashNoBackupSessionForTooLong
+      annotations:
+        description: "MongoDB Stash no backup for too long {{ $labels.invoker_name
+          }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: MongoDB Stash no backup for last 18000 second (invoker_name {{ $labels.invoker_name
+          }})
+      expr: time() - stash_backup_last_success_time_seconds + on(invoker_name, invoker_kind)
+        group_left(target_name, target_kind) stash_appscode_com_backupconfiguration_info{target_name="mongo-test",
+        target_kind="AppBinding", namespace="demo"} - 1 > 18000
+      for: 0m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongoDBStashRepositoryCorrupted
+      annotations:
+        description: "MongoDB Stash repository corrupted {{ $labels.invoker_name }}
+          \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: MongoDB Stash repository corrupted (invoker_name {{ $labels.invoker_name
+          }})
+      expr: stash_repository_integrity * on(invoker_name, invoker_kind) group_left(target_name,
+        target_kind, repository) stash_appscode_com_backupconfiguration_info{target_name="mongo-test",
+        target_kind="AppBinding", namespace="demo"}
+      for: 5m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: critical
+    - alert: MongoDBStashRepositoryStorageRunningLow
+      annotations:
+        description: "MongoDB Stash Repository storage running low {{ $labels.invoker_name
+          }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: MongoDB Stash Repository storage more than 1.073741824e+10 byte.
+          (invoker_name {{ $labels.invoker_name }})
+      expr: stash_repository_size_bytes * on(invoker_name, invoker_kind) group_left(target_name,
+        target_kind, repository) stash_appscode_com_backupconfiguration_info{target_name="mongo-test",
+        target_kind="AppBinding", namespace="demo"} > 1.073741824e+10
+      for: 5m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongoDBStashBackupSessionPeriodTooLong
+      annotations:
+        description: "MongoDB Stash backup session taking to long to complete {{ $labels.invoker_name
+          }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: MongoDB Stash backup session took more than 1800 second to complete.
+          (invoker_name {{ $labels.invoker_name }})
+      expr: stash_backup_session_duration_seconds * on(invoker_name, invoker_kind)
+        group_left(target_name, target_kind, repository) stash_appscode_com_backupconfiguration_info{target_name="mongo-test",
+        target_kind="AppBinding", namespace="demo"} > 1800
+      for: 0m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: MongoDBStashRestoreSessionPeriodTooLong
+      annotations:
+        description: "MongoDB Stash restore session taking to long to complete {{
+          $labels.invoker_name }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels
+          }}"
+        summary: MongoDB Stash restore session took more than 1800 second to complete.
+          (invoker_name {{ $labels.invoker_name }})
+      expr: stash_restore_session_duration_seconds * on(invoker_name, invoker_kind)
+        group_left(target_name, target_kind, repository) stash_appscode_com_restoresession_info{target_name="mongo-test",
+        target_kind="AppBinding", namespace="demo"} > 1800
+      for: 0m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+  - name: mongodb.schemaManager.demo.mongo-test.rules
+    rules:
+    - alert: KubeDBMongoDBSchemaPendingForTooLong
+      annotations:
+        description: "KubeDB schema pending for too long.\n {{ $labels.mongodbdatabase
+          }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: KubeDB schema pending for too long for (mongodbdatabase {{ $labels.mongodbdatabase
+          }})
+      expr: schema_kubedb_com_mongodbdatabase_status_phase{phase="Pending",app="mongo-test",app_namespace="demo"}
+        == 1
+      for: 30m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: KubeDBMongoDBSchemaInProgressForTooLong
+      annotations:
+        description: "KubeDB schema is in progress for too long.\n {{ $labels.mongodbdatabase
+          }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: KubeDB schema is in progress for too long for (mongodbdatabase {{
+          $labels.mongodbdatabase }})
+      expr: schema_kubedb_com_mongodbdatabase_status_phase{phase="InProgress",app="mongo-test",app_namespace="demo"}
+        == 1
+      for: 30m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: KubeDBMongoDBSchemaTerminatingForTooLong
+      annotations:
+        description: "KubeDB schema terminating for too long.\n {{ $labels.mongodbdatabase
+          }} \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: KubeDB schema terminating for too long for (mongodbdatabase {{ $labels.mongodbdatabase
+          }})
+      expr: schema_kubedb_com_mongodbdatabase_status_phase{phase="Terminating",app="mongo-test",app_namespace="demo"}
+        == 1
+      for: 30m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: KubeDBMongoDBSchemaFailed
+      annotations:
+        description: "KubeDB schema failed.\n {{ $labels.mongodbdatabase }} \n  VALUE
+          = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: KubeDB schema failed for (mongodbdatabase {{ $labels.mongodbdatabase
+          }})
+      expr: schema_kubedb_com_mongodbdatabase_status_phase{phase="Failed",app="mongo-test",app_namespace="demo"}
+        == 1
+      for: 0m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning
+    - alert: KubeDBMongoDBSchemaExpired
+      annotations:
+        description: "KubeDB schema expired.\n {{ $labels.mongodbdatabase }} \n  VALUE
+          = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: KubeDB schema expired for (mongodbdatabase {{ $labels.mongodbdatabase
+          }})
+      expr: schema_kubedb_com_mongodbdatabase_status_phase{phase="Expired",app="mongo-test",app_namespace="demo"}
+        == 1
+      for: 0m
+      labels:
+        app: mongo-test
+        app_namespace: demo
+        k8s_group: kubedb.com
+        k8s_kind: MongoDB
+        k8s_resource: mongodbs
+        severity: warning

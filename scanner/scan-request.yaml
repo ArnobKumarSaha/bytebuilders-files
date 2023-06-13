@@ -1,0 +1,6 @@
+apiVersion: scanner.appscode.com/v1alpha1
+kind: ImageScanRequest
+metadata:
+  name: pub
+spec:
+  image: index.docker.io/library/mongo@sha256:4088649f737cf704deaf350ccd5ad8045552c5a0f8a5a2e81c1c23e280db2d80

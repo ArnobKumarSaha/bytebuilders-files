@@ -1,0 +1,62 @@
+# kubectl get constrainttemplatepodstatus -oyaml -n gatekeeper-system gatekeeper--audit--6669dc56f9--vbtjk-k8scontainerrequests
+
+apiVersion: status.gatekeeper.sh/v1beta1
+kind: ConstraintTemplatePodStatus
+metadata:
+  creationTimestamp: "2023-04-04T12:56:20Z"
+  generation: 2
+  labels:
+    internal.gatekeeper.sh/constrainttemplate-name: k8scontainerrequests
+    internal.gatekeeper.sh/pod: gatekeeper-audit-6669dc56f9-vbtjk
+  name: gatekeeper--audit--6669dc56f9--vbtjk-k8scontainerrequests
+  namespace: gatekeeper-system
+  ownerReferences:
+  - apiVersion: v1
+    kind: Pod
+    name: gatekeeper-audit-6669dc56f9-vbtjk
+    uid: e7a9564d-69fa-4924-8765-0d986222515c
+  resourceVersion: "5068"
+  uid: ac22b5d0-0259-4103-95a7-3a4fba71f9ee
+status:
+  id: gatekeeper-audit-6669dc56f9-vbtjk
+  observedGeneration: 1
+  operations:
+  - audit
+  - mutation-status
+  - status
+  templateUID: f85422b8-cac4-46e5-9c88-8b3b5ad0ddea
+
+---
+
+# kubectl get -oyaml -n gatekeeper-system constraintpodstatus gatekeeper--audit--6669dc56f9--vbtjk-k8scontainerrequests-container--must--have--requests
+
+apiVersion: status.gatekeeper.sh/v1beta1
+kind: ConstraintPodStatus
+metadata:
+  creationTimestamp: "2023-04-04T12:56:49Z"
+  generation: 2
+  labels:
+    internal.gatekeeper.sh/constraint-kind: K8sContainerRequests
+    internal.gatekeeper.sh/constraint-name: container-must-have-requests
+    internal.gatekeeper.sh/constrainttemplate-name: k8scontainerrequests
+    internal.gatekeeper.sh/pod: gatekeeper-audit-6669dc56f9-vbtjk
+  name: gatekeeper--audit--6669dc56f9--vbtjk-k8scontainerrequests-container--must--have--requests
+  namespace: gatekeeper-system
+  ownerReferences:
+  - apiVersion: v1
+    kind: Pod
+    name: gatekeeper-audit-6669dc56f9-vbtjk
+    uid: e7a9564d-69fa-4924-8765-0d986222515c
+  resourceVersion: "5096"
+  uid: b5dc4337-d684-48df-be4a-f5ecfef49e35
+status:
+  constraintUID: 20eda026-95d9-4198-aac0-509610e55222
+  enforced: true
+  id: gatekeeper-audit-6669dc56f9-vbtjk
+  observedGeneration: 1
+  operations:
+  - audit
+  - mutation-status
+  - status
+
+

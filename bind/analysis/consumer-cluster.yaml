@@ -1,0 +1,60 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: "2023-05-12T17:30:14Z"
+  name: kube-bind-konnector
+  resourceVersion: "11225"
+  uid: 7a0c0bd6-5cdc-4756-8440-e55b38cb47b3
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - '*'
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: "2023-05-12T17:30:14Z"
+  name: kube-bind-konnector
+  resourceVersion: "11226"
+  uid: 9e7bf6bc-98e3-4dd6-b93d-73049173ebc7
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kube-bind-konnector
+subjects:
+- kind: ServiceAccount
+  name: konnector
+  namespace: kube-bind
+apiVersion: kube-bind.io/v1alpha1
+kind: APIServiceBinding
+metadata:
+  creationTimestamp: "2023-05-12T17:31:45Z"
+  generation: 1
+  name: mangodbs.mangodb.com
+  resourceVersion: "11388"
+  uid: bc849f21-ba5f-4858-bed8-ec96e03e8e13
+spec:
+  kubeconfigSecretRef:
+    key: kubeconfig
+    name: kubeconfig-mvhn9
+    namespace: kube-bind
+status:
+  conditions:
+  - lastTransitionTime: "2023-05-12T17:31:45Z"
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    status: "True"
+    type: Connected
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    status: "True"
+    type: Heartbeating
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    status: "True"
+    type: InformersSynced
+  - lastTransitionTime: "2023-05-12T17:31:45Z"
+    status: "True"
+    type: SecretValid
+  providerPrettyName: arnob.com

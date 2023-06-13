@@ -1,0 +1,52 @@
+apiVersion: kubedb.com/v1alpha2
+kind: MongoDB
+metadata:
+  name: mg-sh
+  namespace: demo
+spec:
+  version: "4.4.6"
+  storageType: Durable
+  shardTopology:
+    configServer:
+      storage:
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 1Gi
+      replicas: 3
+      podTemplate:
+        spec:
+          resources:
+            requests:
+              "cpu": 0.2
+              "memory": 200Mi
+    mongos:
+      replicas: 2
+      podTemplate:
+        spec:
+          resources:
+            requests:
+              "cpu": 0.2
+              "memory": 200Mi
+    shard:
+      storage:
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 1Gi
+      replicas: 3
+      shards: 2
+      podTemplate:
+        spec:
+          resources:
+            requests:
+              "cpu": 0.3
+              "memory": 200Mi
+  terminationPolicy: WipeOut
+  monitor:
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: prometheus
+        interval: 10s

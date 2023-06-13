@@ -1,0 +1,262 @@
+kc bind http://127.0.0.1:8080/export -v 8
+DISCLAIMER: This is a prototype. It will change in incompatible ways at any time.
+
+I0513 00:27:54.878531   71258 loader.go:374] Config loaded from file:  /home/arnob/.kube/config
+I0513 00:27:54.881390   71258 round_trippers.go:463] GET https://127.0.0.1:34105/api/v1/namespaces/kube-bind
+I0513 00:27:54.881413   71258 round_trippers.go:469] Request Headers:
+I0513 00:27:54.881427   71258 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:27:54.881439   71258 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:27:54.895057   71258 round_trippers.go:574] Response Status: 200 OK in 13 milliseconds
+I0513 00:27:54.895092   71258 round_trippers.go:577] Response Headers:
+I0513 00:27:54.895105   71258 round_trippers.go:580]     Audit-Id: 67d4a77a-4cce-40d7-aafa-de4b3b141e7e
+I0513 00:27:54.895129   71258 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:27:54.895151   71258 round_trippers.go:580]     Content-Type: application/json
+I0513 00:27:54.895166   71258 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:27:54.895180   71258 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:27:54.895197   71258 round_trippers.go:580]     Content-Length: 524
+I0513 00:27:54.895211   71258 round_trippers.go:580]     Date: Fri, 12 May 2023 18:27:54 GMT
+I0513 00:27:54.895315   71258 request.go:1154] Response Body: {"kind":"Namespace","apiVersion":"v1","metadata":{"name":"kube-bind","uid":"07414ff6-8847-40a7-9f02-a0c4f709998a","resourceVersion":"10459","creationTimestamp":"2023-05-12T17:19:40Z","labels":{"kubernetes.io/metadata.name":"kube-bind"},"managedFields":[{"manager":"kubectl-bind","operation":"Update","apiVersion":"v1","time":"2023-05-12T17:19:40Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:labels":{".":{},"f:kubernetes.io/metadata.name":{}}}}}]},"spec":{"finalizers":["kubernetes"]},"status":{"phase":"Active"}}
+
+To authenticate, visit in your browser:
+
+	http://127.0.0.1:8080/authorize?c=2b35eU&p=38905&s=4cgpcyI0513 00:28:17.138280   71258 authenticator.go:127] "Received auth data" data="eyJraW5kIjoiQmluZGluZ1Jlc3BvbnNlIiwiYXBpVmVyc2lvbiI6Imt1YmUtYmluZC5pby92MWFscGhhMSIsImF1dGhlbnRpY2F0aW9uIjp7Im9hdXRoMkNvZGVHcmFudCI6eyJzaWQiOiI0Y2dwY3kiLCJpZCI6Imh0dHA6Ly8xMjcuMC4wLjE6NTU1Ni9kZXgvQ2cwd0xUTTROUzB5T0RBNE9TMHdFZ1J0YjJOciJ9fSwia3ViZWNvbmZpZyI6IllYQnBWbVZ5YzJsdmJqb2dkakVLWTJ4MWMzUmxjbk02Q2kwZ1kyeDFjM1JsY2pvS0lDQWdJR05sY25ScFptbGpZWFJsTFdGMWRHaHZjbWwwZVMxa1lYUmhPaUJNVXpCMFRGTXhRMUpWWkVwVWFVSkVVbFpLVlZOVldrcFJNRVpWVWxNd2RFeFRNSFJEYXpGS1UxVk5kbUZyVGtSUlYxWm9XakJHTTFOVlNrSmFNR3hEVVZWU1FsUnJTbTVoTTBadllUSnNTRTlZWTNkUmEwWlNZekJhUWxKRlJsZFVWa3BPWkRCV1VsZFZVbGRWVmtaRlVsaGtkMk50VWxoVGJYZExXVEl3TVdKSFVraFdibkJPVVdwU1dWSkdVa3BsYXpGRlZsaG9UbUZyVlhsVVZsSkNaV3M1VjJJeGFFVldSVEUyVkZWU1ZtUXdPVlZTVkVwT1ZrVkdObFF4V25aa01GcFZVbFpTVGxGclZraFJWRVpXVWxGd1FtVkZNVXhaVkU1WFlWWndXVk51Vm1GWFJrcHpXVE53UkZFd1JsUlRXR1JGVlZac1MxTXlPV0ZUVjJneVdUQTFRbFZWVmtOUmJFWkNVa2RrYmxKV1FrSlNSVTVFVVZaR2RsRXlaRzVTVlVwQ1V6RktjME5xVmt4alJsWjZUMGQ0UjA5WVFuZFNSbFoyVm0xR1VsUjZTbWhhVlUxM1pVVnZjbGt6UmxsU01VNVNXbFpDTUZKNlZrcGxSbkJDWXpOS05XTnRlREZVTVdkeVlsWldWMW94U2xaVVNGRjRWVlZHVWxKdGMwdE9iVXBSVmtac2VtVldXbFZWTTAwMVdUQmFTMVpVYkRaUk1sVjZXak5DUzFReFZsSmFhbHBxWTIwd01rOVZPREpOUlU1MlUxVndXV1ZXUW10WmEwcHhVakpTZUU1clJsTlNSRVoyWlZWa2QxSlVSazloZDNCNFlrUm9WVmR0Um1GYVYxcFZWMFZ6ZGtzeVRuaGtWVXBKVlRCNFdXUklhM2xOVm5CUFkwaG9jR0p1WkZCTlNFSnlZbFpuZVdWdVNqVlVSMUUwV214U2MySldSa05STTJoNFRXeHNiMU5YV2xobGJrcDVRMnhvVkU1dVpFaFZWMUowWld4R2NGVlhlSGRhYkd4SFZVUlNTRkV5UmxGTE0ydDJZakpTZGxWNU9WWk9TR2hRVWtod1dHTlZXVFZoZWs1elYxVnNURXd4VFhsaGJrMHpZMGQ0U21Wck5XbFJhMk55VTIwd1MyUkZTWGRrTW5CUlV6STBORnB0U2tsYVdHODBUbXN4ZDFWRVNteFhWRUpJVGtjME5XTXdNVmxPUkVwWlltNUNVV0ZJWkZCU1YzZDVWbXh2TUZWR2JHNWhWWFF5VTFWNGNXUXdjRmxYYkdnMldUSjRUMlZuY0RSaGJXTTFaVWRPTkZSdGFGZFBSRVl4WVROTk0xWkZPV3BSTUVZelVsVkdRbGxWTldGVVZWcHFaREJTYmxkVlVsZFZha0pSVVZaR1NVd3dTa0pWVlZKQ1dqQjBjbFJWUlRSU01FVjRWbGRTUm1Rd1ZrTkRhVGt6VlZWYVRsRlZNVU5SVjFrMFpEQm9VbGRWVWxkVmFrSlFVV3RLV2xKVldrdGtSa1oxVFRCMFZFNUdjRXhoU0VwNVVqRk9kbHB0TVZWVU1uQTBaVlZzTVZwVE9VNVJiRlpJVVZSR1ZscEZWbEpWVlRoTFZGVkdOVkV3VG5Sa1JFWmFZbFphTlZsdE1WZE5SbkJaVkZoa1JWVldiRXRUTWpsaFUxZG9NbGt3TlVKVlZWWk5VV3hHUWxKSFpHNVNWVXBDVWxWc1RFMUZWbE5OTTBrd1RURktiRTlEZEhKbGJtaENaSGR3TTJGVmRHcFRhMXBXVWpOWk1GSkZVblZSTTBGNlpVaEZNMVF3ZEU1YVJ6Z3dUMFpTUjJGR1RUQmxiRnBXWTFWU1JGZEVhSFZsVnpWWlZtdHdkMDFZUWpSamVscHFWRE5rVFZscVVYaFhSbWcwWlVWTmNrTnRPVFpsVlhoU1kwVm9ZVlJUT1hwU01qRjZaREZXUkdWVmQzcFRNVzkzWTBjeFNWbFZhM3BYYm5BeVRESkdhazFZUm5aaFZWcE1UVEZPUjFGdWNGaFRNa1pGWTFoQ1JWbHJiRXhYUnpSNVpFVldjRk5yV1V0U1YxWmhZbXBPV1ZwV1NsbFRNbEpKVWtNNE5WTnJjelJWYlUwelZFaG9VMVZxV2xKTE0xbzJWR3RTZFU5WVFqQmtNSGcxVG01TmNrMUVhRXhPTVdoelZqQjRkbVZWZEVaU1IxVjJUbXhLTTJSV1ZrUlVaM0F6VFcxT2NtUXlOVWRUYTNocllXeE9OVnBXUWpKWlV6aDRZVVpWZDFWV1RrdFRWWFJXVkZkbk0xWXpWbFJTTWtaRFQxZGtWazV0Y0c5VlJYUlFVVlJXUWsweWVGaFpNV1JJV201b00xTXllRkJPU0ZFelEyeHNUMVZFUWt4VmEyaFdWVzB4V0ZKNlduZGtWMUpoVm1zeGNWVnBjM3BqVlRGdlRETkdXR1JVU1RWV1Yyc3pXVEJzVDFaSFZrSmhiVTVaWWtoc2JGRlhkRTlqUm5CR1lraG9jMWt3U25sTU1GbHlUa1YzUzJKcVdrcFFVVzkwVEZNd2RFeFZWazlTUTBKRVVsWktWVk5WV2twUk1FWlZVbE13ZEV4VE1IUkRaejA5Q2lBZ0lDQnpaWEoyWlhJNklHaDBkSEJ6T2k4dllUbGlaV1UyTmpBdE5XRTNPQzAwWWpBMExUa3lOemd0WmpJMk5XWXhaVE0yTnpGbUxtRndMWGRsYzNRdE1pNXNhVzV2WkdWc2EyVXVibVYwT2pRME13b2dJRzVoYldVNklHUmxabUYxYkhRS1kyOXVkR1Y0ZEhNNkNpMGdZMjl1ZEdWNGREb0tJQ0FnSUdOc2RYTjBaWEk2SUdSbFptRjFiSFFLSUNBZ0lHNWhiV1Z6Y0dGalpUb2dZbUl0Y0daMlpuUUtJQ0FnSUhWelpYSTZJR1JsWm1GMWJIUUtJQ0J1WVcxbE9pQmtaV1poZFd4MENtTjFjbkpsYm5RdFkyOXVkR1Y0ZERvZ1pHVm1ZWFZzZEFwcmFXNWtPaUJEYjI1bWFXY0tjSEpsWm1WeVpXNWpaWE02SUh0OUNuVnpaWEp6T2dvdElHNWhiV1U2SUdSbFptRjFiSFFLSUNCMWMyVnlPZ29nSUNBZ2RHOXJaVzQ2SUdWNVNtaGlSMk5wVDJsS1UxVjZTVEZPYVVselNXMTBjRnBEU1RaSmExcHZWakpWZWs1RlVsRlpNa3AwWkVkc2IyRnRNV2xQVjJoTFdqQnNTMUZ0Um5GUk1taGFXREl4YmsxdVpIUlZWM0JWVVZWR1RFMVVRV2xtVVM1bGVVcHdZek5OYVU5cFNuSmtWMHBzWTIwMWJHUkhWbnBNTTA1c1kyNWFjRmt5Vm1oWk1rNTJaRmMxTUVscGQybGhNMVpwV2xoS2RWcFlVbXhqZVRWd1luazVlbHBZU2pKaFYwNXNXVmRPYW1JelZuVmtRemwxV1ZjeGJHTXpRbWhaTWxWcFQybEthVmxwTVhkYWJscHRaRU5KYzBsdGRERlpiVlo1WW0xV01GcFlUWFZoVnpoMll6SldlV1J0YkdwYVYwWnFXVEk1TVdKdVVYWmpNbFpxWTIxV01FeHROV2hpVjFWcFQybEtjbVJYU214TVYwcHdZbTFTYkdOcFNYTkpiWFF4V1cxV2VXSnRWakJhV0UxMVlWYzRkbU15Vm5sa2JXeHFXbGRHYWxreU9URmlibEYyWXpKV2VXUnRiR3BhVXpGb1dUSk9kbVJYTlRCTWJUVm9ZbGRWYVU5cFNuSmtWMHBzVEZkS2NHSnRVbXhqYVVselNXMTBNVmx0Vm5saWJWWXdXbGhOZFdGWE9IWmpNbFo1Wkcxc2FscFhSbXBaTWpreFltNVJkbU15Vm5sa2JXeHFXbE14YUZreVRuWmtWelV3VEc1V2NGcERTVFpKYW1kNlRrUk5OVTV0U1RCTVZHTXhUMVJGZEU1SFZURlphVEEwVGpKT2FreFVVbTFPYlVVeVRucFJlRnBFVm1wYVUwbHpTVzVPTVZscFNUWkpiazQxWXpOU2JHSlVjSHBhV0VveVlWZE9iRmxYVG1waU0xWjFaRVJ3YVZscE1YZGFibHB0WkVSd2NtUlhTbXhNVjBwd1ltMVNiR05wU2prdVIxaGxOSEZWVlVaVlZGZGthVEJxYVhsalIzWTJjVXQxTW5WM2VqQkxhVXBaTm5wNk0wcEhPV3cyYjFvNWEzaFJTblUyUWxwcWRrVmtaVk5KZVhaMVNraDROWEZoWDAxV1ZWSm9kRGRIUnpka1MyOWZTa0o1YkdjNVUwbFlaMFZGU25KaFZIaGljVTE2TUZKMlNtWndMVGxQTlc1U1lXdHFiV2hDU0dOcE1TMXVjRTl4UXpjelpWbHNkbTF0VDA0MFh6TlNkbE5DVWpWeE1GZENhRFExZVd0eGRrbEJVV1p6T0hSdVpEaENSbko2UWtGZlIzcEVSREpqTUVNd2NXTnlUSHBoVmtOWFp6bGtXWEpxTTJNelowOTZNMk13V1RKR1ZWTm1ZVWRwUzBneWIxZEthVFIxT0RBNFZVdFJVVWxaVW1sU2RDMVlkVXRJVW5KdWNsZEpkMVZWVDBkT2R6ZE9UM0pxZEhad1QwOWZRa1Z3Y1d4dWFtaHlibkpDTlU1M2RIZEVVeTFHZFVsdmFWVktZbFYzZUd4eldpMVpkVWgxU25sbWNWODJPVlpyTkcxQ2FHOW1UVmN3WkRSc1R6ZFZkRmswU0VGbkNnPT0iLCJyZXF1ZXN0cyI6W3sia2luZCI6IkFQSVNlcnZpY2VFeHBvcnRSZXF1ZXN0IiwiYXBpVmVyc2lvbiI6Imt1YmUtYmluZC5pby92MWFscGhhMSIsIm1ldGFkYXRhIjp7Im5hbWUiOiJtYW5nb2Ricy5tYW5nb2RiLmNvbSJ9LCJzcGVjIjp7InJlc291cmNlcyI6W3siZ3JvdXAiOiJtYW5nb2RiLmNvbSIsInJlc291cmNlIjoibWFuZ29kYnMifV19LCJzdGF0dXMiOnt9fV19"
+
+
+🔑 Successfully authenticated to http://127.0.0.1:8080/export
+I0513 00:28:17.139496   71258 request.go:1154] Request Body: {"kind":"Namespace","apiVersion":"v1","metadata":{"name":"kube-bind","creationTimestamp":null},"spec":{},"status":{}}
+I0513 00:28:17.139591   71258 round_trippers.go:463] POST https://127.0.0.1:34105/api/v1/namespaces
+I0513 00:28:17.139605   71258 round_trippers.go:469] Request Headers:
+I0513 00:28:17.139629   71258 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:17.139655   71258 round_trippers.go:473]     Content-Type: application/json
+I0513 00:28:17.139675   71258 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:17.150002   71258 round_trippers.go:574] Response Status: 409 Conflict in 10 milliseconds
+I0513 00:28:17.150064   71258 round_trippers.go:577] Response Headers:
+I0513 00:28:17.150085   71258 round_trippers.go:580]     Audit-Id: b7be74de-a25e-420e-bacc-d035b12b2dae
+I0513 00:28:17.150122   71258 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:17.150141   71258 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:17.150159   71258 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:17.150179   71258 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:17.150198   71258 round_trippers.go:580]     Content-Length: 208
+I0513 00:28:17.150217   71258 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:17 GMT
+I0513 00:28:17.150262   71258 request.go:1154] Response Body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"namespaces \"kube-bind\" already exists","reason":"AlreadyExists","details":{"name":"kube-bind","kind":"namespaces"},"code":409}
+I0513 00:28:17.151633   71258 round_trippers.go:463] GET https://127.0.0.1:34105/api/v1/namespaces/kube-bind/secrets
+I0513 00:28:17.151697   71258 round_trippers.go:469] Request Headers:
+I0513 00:28:17.151738   71258 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:17.151757   71258 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:17.157319   71258 round_trippers.go:574] Response Status: 200 OK in 5 milliseconds
+I0513 00:28:17.157359   71258 round_trippers.go:577] Response Headers:
+I0513 00:28:17.157371   71258 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:17.157378   71258 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:17.157385   71258 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:17 GMT
+I0513 00:28:17.157391   71258 round_trippers.go:580]     Audit-Id: 94f0b164-cbdb-408d-8b1b-f6bde2080b2c
+I0513 00:28:17.157401   71258 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:17.157415   71258 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:17.157591   71258 request.go:1154] Response Body: {"kind":"SecretList","apiVersion":"v1","metadata":{"resourceVersion":"17160"},"items":[{"metadata":{"name":"kubeconfig-8fz2h","generateName":"kubeconfig-","namespace":"kube-bind","uid":"9b4210d3-4d9b-4b03-b016-ba97147d47d2","resourceVersion":"10634","creationTimestamp":"2023-05-12T17:22:04Z","managedFields":[{"manager":"kubectl-bind","operation":"Update","apiVersion":"v1","time":"2023-05-12T17:22:04Z","fieldsType":"FieldsV1","fieldsV1":{"f:data":{".":{},"f:kubeconfig":{}},"f:metadata":{"f:generateName":{}},"f:type":{}}}]},"data":{"kubeconfig":"YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNdmFrTkRRV1ZoWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplazFFVlhoTmFrVXlUVlJCZWs5V2IxaEVWRTE2VFVSVmQwOVVSVEpOVkVGNlQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG [truncated 15605 chars]
+I0513 00:28:17.158426   71258 kubeconfig.go:68] "secret current context namespace not set" namespace="kube-bind" name="kubeconfig-8fz2h"
+I0513 00:28:17.158680   71258 kubeconfig.go:68] "secret current context namespace not set" namespace="kube-bind" name="kubeconfig-mvhn9"
+I0513 00:28:17.158907   71258 kubeconfig.go:68] "secret current context namespace not set" namespace="kube-bind" name="kubeconfig-qfk7w"
+I0513 00:28:17.159128   71258 kubeconfig.go:68] "secret current context namespace not set" namespace="kube-bind" name="kubeconfig-tqv9d"
+I0513 00:28:17.159565   71258 request.go:1154] Request Body: {"kind":"Secret","apiVersion":"v1","metadata":{"generateName":"kubeconfig-","namespace":"kube-bind","creationTimestamp":null},"data":{"kubeconfig":"YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNdmFrTkRRV1ZoWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplazFFVlhoTmFrVXlUVlJCZWs5V2IxaEVWRTE2VFVSVmQwOVVSVEpOVkVGNlQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG5SVUpCUzFKc0NqVkxjRlZ6T0d4R09YQndSRlZ2Vm1GUlR6SmhaVU13ZUVvclkzRllSMU5SWlZCMFJ6VkplRnBCYzNKNWNteDFUMWdyYlZWV1oxSlZUSFF4VVVGUlJtc0tObUpRVkZsemVWWlVVM001WTBaS1ZUbDZRMlV6WjNCS1QxVlJaalpqY20wMk9VODJNRU52U1VwWWVWQmtZa0pxUjJSeE5rRlNSREZ2ZVVkd1JURk9hd3B4YkRoVVdtRmFaV1pVV0VzdksyTnhkVUpJVTB4WWRIa3lNVnBPY0hocGJuZFBNSEJyYlZneWVuSjVUR1E0WmxSc2JWRkNRM2h4TWxsb1NXWlhlbkp5Q2xoVE5uZEhVV1J0ZWxGcFVXeHdabGxHVURSSFEyRlFL [truncated 2780 chars]
+I0513 00:28:17.159679   71258 round_trippers.go:463] POST https://127.0.0.1:34105/api/v1/namespaces/kube-bind/secrets
+I0513 00:28:17.159699   71258 round_trippers.go:469] Request Headers:
+I0513 00:28:17.159711   71258 round_trippers.go:473]     Content-Type: application/json
+I0513 00:28:17.159725   71258 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:17.159732   71258 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:17.164823   71258 round_trippers.go:574] Response Status: 201 Created in 5 milliseconds
+I0513 00:28:17.165267   71258 round_trippers.go:577] Response Headers:
+I0513 00:28:17.165373   71258 round_trippers.go:580]     Audit-Id: 28f9293f-a4b4-481c-97d7-04edcd2fb5ac
+I0513 00:28:17.165404   71258 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:17.165433   71258 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:17.165464   71258 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:17.165493   71258 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:17.165534   71258 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:17 GMT
+I0513 00:28:17.165930   71258 request.go:1154] Response Body: {"kind":"Secret","apiVersion":"v1","metadata":{"name":"kubeconfig-x4s6b","generateName":"kubeconfig-","namespace":"kube-bind","uid":"96bef67f-127a-4316-8c60-a38953ee24d1","resourceVersion":"17161","creationTimestamp":"2023-05-12T18:28:17Z","managedFields":[{"manager":"kubectl-bind","operation":"Update","apiVersion":"v1","time":"2023-05-12T18:28:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:data":{".":{},"f:kubeconfig":{}},"f:metadata":{"f:generateName":{}},"f:type":{}}}]},"data":{"kubeconfig":"YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNdmFrTkRRV1ZoWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplazFFVlhoTmFrVXlUVlJCZWs5V2IxaEVWRTE2VFVSVmQwOVVSVEpOVkVGNlQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG5SVUpCUzFKc0NqVkxjRlZ6T0d4R09YQndSRlZ2Vm1GUlR6SmhaVU1 [truncated 3145 chars]
+🔒 Created secret kube-bind/kubeconfig-x4s6b for host https://a9bee660-5a78-4b04-9278-f265f1e3671f.ap-west-2.linodelke.net:443, namespace bb-pfvft
+🚀 Executing: kubectl bind apiservice --remote-kubeconfig-namespace kube-bind --remote-kubeconfig-name kubeconfig-x4s6b -f - --v=8
+✨ Use "-o yaml" and "--dry-run" to get the APIServiceExportRequest and pass it to "kubectl bind apiservice" directly. Great for automation.
+I0513 00:28:17.199314   71421 loader.go:374] Config loaded from file:  /home/arnob/.kube/config
+I0513 00:28:17.199926   71421 round_trippers.go:463] GET https://127.0.0.1:34105/api/v1/namespaces/kube-bind/secrets/kubeconfig-x4s6b
+I0513 00:28:17.199938   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:17.199945   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:17.199954   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:17.209841   71421 round_trippers.go:574] Response Status: 200 OK in 9 milliseconds
+I0513 00:28:17.209894   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:17.209920   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:17.209961   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:17.209981   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:17.209998   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:17 GMT
+I0513 00:28:17.210015   71421 round_trippers.go:580]     Audit-Id: 7ca7d357-4302-4248-99da-ee5ffb0e0419
+I0513 00:28:17.210029   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:17.210233   71421 request.go:1154] Response Body: {"kind":"Secret","apiVersion":"v1","metadata":{"name":"kubeconfig-x4s6b","generateName":"kubeconfig-","namespace":"kube-bind","uid":"96bef67f-127a-4316-8c60-a38953ee24d1","resourceVersion":"17161","creationTimestamp":"2023-05-12T18:28:17Z","managedFields":[{"manager":"kubectl-bind","operation":"Update","apiVersion":"v1","time":"2023-05-12T18:28:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:data":{".":{},"f:kubeconfig":{}},"f:metadata":{"f:generateName":{}},"f:type":{}}}]},"data":{"kubeconfig":"YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNdmFrTkRRV1ZoWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplazFFVlhoTmFrVXlUVlJCZWs5V2IxaEVWRTE2VFVSVmQwOVVSVEpOVkVGNlQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG5SVUpCUzFKc0NqVkxjRlZ6T0d4R09YQndSRlZ2Vm1GUlR6SmhaVU1 [truncated 3145 chars]
+I0513 00:28:17.213813   71421 request.go:1154] Request Body: {"kind":"APIServiceExportRequest","apiVersion":"kube-bind.io/v1alpha1","metadata":{"name":"mangodbs.mangodb.com","creationTimestamp":null},"spec":{"resources":[{"group":"mangodb.com","resource":"mangodbs"}]},"status":{}}
+I0513 00:28:17.213939   71421 round_trippers.go:463] POST https://a9bee660-5a78-4b04-9278-f265f1e3671f.ap-west-2.linodelke.net:443/apis/kube-bind.io/v1alpha1/namespaces/bb-pfvft/apiserviceexportrequests
+I0513 00:28:17.213958   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:17.213980   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:17.214002   71421 round_trippers.go:473]     Authorization: Bearer <masked>
+I0513 00:28:17.214020   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:17.214039   71421 round_trippers.go:473]     Content-Type: application/json
+I0513 00:28:17.365973   71421 round_trippers.go:574] Response Status: 201 Created in 151 milliseconds
+I0513 00:28:17.366020   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:17.366040   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:17 GMT
+I0513 00:28:17.366058   71421 round_trippers.go:580]     Audit-Id: e75336c2-fdd1-40d9-a2dc-f4d09c108725
+I0513 00:28:17.366076   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:17.366093   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:17.366112   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 87cefb7a-eec0-42a1-950d-71a1f7701d96
+I0513 00:28:17.366131   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: d25d8517-46e2-4758-bd95-0ee298b3dd3a
+I0513 00:28:17.366159   71421 round_trippers.go:580]     Content-Length: 569
+I0513 00:28:17.366206   71421 request.go:1154] Response Body: {"apiVersion":"kube-bind.io/v1alpha1","kind":"APIServiceExportRequest","metadata":{"creationTimestamp":"2023-05-12T18:28:17Z","generation":1,"managedFields":[{"apiVersion":"kube-bind.io/v1alpha1","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{".":{},"f:resources":{}}},"manager":"kubectl-bind","operation":"Update","time":"2023-05-12T18:28:17Z"}],"name":"mangodbs.mangodb.com","namespace":"bb-pfvft","resourceVersion":"7667","uid":"fb439db0-8957-46d3-bbf2-e9096d82bba5"},"spec":{"resources":[{"group":"mangodb.com","resource":"mangodbs"}]},"status":{"phase":"Pending"}}
+I0513 00:28:17.366681   71421 round_trippers.go:463] GET https://a9bee660-5a78-4b04-9278-f265f1e3671f.ap-west-2.linodelke.net:443/apis/kube-bind.io/v1alpha1/namespaces/bb-pfvft/apiserviceexportrequests/mangodbs.mangodb.com
+I0513 00:28:17.366701   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:17.366720   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:17.366739   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:17.366760   71421 round_trippers.go:473]     Authorization: Bearer <masked>
+I0513 00:28:17.414182   71421 round_trippers.go:574] Response Status: 200 OK in 47 milliseconds
+I0513 00:28:17.414220   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:17.414236   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:17.414254   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 87cefb7a-eec0-42a1-950d-71a1f7701d96
+I0513 00:28:17.414273   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: d25d8517-46e2-4758-bd95-0ee298b3dd3a
+I0513 00:28:17.414289   71421 round_trippers.go:580]     Content-Length: 569
+I0513 00:28:17.414303   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:17 GMT
+I0513 00:28:17.414317   71421 round_trippers.go:580]     Audit-Id: 25e8eba8-cd7f-445b-b1de-25666ede6238
+I0513 00:28:17.414332   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:17.414399   71421 request.go:1154] Response Body: {"apiVersion":"kube-bind.io/v1alpha1","kind":"APIServiceExportRequest","metadata":{"creationTimestamp":"2023-05-12T18:28:17Z","generation":1,"managedFields":[{"apiVersion":"kube-bind.io/v1alpha1","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{".":{},"f:resources":{}}},"manager":"kubectl-bind","operation":"Update","time":"2023-05-12T18:28:17Z"}],"name":"mangodbs.mangodb.com","namespace":"bb-pfvft","resourceVersion":"7667","uid":"fb439db0-8957-46d3-bbf2-e9096d82bba5"},"spec":{"resources":[{"group":"mangodb.com","resource":"mangodbs"}]},"status":{"phase":"Pending"}}
+I0513 00:28:18.414881   71421 round_trippers.go:463] GET https://a9bee660-5a78-4b04-9278-f265f1e3671f.ap-west-2.linodelke.net:443/apis/kube-bind.io/v1alpha1/namespaces/bb-pfvft/apiserviceexportrequests/mangodbs.mangodb.com
+I0513 00:28:18.414911   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:18.414930   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:18.414949   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:18.414968   71421 round_trippers.go:473]     Authorization: Bearer <masked>
+I0513 00:28:18.461969   71421 round_trippers.go:574] Response Status: 200 OK in 46 milliseconds
+I0513 00:28:18.462005   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:18.462021   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 87cefb7a-eec0-42a1-950d-71a1f7701d96
+I0513 00:28:18.462037   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: d25d8517-46e2-4758-bd95-0ee298b3dd3a
+I0513 00:28:18.462053   71421 round_trippers.go:580]     Content-Length: 969
+I0513 00:28:18.462068   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:18 GMT
+I0513 00:28:18.462083   71421 round_trippers.go:580]     Audit-Id: d530d0f6-b8b2-4cf4-be1f-7ae79add1e7d
+I0513 00:28:18.462099   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:18.462114   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:18.462154   71421 request.go:1154] Response Body: {"apiVersion":"kube-bind.io/v1alpha1","kind":"APIServiceExportRequest","metadata":{"creationTimestamp":"2023-05-12T18:28:17Z","generation":1,"managedFields":[{"apiVersion":"kube-bind.io/v1alpha1","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:conditions":{},"f:phase":{}}},"manager":"example-backend","operation":"Update","subresource":"status","time":"2023-05-12T18:28:17Z"},{"apiVersion":"kube-bind.io/v1alpha1","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{".":{},"f:resources":{}}},"manager":"kubectl-bind","operation":"Update","time":"2023-05-12T18:28:17Z"}],"name":"mangodbs.mangodb.com","namespace":"bb-pfvft","resourceVersion":"7669","uid":"fb439db0-8957-46d3-bbf2-e9096d82bba5"},"spec":{"resources":[{"group":"mangodb.com","resource":"mangodbs"}]},"status":{"conditions":[{"lastTransitionTime":"2023-05-12T18:28:17Z","status":"True","type":"Ready"},{"lastTransitionTime":"2023-05-12T18:28:17Z","status":"True","type":"ExportsReady"}],"phase":"Succeeded"}}
+I0513 00:28:18.462861   71421 round_trippers.go:463] GET https://127.0.0.1:34105/apis/apps/v1/namespaces/kube-bind/deployments/konnector
+I0513 00:28:18.462880   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:18.462898   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:18.462915   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:18.465815   71421 round_trippers.go:574] Response Status: 200 OK in 2 milliseconds
+I0513 00:28:18.465849   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:18.465871   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:18.465886   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:18.465902   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:18.465917   71421 round_trippers.go:580]     Content-Length: 3506
+I0513 00:28:18.465932   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:18 GMT
+I0513 00:28:18.465947   71421 round_trippers.go:580]     Audit-Id: 2cb3e068-ca86-4f95-a716-a2e913026017
+I0513 00:28:18.465962   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:18.466033   71421 request.go:1154] Response Body: {"kind":"Deployment","apiVersion":"apps/v1","metadata":{"name":"konnector","namespace":"kube-bind","uid":"921cb3fe-80f8-4e53-b11c-b62f32bcd681","resourceVersion":"11380","generation":1,"creationTimestamp":"2023-05-12T17:30:14Z","labels":{"app":"konnector"},"annotations":{"deployment.kubernetes.io/revision":"1"},"managedFields":[{"manager":"kubectl-bind","operation":"Update","apiVersion":"apps/v1","time":"2023-05-12T17:30:14Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:labels":{".":{},"f:app":{}}},"f:spec":{"f:progressDeadlineSeconds":{},"f:replicas":{},"f:revisionHistoryLimit":{},"f:selector":{},"f:strategy":{"f:rollingUpdate":{".":{},"f:maxSurge":{},"f:maxUnavailable":{}},"f:type":{}},"f:template":{"f:metadata":{"f:labels":{".":{},"f:app":{}}},"f:spec":{"f:containers":{"k:{\"name\":\"konnector\"}":{".":{},"f:env":{".":{},"k:{\"name\":\"POD_NAME\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{}}},"k:{\"name\":\"POD_NAMESPACE\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{}}} [truncated 2482 chars]
+I0513 00:28:18.469468   71421 round_trippers.go:463] GET https://127.0.0.1:34105/apis/kube-bind.io/v1alpha1/apiservicebindings
+I0513 00:28:18.469497   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:18.469516   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:18.469535   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:18.472551   71421 round_trippers.go:574] Response Status: 200 OK in 2 milliseconds
+I0513 00:28:18.472595   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:18.472615   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:18.472633   71421 round_trippers.go:580]     Content-Length: 134
+I0513 00:28:18.472648   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:18 GMT
+I0513 00:28:18.472663   71421 round_trippers.go:580]     Audit-Id: ceeac6eb-9abf-4072-ab16-c112426ed928
+I0513 00:28:18.472685   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:18.472701   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:18.472716   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:18.472745   71421 request.go:1154] Response Body: {"apiVersion":"kube-bind.io/v1alpha1","items":[],"kind":"APIServiceBindingList","metadata":{"continue":"","resourceVersion":"17163"}}
+I0513 00:28:18.473501   71421 request.go:1154] Request Body: {"kind":"Namespace","apiVersion":"v1","metadata":{"name":"kube-bind","creationTimestamp":null},"spec":{},"status":{}}
+I0513 00:28:18.473581   71421 round_trippers.go:463] POST https://127.0.0.1:34105/api/v1/namespaces
+I0513 00:28:18.473596   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:18.473615   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:18.473632   71421 round_trippers.go:473]     Content-Type: application/json
+I0513 00:28:18.473648   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:18.479969   71421 round_trippers.go:574] Response Status: 409 Conflict in 6 milliseconds
+I0513 00:28:18.480007   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:18.480020   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:18.480031   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:18.480042   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:18.480057   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:18.480070   71421 round_trippers.go:580]     Content-Length: 208
+I0513 00:28:18.480082   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:18 GMT
+I0513 00:28:18.480092   71421 round_trippers.go:580]     Audit-Id: 0e423b7a-6371-4e39-9f73-a17043d74d0e
+I0513 00:28:18.480119   71421 request.go:1154] Response Body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"namespaces \"kube-bind\" already exists","reason":"AlreadyExists","details":{"name":"kube-bind","kind":"namespaces"},"code":409}
+I0513 00:28:18.480450   71421 round_trippers.go:463] GET https://127.0.0.1:34105/api/v1/namespaces/kube-bind/secrets
+I0513 00:28:18.480464   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:18.480476   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:18.480487   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:18.482877   71421 round_trippers.go:574] Response Status: 200 OK in 2 milliseconds
+I0513 00:28:18.482900   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:18.482912   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:18.482919   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:18.482926   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:18.482933   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:18.482941   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:18 GMT
+I0513 00:28:18.482949   71421 round_trippers.go:580]     Audit-Id: 118db485-18fe-4922-a07f-1d5dabde686b
+I0513 00:28:18.484091   71421 request.go:1154] Response Body: {"kind":"SecretList","apiVersion":"v1","metadata":{"resourceVersion":"17163"},"items":[{"metadata":{"name":"kubeconfig-8fz2h","generateName":"kubeconfig-","namespace":"kube-bind","uid":"9b4210d3-4d9b-4b03-b016-ba97147d47d2","resourceVersion":"10634","creationTimestamp":"2023-05-12T17:22:04Z","managedFields":[{"manager":"kubectl-bind","operation":"Update","apiVersion":"v1","time":"2023-05-12T17:22:04Z","fieldsType":"FieldsV1","fieldsV1":{"f:data":{".":{},"f:kubeconfig":{}},"f:metadata":{"f:generateName":{}},"f:type":{}}}]},"data":{"kubeconfig":"YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNdmFrTkRRV1ZoWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplazFFVlhoTmFrVXlUVlJCZWs5V2IxaEVWRTE2VFVSVmQwOVVSVEpOVkVGNlQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG [truncated 19740 chars]
+I0513 00:28:18.485497   71421 kubeconfig.go:68] "secret current context namespace not set" namespace="kube-bind" name="kubeconfig-8fz2h"
+I0513 00:28:18.485839   71421 kubeconfig.go:68] "secret current context namespace not set" namespace="kube-bind" name="kubeconfig-mvhn9"
+I0513 00:28:18.486141   71421 kubeconfig.go:68] "secret current context namespace not set" namespace="kube-bind" name="kubeconfig-qfk7w"
+I0513 00:28:18.486436   71421 kubeconfig.go:68] "secret current context namespace not set" namespace="kube-bind" name="kubeconfig-tqv9d"
+I0513 00:28:18.486871   71421 round_trippers.go:463] GET https://127.0.0.1:34105/apis/kube-bind.io/v1alpha1/apiservicebindings/mangodbs.mangodb.com
+I0513 00:28:18.486883   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:18.486896   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:18.486913   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:18.489151   71421 round_trippers.go:574] Response Status: 404 Not Found in 2 milliseconds
+I0513 00:28:18.489181   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:18.489197   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:18.489209   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:18.489220   71421 round_trippers.go:580]     Content-Length: 272
+I0513 00:28:18.489231   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:18 GMT
+I0513 00:28:18.489241   71421 round_trippers.go:580]     Audit-Id: facfb489-c5f3-4dbe-b64b-0ac2f3ce54b3
+I0513 00:28:18.489252   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:18.489263   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:18.489289   71421 request.go:1154] Response Body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"apiservicebindings.kube-bind.io \"mangodbs.mangodb.com\" not found","reason":"NotFound","details":{"name":"mangodbs.mangodb.com","group":"kube-bind.io","kind":"apiservicebindings"},"code":404}
+I0513 00:28:19.489763   71421 request.go:1154] Request Body: {"kind":"APIServiceBinding","apiVersion":"kube-bind.io/v1alpha1","metadata":{"name":"mangodbs.mangodb.com","namespace":"kube-bind","creationTimestamp":null},"spec":{"kubeconfigSecretRef":{"name":"kubeconfig-x4s6b","key":"kubeconfig","namespace":"kube-bind"}},"status":{}}
+I0513 00:28:19.489853   71421 round_trippers.go:463] POST https://127.0.0.1:34105/apis/kube-bind.io/v1alpha1/apiservicebindings
+I0513 00:28:19.489865   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:19.489882   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:19.489897   71421 round_trippers.go:473]     Content-Type: application/json
+I0513 00:28:19.489912   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:19.494188   71421 round_trippers.go:574] Response Status: 201 Created in 4 milliseconds
+I0513 00:28:19.494234   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:19.494259   71421 round_trippers.go:580]     Audit-Id: 679c9502-53e0-428f-bdbe-513f3e0c19da
+I0513 00:28:19.494283   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:19.494305   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:19.494329   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:19.494352   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:19.494398   71421 round_trippers.go:580]     Content-Length: 601
+I0513 00:28:19.494455   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:19 GMT
+I0513 00:28:19.494517   71421 request.go:1154] Response Body: {"apiVersion":"kube-bind.io/v1alpha1","kind":"APIServiceBinding","metadata":{"creationTimestamp":"2023-05-12T18:28:19Z","generation":1,"managedFields":[{"apiVersion":"kube-bind.io/v1alpha1","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{".":{},"f:kubeconfigSecretRef":{".":{},"f:key":{},"f:name":{},"f:namespace":{}}}},"manager":"kubectl-bind","operation":"Update","time":"2023-05-12T18:28:19Z"}],"name":"mangodbs.mangodb.com","resourceVersion":"17166","uid":"22f19628-fc7d-4c5f-921b-a2ca0ca73527"},"spec":{"kubeconfigSecretRef":{"key":"kubeconfig","name":"kubeconfig-x4s6b","namespace":"kube-bind"}}}
+I0513 00:28:19.494865   71421 request.go:1154] Request Body: {"kind":"APIServiceBinding","apiVersion":"kube-bind.io/v1alpha1","metadata":{"name":"mangodbs.mangodb.com","uid":"22f19628-fc7d-4c5f-921b-a2ca0ca73527","resourceVersion":"17166","generation":1,"creationTimestamp":"2023-05-12T18:28:19Z","managedFields":[{"manager":"kubectl-bind","operation":"Update","apiVersion":"kube-bind.io/v1alpha1","time":"2023-05-12T18:28:19Z","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{".":{},"f:kubeconfigSecretRef":{".":{},"f:key":{},"f:name":{},"f:namespace":{}}}}}]},"spec":{"kubeconfigSecretRef":{"name":"kubeconfig-x4s6b","key":"kubeconfig","namespace":"kube-bind"}},"status":{"conditions":[{"type":"Ready","status":"False","severity":"Info","lastTransitionTime":"2023-05-12T18:28:19Z","reason":"Pending","message":"Pending"}]}}
+I0513 00:28:19.494969   71421 round_trippers.go:463] PUT https://127.0.0.1:34105/apis/kube-bind.io/v1alpha1/apiservicebindings/mangodbs.mangodb.com/status
+I0513 00:28:19.494988   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:19.495015   71421 round_trippers.go:473]     Accept: application/json, */*
+I0513 00:28:19.495040   71421 round_trippers.go:473]     Content-Type: application/json
+I0513 00:28:19.495088   71421 round_trippers.go:473]     User-Agent: kubectl-bind/v1.25.2+kube (linux/amd64) kubernetes/443bbb9
+I0513 00:28:19.500513   71421 round_trippers.go:574] Response Status: 200 OK in 5 milliseconds
+I0513 00:28:19.500543   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:19.500556   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:19.500567   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:19.500579   71421 round_trippers.go:580]     Content-Length: 975
+I0513 00:28:19.500597   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:19 GMT
+I0513 00:28:19.500613   71421 round_trippers.go:580]     Audit-Id: 6a0321a8-ab68-4973-a497-741ecca7217f
+I0513 00:28:19.500627   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:19.500641   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:19.500704   71421 request.go:1154] Response Body: {"apiVersion":"kube-bind.io/v1alpha1","kind":"APIServiceBinding","metadata":{"creationTimestamp":"2023-05-12T18:28:19Z","generation":1,"managedFields":[{"apiVersion":"kube-bind.io/v1alpha1","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{".":{},"f:kubeconfigSecretRef":{".":{},"f:key":{},"f:name":{},"f:namespace":{}}}},"manager":"kubectl-bind","operation":"Update","time":"2023-05-12T18:28:19Z"},{"apiVersion":"kube-bind.io/v1alpha1","fieldsType":"FieldsV1","fieldsV1":{"f:status":{".":{},"f:conditions":{}}},"manager":"kubectl-bind","operation":"Update","subresource":"status","time":"2023-05-12T18:28:19Z"}],"name":"mangodbs.mangodb.com","resourceVersion":"17167","uid":"22f19628-fc7d-4c5f-921b-a2ca0ca73527"},"spec":{"kubeconfigSecretRef":{"key":"kubeconfig","name":"kubeconfig-x4s6b","namespace":"kube-bind"}},"status":{"conditions":[{"lastTransitionTime":"2023-05-12T18:28:19Z","message":"Pending","reason":"Pending","severity":"Info","status":"False","type":"Ready"}]}}
+✅ Created APIServiceBinding mangodbs.mangodb.com
+
+I0513 00:28:19.501146   71421 round_trippers.go:463] GET https://127.0.0.1:34105/apis/kube-bind.io/v1alpha1/apiservicebindings/mangodbs.mangodb.com
+I0513 00:28:19.501164   71421 round_trippers.go:469] Request Headers:
+I0513 00:28:19.501177   71421 round_trippers.go:473]     Accept: application/json;as=Table;v=v1;g=meta.k8s.io
+I0513 00:28:19.506688   71421 round_trippers.go:574] Response Status: 200 OK in 5 milliseconds
+I0513 00:28:19.506727   71421 round_trippers.go:577] Response Headers:
+I0513 00:28:19.506745   71421 round_trippers.go:580]     Content-Type: application/json
+I0513 00:28:19.506760   71421 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 8a007d04-3a38-4d32-a631-ddaf7a8f81b8
+I0513 00:28:19.506775   71421 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: bf382518-1b14-4acb-a311-36ca76a3d05e
+I0513 00:28:19.506791   71421 round_trippers.go:580]     Content-Length: 2185
+I0513 00:28:19.506805   71421 round_trippers.go:580]     Date: Fri, 12 May 2023 18:28:19 GMT
+I0513 00:28:19.506822   71421 round_trippers.go:580]     Audit-Id: 72ee242b-c996-42b6-83ba-7eb7b8c2a146
+I0513 00:28:19.506837   71421 round_trippers.go:580]     Cache-Control: no-cache, private
+I0513 00:28:19.506915   71421 request.go:1154] Response Body: {"kind":"Table","apiVersion":"meta.k8s.io/v1","metadata":{"resourceVersion":"17167"},"columnDefinitions":[{"name":"Name","type":"string","format":"name","description":"Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names","priority":0},{"name":"Provider","type":"string","format":"","description":"Custom resource definition column (in JSONPath format): .status.providerPrettyName","priority":0},{"name":"Resources","type":"string","format":"","description":"Custom resource definition column (in JSONPath format): .metadata.annotations.kube-bind\\.io/resources","priority":1},{"name":"Ready","type":"string","format":"","description":"Custom resource definition column (in JSONPath format): .status.conditions[?(@.type==\"Rea [truncated 1161 chars]
+NAME                                                  PROVIDER   READY   MESSAGE   AGE
+apiservicebinding.kube-bind.io/mangodbs.mangodb.com              False   Pending   0s
+

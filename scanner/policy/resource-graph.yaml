@@ -1,0 +1,12 @@
+apiVersion: meta.k8s.appscode.com/v1alpha1
+kind: ResourceGraph
+request:
+  source:
+    resource:
+        group: apps
+        version: v1
+        name: deployments
+        kind: Deployment
+    ref:
+        name: hello
+        namespace: default

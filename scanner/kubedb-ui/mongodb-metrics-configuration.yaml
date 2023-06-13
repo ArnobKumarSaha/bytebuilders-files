@@ -1,0 +1,217 @@
+apiVersion: metrics.appscode.com/v1alpha1
+kind: MetricsConfiguration
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kubedb-metrics
+    meta.helm.sh/release-namespace: kubedb
+  creationTimestamp: "2023-01-06T05:04:28Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: kubedb-com-mongodb
+  resourceVersion: "6984"
+  uid: bc99c838-6b98-42fc-bb54-1f08f33a3727
+spec:
+  commonLabels:
+  - key: app
+    valuePath: .metadata.name
+  - key: app_namespace
+    valuePath: .metadata.namespace
+  metrics:
+  - field:
+      path: .metadata.creationTimestamp
+      type: DateTime
+    help: Unix creation timestamp
+    metricValue:
+      valueFromPath: .metadata.creationTimestamp
+    name: created
+    type: gauge
+  - field:
+      path: .status.phase
+      type: String
+    help: MongoDB instance current phase
+    name: status_phase
+    params:
+    - key: phase
+      valuePath: .status.phase
+    states:
+      labelKey: phase
+      values:
+      - labelValue: Ready
+        metricValue:
+          valueFromExpression: int(phase == 'Ready')
+      - labelValue: Halted
+        metricValue:
+          valueFromExpression: int(phase == 'Halted')
+      - labelValue: Provisioning
+        metricValue:
+          valueFromExpression: int(phase == 'Provisioning')
+      - labelValue: Critical
+        metricValue:
+          valueFromExpression: int(phase == 'Critical')
+      - labelValue: NotReady
+        metricValue:
+          valueFromExpression: int(phase == 'NotReady')
+      - labelValue: DataRestoring
+        metricValue:
+          valueFromExpression: int(phase == 'DataRestoring')
+    type: gauge
+  - help: MongoDB instance information
+    labels:
+    - key: clusterAuthMode
+      valuePath: .spec.clusterAuthMode
+    - key: sslMode
+      valuePath: .spec.sslMode
+    - key: storageType
+      valuePath: .spec.storageType
+    - key: terminationPolicy
+      valuePath: .spec.terminationPolicy
+    - key: version
+      valuePath: .spec.version
+    metricValue:
+      value: 1
+    name: info
+    type: gauge
+  - field:
+      path: .status.conditions
+      type: Array
+    help: MongoDB instance status condition
+    labels:
+    - key: type
+      valuePath: .status.conditions[*].type
+    - key: status
+      valuePath: .status.conditions[*].status
+    metricValue:
+      value: 1
+    name: status_conditions
+    type: gauge
+  - help: MongoDB sharded topology enable info
+    metricValue:
+      valueFromExpression: int(topology != 'nil')
+    name: shard_enabled
+    params:
+    - key: topology
+      valuePath: .spec.shardTopology
+    type: gauge
+  - help: Requested CPU by MongoDB in core
+    labels:
+    - key: unit
+      value: core
+    metricValue:
+      valueFromExpression: total_resource_requests(obj, resourceType)
+    name: resource_request_cpu
+    params:
+    - key: obj
+      valuePath: .
+    - key: resourceType
+      value: cpu
+    type: gauge
+  - help: Requested memory by MongoDB in byte
+    labels:
+    - key: unit
+      value: byte
+    metricValue:
+      valueFromExpression: total_resource_requests(obj, resourceType)
+    name: resource_request_memory
+    params:
+    - key: obj
+      valuePath: .
+    - key: resourceType
+      value: memory
+    type: gauge
+  - help: Requested storage by MongoDB in byte
+    labels:
+    - key: unit
+      value: byte
+    metricValue:
+      valueFromExpression: total_resource_requests(obj, resourceType)
+    name: resource_request_storage
+    params:
+    - key: obj
+      valuePath: .
+    - key: resourceType
+      value: storage
+    type: gauge
+  - help: CPU limit for MongoDB in core
+    labels:
+    - key: unit
+      value: core
+    metricValue:
+      valueFromExpression: total_resource_limits(obj, resourceType)
+    name: resource_limit_cpu
+    params:
+    - key: obj
+      valuePath: .
+    - key: resourceType
+      value: cpu
+    type: gauge
+  - help: Memory limit for MongoDB in byte
+    labels:
+    - key: unit
+      value: byte
+    metricValue:
+      valueFromExpression: total_resource_limits(obj, resourceType)
+    name: resource_limit_memory
+    params:
+    - key: obj
+      valuePath: .
+    - key: resourceType
+      value: memory
+    type: gauge
+  - help: Storage limit for MongoDB in byte
+    labels:
+    - key: unit
+      value: byte
+    metricValue:
+      valueFromExpression: total_resource_limits(obj, resourceType)
+    name: resource_limit_storage
+    params:
+    - key: obj
+      valuePath: .
+    - key: resourceType
+      value: storage
+    type: gauge
+  - field:
+      path: .spec.replicas
+      type: Integer
+    help: Number of replicas in the MongoDB replicaset
+    metricValue:
+      valueFromPath: .spec.replicas
+    name: replicas
+    type: gauge
+  - field:
+      path: .spec.shardTopology.shard.shards
+      type: Integer
+    help: Number of shards of the MongoDB database
+    metricValue:
+      valueFromPath: .spec.shardTopology.shard.shards
+    name: shard_shards
+    type: gauge
+  - field:
+      path: .spec.shardTopology.shard.replicas
+      type: Integer
+    help: Number of replicas in the MongoDB shards
+    metricValue:
+      valueFromPath: .spec.shardTopology.shard.replicas
+    name: shard_replicas
+    type: gauge
+  - field:
+      path: .spec.shardTopology.configServer.replicas
+      type: Integer
+    help: Number of replicas in MongoDB config server in sharded database
+    metricValue:
+      valueFromPath: .spec.shardTopology.configServer.replicas
+    name: configsvr_replicas
+    type: gauge
+  - field:
+      path: .spec.shardTopology.mongos.replicas
+      type: Integer
+    help: Number of replicas in mongodb sharded mongos
+    metricValue:
+      valueFromPath: .spec.shardTopology.mongos.replicas
+    name: mongos_replicas
+    type: gauge
+  targetRef:
+    apiVersion: kubedb.com/v1alpha2
+    kind: MongoDB
+

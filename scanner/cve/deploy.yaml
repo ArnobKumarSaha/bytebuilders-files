@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: private
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private
+  template:
+    metadata:
+      labels:
+        app: private
+    spec:
+      containers:
+      - name: private
+        image: arnobkumarsaha/private-test:01
+        #image: hibijibihibijibi
+        #image: arnobkumarsaha/my-mongo:01
+        #image: ghcr.io/arnobkumarsaha/hello-melange-apko/go
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: pull-secret

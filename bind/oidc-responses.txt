@@ -1,0 +1,25 @@
+Gitea Response : {AccessToken: <jwt-token> TokenType:bearer ExpiresIn:3600 RefreshToken:<jwt-token>}
+
+Github Response : {AccessToken:<a-persolal-access-token> TokenType:bearer Scope:} 
+
+B3 Response : {AccessToken: <jwt-token>  TokenType:bearer ExpiresIn:3600 RefreshToken:<jwt-token>} 
+
+
+{
+    "id": 3,
+    "login": "arnob",
+    "full_name": "",
+    "email": "arnob@appscode.com",
+    "avatar_url": "http://accounts.bb.test:3000/avatars?obj=bb-test/avatars/3-86a8331c2032e4b8aaf379639ed1edf6",
+    "language": "en-US",
+    "is_admin": false,
+    "last_login": "2023-05-02T11:15:08+06:00",
+    "created": "2023-04-27T12:05:07+06:00",
+    "type": 0,
+    "active": true,
+    "prohibit_login": false,
+    "location": "",
+    "website": "",
+    "description": "",
+    "username": "arnob"
+}

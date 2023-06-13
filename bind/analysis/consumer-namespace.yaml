@@ -1,0 +1,501 @@
+apiVersion: v1
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIC/jCCAeagAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+    cm5ldGVzMB4XDTIzMDUxMjE1MDEyNVoXDTMzMDUwOTE1MDEyNVowFTETMBEGA1UE
+    AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANHz
+    hJyxctYMIZcrwdfTEW4HGjJVbUp9LQh8mLmdx8KfcDeqgMLF+VTOKdOF7lzqPJl/
+    UAXJDE1Rr1IKhemA+voaWtIqchEGUTANzfYQVHtGPsOucb2XBpU1VNFzW1qfEyxb
+    OVGphiXekzzgv2AVClC+1m6kgBf6bjjgvnCFrsnsGvaJcu+4vUwN121tBGHjyliE
+    0IViINp5bAixT34DdK82xVuFJT5bq2gthXJ+khuuUsFfdxLcbSB+sT2JH8gm/ITp
+    Z1iFAWlnOQqW5veR1iZp3rdxZwocRW58Hl6Dvj/Mz6mk6ljC6vyOuOPLpChlGT7j
+    1sZX3X0V2f7AaBB5teECAwEAAaNZMFcwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+    /wQFMAMBAf8wHQYDVR0OBBYEFDBISjPM0xPTKVgMTKhbK+gBd1k9MBUGA1UdEQQO
+    MAyCCmt1YmVybmV0ZXMwDQYJKoZIhvcNAQELBQADggEBAGUvos23chheytJfmmy/
+    FqadjvZdw49J191dXJ+zDyp1MNI3KnWYux6oCJAzl3ZJjGRgZz383XmVbG5i5FNp
+    vEFEDE3st9B7A3Gfr7K8OlzCUAHlBlsmcE9FsWqLtbJfHZ2alkrCvW4jRg4oAOYJ
+    rdlglPFMN6b22YnfUrq9IN6Q4q7Hsd8nS1KxV+dVYXC4zzSjbUUa1iW60iniz7mL
+    eajidhsPMzPPAgOebPnm+zKVXgghcujBCoT9dhBEzL/e4dvUufargSECMR9n8mED
+    iMbVaaqY70Tnq1s9iFv2ds3SJZa3Qru+EcoePKKjbG3hYerWOeAFYBYPj29ypTo6
+    M3s=
+    -----END CERTIFICATE-----
+kind: ConfigMap
+metadata:
+  annotations:
+    kubernetes.io/description: Contains a CA bundle that can be used to verify the
+      kube-apiserver when using internal endpoints such as the internal service IP
+      or kubernetes.default.svc. No other usage is guaranteed across distributions
+      of Kubernetes clusters.
+  creationTimestamp: "2023-05-12T17:19:40Z"
+  name: kube-root-ca.crt
+  namespace: kube-bind
+  resourceVersion: "10461"
+  uid: 591830ac-4687-424d-a63e-bbe5b8dc5dac
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-05-12T17:30:14Z"
+  generateName: konnector-69b76b6c67-
+  labels:
+    app: konnector
+    pod-template-hash: 69b76b6c67
+  name: konnector-69b76b6c67-k5zzx
+  namespace: kube-bind
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: konnector-69b76b6c67
+    uid: eab67dd6-7739-46bb-8192-447d6b0cdda3
+  resourceVersion: "11365"
+  uid: e6266940-c0d9-4321-9f66-d962ccc1d27b
+spec:
+  containers:
+  - env:
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    image: ghcr.io/kube-bind/konnector:v0.3.0
+    imagePullPolicy: IfNotPresent
+    name: konnector
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xc54w
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: kind-control-plane
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: konnector
+  serviceAccountName: konnector
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-xc54w
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-12T17:30:15Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-12T17:31:44Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-12T17:31:44Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-12T17:30:14Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://621ceeda6d8aeb50564e73cbbdc7b58a71238f18920c9ffc6c100ed6866f1aad
+    image: ghcr.io/kube-bind/konnector:v0.3.0
+    imageID: ghcr.io/kube-bind/konnector@sha256:3d26e6d92a8b17eca84a1673e6b64b85b336c2ae00b55cfe7427285dfbaa6d3f
+    lastState: {}
+    name: konnector
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-05-12T17:31:43Z"
+  hostIP: 172.18.0.2
+  phase: Running
+  podIP: 10.244.0.8
+  podIPs:
+  - ip: 10.244.0.8
+  qosClass: BestEffort
+  startTime: "2023-05-12T17:30:15Z"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-05-12T17:30:14Z"
+  generateName: konnector-69b76b6c67-
+  labels:
+    app: konnector
+    pod-template-hash: 69b76b6c67
+  name: konnector-69b76b6c67-kxp5k
+  namespace: kube-bind
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: konnector-69b76b6c67
+    uid: eab67dd6-7739-46bb-8192-447d6b0cdda3
+  resourceVersion: "11378"
+  uid: 9742622b-1282-48f8-a102-6bcc30a09061
+spec:
+  containers:
+  - env:
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    image: ghcr.io/kube-bind/konnector:v0.3.0
+    imagePullPolicy: IfNotPresent
+    name: konnector
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-kr8f7
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: kind-control-plane
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: konnector
+  serviceAccountName: konnector
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-kr8f7
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-12T17:30:15Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-12T17:31:46Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-12T17:31:46Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-12T17:30:14Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://4b5f4704372312ba9cab7292bc7fb90571f3646ced2a47482cc180819fc22c98
+    image: ghcr.io/kube-bind/konnector:v0.3.0
+    imageID: ghcr.io/kube-bind/konnector@sha256:3d26e6d92a8b17eca84a1673e6b64b85b336c2ae00b55cfe7427285dfbaa6d3f
+    lastState: {}
+    name: konnector
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-05-12T17:31:45Z"
+  hostIP: 172.18.0.2
+  phase: Running
+  podIP: 10.244.0.7
+  podIPs:
+  - ip: 10.244.0.7
+  qosClass: BestEffort
+  startTime: "2023-05-12T17:30:15Z"
+---
+apiVersion: v1
+data:
+  kubeconfig: YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNdmFrTkRRV1ZoWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplazFFVlhoTmFrVXlUVlJCZWs5V2IxaEVWRTE2VFVSVmQwOVVSVEpOVkVGNlQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG5SVUpCUzFKc0NqVkxjRlZ6T0d4R09YQndSRlZ2Vm1GUlR6SmhaVU13ZUVvclkzRllSMU5SWlZCMFJ6VkplRnBCYzNKNWNteDFUMWdyYlZWV1oxSlZUSFF4VVVGUlJtc0tObUpRVkZsemVWWlVVM001WTBaS1ZUbDZRMlV6WjNCS1QxVlJaalpqY20wMk9VODJNRU52U1VwWWVWQmtZa0pxUjJSeE5rRlNSREZ2ZVVkd1JURk9hd3B4YkRoVVdtRmFaV1pVV0VzdksyTnhkVUpJVTB4WWRIa3lNVnBPY0hocGJuZFBNSEJyYlZneWVuSjVUR1E0WmxSc2JWRkNRM2h4TWxsb1NXWlhlbkp5Q2xoVE5uZEhVV1J0ZWxGcFVXeHdabGxHVURSSFEyRlFLM2t2YjJSdlV5OVZOSGhQUkhwWGNVWTVhek5zV1VsTEwxTXlhbk0zY0d4SmVrNWlRa2NyU20wS2RFSXdkMnBRUzI0NFptSklaWG80Tmsxd1VESmxXVEJITkc0NWMwMVlOREpZYm5CUWFIZFBSV3d5VmxvMFVGbG5hVXQyU1V4cWQwcFlXbGg2WTJ4T2VncDRhbWM1ZUdONFRtaFdPREYxYTNNM1ZFOWpRMEYzUlVGQllVNWFUVVpqZDBSbldVUldVakJRUVZGSUwwSkJVVVJCWjB0clRVRTRSMEV4VldSRmQwVkNDaTkzVVVaTlFVMUNRV1k0ZDBoUldVUldVakJQUWtKWlJVWktkRkZ1TTB0VE5GcExhSEp5UjFOdlptMVVUMnA0ZVVsMVpTOU5RbFZIUVRGVlpFVlJVVThLVFVGNVEwTnRkREZaYlZaNVltMVdNRnBZVFhkRVVWbEtTMjlhU1doMlkwNUJVVVZNUWxGQlJHZG5SVUpCUlVsTE1FVlNNM0kwTTFKbE9DdHJlbmhCZHdwM2FVdGpTa1pWUjNZMFJFUnVRM0F6ZUhFM1QwdE5aRzgwT0ZSR2FGTTBlbFpWY1VSRFdEaHVlVzVZVmtwd01YQjRjelpqVDNkTVlqUXhXRmg0ZUVNckNtOTZlVXhSY0VoYVRTOXpSMjF6ZDFWRGVVd3pTMW93Y0cxSVlVa3pXbnAyTDJGak1YRnZhVVpMTTFOR1FucFhTMkZFY1hCRVlrbExXRzR5ZEVWcFNrWUtSV1ZhYmpOWVpWSllTMlJJUkM4NVNrczRVbU0zVEhoU1VqWlJLM1o2VGtSdU9YQjBkMHg1Tm5Nck1EaExOMWhzVjB4dmVVdEZSR1V2TmxKM2RWVkRUZ3AzTW1OcmQyNUdTa3hrYWxONVpWQjJZUzh4YUZVd1VWTktTVXRWVFdnM1YzVlRSMkZDT1dkVk5tcG9VRXRQUVRWQk0yeFhZMWRIWm5oM1MyeFBOSFEzQ2xsT1VEQkxVa2hWVW0xWFJ6WndkV1JhVmsxcVVpc3pjVTFvTDNGWGRUSTVWV2szWTBsT1ZHVkJhbU5ZYkhsbFFXdE9jRnBGYkhoc1kwSnlMMFlyTkV3S2JqWkpQUW90TFMwdExVVk9SQ0JEUlZKVVNVWkpRMEZVUlMwdExTMHRDZz09CiAgICBzZXJ2ZXI6IGh0dHBzOi8vYTliZWU2NjAtNWE3OC00YjA0LTkyNzgtZjI2NWYxZTM2NzFmLmFwLXdlc3QtMi5saW5vZGVsa2UubmV0OjQ0MwogIG5hbWU6IGRlZmF1bHQKY29udGV4dHM6Ci0gY29udGV4dDoKICAgIGNsdXN0ZXI6IGRlZmF1bHQKICAgIG5hbWVzcGFjZTogYmItbm13OXIKICAgIHVzZXI6IGRlZmF1bHQKICBuYW1lOiBkZWZhdWx0CmN1cnJlbnQtY29udGV4dDogZGVmYXVsdApraW5kOiBDb25maWcKcHJlZmVyZW5jZXM6IHt9CnVzZXJzOgotIG5hbWU6IGRlZmF1bHQKICB1c2VyOgogICAgdG9rZW46IGV5SmhiR2NpT2lKU1V6STFOaUlzSW10cFpDSTZJa1pvVjJVek5FUlFZMkp0ZEdsb2FtMWlPV2hLWjBsS1FtRnFRMmhaWDIxbk1uZHRVV3BVUVVGTE1UQWlmUS5leUpwYzNNaU9pSnJkV0psY201bGRHVnpMM05sY25acFkyVmhZMk52ZFc1MElpd2lhM1ZpWlhKdVpYUmxjeTVwYnk5elpYSjJhV05sWVdOamIzVnVkQzl1WVcxbGMzQmhZMlVpT2lKaVlpMXViWGM1Y2lJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZqY21WMExtNWhiV1VpT2lKcmRXSmxMV0pwYm1SbGNpSXNJbXQxWW1WeWJtVjBaWE11YVc4dmMyVnlkbWxqWldGalkyOTFiblF2YzJWeWRtbGpaUzFoWTJOdmRXNTBMbTVoYldVaU9pSnJkV0psTFdKcGJtUmxjaUlzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVnlkbWxqWlMxaFkyTnZkVzUwTG5WcFpDSTZJakUzTURZMk5ERXpMVFUxWXpNdE5EQmtPUzFpWVRjMkxXSXhPVGhrTmpnNE1qVTRPQ0lzSW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZERwaVlpMXViWGM1Y2pwcmRXSmxMV0pwYm1SbGNpSjkubnlzOU9KUkVSR0tzWFdWNXl6SXR3dk0zX3RqQ1VGcGtPVWx4V2ZTS2JibDlQeGZzUnc5ekVFekZjRHJUQWljYVFWNDdqVjRNR2oxLTM2RDY2c1RsS1duN08ySTFHRERQT3ZOcVZLVlZMQU5XR1hybmp4NTdScWtDa3l1V1pKVmFQNUI4N1pqdEVEbkgwWVFVdGpzZlZ4NHhZdldsc0dhdnZrM0NEYm1hbTFCR2g3bG9QX0ktX0RLM3dlTXY1bHZMMjNhTWxCNDlab1doUHFXZlBZM0p4N3lvV1U3NTdBV0JiemhwQ09yQlZFOFVUNDMxc2hsQURTY0d0X053bmRLbzlzZGRoZHQ3cGxubE5keC03eVE4a0hiZERwUjBtVEtDUFZFWW9aRUROVnhHTkhobjIzcVpsV3pxZm9HLUZaVGt4aWZhZ21Sd3FEcG95WGgwejhFQmt3Cg==
+kind: Secret
+metadata:
+  creationTimestamp: "2023-05-12T17:22:04Z"
+  generateName: kubeconfig-
+  name: kubeconfig-8fz2h
+  namespace: kube-bind
+  resourceVersion: "10634"
+  uid: 9b4210d3-4d9b-4b03-b016-ba97147d47d2
+type: Opaque
+---
+apiVersion: v1
+data:
+  kubeconfig: YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNdmFrTkRRV1ZoWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplazFFVlhoTmFrVXlUVlJCZWs5V2IxaEVWRTE2VFVSVmQwOVVSVEpOVkVGNlQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG5SVUpCUzFKc0NqVkxjRlZ6T0d4R09YQndSRlZ2Vm1GUlR6SmhaVU13ZUVvclkzRllSMU5SWlZCMFJ6VkplRnBCYzNKNWNteDFUMWdyYlZWV1oxSlZUSFF4VVVGUlJtc0tObUpRVkZsemVWWlVVM001WTBaS1ZUbDZRMlV6WjNCS1QxVlJaalpqY20wMk9VODJNRU52U1VwWWVWQmtZa0pxUjJSeE5rRlNSREZ2ZVVkd1JURk9hd3B4YkRoVVdtRmFaV1pVV0VzdksyTnhkVUpJVTB4WWRIa3lNVnBPY0hocGJuZFBNSEJyYlZneWVuSjVUR1E0WmxSc2JWRkNRM2h4TWxsb1NXWlhlbkp5Q2xoVE5uZEhVV1J0ZWxGcFVXeHdabGxHVURSSFEyRlFLM2t2YjJSdlV5OVZOSGhQUkhwWGNVWTVhek5zV1VsTEwxTXlhbk0zY0d4SmVrNWlRa2NyU20wS2RFSXdkMnBRUzI0NFptSklaWG80Tmsxd1VESmxXVEJITkc0NWMwMVlOREpZYm5CUWFIZFBSV3d5VmxvMFVGbG5hVXQyU1V4cWQwcFlXbGg2WTJ4T2VncDRhbWM1ZUdONFRtaFdPREYxYTNNM1ZFOWpRMEYzUlVGQllVNWFUVVpqZDBSbldVUldVakJRUVZGSUwwSkJVVVJCWjB0clRVRTRSMEV4VldSRmQwVkNDaTkzVVVaTlFVMUNRV1k0ZDBoUldVUldVakJQUWtKWlJVWktkRkZ1TTB0VE5GcExhSEp5UjFOdlptMVVUMnA0ZVVsMVpTOU5RbFZIUVRGVlpFVlJVVThLVFVGNVEwTnRkREZaYlZaNVltMVdNRnBZVFhkRVVWbEtTMjlhU1doMlkwNUJVVVZNUWxGQlJHZG5SVUpCUlVsTE1FVlNNM0kwTTFKbE9DdHJlbmhCZHdwM2FVdGpTa1pWUjNZMFJFUnVRM0F6ZUhFM1QwdE5aRzgwT0ZSR2FGTTBlbFpWY1VSRFdEaHVlVzVZVmtwd01YQjRjelpqVDNkTVlqUXhXRmg0ZUVNckNtOTZlVXhSY0VoYVRTOXpSMjF6ZDFWRGVVd3pTMW93Y0cxSVlVa3pXbnAyTDJGak1YRnZhVVpMTTFOR1FucFhTMkZFY1hCRVlrbExXRzR5ZEVWcFNrWUtSV1ZhYmpOWVpWSllTMlJJUkM4NVNrczRVbU0zVEhoU1VqWlJLM1o2VGtSdU9YQjBkMHg1Tm5Nck1EaExOMWhzVjB4dmVVdEZSR1V2TmxKM2RWVkRUZ3AzTW1OcmQyNUdTa3hrYWxONVpWQjJZUzh4YUZVd1VWTktTVXRWVFdnM1YzVlRSMkZDT1dkVk5tcG9VRXRQUVRWQk0yeFhZMWRIWm5oM1MyeFBOSFEzQ2xsT1VEQkxVa2hWVW0xWFJ6WndkV1JhVmsxcVVpc3pjVTFvTDNGWGRUSTVWV2szWTBsT1ZHVkJhbU5ZYkhsbFFXdE9jRnBGYkhoc1kwSnlMMFlyTkV3S2JqWkpQUW90TFMwdExVVk9SQ0JEUlZKVVNVWkpRMEZVUlMwdExTMHRDZz09CiAgICBzZXJ2ZXI6IGh0dHBzOi8vYTliZWU2NjAtNWE3OC00YjA0LTkyNzgtZjI2NWYxZTM2NzFmLmFwLXdlc3QtMi5saW5vZGVsa2UubmV0OjQ0MwogIG5hbWU6IGRlZmF1bHQKY29udGV4dHM6Ci0gY29udGV4dDoKICAgIGNsdXN0ZXI6IGRlZmF1bHQKICAgIG5hbWVzcGFjZTogYmItY3BsOXEKICAgIHVzZXI6IGRlZmF1bHQKICBuYW1lOiBkZWZhdWx0CmN1cnJlbnQtY29udGV4dDogZGVmYXVsdApraW5kOiBDb25maWcKcHJlZmVyZW5jZXM6IHt9CnVzZXJzOgotIG5hbWU6IGRlZmF1bHQKICB1c2VyOgogICAgdG9rZW46IGV5SmhiR2NpT2lKU1V6STFOaUlzSW10cFpDSTZJa1pvVjJVek5FUlFZMkp0ZEdsb2FtMWlPV2hLWjBsS1FtRnFRMmhaWDIxbk1uZHRVV3BVUVVGTE1UQWlmUS5leUpwYzNNaU9pSnJkV0psY201bGRHVnpMM05sY25acFkyVmhZMk52ZFc1MElpd2lhM1ZpWlhKdVpYUmxjeTVwYnk5elpYSjJhV05sWVdOamIzVnVkQzl1WVcxbGMzQmhZMlVpT2lKaVlpMWpjR3c1Y1NJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZqY21WMExtNWhiV1VpT2lKcmRXSmxMV0pwYm1SbGNpSXNJbXQxWW1WeWJtVjBaWE11YVc4dmMyVnlkbWxqWldGalkyOTFiblF2YzJWeWRtbGpaUzFoWTJOdmRXNTBMbTVoYldVaU9pSnJkV0psTFdKcGJtUmxjaUlzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVnlkbWxqWlMxaFkyTnZkVzUwTG5WcFpDSTZJbVJqWkdKbE9XRTBMV1EwWVRrdE5HUXpPQzFoTUdZeUxXSmxPRGxqWlRNeU5ERXdZeUlzSW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZERwaVlpMWpjR3c1Y1RwcmRXSmxMV0pwYm1SbGNpSjkuUGxEVE8xQnZDVWh5a1lJMnhrTmM2SUduMDF5MDc1dEZOYjBScXhpYUgyWU9fUEhrcW43X255UWRNcENJaC1nX1ZqNHVIUXZTUUNWLVN1MUNTdG5CdzZQQ2IyTnhqSWZUeFpTNl9OMS1FUTdUQ21ieWJCRUF6M2xVaUFUQ1ZkR3I5SWNoYU15ZnhNaXJ5NTZWZnF1WlpwNUdyM1NOME5IMkVSZTJ0c2hQdGhzYUo4M0c1YlFyMlBuVE5QNXVob0FkSmEtMHBCUC1SMFR3WFNzNUxPUk4yd2NqSXo1QTdoNlJvZnJDWXhpRmZyRlZHa1dVSWZZT196T0RYbGdXZkRFQUtCdWU4X1FSY251R2o2NlpscmVLcDVJcndOUjZMbGk5T1BtU2pCbnotaktHVW5VeUJmeG50VGhJY1lMZE9Hb3VOeHFubFRJNzltM0liMmVqSzRnTjdRCg==
+kind: Secret
+metadata:
+  creationTimestamp: "2023-05-12T17:30:13Z"
+  generateName: kubeconfig-
+  name: kubeconfig-mvhn9
+  namespace: kube-bind
+  resourceVersion: "11224"
+  uid: ad483b9d-c367-40b9-8a7e-a2bf68e240ae
+type: Opaque
+---
+apiVersion: v1
+data:
+  kubeconfig: YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNdmFrTkRRV1ZoWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplazFFVlhoTmFrVXlUVlJCZWs5V2IxaEVWRTE2VFVSVmQwOVVSVEpOVkVGNlQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG5SVUpCUzFKc0NqVkxjRlZ6T0d4R09YQndSRlZ2Vm1GUlR6SmhaVU13ZUVvclkzRllSMU5SWlZCMFJ6VkplRnBCYzNKNWNteDFUMWdyYlZWV1oxSlZUSFF4VVVGUlJtc0tObUpRVkZsemVWWlVVM001WTBaS1ZUbDZRMlV6WjNCS1QxVlJaalpqY20wMk9VODJNRU52U1VwWWVWQmtZa0pxUjJSeE5rRlNSREZ2ZVVkd1JURk9hd3B4YkRoVVdtRmFaV1pVV0VzdksyTnhkVUpJVTB4WWRIa3lNVnBPY0hocGJuZFBNSEJyYlZneWVuSjVUR1E0WmxSc2JWRkNRM2h4TWxsb1NXWlhlbkp5Q2xoVE5uZEhVV1J0ZWxGcFVXeHdabGxHVURSSFEyRlFLM2t2YjJSdlV5OVZOSGhQUkhwWGNVWTVhek5zV1VsTEwxTXlhbk0zY0d4SmVrNWlRa2NyU20wS2RFSXdkMnBRUzI0NFptSklaWG80Tmsxd1VESmxXVEJITkc0NWMwMVlOREpZYm5CUWFIZFBSV3d5VmxvMFVGbG5hVXQyU1V4cWQwcFlXbGg2WTJ4T2VncDRhbWM1ZUdONFRtaFdPREYxYTNNM1ZFOWpRMEYzUlVGQllVNWFUVVpqZDBSbldVUldVakJRUVZGSUwwSkJVVVJCWjB0clRVRTRSMEV4VldSRmQwVkNDaTkzVVVaTlFVMUNRV1k0ZDBoUldVUldVakJQUWtKWlJVWktkRkZ1TTB0VE5GcExhSEp5UjFOdlptMVVUMnA0ZVVsMVpTOU5RbFZIUVRGVlpFVlJVVThLVFVGNVEwTnRkREZaYlZaNVltMVdNRnBZVFhkRVVWbEtTMjlhU1doMlkwNUJVVVZNUWxGQlJHZG5SVUpCUlVsTE1FVlNNM0kwTTFKbE9DdHJlbmhCZHdwM2FVdGpTa1pWUjNZMFJFUnVRM0F6ZUhFM1QwdE5aRzgwT0ZSR2FGTTBlbFpWY1VSRFdEaHVlVzVZVmtwd01YQjRjelpqVDNkTVlqUXhXRmg0ZUVNckNtOTZlVXhSY0VoYVRTOXpSMjF6ZDFWRGVVd3pTMW93Y0cxSVlVa3pXbnAyTDJGak1YRnZhVVpMTTFOR1FucFhTMkZFY1hCRVlrbExXRzR5ZEVWcFNrWUtSV1ZhYmpOWVpWSllTMlJJUkM4NVNrczRVbU0zVEhoU1VqWlJLM1o2VGtSdU9YQjBkMHg1Tm5Nck1EaExOMWhzVjB4dmVVdEZSR1V2TmxKM2RWVkRUZ3AzTW1OcmQyNUdTa3hrYWxONVpWQjJZUzh4YUZVd1VWTktTVXRWVFdnM1YzVlRSMkZDT1dkVk5tcG9VRXRQUVRWQk0yeFhZMWRIWm5oM1MyeFBOSFEzQ2xsT1VEQkxVa2hWVW0xWFJ6WndkV1JhVmsxcVVpc3pjVTFvTDNGWGRUSTVWV2szWTBsT1ZHVkJhbU5ZYkhsbFFXdE9jRnBGYkhoc1kwSnlMMFlyTkV3S2JqWkpQUW90TFMwdExVVk9SQ0JEUlZKVVNVWkpRMEZVUlMwdExTMHRDZz09CiAgICBzZXJ2ZXI6IGh0dHBzOi8vYTliZWU2NjAtNWE3OC00YjA0LTkyNzgtZjI2NWYxZTM2NzFmLmFwLXdlc3QtMi5saW5vZGVsa2UubmV0OjQ0MwogIG5hbWU6IGRlZmF1bHQKY29udGV4dHM6Ci0gY29udGV4dDoKICAgIGNsdXN0ZXI6IGRlZmF1bHQKICAgIG5hbWVzcGFjZTogYmItcDc1cWIKICAgIHVzZXI6IGRlZmF1bHQKICBuYW1lOiBkZWZhdWx0CmN1cnJlbnQtY29udGV4dDogZGVmYXVsdApraW5kOiBDb25maWcKcHJlZmVyZW5jZXM6IHt9CnVzZXJzOgotIG5hbWU6IGRlZmF1bHQKICB1c2VyOgogICAgdG9rZW46IGV5SmhiR2NpT2lKU1V6STFOaUlzSW10cFpDSTZJa1pvVjJVek5FUlFZMkp0ZEdsb2FtMWlPV2hLWjBsS1FtRnFRMmhaWDIxbk1uZHRVV3BVUVVGTE1UQWlmUS5leUpwYzNNaU9pSnJkV0psY201bGRHVnpMM05sY25acFkyVmhZMk52ZFc1MElpd2lhM1ZpWlhKdVpYUmxjeTVwYnk5elpYSjJhV05sWVdOamIzVnVkQzl1WVcxbGMzQmhZMlVpT2lKaVlpMXdOelZ4WWlJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZqY21WMExtNWhiV1VpT2lKcmRXSmxMV0pwYm1SbGNpSXNJbXQxWW1WeWJtVjBaWE11YVc4dmMyVnlkbWxqWldGalkyOTFiblF2YzJWeWRtbGpaUzFoWTJOdmRXNTBMbTVoYldVaU9pSnJkV0psTFdKcGJtUmxjaUlzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVnlkbWxqWlMxaFkyTnZkVzUwTG5WcFpDSTZJalV3TkRKbFl6QTVMVFkxTVRRdE5HWXlPUzA0TWpOa0xXWTRNemt5TmpOaVl6RTVNU0lzSW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZERwaVlpMXdOelZ4WWpwcmRXSmxMV0pwYm1SbGNpSjkuaHJiYUstYV9EaTA4YVNMa0Vma1FRVHlhelpMdDEzSXlNcjFNaWdHSUkxUm1hUEVNQ29vSTY3b3FZWFRQdUVNeHdBNy1QVmYycVZfZlVrMmU3QzFmWk5XQmlQN3ZyemRTemI3ekhaekdLNXhoaUhEcVBGV3BOcnAwTmk0SGVjb1RqWXpaQzNfLVppWFJGWWkwelQ0NVJSLTU5aGR5SkFqWF9YOWo2Q0hWQUJ6UFo4TDdFdHd0aUlQeUF4Nm5ELUxreDhZYy15VmdUR0tubDJMS1dJM09sQVhiaTJXU09kUUlaUk41UVJhbXNBSFVmLW1HOVlqOEJ3eDBDUlNfX2lnLVVsei1zYktvdkN0cmx3WmxrQXZQWWJkRTNTSl8tS2w2blh0dmRick9aWi01ZDlYc0VuTW5hM2ppdi1naEo1b19tdmEwRTJlanhQVFZpUXVKUkVOZjl3Cg==
+kind: Secret
+metadata:
+  creationTimestamp: "2023-05-12T17:29:05Z"
+  generateName: kubeconfig-
+  name: kubeconfig-qfk7w
+  namespace: kube-bind
+  resourceVersion: "11141"
+  uid: 5b7b97b0-b633-4fed-a372-36330f16674b
+type: Opaque
+---
+apiVersion: v1
+data:
+  kubeconfig: YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNdmFrTkRRV1ZoWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplazFFVlhoTmFrVXlUVlJCZWs5V2IxaEVWRTE2VFVSVmQwOVVSVEpOVkVGNlQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG5SVUpCUzFKc0NqVkxjRlZ6T0d4R09YQndSRlZ2Vm1GUlR6SmhaVU13ZUVvclkzRllSMU5SWlZCMFJ6VkplRnBCYzNKNWNteDFUMWdyYlZWV1oxSlZUSFF4VVVGUlJtc0tObUpRVkZsemVWWlVVM001WTBaS1ZUbDZRMlV6WjNCS1QxVlJaalpqY20wMk9VODJNRU52U1VwWWVWQmtZa0pxUjJSeE5rRlNSREZ2ZVVkd1JURk9hd3B4YkRoVVdtRmFaV1pVV0VzdksyTnhkVUpJVTB4WWRIa3lNVnBPY0hocGJuZFBNSEJyYlZneWVuSjVUR1E0WmxSc2JWRkNRM2h4TWxsb1NXWlhlbkp5Q2xoVE5uZEhVV1J0ZWxGcFVXeHdabGxHVURSSFEyRlFLM2t2YjJSdlV5OVZOSGhQUkhwWGNVWTVhek5zV1VsTEwxTXlhbk0zY0d4SmVrNWlRa2NyU20wS2RFSXdkMnBRUzI0NFptSklaWG80Tmsxd1VESmxXVEJITkc0NWMwMVlOREpZYm5CUWFIZFBSV3d5VmxvMFVGbG5hVXQyU1V4cWQwcFlXbGg2WTJ4T2VncDRhbWM1ZUdONFRtaFdPREYxYTNNM1ZFOWpRMEYzUlVGQllVNWFUVVpqZDBSbldVUldVakJRUVZGSUwwSkJVVVJCWjB0clRVRTRSMEV4VldSRmQwVkNDaTkzVVVaTlFVMUNRV1k0ZDBoUldVUldVakJQUWtKWlJVWktkRkZ1TTB0VE5GcExhSEp5UjFOdlptMVVUMnA0ZVVsMVpTOU5RbFZIUVRGVlpFVlJVVThLVFVGNVEwTnRkREZaYlZaNVltMVdNRnBZVFhkRVVWbEtTMjlhU1doMlkwNUJVVVZNUWxGQlJHZG5SVUpCUlVsTE1FVlNNM0kwTTFKbE9DdHJlbmhCZHdwM2FVdGpTa1pWUjNZMFJFUnVRM0F6ZUhFM1QwdE5aRzgwT0ZSR2FGTTBlbFpWY1VSRFdEaHVlVzVZVmtwd01YQjRjelpqVDNkTVlqUXhXRmg0ZUVNckNtOTZlVXhSY0VoYVRTOXpSMjF6ZDFWRGVVd3pTMW93Y0cxSVlVa3pXbnAyTDJGak1YRnZhVVpMTTFOR1FucFhTMkZFY1hCRVlrbExXRzR5ZEVWcFNrWUtSV1ZhYmpOWVpWSllTMlJJUkM4NVNrczRVbU0zVEhoU1VqWlJLM1o2VGtSdU9YQjBkMHg1Tm5Nck1EaExOMWhzVjB4dmVVdEZSR1V2TmxKM2RWVkRUZ3AzTW1OcmQyNUdTa3hrYWxONVpWQjJZUzh4YUZVd1VWTktTVXRWVFdnM1YzVlRSMkZDT1dkVk5tcG9VRXRQUVRWQk0yeFhZMWRIWm5oM1MyeFBOSFEzQ2xsT1VEQkxVa2hWVW0xWFJ6WndkV1JhVmsxcVVpc3pjVTFvTDNGWGRUSTVWV2szWTBsT1ZHVkJhbU5ZYkhsbFFXdE9jRnBGYkhoc1kwSnlMMFlyTkV3S2JqWkpQUW90TFMwdExVVk9SQ0JEUlZKVVNVWkpRMEZVUlMwdExTMHRDZz09CiAgICBzZXJ2ZXI6IGh0dHBzOi8vYTliZWU2NjAtNWE3OC00YjA0LTkyNzgtZjI2NWYxZTM2NzFmLmFwLXdlc3QtMi5saW5vZGVsa2UubmV0OjQ0MwogIG5hbWU6IGRlZmF1bHQKY29udGV4dHM6Ci0gY29udGV4dDoKICAgIGNsdXN0ZXI6IGRlZmF1bHQKICAgIG5hbWVzcGFjZTogYmItOHJnYmcKICAgIHVzZXI6IGRlZmF1bHQKICBuYW1lOiBkZWZhdWx0CmN1cnJlbnQtY29udGV4dDogZGVmYXVsdApraW5kOiBDb25maWcKcHJlZmVyZW5jZXM6IHt9CnVzZXJzOgotIG5hbWU6IGRlZmF1bHQKICB1c2VyOgogICAgdG9rZW46IGV5SmhiR2NpT2lKU1V6STFOaUlzSW10cFpDSTZJa1pvVjJVek5FUlFZMkp0ZEdsb2FtMWlPV2hLWjBsS1FtRnFRMmhaWDIxbk1uZHRVV3BVUVVGTE1UQWlmUS5leUpwYzNNaU9pSnJkV0psY201bGRHVnpMM05sY25acFkyVmhZMk52ZFc1MElpd2lhM1ZpWlhKdVpYUmxjeTVwYnk5elpYSjJhV05sWVdOamIzVnVkQzl1WVcxbGMzQmhZMlVpT2lKaVlpMDRjbWRpWnlJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZqY21WMExtNWhiV1VpT2lKcmRXSmxMV0pwYm1SbGNpSXNJbXQxWW1WeWJtVjBaWE11YVc4dmMyVnlkbWxqWldGalkyOTFiblF2YzJWeWRtbGpaUzFoWTJOdmRXNTBMbTVoYldVaU9pSnJkV0psTFdKcGJtUmxjaUlzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVnlkbWxqWlMxaFkyTnZkVzUwTG5WcFpDSTZJakl5TlRVMk4yWmhMVEUyWlRNdE5Ea3dZeTA1TlRJeUxUSTVNamt6WWpaalpEQTNOaUlzSW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZERwaVlpMDRjbWRpWnpwcmRXSmxMV0pwYm1SbGNpSjkuZ0VQOF9LOXVkUlBfbGhCbUVMU1FYWFJpWmpCby1RVTZPZmpaWWk5OFNueUhEOHI5a1lVVFNZc2lnTEM4dG1rRDZGcWZSQ1lGNlk2RVAwTmpYUW9XY0wzMTFGVy1fNU96WlNPQWxzOEZJV2dTa1hVTEN4cUZucmM2ajRGVWNXYUhsZGFINllqajU4dFlTTzFLcDYyVXhhaW93ZlJKMWItSXVxTTExeVVOa3I0RHFFZWJHVlZoMWpTSlJEdDZUVDFPS29GY0dENkVVczhHYmNDLVZFenQ3dVhjcllscDZ6bkdQWVAtcXJ0VF9tZExTSlFrRDBIWG9YdDBZSEE5SnlqbG5GXzFhTGhaMVFWTTRUT0ZRNEFJYVk2Q2Q1eHVxR1pMYkRhbmgzUEZYVldaRUJFdW1hZlhWRkFZdkphLTk4bE9EUGtEWUhadDBMa0VXM1J5V3k4X3h3Cg==
+kind: Secret
+metadata:
+  creationTimestamp: "2023-05-12T17:26:41Z"
+  generateName: kubeconfig-
+  name: kubeconfig-tqv9d
+  namespace: kube-bind
+  resourceVersion: "10968"
+  uid: 5dd6f90c-38c4-4794-a1b4-e3daea759110
+type: Opaque
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-12T17:19:40Z"
+  name: default
+  namespace: kube-bind
+  resourceVersion: "10460"
+  uid: 5447a8e7-7111-4f53-a8ae-38947bdb74c8
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-12T17:30:14Z"
+  name: konnector
+  namespace: kube-bind
+  resourceVersion: "11227"
+  uid: fc52a622-3c64-4535-bb5d-80bc2bc9f4ac
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2023-05-12T17:30:14Z"
+  generation: 1
+  labels:
+    app: konnector
+  name: konnector
+  namespace: kube-bind
+  resourceVersion: "11380"
+  uid: 921cb3fe-80f8-4e53-b11c-b62f32bcd681
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: konnector
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: konnector
+    spec:
+      containers:
+      - env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: ghcr.io/kube-bind/konnector:v0.3.0
+        imagePullPolicy: IfNotPresent
+        name: konnector
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: konnector
+      serviceAccountName: konnector
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 2
+  conditions:
+  - lastTransitionTime: "2023-05-12T17:31:46Z"
+    lastUpdateTime: "2023-05-12T17:31:46Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2023-05-12T17:30:14Z"
+    lastUpdateTime: "2023-05-12T17:31:46Z"
+    message: ReplicaSet "konnector-69b76b6c67" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  readyReplicas: 2
+  replicas: 2
+  updatedReplicas: 2
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "2"
+    deployment.kubernetes.io/max-replicas: "3"
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2023-05-12T17:30:14Z"
+  generation: 1
+  labels:
+    app: konnector
+    pod-template-hash: 69b76b6c67
+  name: konnector-69b76b6c67
+  namespace: kube-bind
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: konnector
+    uid: 921cb3fe-80f8-4e53-b11c-b62f32bcd681
+  resourceVersion: "11379"
+  uid: eab67dd6-7739-46bb-8192-447d6b0cdda3
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: konnector
+      pod-template-hash: 69b76b6c67
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: konnector
+        pod-template-hash: 69b76b6c67
+    spec:
+      containers:
+      - env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: ghcr.io/kube-bind/konnector:v0.3.0
+        imagePullPolicy: IfNotPresent
+        name: konnector
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: konnector
+      serviceAccountName: konnector
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 2
+  fullyLabeledReplicas: 2
+  observedGeneration: 1
+  readyReplicas: 2
+  replicas: 2
+---
+apiVersion: coordination.k8s.io/v1
+kind: Lease
+metadata:
+  creationTimestamp: "2023-05-12T17:31:44Z"
+  name: kube-bind
+  namespace: kube-bind
+  resourceVersion: "12071"
+  uid: 0c359abb-9905-43e9-8607-8784c5c61c27
+spec:
+  acquireTime: "2023-05-12T17:31:44.150753Z"
+  holderIdentity: konnector-69b76b6c67-k5zzx
+  leaseDurationSeconds: 15
+  leaseTransitions: 0
+  renewTime: "2023-05-12T17:38:27.693840Z"

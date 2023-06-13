@@ -1,0 +1,80 @@
+apiVersion: meta.k8s.appscode.com/v1alpha1
+kind: ResourceGraph
+request:
+  source:
+    ref:
+      name: hello
+      namespace: default
+    resource:
+      group: apps
+      kind: Deployment
+      name: deployments
+      version: v1
+response:
+  connections:
+  - labels:
+    - offshoot
+    source:
+      name: hello
+      namespace: default
+      resourceID: 3
+    target:
+      name: hello-5c44dd6c59
+      namespace: default
+      resourceID: 4
+  - labels:
+    - offshoot
+    source:
+      name: hello-5c44dd6c59-vvvs2
+      namespace: default
+      resourceID: 1
+    target:
+      name: hello-5c44dd6c59
+      namespace: default
+      resourceID: 4
+  - labels:
+    - id
+    source:
+      name: hello-5c44dd6c59-vvvs2
+      namespace: default
+      resourceID: 1
+    target:
+      name: default
+      namespace: default
+      resourceID: 2
+  - labels:
+    - located_on
+    source:
+      name: kind-control-plane
+      namespace: ""
+      resourceID: 0
+    target:
+      name: hello-5c44dd6c59-vvvs2
+      namespace: default
+      resourceID: 1
+  resources:
+  - group: ""
+    kind: Node
+    name: nodes
+    scope: Cluster
+    version: v1
+  - group: ""
+    kind: Pod
+    name: pods
+    scope: Namespaced
+    version: v1
+  - group: ""
+    kind: ServiceAccount
+    name: serviceaccounts
+    scope: Namespaced
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: deployments
+    scope: Namespaced
+    version: v1
+  - group: apps
+    kind: ReplicaSet
+    name: replicasets
+    scope: Namespaced
+    version: v1

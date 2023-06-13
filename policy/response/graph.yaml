@@ -1,0 +1,152 @@
+apiVersion: meta.k8s.appscode.com/v1alpha1
+kind: ResourceGraph
+request:
+  source:
+    ref:
+      name: nats-server
+      namespace: default
+    resource:
+      group: apps
+      kind: Deployment
+      name: deployments
+      version: v1
+response:
+  connections:
+  - labels:
+    - config
+    source:
+      name: nats-server-574b4f8947-5bgv5
+      namespace: default
+      resourceID: 2
+    target:
+      name: nats-credentials
+      namespace: default
+      resourceID: 3
+  - labels:
+    - offshoot
+    source:
+      name: nats-server
+      namespace: default
+      resourceID: 6
+    target:
+      name: nats-server-574b4f8947
+      namespace: default
+      resourceID: 7
+  - labels:
+    - offshoot
+    source:
+      name: nats-server-574b4f8947-5bgv5
+      namespace: default
+      resourceID: 2
+    target:
+      name: nats-server-574b4f8947
+      namespace: default
+      resourceID: 7
+  - labels:
+    - offshoot
+    source:
+      name: nats-resolver
+      namespace: default
+      resourceID: 1
+    target:
+      name: nats-server-574b4f8947-5bgv5
+      namespace: default
+      resourceID: 2
+  - labels:
+    - located_on
+    source:
+      name: kind-control-plane
+      namespace: ""
+      resourceID: 0
+    target:
+      name: nats-server-574b4f8947-5bgv5
+      namespace: default
+      resourceID: 2
+  - labels:
+    - id
+    source:
+      name: nats-server-574b4f8947-5bgv5
+      namespace: default
+      resourceID: 2
+    target:
+      name: default
+      namespace: default
+      resourceID: 5
+  - labels:
+    - exposed_by
+    source:
+      name: nats-server-574b4f8947-5bgv5
+      namespace: default
+      resourceID: 2
+    target:
+      name: nats-server
+      namespace: default
+      resourceID: 4
+  - labels:
+    - config
+    source:
+      name: nats-server-574b4f8947-5bgv5
+      namespace: default
+      resourceID: 2
+    target:
+      name: nats-server-config
+      namespace: default
+      resourceID: 3
+  resources:
+  - group: ""
+    kind: Node
+    name: nodes
+    scope: Cluster
+    version: v1
+  - group: ""
+    kind: PersistentVolumeClaim
+    name: persistentvolumeclaims
+    scope: Namespaced
+    version: v1
+  - group: ""
+    kind: Pod
+    name: pods
+    scope: Namespaced
+    version: v1
+  - group: ""
+    kind: Secret
+    name: secrets
+    scope: Namespaced
+    version: v1
+  - group: ""
+    kind: Service
+    name: services
+    scope: Namespaced
+    version: v1
+  - group: ""
+    kind: ServiceAccount
+    name: serviceaccounts
+    scope: Namespaced
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: deployments
+    scope: Namespaced
+    version: v1
+  - group: apps
+    kind: ReplicaSet
+    name: replicasets
+    scope: Namespaced
+    version: v1
+
+0 node
+1 pvc
+2 pod
+3 secret
+4 svc
+5 sa
+6 deploy
+7 rs
+
+2+3 config
+2+4 exposed_by
+2+5 id
+0+2 located_on
+1+2 offshoot
+2+7 offshoot
+6+7 offshoot

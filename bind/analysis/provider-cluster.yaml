@@ -1,0 +1,194 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: "2023-05-12T17:30:13Z"
+  name: kube-binder-bb-cpl9q
+  ownerReferences:
+  - apiVersion: v1
+    controller: true
+    kind: Namespace
+    name: bb-cpl9q
+    uid: 70b357ff-e364-4329-bba4-a717aeb65107
+  resourceVersion: "4808"
+  uid: 9664d1f6-0933-470a-851f-4a8591b1f03d
+rules:
+- apiGroups:
+  - mangodb.com
+  resources:
+  - mangodbs
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - patch
+  - delete
+  - create
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - patch
+  - delete
+  - create
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: "2023-05-12T16:17:20Z"
+  name: kube-binder
+  resourceVersion: "1210"
+  uid: bbc66791-32ed-4b75-9c4d-e3f5f5840c3f
+rules:
+- apiGroups:
+  - kube-bind.io
+  resources:
+  - apiserviceexportrequests
+  verbs:
+  - create
+  - delete
+  - patch
+  - update
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - kube-bind.io
+  resources:
+  - clusterbindings
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - kube-bind.io
+  resources:
+  - clusterbindings/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - kube-bind.io
+  resources:
+  - apiserviceexports
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - kube-bind.io
+  resources:
+  - apiserviceexports/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - kube-bind.io
+  resources:
+  - apiservicenamespaces
+  verbs:
+  - create
+  - delete
+  - patch
+  - update
+  - get
+  - list
+  - watch
+- apiGroups:
+  - kube-bind.io
+  resources:
+  - apiservicenamespaces
+  verbs:
+  - create
+  - delete
+  - patch
+  - update
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+  - delete
+  - patch
+  - update
+  - get
+  - list
+  - watch
+apiVersion: v1
+items:
+- apiVersion: kube-bind.io/v1alpha1
+  kind: APIServiceExportTemplate
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"kube-bind.io/v1alpha1","kind":"APIServiceExportTemplate","metadata":{"annotations":{},"name":"mangodbs.mangodb.com"},"spec":{"permissionClaims":[{"labels":["exposed_by"],"level":"Owner","namespacePath":"metadata.namespace","selector":{"matchLabels":{"app.kubernetes.io/instance":"{.metadata.name}","app.kubernetes.io/managed-by":"kubedb.com","app.kubernetes.io/name":"mangodbs.mangodb.com"}},"target":{"apiVersion":"v1","kind":"Secret"},"type":"MatchSelector","verbs":{"consumer":["get","list","watch"],"provider":["*"]}}]}}
+    creationTimestamp: "2023-05-12T17:30:04Z"
+    generation: 1
+    name: mangodbs.mangodb.com
+    resourceVersion: "4781"
+    uid: b7af13ae-3df0-4829-b4ed-7524cdb2a741
+  spec:
+    permissionClaims:
+    - labels:
+      - exposed_by
+      level: Owner
+      namespacePath: metadata.namespace
+      selector:
+        matchLabels:
+          app.kubernetes.io/instance: '{.metadata.name}'
+          app.kubernetes.io/managed-by: kubedb.com
+          app.kubernetes.io/name: mangodbs.mangodb.com
+      target:
+        apiVersion: v1
+        kind: Secret
+      type: MatchSelector
+      verbs:
+        consumer:
+        - get
+        - list
+        - watch
+        provider:
+        - '*'
+        
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: "2023-05-12T17:44:16Z"
+  name: kube-binder-bb-cpl9q
+  ownerReferences:
+  - apiVersion: v1
+    controller: true
+    kind: Namespace
+    name: bb-cpl9q
+    uid: 70b357ff-e364-4329-bba4-a717aeb65107
+  resourceVersion: "5502"
+  uid: 85cc7fdc-d6b0-4935-8406-8c6c89728d3b
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kube-binder-bb-cpl9q
+subjects:
+- kind: ServiceAccount
+  name: kube-binder
+  namespace: bb-cpl9q
+
+kind: List
+metadata:
+  resourceVersion: ""

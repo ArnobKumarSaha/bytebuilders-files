@@ -1,0 +1,188 @@
+apiVersion: reports.scanner.appscode.com/v1alpha1
+kind: CVEReport
+request:
+  ref:
+    name: etcd-kind-control-plane
+    namespace: kube-system
+  resource:
+    group: ""
+    kind: Pod
+    name: pods
+    version: v1
+response:
+  images:
+  - image:
+      digest: sha256:6f72b851544986cb0921b53ea655ec04c36131248f16d4ad110cb3ca0c369dc1
+      name: registry.k8s.io/etcd@sha256:6f72b851544986cb0921b53ea655ec04c36131248f16d4ad110cb3ca0c369dc1
+    metadata:
+      imageConfig:
+        architecture: amd64
+        author: Bazel
+        os: linux
+      os:
+        family: debian
+        name: "11.3"
+    scanStatus:
+      lastChecked: "2023-01-02T12:15:55.818232949Z"
+      reportRef:
+        name: 9d9de4ec27377a821c16d47d29b72c12
+      result: Found
+      trivyDBVersion: 0.32.0
+    stats:
+      HIGH:
+        count: 5
+        occurrence: 20
+      MEDIUM:
+        count: 2
+        occurrence: 8
+  vulnerabilities:
+    cves:
+    - occurrence: 4
+      primaryURL: https://avd.aquasec.com/nvd/cve-2021-38561
+      results:
+      - image: registry.k8s.io/etcd@sha256:6f72b851544986cb0921b53ea655ec04c36131248f16d4ad110cb3ca0c369dc1
+        targets:
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd
+          type: gobinary
+      severity: HIGH
+      title: 'golang: out-of-bounds read in golang.org/x/text/language leads to DoS'
+      vulnerabilityID: CVE-2021-38561
+    - occurrence: 4
+      primaryURL: https://avd.aquasec.com/nvd/cve-2021-44716
+      results:
+      - image: registry.k8s.io/etcd@sha256:6f72b851544986cb0921b53ea655ec04c36131248f16d4ad110cb3ca0c369dc1
+        targets:
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd
+          type: gobinary
+      severity: HIGH
+      title: 'golang: net/http: limit growth of header canonicalization cache'
+      vulnerabilityID: CVE-2021-44716
+    - occurrence: 4
+      primaryURL: https://avd.aquasec.com/nvd/cve-2022-27191
+      results:
+      - image: registry.k8s.io/etcd@sha256:6f72b851544986cb0921b53ea655ec04c36131248f16d4ad110cb3ca0c369dc1
+        targets:
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd
+          type: gobinary
+      severity: HIGH
+      title: 'golang: crash in a golang.org/x/crypto/ssh server'
+      vulnerabilityID: CVE-2022-27191
+    - occurrence: 4
+      primaryURL: https://avd.aquasec.com/nvd/cve-2022-27664
+      results:
+      - image: registry.k8s.io/etcd@sha256:6f72b851544986cb0921b53ea655ec04c36131248f16d4ad110cb3ca0c369dc1
+        targets:
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd
+          type: gobinary
+      severity: HIGH
+      title: 'golang: net/http: handle server errors after sending GOAWAY'
+      vulnerabilityID: CVE-2022-27664
+    - occurrence: 4
+      primaryURL: https://avd.aquasec.com/nvd/cve-2022-32149
+      results:
+      - image: registry.k8s.io/etcd@sha256:6f72b851544986cb0921b53ea655ec04c36131248f16d4ad110cb3ca0c369dc1
+        targets:
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd
+          type: gobinary
+      severity: HIGH
+      title: 'golang: golang.org/x/text/language: ParseAcceptLanguage takes a long
+        time to parse complex tags'
+      vulnerabilityID: CVE-2022-32149
+    - occurrence: 4
+      primaryURL: https://avd.aquasec.com/nvd/cve-2022-29526
+      results:
+      - image: registry.k8s.io/etcd@sha256:6f72b851544986cb0921b53ea655ec04c36131248f16d4ad110cb3ca0c369dc1
+        targets:
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd
+          type: gobinary
+      severity: MEDIUM
+      title: 'golang: syscall: faccessat checks wrong group'
+      vulnerabilityID: CVE-2022-29526
+    - occurrence: 4
+      primaryURL: https://avd.aquasec.com/nvd/cve-2022-41717
+      results:
+      - image: registry.k8s.io/etcd@sha256:6f72b851544986cb0921b53ea655ec04c36131248f16d4ad110cb3ca0c369dc1
+        targets:
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcdctl
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd-3.5.4
+          type: gobinary
+        - class: lang-pkgs
+          target: usr/local/bin/etcd
+          type: gobinary
+      severity: MEDIUM
+      title: An attacker can cause excessive memory growth in a Go server accepting
+        ...
+      vulnerabilityID: CVE-2022-41717
+    stats:
+      HIGH:
+        count: 5
+        occurrence: 20
+      MEDIUM:
+        count: 2
+        occurrence: 8

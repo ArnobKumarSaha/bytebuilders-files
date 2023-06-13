@@ -1,0 +1,11 @@
+apiVersion: appcatalog.appscode.com/v1alpha1
+kind: HostedApp
+metadata: 
+  name: xyz
+  namespace: demo
+spec:
+  sourceRef:
+    apiGroup: kubedb.dev
+    kind: MongoDB
+    name: mg-rs
+    namespace: demo
