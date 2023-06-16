@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: bytebuilders
+    app.kubernetes.io/name: bytebuilders-bind
+  name: bytebuilders-bind
+  namespace: bb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: bytebuilders
+      app.kubernetes.io/name: bytebuilders-bind
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: bytebuilders
+        app.kubernetes.io/name: bytebuilders-bind
+    spec:
+      containers:
+      - args:
+        - server
+        - --oidc-issuer-url=http://accounts.bb.test:3000/
+        - --oidc-callback-url=http://127.0.0.1:8080/callback
+        - --pretty-name="Arnob.com"
+        - --namespace-prefix="bb-"
+        - --bind-secret-path=/data/credentials/bind
+        # - --license-file=/var/run/secrets/appscode/license/key.txt
+        image: arnobkumarsaha/kube-bind-backend:01
+        imagePullPolicy: Always
+        name: bind
+        ports:
+        - containerPort: 3003
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /var/run/secrets/appscode/license
+          name: license
+        - mountPath: /data/credentials/bind
+          name: bind-cred
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      serviceAccountName: virtual-kubernetes
+      volumes:
+      - name: license
+        secret:
+          defaultMode: 420
+          secretName: platform-license
+      - name: bind-cred
+        secret:
+          defaultMode: 420
+          secretName: bind-cred
