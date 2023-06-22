@@ -1,0 +1,78 @@
+{
+  "kind": "BindingResponse",
+  "apiVersion": "kube-bind.io/v1alpha1",
+  "authentication": {
+    "oauth2CodeGrant": {
+      "sid": "4cgpcy",
+      "id": "http://accounts.bb.test:3000//2"
+    }
+  },
+  "kubeconfig": "<dedacted>",
+  "requests": [
+    {
+      "kind": "APIServiceExportRequest",
+      "apiVersion": "kube-bind.io/v1alpha1",
+      "metadata": {
+        "name": "mangodbs.mangodb.com"
+      },
+      "spec": {
+        "resources": [
+          {
+            "group": "mangodb.com",
+            "resource": "mangodbs"
+          }
+        ]
+      },
+      "status": {}
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: <>
+    server: https://4d111421-8371-4c05-9e13-24ac0043e1d3.cpc1-us-central.linodelke.net:443
+  name: default
+contexts:
+- context:
+    cluster: default
+    namespace: bb-gg8g2
+    user: default
+  name: default
+current-context: default
+kind: Config
+preferences: {}
+users:
+- name: default
+  user:
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6Inh3aG9LVF9IQkFvQmtxUHQ5VGhDQnA4bmZoWFpIdnFfSFlndzFRbFFpaFkifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJiYi1nZzhnMiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlLWJpbmRlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlLWJpbmRlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjNkNzU4YzIzLTUxMGQtNGFmNy04NDU3LWY0YWRmNWY3MjRjNCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpiYi1nZzhnMjprdWJlLWJpbmRlciJ9.eINGvaIC-4B4MnH7HPF8fP6_2CeifQBOR0qQX4rQCtGFdjj71NWGvmzh4q46ibRpMYuxcjh_m85ptahT__LEPHBqGRXwaEsWPeOz9gXvwHAx0j4envrvsoPPYFbwNKCUR0RRqk3-U_SVA3M3dSGep-3PJftUNzR1JqErGoWvyy0LOikBUAV9d_j8rIydY6jnR2ZMSjFsmNCsZ33lIl4rEaKUEsc1XeXJMqkw6ujEbsTa8lGn_9wgbM7H7Sfn48suLwSn0gwsZYgger03j-MEmVELnSX7Jq13DH-LdctVY3uDKLOuM7S6jVNpYqtbR_swVpGKz-zME_9-6gZuBhK5cg
+    
+    
+ 
+ 
+ 
+ 
+ 
+    
+    
+{
+  "alg": "RS256",
+  "kid": "xwhoKT_HBAoBkqPt9ThCBp8nfhXZHvq_HYgw1QlQihY"
+}
+{
+  "iss": "kubernetes/serviceaccount",
+  "kubernetes.io/serviceaccount/namespace": "bb-gg8g2",
+  "kubernetes.io/serviceaccount/secret.name": "kube-binder",
+  "kubernetes.io/serviceaccount/service-account.name": "kube-binder",
+  "kubernetes.io/serviceaccount/service-account.uid": "3d758c23-510d-4af7-8457-f4adf5f724c4",
+  "sub": "system:serviceaccount:bb-gg8g2:kube-binder"
+}
+
