@@ -16,15 +16,16 @@ kind: Function
 metadata:
   name: kubedb-manifest-backup
 spec:
-  image: fahimabrar/kubedb-manifest:v0.1.0-6-g99ca49f_linux_amd64
+  # image: fahimabrar/kubedb-manifest:v0.1.0-6-g99ca49f_linux_amd64
+  image: hmsayem/kubedb-manifest:test_linux_amd64
   args:
   - backup
   - --scratchDir=${scratchDir:=/tmp}
   - --namespace=${namespace:=default}
   - --backupSession=${backupSession:=}
-  - --targetKind=${targetKind:=}
-  - --targetNamespace=${targetNamespace:=default}
-  - --targetName=${targetName:=}
+  # - --targetKind=${targetKind:=}
+  # - --targetNamespace=${targetNamespace:=default}
+  # - --targetName=${targetName:=}
 ---
 apiVersion: addons.kubestash.com/v1alpha1
 kind: Function
@@ -36,7 +37,7 @@ spec:
   - restore
   - --namespace=${namespace:=default}
   - --restoreSession=${restoreSession:=}
-  - --targetKind=${targetKind:=}
+  # - --targetKind=${targetKind:=}
   - --restoreNamespace=${restoreNamespace:=default}
   - --mongoYaml=${mongoYaml:=true}
   - --mongoName=${mongoDBName:=}

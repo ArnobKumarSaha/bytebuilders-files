@@ -3,4 +3,4 @@ kind: ImageScanRequest
 metadata:
   name: pub
 spec:
-  image: mysql:8.0.31
+  image: mysql:5.7.36

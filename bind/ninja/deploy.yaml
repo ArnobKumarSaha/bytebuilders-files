@@ -21,15 +21,18 @@ spec:
       containers:
       - args:
         - server
-        - --oidc-issuer-url=http://accounts.bb.test:3000/
-        - --oidc-callback-url=http://127.0.0.1:8080/callback
+        - --oidc-issuer-url=https://accounts.appscode.ninja/
+        - --oidc-callback-url=https://bind.appscode.ninja/callback
         - --pretty-name="Arnob.com"
-        - --namespace-prefix="bb-"
+        - --namespace-prefix=bb-
         - --bind-secret-path=/data/credentials/bind
         # - --license-file=/var/run/secrets/appscode/license/key.txt
         image: arnobkumarsaha/kube-bind-backend:01
         imagePullPolicy: Always
         name: bind
+        env:
+        - name: BIND_BACKEND_IMAGE
+          value: arnobkumarsaha/kube-bind-backend:01
         ports:
         - containerPort: 3003
           name: http

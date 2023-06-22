@@ -6,6 +6,9 @@ metadata:
 spec:
   version: "4.2.3"
   terminationPolicy: WipeOut
+  replicas: 3
+  replicaSet:
+    name: "rs"
   storage:
     accessModes:
     - ReadWriteOnce

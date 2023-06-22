@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test
+  namespace: bb
+spec:
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+        - name: ubuntu
+          image: ubuntu:latest
+          # ports:
+          #   - containerPort: 80
+          args: ["/bin/bash", "-c", "sleep infinity"]

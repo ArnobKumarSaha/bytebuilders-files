@@ -21,21 +21,21 @@ spec:
     resources:
       requests:
         storage: 1Gi
-  sslMode: requireSSL
-  tls:
-    issuerRef:
-      name: mongo-ca-issuer
-      kind: Issuer
-      apiGroup: "cert-manager.io"
-  clusterAuthMode: x509
+  # sslMode: requireSSL
+  # tls:
+  #   issuerRef:
+  #     name: mongo-ca-issuer
+  #     kind: Issuer
+  #     apiGroup: "cert-manager.io"
+  # clusterAuthMode: x509
   init:
     archiver:
-      recoveryTimestamp: "2023-06-12T19:22:02Z"
-      fullBackup:
+      recoveryTimestamp: "2023-06-22T15:03:00Z"
+      fullDBRestore:
         repository:
           name: "mg-rs-full"
           namespace: "demo"
-      manifestBackup:
+      manifestRestore:
         repository:
           name: "mg-rs-manifest"
           namespace: "demo"

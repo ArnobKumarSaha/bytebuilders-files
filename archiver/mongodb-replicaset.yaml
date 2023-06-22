@@ -23,10 +23,10 @@ spec:
     resources:
       requests:
         storage: 1Gi
-  sslMode: requireSSL
-  tls:
-    issuerRef:
-      name: mongo-ca-issuer
-      kind: Issuer
-      apiGroup: "cert-manager.io"
-  clusterAuthMode: x509
+  # sslMode: requireSSL
+  # tls:
+  #   issuerRef:
+  #     name: mongo-ca-issuer
+  #     kind: Issuer
+  #     apiGroup: "cert-manager.io"
+  # clusterAuthMode: x509
