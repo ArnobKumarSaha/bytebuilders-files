@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg
+  name: mg-restore
   namespace: demo
 spec:
   version: "4.2.3"
