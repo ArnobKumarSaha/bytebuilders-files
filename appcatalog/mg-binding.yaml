@@ -1,0 +1,9 @@
+apiVersion: catalog.kubeware.dev/v1alpha1
+kind: MongoDBBinding
+metadata: 
+  name: xyz
+  namespace: test
+spec:
+  sourceRef:
+    name: mg
+    namespace: demo
