@@ -1,0 +1,21 @@
+apiVersion: stash.appscode.com/v1beta1
+kind: RestoreSession
+metadata:
+  name: mg-restore
+  namespace: demo
+spec:
+  task:
+    name: mongodb-restore-5.0.3
+    # params:
+    # - name: "args"
+    #   value: "--preserveUUID true --drop"
+  repository:
+    name: lke
+  target:
+    ref:
+      apiVersion: appcatalog.appscode.com/v1alpha1
+      kind: AppBinding
+      name: rsmg5
+  rules:
+  - snapshots: [latest]
+

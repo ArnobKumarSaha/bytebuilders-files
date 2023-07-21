@@ -1,10 +1,10 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg-restore
+  name: rsmg5
   namespace: demo
 spec:
-  version: "4.2.3"
+  version: "5.0.3"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
@@ -15,6 +15,13 @@ spec:
     resources:
       requests:
         storage: 1Gi
+  # sslMode: requireSSL
+  # tls:
+  #   issuerRef:
+  #     apiGroup: "cert-manager.io"
+  #     kind: Issuer
+  #     name: mongo-ca-issuer
+  # clusterAuthMode: x509
   # monitor:
   #   agent: prometheus.io/operator
   #   prometheus:
@@ -22,3 +29,6 @@ spec:
   #       labels:
   #         release: prometheus
   #       interval: 10s
+
+
+
