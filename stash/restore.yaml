@@ -15,7 +15,7 @@ spec:
     ref:
       apiVersion: appcatalog.appscode.com/v1alpha1
       kind: AppBinding
-      name: rsmg5
+      name: mg5-restored
   rules:
   - snapshots: [latest]
 

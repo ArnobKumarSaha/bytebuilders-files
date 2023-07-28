@@ -7,7 +7,7 @@ spec:
   backend:
     s3:
       endpoint: us-east-1.linodeobjects.com
-      bucket: mg5
+      bucket: mg-patch
       prefix: replica #shard #standalone
       region: us-east-1
     storageSecretName: lke-creds

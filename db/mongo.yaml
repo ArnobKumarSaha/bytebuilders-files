@@ -1,10 +1,19 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: rsmg5
+  name: mg5-restored
   namespace: demo
 spec:
-  version: "5.0.3"
+  allowedSchemas:
+    namespaces:
+      from: Selector
+      selector:
+        matchExpressions:
+        - {key: kubernetes.io/metadata.name, operator: In, values: [dev]}
+    selector:
+      matchLabels:
+        "schema.kubedb.com": "mongo"
+  version: "5.0.15"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:

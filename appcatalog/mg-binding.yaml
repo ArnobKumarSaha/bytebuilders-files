@@ -5,5 +5,5 @@ metadata:
   namespace: test
 spec:
   sourceRef:
-    name: mg
+    name: mg-rs
     namespace: demo
