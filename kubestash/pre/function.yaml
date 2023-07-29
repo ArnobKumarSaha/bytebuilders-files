@@ -1,9 +1,34 @@
 apiVersion: addons.kubestash.com/v1alpha1
 kind: Function
 metadata:
+  name: mongodb-backup
+spec: 
+  image: arnobkumarsaha/mongodb-addon:002
+  args:
+  - backup
+  - --namespace=${namespace:=default}
+  - --backupSession=${backupSession:=}
+  - --taskName=${taskName:=}
+---
+apiVersion: addons.kubestash.com/v1alpha1
+kind: Function
+metadata:
+  name: mongodb-restore
+spec:
+  image: arnobkumarsaha/mongodb-addon:002
+  args:
+  - restore
+  - --namespace=${namespace:=default}
+  - --restoreSession=${restoreSession:=}
+  - --snapshotName=${snapshotName:=}
+  - --taskName=${taskName:=}
+---
+apiVersion: addons.kubestash.com/v1alpha1
+kind: Function
+metadata:
   name: kubedb-manifest-backup
 spec:
-  image: hmsayem/kubedb-manifest:fix-snapshot-component_linux_amd64
+  image: arnobkumarsaha/kubedb-manifest:v0.1.0-12-g5a47722_linux_amd64
   args:
   - backup
   - --scratchDir=${scratchDir:=/tmp}
@@ -18,7 +43,7 @@ kind: Function
 metadata:
   name: kubedb-manifest-restore
 spec:
-  image: hmsayem/kubedb-manifest:fix-snapshot-component_linux_amd64
+  image: arnobkumarsaha/kubedb-manifest:v0.1.0-12-g5a47722_linux_amd64
   args:
   - restore
   - --namespace=${namespace:=default}

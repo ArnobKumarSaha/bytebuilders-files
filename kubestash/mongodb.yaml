@@ -1,13 +1,16 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: sample-mongodb
+  name: restore-mongodb
   namespace: demo
 spec:
-  version: "5.0.3"
+  version: "4.4.6"
+  replicaSet:
+    name: "rs0"
+  replicas: 3
   storageType: Durable
   storage:
-    storageClassName: "standard"
+    storageClassName: "linode-block-storage"
     accessModes:
       - ReadWriteOnce
     resources:

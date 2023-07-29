@@ -10,14 +10,14 @@ spec:
     namespace: demo
     name: sample-mongodb
   backends:
-    - name: s3-backend
+    - name: linode-backend
       storageRef:
         apiGroup: storage.kubestash.com
         namespace: demo
         kind: BackupStorage
-        name: s3-storage
+        name: linode
       retentionPolicy:
-        name: manifest-rp
+        name: rp
         namespace: demo
   sessions:
     - name: frequent-backup
@@ -29,13 +29,13 @@ spec:
         jobTemplate:
           backoffLimit: 1
       repositories:
-        - name: s3-repo
-          backend: s3-backend
-          directory: /manifest/kubedb-manifest
+        - name: linode-repo
+          backend: linode-backend
+          directory: /full
           encryptionSecret:
-           name: encry-secret # some addon may not support encryption
+           name: encrypt-secret # some addon may not support encryption
            namespace: demo
       addon:
-        name: kubedb-manifest-addon
+        name: mongodb-backup-restore-addon
         tasks:
-          - name: manifest-backup
+          - name: mongodb-backup-task
