@@ -1,0 +1,70 @@
+apiVersion: ops.kubedb.com/v1alpha1
+kind: MongoDBOpsRequest
+metadata:
+  name: vscale
+  namespace: demo
+spec:
+  type: VerticalScaling
+  databaseRef:
+    name: mg
+  verticalScaling:
+    replicaSet:
+      requests:
+        memory: "1300Mi"
+        cpu: "0.6"
+      limits:
+        memory: "1300Mi"
+        cpu: "0.6"
+    arbiter:
+      requests:
+        memory: "1000Mi"
+        cpu: "0.6"
+      limits:
+        memory: "1000Mi"
+        cpu: "0.6"
+    hidden:
+      requests:
+        memory: "1200Mi"
+        cpu: "0.6"
+      limits:
+        memory: "1200Mi"
+        cpu: "0.6"
+  readinessCriteria:
+    oplogMaxLagSeconds: 20
+    objectsCountDiffPercentage: 10
+  timeout: 5m
+  apply: IfReady
+# status:
+#   conditions:
+#   - lastTransitionTime: "2023-08-02T04:23:51Z"
+#     message: MongoDB ops request is vertically scaling database
+#     observedGeneration: 1
+#     reason: VerticalScale
+#     status: "True"
+#     type: VerticalScale
+#   - lastTransitionTime: "2023-08-02T04:24:58Z"
+#     message: Successfully Vertically Scaled Replicaset Resources
+#     observedGeneration: 1
+#     reason: VerticalScaleReplicaSet
+#     status: "True"
+#     type: VerticalScaleReplicaSet
+#   - lastTransitionTime: "2023-08-02T04:25:59Z"
+#     message: Successfully Vertically Scaled arbiter Resources
+#     observedGeneration: 1
+#     reason: VerticalScaleArbiter
+#     status: "True"
+#     type: VerticalScaleArbiter
+#   - lastTransitionTime: "2023-08-02T04:26:40Z"
+#     message: Successfully Vertically Scaled Hidden Resources
+#     observedGeneration: 1
+#     reason: VerticalScaleHidden
+#     status: "True"
+#     type: VerticalScaleHidden
+#   - lastTransitionTime: "2023-08-02T04:26:41Z"
+#     message: Successfully Vertically Scaled Database
+#     observedGeneration: 1
+#     reason: Successful
+#     status: "True"
+#     type: Successful
+#   observedGeneration: 1
+#   phase: Successful
