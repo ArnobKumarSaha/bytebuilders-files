@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg5-restored
+  name: mg4
   namespace: demo
 spec:
   allowedSchemas:
@@ -13,7 +13,7 @@ spec:
     selector:
       matchLabels:
         "schema.kubedb.com": "mongo"
-  version: "5.0.15"
+  version: "4.4.6"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
@@ -24,6 +24,23 @@ spec:
     resources:
       requests:
         storage: 1Gi
+  # hidden:
+  #   podTemplate:
+  #     spec:
+  #       resources:
+  #         requests:
+  #           cpu: "400m"
+  #           memory: "400Mi"
+  #   replicas: 1
+  #   storage:
+  #     storageClassName: "longhorn"
+  #     accessModes:
+  #       - ReadWriteOnce
+  #     resources:
+  #       requests:
+  #         storage: 2Gi
+  # arbiter:
+  #   podTemplate: {}
   # sslMode: requireSSL
   # tls:
   #   issuerRef:
@@ -31,13 +48,13 @@ spec:
   #     kind: Issuer
   #     name: mongo-ca-issuer
   # clusterAuthMode: x509
-  # monitor:
-  #   agent: prometheus.io/operator
-  #   prometheus:
-  #     serviceMonitor:
-  #       labels:
-  #         release: prometheus
-  #       interval: 10s
+  monitor:
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: prometheus
+        interval: 10s
 
 
 

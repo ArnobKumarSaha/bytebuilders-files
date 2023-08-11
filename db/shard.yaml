@@ -1,10 +1,10 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg5
+  name: mgsh
   namespace: demo
 spec:
-  version: "5.0.3"
+  version: "6.0.5"
   storageType: Durable
   shardTopology:
     configServer:
@@ -13,43 +13,51 @@ spec:
         resources:
           requests:
             storage: 1Gi
-      replicas: 3
+      replicas: 2
       podTemplate:
         spec:
           resources:
             requests:
-              "cpu": 0.4
-              "memory": 400Mi
+              "cpu": 0.6
+              "memory": 600Mi
     mongos:
       replicas: 2
       podTemplate:
         spec:
           resources:
             requests:
-              "cpu": 0.2
-              "memory": 200Mi
+              "cpu": 0.5
+              "memory": 400Mi
     shard:
       storage:
         # storageClassName: longhorn
         resources:
           requests:
             storage: 1Gi
-      replicas: 3
-      shards: 2
+      replicas: 2
+      shards: 3
       podTemplate:
         spec:
           resources:
             requests:
-              "cpu": 0.4
-              "memory": 400Mi
+              "cpu": 0.7
+              "memory": 900Mi
+      storage:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+  # arbiter:
+  #   podTemplate: {}
   terminationPolicy: WipeOut
-  sslMode: requireSSL
-  tls:
-    issuerRef:
-      apiGroup: "cert-manager.io"
-      kind: Issuer
-      name: mongo-ca-issuer
-  clusterAuthMode: x509
+  # sslMode: requireSSL
+  # tls:
+  #   issuerRef:
+  #     apiGroup: "cert-manager.io"
+  #     kind: Issuer
+  #     name: mongo-ca-issuer
+  # clusterAuthMode: x509
   # monitor:
   #   agent: prometheus.io/operator
   #   prometheus:
