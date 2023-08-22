@@ -3,25 +3,23 @@ kind: Function
 metadata:
   name: mongodb-backup
 spec: 
-  image: arnobkumarsaha/mongodb-addon:002
+  image: arnobkumarsaha/mongodb:sayed_mongo_linux_amd64
   args:
   - backup
   - --namespace=${namespace:=default}
   - --backupSession=${backupSession:=}
-  - --taskName=${taskName:=}
 ---
 apiVersion: addons.kubestash.com/v1alpha1
 kind: Function
 metadata:
   name: mongodb-restore
 spec:
-  image: arnobkumarsaha/mongodb-addon:002
+  image: arnobkumarsaha/mongodb:sayed_mongo_linux_amd64
   args:
   - restore
   - --namespace=${namespace:=default}
   - --restoreSession=${restoreSession:=}
   - --snapshotName=${snapshotName:=}
-  - --taskName=${taskName:=}
 ---
 apiVersion: addons.kubestash.com/v1alpha1
 kind: Function

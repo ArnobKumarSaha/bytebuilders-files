@@ -8,7 +8,7 @@ spec:
     apiGroup: kubedb.com
     kind: MongoDB
     namespace: demo
-    name: sample-mongodb
+    name: standalone
   backends:
     - name: linode-backend
       storageRef:
@@ -39,3 +39,4 @@ spec:
         name: mongodb-backup-restore-addon
         tasks:
           - name: mongodb-backup-task
+# NB: Deleting the backupConfiguration will delete not delete the created repositories & snapshots

@@ -9,6 +9,8 @@ spec:
       driver: Restic
       executor: Job
       singleton: true
+      # parameters:
+      # - name: taskName
   restoreTasks:
     - name: mongodb-restore-task
       function: mongodb-restore

@@ -8,7 +8,7 @@ spec:
     apiGroup: kubedb.com
     kind: MongoDB
     namespace: demo
-    name: sample-mongodb
+    name: restore
   # manifestOptions:
   #   restoreNamespace: demo2
   #   mongoDB:
@@ -17,7 +17,7 @@ spec:
   #     authSecret: true
   #     configSecret: true
   dataSource:
-    snapshot: linode-repo-db-backup-frequent-backup-1690614600
+    snapshot: linode-repo-db-backup-frequent-backup-1692709320 
     repository: linode-repo
     encryptionSecret:
       name: encrypt-secret # some addon may not support encryption
