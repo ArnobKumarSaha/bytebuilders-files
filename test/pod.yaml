@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: demo
+  labels:
+    app: busybox
+spec:
+  containers:
+  - image: arnobkumarsaha/stash-mongodb:fix-6.0.5_linux_amd64
+    command:
+      - sleep
+      - "3600"
+    imagePullPolicy: IfNotPresent
+    name: busybox
+  restartPolicy: Always

@@ -5,7 +5,7 @@ metadata:
   namespace: demo
 spec:
   task:
-    name: mongodb-restore-3.6.13
+    name: mongodb-restore-4.2.3
     # params:
     # - name: "args"
     #   value: "--preserveUUID true --drop"
@@ -15,6 +15,6 @@ spec:
     ref:
       apiVersion: appcatalog.appscode.com/v1alpha1
       kind: AppBinding
-      name: mg-res
+      name: mg4-res
   rules:
   - snapshots: [latest]

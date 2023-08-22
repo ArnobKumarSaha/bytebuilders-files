@@ -11,17 +11,11 @@ metadata:
 spec:
   type: Reconfigure
   databaseRef:
-    name: mg
+    name: standalone
   configuration:
-    replicaSet:
+    standalone:
       configSecret:
-        name: new-custom-config
-    arbiter:
-      configSecret:
-        name: new-custom-config
-  readinessCriteria:
-    oplogMaxLagSeconds: 20
-    objectsCountDiffPercentage: 10
+        name: mg-custom-config
   timeout: 5m
   apply: IfReady
 # status:

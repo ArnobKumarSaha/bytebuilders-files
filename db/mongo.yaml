@@ -48,13 +48,12 @@ spec:
   #     kind: Issuer
   #     name: mongo-ca-issuer
   # clusterAuthMode: x509
-  monitor:
-    agent: prometheus.io/operator
-    prometheus:
-      serviceMonitor:
-        labels:
-          release: prometheus
-        interval: 10s
-
+  # monitor:
+  #   agent: prometheus.io/operator
+  #   prometheus:
+  #     serviceMonitor:
+  #       labels:
+  #         release: prometheus
+  #       interval: 10s
 
 
