@@ -1,0 +1,38 @@
+
+<1>>>>>>>>>> falco
+i)
+docker.io/falcosecurity/falcoctl:0.5.1
+artifact install --verbose
+ii)
+docker.io/falcosecurity/falco-no-driver:0.35.1
+
+/usr/bin/falco --modern-bpf --cri /run/containerd/containerd.sock \
+--cri /run/crio/crio.sock -K /var/run/secrets/kubernetes.io/serviceaccount/token \
+-k https://$(KUBERNETES_SERVICE_HOST) --k8s-node "$(FALCO_K8S_NODE_NAME)" -pk
+
+iii)
+docker.io/falcosecurity/falcoctl:0.5.1
+artifact follow --verbose
+
+
+<2>>>>>>>>>> sidekick
+docker.io/falcosecurity/falcosidekick:2.28.0
+
+<3>>>>>>>>>> sidekick-ui
+docker.io/falcosecurity/falcosidekick-ui:v2.1.0
+-r falco-falcosidekick-ui-redis:6379 -l info -u admin:admin
+
+<4>>>>>>>>>> sidekick-ui redis
+docker.io/redis/redis-stack:6.2.6-v3
+
+
+<5>>>>>>>>>>> sidekick test connection
+appropriate/curl
+curl -X POST falco-falcosidekick:2801/ping
+
+
+-------------------------------------
+
+<1>>>>>>>>>> exporter
+docker.io/falcosecurity/falco-exporter:0.8.3
+/usr/bin/falco-exporter --client-socket=unix:///run/falco/falco.sock --timeout=2m --listen-address=0.0.0.0:9376

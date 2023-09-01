@@ -1,10 +1,10 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: restore
+  name: standalone
   namespace: demo
 spec:
-  version: "5.0.3"
+  version: "4.4.6"
   terminationPolicy: WipeOut
   storage:
     accessModes:
@@ -12,12 +12,26 @@ spec:
     resources:
       requests:
         storage: 1Gi
-  # sslMode: requireSSL
-  # tls:
-  #   issuerRef:
-  #     apiGroup: "cert-manager.io"
-  #     kind: Issuer
-  #     name: mongo-ca-issuer
-  # clusterAuthMode: x509
+  sslMode: requireSSL
+  tls:
+    issuerRef:
+      apiGroup: "cert-manager.io"
+      kind: Issuer
+      name: mongo-ca-issuer
+  clusterAuthMode: x509
   # configSecret:
   #   name: mg-custom-config
+
+
+# > restoreSession
+# nil
+
+# > restore job
+# app.kubernetes.io/managed-by=kubestash.com,
+# kubestash.com/invoker-name=sample,
+# kubestash.com/invoker-namespace=demo
+
+# app.kubernetes.io/component=kubestash-restore,
+# app.kubernetes.io/managed-by=kubestash.com,
+# kubestash.com/invoker-name=sample,
+# kubestash.com/invoker-namespace=demo

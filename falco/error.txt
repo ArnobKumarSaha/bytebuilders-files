@@ -1,0 +1,28 @@
+payload.outputFields = map[container.id:host container.image.repository:<nil> evt.time:1693401412844393616 fd.name:postmaster.pid k8s.ns.name:<nil> k8s.pod.name:<nil> proc.cmdline:postgres -D /var/lib/postgresql/14/main -c config_file=/etc/postgresql/14/main/postgresql.conf proc.name:postgres proc.pid:940 proc.pname:<nil> user.loginuid:-1 user.name:] 
+
+container.id:host 
+container.image.repository:<nil> 
+evt.time:1693460112495942404 
+fd.name:postmaster.pid 
+k8s.ns.name:<nil> 
+k8s.pod.name:<nil> 
+proc.cmdline:postgres -D /var/lib/postgresql/14/main -c config_file=/etc/postgresql/14/main/postgresql.conf 
+proc.name:postgres 
+proc.pid:945 
+proc.pname:<nil> 
+user.loginuid:-1 user.name:
+
+
+fe-7961989069328278469 
+map[k8s.node.name:kind-control-plane]
+
+{UUID:a3152234-b3b1-493b-8da2-71d9d6eb6531 
+Output:Falco 
+internal: syscall event drop. 252466 system calls dropped in last second. 
+Priority:Debug 
+Rule:Falco 
+internal: syscall event drop 
+Time:2023-08-31 04:38:07 +0000 UTC 
+Source:internal Tags:[] Hostname:falco-vgthx Nodename:kind-control-plane}
+
+{"ebpf_enabled":"0","n_drops":"252466","n_drops_buffer_clone_fork_enter":"0","n_drops_buffer_clone_fork_exit":"0","n_drops_buffer_connect_enter":"0","n_drops_buffer_connect_exit":"0","n_drops_buffer_dir_file_enter":"0","n_drops_buffer_dir_file_exit":"0","n_drops_buffer_execve_enter":"0","n_drops_buffer_execve_exit":"0","n_drops_buffer_open_enter":"0","n_drops_buffer_open_exit":"0","n_drops_buffer_other_interest_enter":"0","n_drops_buffer_other_interest_exit":"0","n_drops_buffer_total":"252466","n_drops_bug":"0","n_drops_page_faults":"0","n_drops_scratch_map":"0","n_evts":"1392149"}

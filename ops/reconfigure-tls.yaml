@@ -2,42 +2,42 @@
 
 # kubectl create secret tls mongo-ca --cert=ca.crt  --key=ca.key --namespace=demo
 
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: mg-issuer
-  namespace: demo
-spec:
-  ca:
-    secretName: mongo-ca
----
+# apiVersion: cert-manager.io/v1
+# kind: Issuer
+# metadata:
+#   name: mg-issuer
+#   namespace: demo
+# spec:
+#   ca:
+#     secretName: mongo-ca
+# ---
 
-apiVersion: ops.kubedb.com/v1alpha1
-kind: MongoDBOpsRequest
-metadata:
-  name: tls
-  namespace: demo
-spec:
-  type: ReconfigureTLS
-  databaseRef:
-    name: mg
-  tls:
-    issuerRef:
-      name: mg-issuer
-      kind: Issuer
-      apiGroup: "cert-manager.io"
-    certificates:
-      - alias: client
-        subject:
-          organizations:
-            - mongo
-          organizationalUnits:
-            - client
-  readinessCriteria:
-    oplogMaxLagSeconds: 20
-    objectsCountDiffPercentage: 10
-  timeout: 5m
-  apply: IfReady
+# apiVersion: ops.kubedb.com/v1alpha1
+# kind: MongoDBOpsRequest
+# metadata:
+#   name: tls
+#   namespace: demo
+# spec:
+#   type: ReconfigureTLS
+#   databaseRef:
+#     name: mg
+#   tls:
+#     issuerRef:
+#       name: mg-issuer
+#       kind: Issuer
+#       apiGroup: "cert-manager.io"
+#     certificates:
+#       - alias: client
+#         subject:
+#           organizations:
+#             - mongo
+#           organizationalUnits:
+#             - client
+#   readinessCriteria:
+#     oplogMaxLagSeconds: 20
+#     objectsCountDiffPercentage: 10
+#   timeout: 5m
+#   apply: IfReady
 # status:
 #   conditions:
 #   - lastTransitionTime: "2023-08-02T04:36:36Z"
@@ -66,3 +66,20 @@ spec:
 #     type: Successful
 #   observedGeneration: 1
 #   phase: Successful
+
+apiVersion: ops.kubedb.com/v1alpha1
+kind: MongoDBOpsRequest
+metadata:
+  name: tls
+  namespace: demo
+spec:
+  type: ReconfigureTLS
+  databaseRef:
+    name: mg
+  tls:
+    remove: true
+  readinessCriteria:
+    oplogMaxLagSeconds: 20
+    objectsCountDiffPercentage: 10
+  timeout: 5m
+  apply: IfReady

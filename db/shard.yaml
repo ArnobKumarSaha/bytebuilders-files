@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg5
+  name: shard
   namespace: demo
 spec:
   version: "5.0.3"
@@ -34,8 +34,8 @@ spec:
         resources:
           requests:
             storage: 1Gi
-      replicas: 3
-      shards: 3
+      replicas: 2
+      shards: 2
       podTemplate:
         spec:
           resources:
@@ -47,17 +47,26 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 5Gi
-  # arbiter:
-  #   podTemplate: {}
+            storage: 1Gi
+  hidden:
+    podTemplate: {}
+    replicas: 1
+    storage:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+  arbiter:
+    podTemplate: {}
   terminationPolicy: WipeOut
-  # sslMode: requireSSL
-  # tls:
-  #   issuerRef:
-  #     apiGroup: "cert-manager.io"
-  #     kind: Issuer
-  #     name: mongo-ca-issuer
-  # clusterAuthMode: x509
+  sslMode: requireSSL
+  tls:
+    issuerRef:
+      apiGroup: "cert-manager.io"
+      kind: Issuer
+      name: mongo-ca-issuer
+  clusterAuthMode: x509
   # monitor:
   #   agent: prometheus.io/operator
   #   prometheus:

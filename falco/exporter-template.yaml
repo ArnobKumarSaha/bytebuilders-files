@@ -1,0 +1,200 @@
+---
+# Source: falco-exporter/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: falco-exporter
+  labels:
+    app.kubernetes.io/name: falco-exporter
+    app.kubernetes.io/instance: falco-exporter
+    app.kubernetes.io/version: "0.8.3"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: falco-exporter-0.9.6
+  namespace: falco
+---
+# Source: falco-exporter/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: falco-exporter
+  labels:
+    app.kubernetes.io/name: falco-exporter
+    app.kubernetes.io/instance: falco-exporter
+    app.kubernetes.io/version: "0.8.3"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: falco-exporter-0.9.6
+  namespace: falco
+spec:
+  clusterIP: None
+  type: ClusterIP
+  ports:
+    - port: 9376
+      targetPort: 9376
+      protocol: TCP
+      name: metrics
+  selector:
+    app.kubernetes.io/name: falco-exporter
+    app.kubernetes.io/instance: falco-exporter
+---
+# Source: falco-exporter/templates/daemonset.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: falco-exporter
+  labels:
+    app.kubernetes.io/name: falco-exporter
+    app.kubernetes.io/instance: falco-exporter
+    app.kubernetes.io/version: "0.8.3"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: falco-exporter-0.9.6
+  namespace: falco
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: falco-exporter
+      app.kubernetes.io/instance: falco-exporter
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: falco-exporter
+        app.kubernetes.io/instance: falco-exporter
+    spec:
+      serviceAccountName: falco-exporter
+      securityContext:
+        {}
+      containers:
+        - name: falco-exporter
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            seccompProfile:
+              type: RuntimeDefault
+          image: "docker.io/falcosecurity/falco-exporter:0.8.3"
+          imagePullPolicy: IfNotPresent
+          args:
+            - /usr/bin/falco-exporter
+            - --client-socket=unix:///run/falco/falco.sock
+            - --timeout=2m
+            - --listen-address=0.0.0.0:9376
+          ports:
+            - name: metrics
+              containerPort: 9376
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            periodSeconds: 15          
+            httpGet:
+              path: /liveness
+              port: 19376
+          readinessProbe:
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 15
+            httpGet:
+              path: /readiness
+              port: 19376
+          resources:
+            {}
+          volumeMounts:
+            - mountPath: /run/falco
+              name: falco-socket-dir
+              readOnly: true
+      volumes:
+        - name: falco-socket-dir
+          hostPath:
+            path: /run/falco
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+---
+# Source: falco-exporter/templates/prometheusrule.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: falco-exporter
+  labels:
+    app.kubernetes.io/name: falco-exporter
+    app.kubernetes.io/instance: falco-exporter
+    app.kubernetes.io/version: "0.8.3"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: falco-exporter-0.9.6
+spec:
+  groups:
+  - name: falco-exporter
+    rules:
+    - alert: FalcoExporterAbsent
+      expr: absent(up{job="falco-exporter"})
+      for: 10m
+      annotations:
+        summary: Falco Exporter has dissapeared from Prometheus service discovery.
+        description: No metrics are being scraped from falco. No events will trigger any alerts.
+      labels:
+        severity: critical
+    - alert: FalcoWarningEventsRateHigh
+      annotations:
+        summary: Falco is experiencing high rate of warning events
+        description: A high rate of warning events are being detected by Falco
+      expr: rate(falco_events{priority="4"}[5m]) > 0
+      for: 15m
+      labels:
+        severity: warning
+    - alert: FalcoErrorEventsRateHigh
+      annotations:
+        summary: Falco is experiencing high rate of error events
+        description: A high rate of error events are being detected by Falco
+      expr: rate(falco_events{priority="3"}[5m]) > 0
+      for: 15m
+      labels:
+        severity: warning
+    - alert: FalcoCriticalEventsRateHigh
+      annotations:
+        summary: Falco is experiencing high rate of critical events
+        description: A high rate of critical events are being detected by Falco
+      expr: rate(falco_events{priority="2"}[5m]) > 0
+      for: 15m
+      labels:
+        severity: critical
+    - alert: FalcoAlertEventsRateHigh
+      annotations:
+        summary: Falco is experiencing high rate of alert events
+        description: A high rate of alert events are being detected by Falco
+      expr: rate(falco_events{priority="1"}[5m]) > 0
+      for: 5m
+      labels:
+        severity: critical
+    - alert: FalcoEmergencyEventsRateHigh
+      annotations:
+        summary: Falco is experiencing high rate of emergency events
+        description: A high rate of emergency events are being detected by Falco
+      expr: rate(falco_events{priority="0"}[1m]) > 0
+      for: 1m
+      labels:
+        severity: critical
+---
+# Source: falco-exporter/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "falco-exporter-test-connection"
+  labels:
+    app.kubernetes.io/name: falco-exporter
+    app.kubernetes.io/instance: falco-exporter
+    app.kubernetes.io/version: "0.8.3"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: falco-exporter-0.9.6
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['falco-exporter:9376/metrics']
+  restartPolicy: Never

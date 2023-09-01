@@ -1,10 +1,10 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg3
+  name: mg5
   namespace: demo
 spec:
-  version: "3.4.17-v1"
+  version: "5.0.3"
   replicaSet:
     name: "rs0"
   replicas: 3

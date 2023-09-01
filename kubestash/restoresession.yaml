@@ -17,7 +17,7 @@ spec:
   #     authSecret: true
   #     configSecret: true
   dataSource:
-    snapshot: linode-repo-db-backup-frequent-backup-1692709320 
+    snapshot: linode-repo-db-backup-frequent-backup-1692959160
     repository: linode-repo
     encryptionSecret:
       name: encrypt-secret # some addon may not support encryption
