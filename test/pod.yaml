@@ -7,7 +7,7 @@ metadata:
     app: busybox
 spec:
   containers:
-  - image: arnobkumarsaha/stash-mongodb:fix-6.0.5_linux_amd64
+  - image: busybox
     command:
       - sleep
       - "3600"

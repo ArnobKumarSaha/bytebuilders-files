@@ -20,3 +20,6 @@ helm upgrade -i falco-exporter falcosecurity/falco-exporter \
 --set service.annotations=null \
 --set prometheusRules.enabled=true
 
+kubectl port-forward -n monitoring svc/kube-prometheus-stack-prometheus 9090
+kubectl port-forward -n monitoring svc/kube-prometheus-stack-grafana 9091:80
+

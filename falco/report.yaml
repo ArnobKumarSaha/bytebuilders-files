@@ -1,0 +1,11 @@
+apiVersion: reports.falco.appscode.com/v1alpha1
+kind: FalcoReport
+request:
+  ref:
+    name: mg
+    namespace: demo
+  resource:
+    group: kubedb.dev
+    kind: MongoDB
+    name: mongodbs
+    version: v1alpha2

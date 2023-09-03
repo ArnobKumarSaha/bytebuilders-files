@@ -26,3 +26,10 @@ Time:2023-08-31 04:38:07 +0000 UTC
 Source:internal Tags:[] Hostname:falco-vgthx Nodename:kind-control-plane}
 
 {"ebpf_enabled":"0","n_drops":"252466","n_drops_buffer_clone_fork_enter":"0","n_drops_buffer_clone_fork_exit":"0","n_drops_buffer_connect_enter":"0","n_drops_buffer_connect_exit":"0","n_drops_buffer_dir_file_enter":"0","n_drops_buffer_dir_file_exit":"0","n_drops_buffer_execve_enter":"0","n_drops_buffer_execve_exit":"0","n_drops_buffer_open_enter":"0","n_drops_buffer_open_exit":"0","n_drops_buffer_other_interest_enter":"0","n_drops_buffer_other_interest_exit":"0","n_drops_buffer_total":"252466","n_drops_bug":"0","n_drops_page_faults":"0","n_drops_scratch_map":"0","n_evts":"1392149"}
+
+
+
+
+
+
+F0903 12:02:51.739021       1 main.go:42] Error in kube-ui-server Main: unable to get openapi models: cannot find model definition for kubeops.dev/falco-ui-server/apis/reports/v1alpha1.FalcoReport. If you added a new type, you may need to add +k8s:openapi-gen=true to the package or type and run code-gen again

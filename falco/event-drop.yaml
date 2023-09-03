@@ -1,0 +1,40 @@
+apiVersion: falco.appscode.com/v1alpha1
+kind: FalcoEvent
+metadata:
+  creationTimestamp: "2023-09-01T17:05:40Z"
+  generation: 1
+  labels:
+    k8s.node.name: kind-control-plane
+  name: fe-15904324085136479468
+  resourceVersion: "6"
+  uid: 8695bc5a-b97f-4b37-8193-b88eca401d4a
+spec:
+  hostname: falco-7tz86
+  nodename: kind-control-plane
+  output: 'Falco internal: syscall event drop. 482769 system calls dropped in last
+    second.'
+  outputFields:
+    ebpf_enabled: "0"
+    n_drops: "482769"
+    n_drops_buffer_clone_fork_enter: "0"
+    n_drops_buffer_clone_fork_exit: "0"
+    n_drops_buffer_connect_enter: "0"
+    n_drops_buffer_connect_exit: "0"
+    n_drops_buffer_dir_file_enter: "0"
+    n_drops_buffer_dir_file_exit: "0"
+    n_drops_buffer_execve_enter: "1"
+    n_drops_buffer_execve_exit: "0"
+    n_drops_buffer_open_enter: "0"
+    n_drops_buffer_open_exit: "0"
+    n_drops_buffer_other_interest_enter: "0"
+    n_drops_buffer_other_interest_exit: "0"
+    n_drops_buffer_total: "482769"
+    n_drops_bug: "0"
+    n_drops_page_faults: "0"
+    n_drops_scratch_map: "0"
+    n_evts: "1946402"
+  priority: Debug
+  rule: 'Falco internal: syscall event drop'
+  source: internal
+  time: "2023-09-01T17:05:40Z"
+  uuid: 8d1c9ae3-a359-46b6-8e4e-d3d4efebdb30
