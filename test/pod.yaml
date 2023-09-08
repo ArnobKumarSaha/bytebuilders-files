@@ -2,12 +2,11 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: busybox
-  namespace: demo
   labels:
     app: busybox
 spec:
   containers:
-  - image: busybox
+  - image: ubuntu
     command:
       - sleep
       - "3600"

@@ -1,0 +1,308 @@
+---
+# Source: opencost/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: opencost
+  namespace: opencost
+  labels:
+    helm.sh/chart: opencost-1.18.1
+    app.kubernetes.io/name: opencost
+    app.kubernetes.io/instance: opencost
+    app.kubernetes.io/version: "1.105.2"
+    app.kubernetes.io/part-of: opencost
+    app.kubernetes.io/managed-by: Helm
+automountServiceAccountToken: true
+---
+# Source: opencost/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: opencost-metrics-config
+  namespace: opencost
+  labels:
+    
+    helm.sh/chart: opencost-1.18.1
+    app.kubernetes.io/name: opencost
+    app.kubernetes.io/instance: opencost
+    app.kubernetes.io/version: "1.105.2"
+    app.kubernetes.io/part-of: opencost
+    app.kubernetes.io/managed-by: Helm
+data:
+  cluster-info.json: '{"id":"5ae42136-d69f-4b32-bfe6-c30cdd94f966","name":"kind"}'
+  metrics.json: '{"disabledMetrics":["kube_node_status_capacity","kube_node_status_allocatable","kube_node_labels","kube_node_status_condition","kube_namespace_labels","kube_pod_labels","kube_pod_owner"]}'
+---
+# Source: opencost/templates/clusterrole.yaml
+# Cluster role giving opencost to get, list, watch required resources
+# No write permissions are required
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: opencost
+  labels:
+    helm.sh/chart: opencost-1.18.1
+    app.kubernetes.io/name: opencost
+    app.kubernetes.io/instance: opencost
+    app.kubernetes.io/version: "1.105.2"
+    app.kubernetes.io/part-of: opencost
+    app.kubernetes.io/managed-by: Helm
+rules:
+  - apiGroups: [""]
+    resources:
+      - configmaps
+      - deployments
+      - nodes
+      - pods
+      - services
+      - resourcequotas
+      - replicationcontrollers
+      - limitranges
+      - persistentvolumeclaims
+      - persistentvolumes
+      - namespaces
+      - endpoints
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - daemonsets
+      - deployments
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets
+      - deployments
+      - daemonsets
+      - replicasets
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - cronjobs
+      - jobs
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - autoscaling
+    resources:
+      - horizontalpodautoscalers
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - policy
+    resources:
+      - poddisruptionbudgets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - storage.k8s.io
+    resources:
+      - storageclasses
+    verbs:
+      - get
+      - list
+      - watch
+---
+# Source: opencost/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: opencost
+  labels:
+    helm.sh/chart: opencost-1.18.1
+    app.kubernetes.io/name: opencost
+    app.kubernetes.io/instance: opencost
+    app.kubernetes.io/version: "1.105.2"
+    app.kubernetes.io/part-of: opencost
+    app.kubernetes.io/managed-by: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: opencost
+subjects:
+  - kind: ServiceAccount
+    name: opencost
+    namespace: opencost
+---
+# Source: opencost/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: opencost
+  namespace: opencost
+  labels:
+    helm.sh/chart: opencost-1.18.1
+    app.kubernetes.io/name: opencost
+    app.kubernetes.io/instance: opencost
+    app.kubernetes.io/version: "1.105.2"
+    app.kubernetes.io/part-of: opencost
+    app.kubernetes.io/managed-by: Helm
+spec:
+  selector:
+    app.kubernetes.io/name: opencost
+    app.kubernetes.io/instance: opencost
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 9003
+      targetPort: 9003
+    - name: http-ui
+      port: 9090
+      targetPort: 9090
+---
+# Source: opencost/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opencost
+  namespace: opencost
+  labels:
+    helm.sh/chart: opencost-1.18.1
+    app.kubernetes.io/name: opencost
+    app.kubernetes.io/instance: opencost
+    app.kubernetes.io/version: "1.105.2"
+    app.kubernetes.io/part-of: opencost
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: opencost
+      app.kubernetes.io/instance: opencost
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: opencost
+        app.kubernetes.io/instance: opencost
+    spec:
+      serviceAccountName: opencost
+      containers:
+        - name: opencost
+          image: "quay.io/kubecost1/kubecost-cost-model:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9003
+              name: http
+          resources:
+            limits:
+              cpu: 999m
+              memory: 1Gi
+            requests:
+              cpu: 10m
+              memory: 55Mi
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9003
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9003
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+          env:
+            - name: PROMETHEUS_SERVER_ENDPOINT
+              value: "http://prometheus-operated.monitoring.svc:9090"
+            - name: CLOUD_PROVIDER_API_KEY
+              value: "AIzaSyD29bGxmHAVEOBYtgd8sYM2gM2ekfxQX4U"
+            - name: CLUSTER_ID
+              value: "5ae42136-d69f-4b32-bfe6-c30cdd94f966"
+            # If username, password or bearer_token are defined, pull from secrets
+            # Add any additional provided variables
+            - name: CLUSTER_INFO_FILE_ENABLED
+              value: "true"
+            - name: EMIT_KSM_V1_METRICS
+              value: "false"
+            - name: EMIT_KSM_V1_METRICS_ONLY
+              value: "true"
+            - name: KUBECOST_NAMESPACE
+              value: "opencost"
+          volumeMounts:
+            - name: metrics-config
+              mountPath: "/var/configs"
+              readOnly: true
+        - name: opencost-ui
+          image:  "quay.io/kubecost1/opencost-ui:prod-1.105.2"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9090
+              name: http-ui
+          resources:
+            limits:
+              cpu: 999m
+              memory: 1Gi
+            requests:
+              cpu: 10m
+              memory: 55Mi
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9090
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9090
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+      volumes:
+        - name: metrics-config
+          configMap:
+            name: opencost-metrics-config
+---
+# Source: opencost/templates/servicemonitor.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: opencost
+  namespace: opencost
+  labels:
+    helm.sh/chart: opencost-1.18.1
+    app.kubernetes.io/name: opencost
+    app.kubernetes.io/instance: opencost
+    app.kubernetes.io/version: "1.105.2"
+    app.kubernetes.io/part-of: opencost
+    app.kubernetes.io/managed-by: Helm
+    release: kube-prometheus-stack
+spec:
+  endpoints:
+    - port: http
+      scheme: http
+      path: /metrics
+      interval: 30s
+      honorLabels: true
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: opencost
+      app.kubernetes.io/instance: opencost
+  namespaceSelector:
+    matchNames:
+      - opencost

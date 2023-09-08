@@ -1,0 +1,39 @@
+apiVersion: meta.k8s.appscode.com/v1alpha1
+kind: ResourceGraph
+request:
+  source:
+    # ref:
+    #   name: s6
+    #   namespace: demo
+    # resource:
+    #   group: kubedb.com
+    #   kind: MongoDB
+    #   name: mongodbs
+    #   version: v1alpha2
+    ref:
+      name: mg-0
+      namespace: demo
+    resource:
+      group: ""
+      kind: Pod
+      name: pods
+      version: v1
+
+
+
+# {Resources:[
+#   {Group: Version:v1 Name:pods Kind:Pod Scope:Namespaced} 
+#   {Group:apps Version:v1 Name:statefulsets Kind:StatefulSet Scope:Namespaced} 
+#   {Group:kubedb.com Version:v1alpha2 Name:mongodbs Kind:MongoDB Scope:Namespaced}] 
+  
+#   Connections:[
+#     {Source:{ResourceID:0 Namespace:demo Name:mg-2} Target:{ResourceID:1 Namespace:demo Name:mg} Labels:[offshoot]} 
+#     {Source:{ResourceID:0 Namespace:demo Name:mg-0} Target:{ResourceID:1 Namespace:demo Name:mg} Labels:[offshoot]} 
+#     {Source:{ResourceID:0 Namespace:demo Name:mg-1} Target:{ResourceID:1 Namespace:demo Name:mg} Labels:[offshoot]} 
+# {Source:{ResourceID:1 Namespace:demo Name:mg} Target:{ResourceID:2 Namespace:demo Name:mg} Labels:[offshoot]}]} 
+
+# G=apps, K=StatefulSet, appObj={ResourceID:1 Namespace:demo Name:s6}, pod={ResourceID:0 Namespace:demo Name:s6-0} 
+# G=kubedb.com, K=MongoDB, appObj={ResourceID:2 Namespace:demo Name:s6}, pod={ResourceID:1 Namespace:demo Name:s6} 
+
+
+# falco_appscode_com_events * on(pod_name) group_left k8s_appscode_com_pod_ancestor{group="kubedb.com",kind="MongoDB",app_namespace="demo",app_name="mg"}

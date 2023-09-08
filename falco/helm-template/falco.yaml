@@ -30,7 +30,7 @@ metadata:
   name: falco
   namespace: falco
   labels:
-    helm.sh/chart: falco-3.5.0
+    helm.sh/chart: falco-3.6.0
     app.kubernetes.io/name: falco
     app.kubernetes.io/instance: falco
     app.kubernetes.io/version: "0.35.1"
@@ -477,7 +477,7 @@ metadata:
   name: falco
   namespace: falco
   labels:
-    helm.sh/chart: falco-3.5.0
+    helm.sh/chart: falco-3.6.0
     app.kubernetes.io/name: falco
     app.kubernetes.io/instance: falco
     app.kubernetes.io/version: "0.35.1"
@@ -504,7 +504,7 @@ data:
       ca_path: /etc/ssl/certs
       enabled: true
       insecure: true
-      url: http://falco-ui-server:8080/falcoevents
+      url: http://falco-ui-server.kubeops.svc.cluster.local:8080/falcoevents
       user_agent: falcosecurity/falco
     json_include_output_property: true
     json_include_tags_property: true
@@ -532,6 +532,9 @@ data:
     modern_bpf:
       cpus_for_each_syscall_buffer: 1
     output_timeout: 2000
+    outputs:
+      max_burst: 1000
+      rate: 0
     plugins:
     - init_config: null
       library_path: libk8saudit.so
@@ -584,7 +587,7 @@ metadata:
   name: falco-falcoctl
   namespace: falco
   labels:
-    helm.sh/chart: falco-3.5.0
+    helm.sh/chart: falco-3.6.0
     app.kubernetes.io/name: falco
     app.kubernetes.io/instance: falco
     app.kubernetes.io/version: "0.35.1"
@@ -617,7 +620,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: falco
   labels:
-    helm.sh/chart: falco-3.5.0
+    helm.sh/chart: falco-3.6.0
     app.kubernetes.io/name: falco
     app.kubernetes.io/instance: falco
     app.kubernetes.io/version: "0.35.1"
@@ -664,7 +667,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: falco
   labels:
-    helm.sh/chart: falco-3.5.0
+    helm.sh/chart: falco-3.6.0
     app.kubernetes.io/name: falco
     app.kubernetes.io/instance: falco
     app.kubernetes.io/version: "0.35.1"
@@ -822,7 +825,7 @@ metadata:
   name: falco
   namespace: falco
   labels:
-    helm.sh/chart: falco-3.5.0
+    helm.sh/chart: falco-3.6.0
     app.kubernetes.io/name: falco
     app.kubernetes.io/instance: falco
     app.kubernetes.io/version: "0.35.1"
@@ -839,7 +842,7 @@ spec:
         app.kubernetes.io/name: falco
         app.kubernetes.io/instance: falco
       annotations:
-        checksum/config: ef6fe99ccb9cd6b002ffa6f03f2439ebbb57827e5c4bd15d309bfff98d94bc5e
+        checksum/config: b6248b2d428a2ade20ece0c54c76313403a95265453f312d29b30aaa9c678142
         checksum/rules: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
         checksum/certs: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
     spec:
@@ -861,7 +864,12 @@ spec:
               cpu: 100m
               memory: 512Mi
           securityContext:
-            privileged: true
+            capabilities:
+              add:
+              - BPF
+              - SYS_RESOURCE
+              - PERFMON
+              - SYS_PTRACE
           args:
             - /usr/bin/falco
             - --modern-bpf        

@@ -1,11 +1,28 @@
 apiVersion: reports.falco.appscode.com/v1alpha1
 kind: FalcoReport
 request:
+# Application
   ref:
-    name: mg
+    name: s6
     namespace: demo
   resource:
-    group: kubedb.dev
+    group: kubedb.com
     kind: MongoDB
     name: mongodbs
     version: v1alpha2
+# # Node
+#   ref:
+#     name: kind-control-plane
+#   resource:
+#     group: ""
+#     kind: Node 
+#     name: nodes
+#     version: v1
+# # Namespace
+#   ref:
+#     name: falco
+#   resource:
+#     group: ""
+#     kind: Namespace 
+#     name: namespaces
+#     version: v1
