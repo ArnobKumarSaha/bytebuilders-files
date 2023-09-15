@@ -6,10 +6,12 @@ metadata:
 spec:
   type: VolumeExpansion  
   databaseRef:
-    name: mg
+    name: s4
   volumeExpansion:
-    replicaSet: 3Gi
-    hidden: 2Gi
+    mode: Offline
+    standalone: 20Gi
+    # replicaSet: 3Gi
+    # hidden: 2Gi
 # status:
 #   conditions:
 #   - lastTransitionTime: "2023-08-02T05:35:59Z"

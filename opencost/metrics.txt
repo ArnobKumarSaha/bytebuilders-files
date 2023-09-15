@@ -47,6 +47,34 @@ statefulSet_match_labels
 
 ## Not Found
 
-1) from networkCosts-metrics.json
+1) attached-disks.json
+container_fs_limit_bytes
+https://github.com/google/cadvisor/issues/2785
+
+2) cluster-metrics.json
+pv_hourly_cost
+kube_persistentvolume_capacity_bytes
+
+3) cluster-utilization.json
+label_cloud_google_com_gke_preemptible
+kube_persistentvolumeclaim_resource_requests_storage_bytes
+
+
+3) networkCosts-metrics.json
 kubecost_pod_network_ingress_*  
 kubecost_pod_network_egress_*  
+
+
+
+attached-disks 
+Y cluster-metrics 
+cluster-utilization
+deployment-utilization
+Y kubebertes-resource-efficiency
+Y label-cost-utilization
+Y namespace-utilization
+networkCosts-utilization
+Y node-utilization
+Y pod-utilization
+pod-utilization-multi-cluster
+prom-benchmark

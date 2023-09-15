@@ -4,7 +4,7 @@ metadata:
   name: shard
   namespace: demo
 spec:
-  version: "5.0.3"
+  version: "4.4.6"
   storageType: Durable
   shardTopology:
     configServer:
@@ -18,15 +18,15 @@ spec:
         spec:
           resources:
             requests:
-              "cpu": 0.6
-              "memory": 600Mi
+              "cpu": 0.5
+              "memory": 500Mi
     mongos:
-      replicas: 2
+      replicas: 1
       podTemplate:
         spec:
           resources:
             requests:
-              "cpu": 0.5
+              "cpu": 0.4
               "memory": 400Mi
     shard:
       storage:
@@ -35,38 +35,38 @@ spec:
           requests:
             storage: 1Gi
       replicas: 2
-      shards: 2
+      shards: 1
       podTemplate:
         spec:
           resources:
             requests:
-              "cpu": 0.7
-              "memory": 900Mi
+              "cpu": 0.5
+              "memory": 700Mi
       storage:
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
             storage: 1Gi
-  hidden:
-    podTemplate: {}
-    replicas: 1
-    storage:
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 1Gi
+  # hidden:
+  #   podTemplate: {}
+  #   replicas: 1
+  #   storage:
+  #     accessModes:
+  #       - ReadWriteOnce
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
   arbiter:
     podTemplate: {}
   terminationPolicy: WipeOut
-  sslMode: requireSSL
-  tls:
-    issuerRef:
-      apiGroup: "cert-manager.io"
-      kind: Issuer
-      name: mongo-ca-issuer
-  clusterAuthMode: x509
+  # sslMode: requireSSL
+  # tls:
+  #   issuerRef:
+  #     apiGroup: "cert-manager.io"
+  #     kind: Issuer
+  #     name: mongo-ca-issuer
+  # clusterAuthMode: x509
   # monitor:
   #   agent: prometheus.io/operator
   #   prometheus:
