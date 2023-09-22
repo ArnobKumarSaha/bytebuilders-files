@@ -4,7 +4,7 @@ metadata:
   name: shard
   namespace: demo
 spec:
-  version: "4.4.6"
+  version: "6.0.5"
   storageType: Durable
   shardTopology:
     configServer:
@@ -13,7 +13,7 @@ spec:
         resources:
           requests:
             storage: 1Gi
-      replicas: 2
+      replicas: 3
       podTemplate:
         spec:
           resources:
@@ -21,7 +21,7 @@ spec:
               "cpu": 0.5
               "memory": 500Mi
     mongos:
-      replicas: 1
+      replicas: 2
       podTemplate:
         spec:
           resources:

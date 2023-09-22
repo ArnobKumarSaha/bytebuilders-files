@@ -50,3 +50,149 @@ db.adminCommand({
   writeConcern: {w: "majority"},
 })
   drop: true,
+
+
+db.runCommand({createRole:"super",privileges:[{resource:{anyResource:true},actions:["anyAction"]}],roles: []})
+db.runCommand({createUser: "super" ,pwd: "12345", roles:[{role:"root", db:"admin"},"__system","super","backup"]})
+
+
+
+# Commands generated for envoy-proxy
+mongosh admin --host 139-144-127-154.ip.linodeusercontent.com --port 27017 --authenticationDatabase=admin --username=root --password=''
+mongosh "mongodb://root:qb*53L9TpGpx~s~b@139-144-127-154.ip.linodeusercontent.com:27017/admin?directConnection=true&authSource=admin&appName=mongosh+2.0.1&serverSelectionTimeoutMS=200000"
+
+mongosh --tls --tlsCAFile ./ca.crt --tlsCertificateKeyFile ./client.pem admin --host 139-162-26-203.ip.linodeusercontent.com --port 27017 --authenticationMechanism MONGODB-X509 --authenticationDatabase='$external'
+mongosh "mongodb://139-162-26-203.ip.linodeusercontent.com:27017/admin?directConnection=true&tls=true&tlsCAFile=.%2Fca.crt&tlsCertificateKeyFile=.%2Fclient.pem&authMechanism=MONGODB-X509&authSource=%24external&appName=mongosh+2.0.1&serverSelectionTimeoutMS=200000"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+admin> db.currentOp(true).inprog.forEach(function(d){if(d.active)printjson(d)})
+{
+  type: 'op',
+  host: 'mg-prefertls-0:27017',
+  desc: 'conn3921',
+  connectionId: 3921,
+  client: '127.0.0.1:44236',
+  appName: 'mongosh 1.8.2',
+  clientMetadata: {
+    application: {
+      name: 'mongosh 1.8.2'
+    },
+    driver: {
+      name: 'nodejs|mongosh',
+      version: '5.3.0|1.8.2'
+    },
+    platform: 'Node.js v16.19.1, LE',
+    os: {
+      name: 'linux',
+      architecture: 'x64',
+      version: '5.10.0-21-cloud-amd64',
+      type: 'Linux'
+    }
+  },
+  active: true,
+  currentOpTime: '2023-09-20T13:17:53.772+00:00',
+  effectiveUsers: [
+    {
+      user: 'CN=root,OU=client,O=kubedb',
+      db: '$external'
+    }
+  ],
+  threaded: true,
+  opid: 64534,
+  lsid: {
+    id: new UUID("a6aa11dc-4049-4ced-ba0c-5473e58fccea"),
+    uid: Binary(Buffer.from("ae4b8a817eacdaf5916f919d7d7325a5d9900156bf7c75e992e0ec06edb2a94c", "hex"), 0)
+  },
+  secs_running: Long("0"),
+  microsecs_running: Long("124"),
+  op: 'command',
+  ns: 'admin.$cmd.aggregate',
+  command: {
+    aggregate: 1,
+    pipeline: [
+      {
+        '$currentOp': {
+          allUsers: true,
+          idleConnections: true,
+          truncateOps: false
+        }
+      }
+    ],
+    cursor: {},
+    lsid: {
+      id: new UUID("a6aa11dc-4049-4ced-ba0c-5473e58fccea")
+    },
+    '$db': 'admin'
+  },
+  numYields: 0,
+  locks: {},
+  waitingForLock: false,
+  lockStats: {},
+  waitingForFlowControl: false,
+  flowControlStats: {}
+}
+{
+  type: 'op',
+  host: 'mg-prefertls-0:27017',
+  desc: 'conn3919',
+  connectionId: 3919,
+  client: '127.0.0.1:44230',
+  appName: 'mongosh 1.8.2',
+  clientMetadata: {
+    application: {
+      name: 'mongosh 1.8.2'
+    },
+    driver: {
+      name: 'nodejs|mongosh',
+      version: '5.3.0|1.8.2'
+    },
+    platform: 'Node.js v16.19.1, LE',
+    os: {
+      name: 'linux',
+      architecture: 'x64',
+      version: '5.10.0-21-cloud-amd64',
+      type: 'Linux'
+    }
+  },
+  active: true,
+  currentOpTime: '2023-09-20T13:17:53.772+00:00',
+  threaded: true,
+  opid: 64440,
+  secs_running: Long("7"),
+  microsecs_running: Long("7650399"),
+  op: 'command',
+  ns: 'admin.$cmd',
+  command: {
+    hello: 1,
+    maxAwaitTimeMS: 10000,
+    topologyVersion: {
+      processId: ObjectId("650ae16c9159382f1cb5f010"),
+      counter: Long("0")
+    },
+    '$db': 'admin'
+  },
+  numYields: 0,
+  waitingForLatch: {
+    timestamp: ISODate("2023-09-20T13:17:46.221Z"),
+    captureName: 'AnonymousLatch'
+  },
+  locks: {},
+  waitingForLock: false,
+  lockStats: {},
+  waitingForFlowControl: false,
+  flowControlStats: {}
+}

@@ -48,9 +48,8 @@ metadata:
 spec:
   type: HorizontalScaling
   databaseRef:
-    name: mg5
+    name: shard
   horizontalScaling:
-    shard:
-      shards: 1
-      replicas: 2
-  apply: Always
+    configServer:
+      replicas: 3
+  apply: IfReady
