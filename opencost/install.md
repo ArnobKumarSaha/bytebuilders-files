@@ -1,5 +1,6 @@
 helm upgrade -i kube-prometheus-stack prometheus-community/kube-prometheus-stack \
-  --namespace monitoring --create-namespace --set grafana.image.tag=7.5.5 --set kube-state-metrics.metricLabelsAllowlist[0]=pods='[*]'
+  --namespace monitoring --create-namespace --set grafana.image.tag=7.5.5 \
+  --set kube-state-metrics.metricLabelsAllowlist[0]=pods='[*]' --set kube-state-metrics.metricLabelsAllowlist[1]=persistentvolumeclaims='[*]'
 
 # - --metric-labels-allowlist=pods=[*]
 

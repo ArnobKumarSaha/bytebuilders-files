@@ -1,0 +1,164 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kube-ui-server
+    meta.helm.sh/release-namespace: kubeops
+  creationTimestamp: "2023-09-29T04:09:49Z"
+  generation: 3
+  labels:
+    app.kubernetes.io/instance: kube-ui-server
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-ui-server
+    helm.toolkit.fluxcd.io/name: kube-ui-server
+    helm.toolkit.fluxcd.io/namespace: kubeops
+    monitoring.appscode.com/prometheus: federated
+  name: kube-ui-server
+  namespace: kubeops
+  resourceVersion: "38255"
+  uid: fa170d48-30ee-4500-ae34-87e6cf21ada4
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    honorLabels: true
+    interval: 10s
+    port: api
+    scheme: https
+    tlsConfig:
+      ca:
+        secret:
+          key: tls.crt
+          name: kube-ui-server-apiserver-cert
+      serverName: kube-ui-server.kubeops.svc
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    honorLabels: true
+    interval: 10s
+    port: telemetry
+    scheme: http
+  namespaceSelector:
+    matchNames:
+    - kubeops
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: kube-ui-server
+      app.kubernetes.io/name: kube-ui-server
+---
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  creationTimestamp: "2023-09-29T04:10:18Z"
+  generation: 3
+  labels:
+    release: not-rancher-monitoring
+  name: kube-ui-server
+  namespace: cattle-project-p-gl4n4-monitoring
+  ownerReferences:
+  - apiVersion: monitoring.coreos.com/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Prometheus
+    name: cattle-project-p-gl4n4-mon-prometheus
+    uid: 83f11361-7946-46ca-a973-1ea487c5ea5c
+  resourceVersion: "38256"
+  uid: d5a57e27-46db-4603-b4e9-e35f739d8e7a
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    bearerTokenSecret:
+      key: ""
+    honorLabels: true
+    interval: 10s
+    metricRelabelings:
+    - action: keep
+      regex: (|cattle-project-p-gl4n4-monitoring|team-b-ns1|team-b-ns2)
+      sourceLabels:
+      - namespace
+    port: api
+    scheme: https
+    tlsConfig:
+      ca:
+        secret:
+          key: tls.crt
+          name: kube-ui-server-apiserver-cert
+      cert: {}
+      serverName: kube-ui-server.kubeops.svc
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    bearerTokenSecret:
+      key: ""
+    honorLabels: true
+    interval: 10s
+    metricRelabelings:
+    - action: keep
+      regex: (|cattle-project-p-gl4n4-monitoring|team-b-ns1|team-b-ns2)
+      sourceLabels:
+      - namespace
+    port: telemetry
+    scheme: http
+  namespaceSelector:
+    matchNames:
+    - kubeops
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: kube-ui-server
+      app.kubernetes.io/name: kube-ui-server
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  creationTimestamp: "2023-09-29T04:10:18Z"
+  generation: 3
+  labels:
+    release: not-rancher-monitoring
+  name: kube-ui-server
+  namespace: cattle-project-p-mpkfv-monitoring
+  ownerReferences:
+  - apiVersion: monitoring.coreos.com/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Prometheus
+    name: cattle-project-p-mpkfv-mon-prometheus
+    uid: dfd63dc4-63fb-4d30-a99d-a39cba6bd543
+  resourceVersion: "38257"
+  uid: 590f501d-1f85-497a-9247-5e37b0101f35
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    bearerTokenSecret:
+      key: ""
+    honorLabels: true
+    interval: 10s
+    metricRelabelings:
+    - action: keep
+      regex: (|cattle-project-p-mpkfv-monitoring|team-a-ns-1|team-a-ns2)
+      sourceLabels:
+      - namespace
+    port: api
+    scheme: https
+    tlsConfig:
+      ca:
+        secret:
+          key: tls.crt
+          name: kube-ui-server-apiserver-cert
+      cert: {}
+      serverName: kube-ui-server.kubeops.svc
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    bearerTokenSecret:
+      key: ""
+    honorLabels: true
+    interval: 10s
+    metricRelabelings:
+    - action: keep
+      regex: (|cattle-project-p-mpkfv-monitoring|team-a-ns-1|team-a-ns2)
+      sourceLabels:
+      - namespace
+    port: telemetry
+    scheme: http
+  namespaceSelector:
+    matchNames:
+    - kubeops
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: kube-ui-server
+      app.kubernetes.io/name: kube-ui-server

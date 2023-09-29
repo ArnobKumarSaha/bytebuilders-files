@@ -4,8 +4,8 @@ metadata:
   name: mg-restore
   namespace: demo
 spec:
-  task:
-    name: mongodb-restore-4.2.3
+  # task:
+  #   name: mongodb-restore-4.2.3
     # params:
     # - name: "args"
     #   value: "--preserveUUID true --drop"
