@@ -1,0 +1,77 @@
+apiVersion: stash.appscode.com/v1beta1
+kind: BackupSession
+metadata:
+  creationTimestamp: "2023-09-18T16:55:14Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/component: stash-backup
+    app.kubernetes.io/managed-by: stash.appscode.com
+    stash.appscode.com/invoker-name: mongo-backup
+    stash.appscode.com/invoker-type: BackupConfiguration
+    stash.appscode.com/target-kind: AppBinding
+    stash.appscode.com/target-name: mongo
+    stash.appscode.com/target-namespace: ""
+  name: mongo-backup-1695056114
+  namespace: mongo
+  ownerReferences:
+  - apiVersion: stash.appscode.com/v1beta1
+    blockOwnerDeletion: true
+    controller: true
+    kind: BackupConfiguration
+    name: mongo-backup
+    uid: 7d9c7730-87c0-4a9e-995c-bfc9e2080ddc
+  resourceVersion: "1563994690"
+  uid: a8222a1e-0636-4e27-9f1c-3884eda4cbbd
+spec:
+  invoker:
+    apiGroup: stash.appscode.com
+    kind: BackupConfiguration
+    name: mongo-backup
+status:
+  conditions:
+  - lastTransitionTime: "2023-09-18T16:55:16Z"
+    message: Repository exist in the backend.
+    reason: BackendRepositoryFound
+    status: "True"
+    type: BackendRepositoryInitialized
+  - lastTransitionTime: "2023-09-18T16:57:18Z"
+    message: Successfully cleaned up backup history according to backupHistoryLimit.
+    reason: SuccessfullyCleanedBackupHistory
+    status: "True"
+    type: BackupHistoryCleaned
+  - lastTransitionTime: "2023-09-18T16:57:18Z"
+    message: Successfully pushed metrics.
+    reason: SuccessfullyPushedMetrics
+    status: "True"
+    type: MetricsPushed
+  phase: Failed
+  sessionDuration: 2m4s
+  targets:
+  - conditions:
+    - lastTransitionTime: "2023-09-18T16:55:14Z"
+      message: Successfully ensured backup executor.
+      reason: SuccessfullyEnsuredBackupExecutor
+      status: "True"
+      type: BackupExecutorEnsured
+    phase: Failed
+    postBackupActions:
+    - ApplyRetentionPolicy
+    - VerifyRepositoryIntegrity
+    - SendRepositoryMetrics
+    preBackupActions:
+    - InitializeBackendRepository
+    ref:
+      apiVersion: appcatalog.appscode.com/v1alpha1
+      kind: AppBinding
+      name: mongo
+      namespace: mongo
+    stats:
+    - error: 'failed to start backup: invalid character ''e'' looking for beginning
+        of value'
+      hostname: unknown-0
+      phase: Failed
+    - error: 'failed to start backup: invalid character ''e'' looking for beginning
+        of value'
+      hostname: unknown-1
+      phase: Failed
+    totalHosts: 2

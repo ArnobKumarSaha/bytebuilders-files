@@ -1,0 +1,2035 @@
+=====================================================================
+kubectl get mongodbs.kubedb.com -A
+=====================================================================
+NAMESPACE          NAME               VERSION   STATUS         AGE
+fed-db-mongo-ram   fed-db-mongo-ram   4.0.25    Provisioning   84d
+
+
+=====================================================================
+kubectl describe mongodbs.kubedb.com -A
+=====================================================================
+Name:         fed-db-mongo-ram
+Namespace:    fed-db-mongo-ram
+Labels:       app.kubernetes.io/managed-by=Helm
+Annotations:  meta.helm.sh/release-name: fed-db-mongo-ram
+              meta.helm.sh/release-namespace: fed-db-mongo-ram
+API Version:  kubedb.com/v1alpha2
+Kind:         MongoDB
+Metadata:
+  Creation Timestamp:  2023-07-11T22:39:07Z
+  Finalizers:
+    kubedb.com
+  Generation:  2
+  Managed Fields:
+    API Version:  kubedb.com/v1alpha2
+    Fields Type:  FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .:
+          f:meta.helm.sh/release-name:
+          f:meta.helm.sh/release-namespace:
+        f:labels:
+          .:
+          f:app.kubernetes.io/managed-by:
+      f:spec:
+        .:
+        f:authSecret:
+          .:
+          f:name:
+        f:healthCheck:
+          .:
+          f:disableWriteCheck:
+          f:failureThreshold:
+          f:periodSeconds:
+          f:timeoutSeconds:
+        f:monitor:
+          .:
+          f:agent:
+          f:prometheus:
+            .:
+            f:exporter:
+              .:
+              f:port:
+              f:securityContext:
+                .:
+                f:allowPrivilegeEscalation:
+                f:capabilities:
+                  .:
+                  f:drop:
+                f:privileged:
+                f:runAsNonRoot:
+            f:serviceMonitor:
+              .:
+              f:interval:
+        f:serviceTemplates:
+        f:shardTopology:
+          .:
+          f:configServer:
+            .:
+            f:configSecret:
+              .:
+              f:name:
+            f:ephemeralStorage:
+              .:
+              f:medium:
+              f:sizeLimit:
+            f:podTemplate:
+              .:
+              f:spec:
+                .:
+                f:affinity:
+                  .:
+                  f:podAntiAffinity:
+                    .:
+                    f:preferredDuringSchedulingIgnoredDuringExecution:
+                f:args:
+                f:containerSecurityContext:
+                  .:
+                  f:allowPrivilegeEscalation:
+                  f:capabilities:
+                    .:
+                    f:add:
+                    f:drop:
+                  f:privileged:
+                f:livenessProbe:
+                  .:
+                  f:exec:
+                    .:
+                    f:command:
+                f:priorityClassName:
+                f:readinessProbe:
+                  .:
+                  f:exec:
+                    .:
+                    f:command:
+                f:resources:
+                  .:
+                  f:limits:
+                    .:
+                    f:cpu:
+                    f:memory:
+                  f:requests:
+                    .:
+                    f:cpu:
+                    f:memory:
+                f:securityContext:
+                  .:
+                  f:fsGroup:
+                  f:runAsGroup:
+                  f:runAsNonRoot:
+                  f:runAsUser:
+                  f:sysctls:
+            f:replicas:
+          f:mongos:
+            .:
+            f:configSecret:
+              .:
+              f:name:
+            f:podTemplate:
+              .:
+              f:spec:
+                .:
+                f:affinity:
+                  .:
+                  f:podAntiAffinity:
+                    .:
+                    f:preferredDuringSchedulingIgnoredDuringExecution:
+                f:args:
+                f:containerSecurityContext:
+                  .:
+                  f:allowPrivilegeEscalation:
+                  f:capabilities:
+                    .:
+                    f:add:
+                    f:drop:
+                  f:privileged:
+                f:livenessProbe:
+                  .:
+                  f:exec:
+                    .:
+                    f:command:
+                f:priorityClassName:
+                f:readinessProbe:
+                  .:
+                  f:exec:
+                    .:
+                    f:command:
+                f:resources:
+                  .:
+                  f:limits:
+                    .:
+                    f:cpu:
+                    f:memory:
+                  f:requests:
+                    .:
+                    f:cpu:
+                    f:memory:
+                f:securityContext:
+                  .:
+                  f:fsGroup:
+                  f:runAsGroup:
+                  f:runAsNonRoot:
+                  f:runAsUser:
+                  f:sysctls:
+            f:replicas:
+          f:shard:
+            .:
+            f:configSecret:
+              .:
+              f:name:
+            f:podTemplate:
+              .:
+              f:spec:
+                .:
+                f:affinity:
+                  .:
+                  f:podAntiAffinity:
+                    .:
+                    f:preferredDuringSchedulingIgnoredDuringExecution:
+                f:args:
+                f:containerSecurityContext:
+                  .:
+                  f:allowPrivilegeEscalation:
+                  f:capabilities:
+                    .:
+                    f:add:
+                    f:drop:
+                  f:privileged:
+                f:livenessProbe:
+                  .:
+                  f:exec:
+                    .:
+                    f:command:
+                f:priorityClassName:
+                f:readinessProbe:
+                  .:
+                  f:exec:
+                    .:
+                    f:command:
+                f:resources:
+                  .:
+                  f:limits:
+                    .:
+                    f:cpu:
+                    f:memory:
+                  f:requests:
+                    .:
+                    f:cpu:
+                    f:memory:
+                f:securityContext:
+                  .:
+                  f:fsGroup:
+                  f:runAsGroup:
+                  f:runAsNonRoot:
+                  f:runAsUser:
+                  f:sysctls:
+            f:replicas:
+            f:shards:
+        f:storageEngine:
+        f:storageType:
+        f:terminationPolicy:
+        f:version:
+    Manager:      helm
+    Operation:    Update
+    Time:         2023-07-11T22:39:07Z
+    API Version:  kubedb.com/v1alpha2
+    Fields Type:  FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:finalizers:
+          .:
+          v:"kubedb.com":
+      f:spec:
+        f:keyFileSecret:
+          .:
+          f:name:
+      f:status:
+        .:
+        f:conditions:
+        f:observedGeneration:
+        f:phase:
+    Manager:         operator
+    Operation:       Update
+    Time:            2023-10-04T08:25:22Z
+  Resource Version:  70568746
+  UID:               fb5cba55-0ca5-4ee6-a464-0c2397a59ce8
+Spec:
+  Auth Secret:
+    Name:             mongodb-auth
+  Cluster Auth Mode:  keyFile
+  Coordinator:
+    Resources:
+  Health Check:
+    Disable Write Check:  false
+    Failure Threshold:    3
+    Period Seconds:       10
+    Timeout Seconds:      10
+  Key File Secret:
+    Name:  fed-db-mongo-ram-key
+  Monitor:
+    Agent:  prometheus.io/builtin
+    Prometheus:
+      Exporter:
+        Port:  56790
+        Resources:
+        Security Context:
+          Allow Privilege Escalation:  false
+          Capabilities:
+            Drop:
+              ALL
+          Privileged:       false
+          Run As Non Root:  true
+      Service Monitor:
+        Interval:  1m
+  Service Templates:
+    Alias:  primary
+    Metadata:
+      Annotations:
+        metallb.universe.tf/allow-shared-ip:                             paas
+        service.beta.kubernetes.io/azure-load-balancer-internal:         true
+        service.beta.kubernetes.io/azure-load-balancer-internal-subnet:  none
+    Spec:
+      Load Balancer IP:  108.154.26.33
+      Ports:
+        Name:  mongo
+        Port:  27017
+      Type:    LoadBalancer
+  Shard Topology:
+    Config Server:
+      Config Secret:
+        Name:  configsvr-config
+      Ephemeral Storage:
+        Medium:      Memory
+        Size Limit:  1Gi
+      Pod Template:
+        Controller:
+        Metadata:
+        Spec:
+          Affinity:
+            Pod Anti Affinity:
+              Preferred During Scheduling Ignored During Execution:
+                Pod Affinity Term:
+                  Label Selector:
+                    Match Labels:
+                      app.kubernetes.io/instance:      fed-db-mongo-ram
+                      app.kubernetes.io/managed-by:    kubedb.com
+                      app.kubernetes.io/name:          mongodbs.kubedb.com
+                      mongodb.kubedb.com/node.config:  fed-db-mongo-ram-configsvr
+                  Topology Key:                        kubernetes.io/hostname
+                Weight:                                100
+                Pod Affinity Term:
+                  Label Selector:
+                    Match Labels:
+                      app.kubernetes.io/instance:      fed-db-mongo-ram
+                      app.kubernetes.io/managed-by:    kubedb.com
+                      app.kubernetes.io/name:          mongodbs.kubedb.com
+                      mongodb.kubedb.com/node.config:  fed-db-mongo-ram-configsvr
+                  Topology Key:                        topology.kubernetes.io/rack
+                Weight:                                100
+          Args:
+            --transitionToAuth
+            --listenBacklog=4096
+          Container Security Context:
+            Allow Privilege Escalation:  false
+            Capabilities:
+              Add:
+                NET_ADMIN
+              Drop:
+                ALL
+            Privileged:  false
+          Liveness Probe:
+            Exec:
+              Command:
+                /bin/bash
+                -c
+                MAXCONN=$(grep -oP 'maxIncomingConnections: ([0-9]+)' /data/configdb/mongod.conf | sed 's/maxIncomingConnections: //g'); if [[ -z '$MAXCONN' || $MAXCONN -eq 0 ]]; then MAXCONN=65536; fi; MAXCONNTEST=$((MAXCONN * 1/100)); ESTAB=$(ss -tn -o state established | grep -v 'Recv-Q' | wc -l); if [[ $ESTAB -ge $MAXCONNTEST ]]; then exit 0; fi; if [[ $(mongo admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin --quiet --eval "db.adminCommand('ping').ok" ) -eq '1' ]]; then exit 0; fi; printf 'Mongo NOK [%d ESTAB TCP; MAXCONN %d; MAXCONNTEST %d]' $ESTAB $MAXCONN $MAXCONNTEST; exit 1;
+          Priority Class Name:  uc-priority-2
+          Readiness Probe:
+            Exec:
+              Command:
+                /bin/bash
+                -c
+                MAXCONN=$(grep -oP 'maxIncomingConnections: ([0-9]+)' /data/configdb/mongod.conf | sed 's/maxIncomingConnections: //g'); if [[ -z '$MAXCONN' || $MAXCONN -eq 0 ]]; then MAXCONN=65536; fi; MAXCONNTEST=$((MAXCONN * 1/100)); ESTAB=$(ss -tn -o state established | grep -v 'Recv-Q' | wc -l); if [[ $ESTAB -ge $MAXCONNTEST ]]; then exit 0; fi; if [[ $(mongo admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin --quiet --eval "db.adminCommand('ping').ok" ) -eq '1' ]]; then exit 0; fi; printf 'Mongo NOK [%d ESTAB TCP; MAXCONN %d; MAXCONNTEST %d]' $ESTAB $MAXCONN $MAXCONNTEST; exit 1;
+          Resources:
+            Limits:
+              Cpu:     16
+              Memory:  2Gi
+            Requests:
+              Cpu:     500m
+              Memory:  10Mi
+          Security Context:
+            Fs Group:         1001
+            Run As Group:     0
+            Run As Non Root:  true
+            Run As User:      1001
+            Sysctls:
+              Name:              net.core.somaxconn
+              Value:             4096
+              Name:              net.ipv4.tcp_max_syn_backlog
+              Value:             4096
+              Name:              net.ipv4.tcp_fin_timeout
+              Value:             30
+              Name:              net.ipv4.tcp_keepalive_intvl
+              Value:             30
+              Name:              net.ipv4.tcp_keepalive_time
+              Value:             120
+          Service Account Name:  fed-db-mongo-ram
+      Replicas:                  3
+    Mongos:
+      Config Secret:
+        Name:  mongos-config
+      Pod Template:
+        Controller:
+        Metadata:
+        Spec:
+          Affinity:
+            Pod Anti Affinity:
+              Preferred During Scheduling Ignored During Execution:
+                Pod Affinity Term:
+                  Label Selector:
+                    Match Labels:
+                      app.kubernetes.io/instance:      fed-db-mongo-ram
+                      app.kubernetes.io/managed-by:    kubedb.com
+                      app.kubernetes.io/name:          mongodbs.kubedb.com
+                      mongodb.kubedb.com/node.mongos:  fed-db-mongo-ram-mongos
+                  Topology Key:                        kubernetes.io/hostname
+                Weight:                                100
+                Pod Affinity Term:
+                  Label Selector:
+                    Match Labels:
+                      app.kubernetes.io/instance:      fed-db-mongo-ram
+                      app.kubernetes.io/managed-by:    kubedb.com
+                      app.kubernetes.io/name:          mongodbs.kubedb.com
+                      mongodb.kubedb.com/node.mongos:  fed-db-mongo-ram-mongos
+                  Topology Key:                        topology.kubernetes.io/rack
+                Weight:                                100
+          Args:
+            --transitionToAuth
+            --listenBacklog=4096
+          Container Security Context:
+            Allow Privilege Escalation:  false
+            Capabilities:
+              Add:
+                NET_ADMIN
+              Drop:
+                ALL
+            Privileged:  false
+          Lifecycle:
+            Pre Stop:
+              Exec:
+                Command:
+                  bash
+                  -c
+                  mongo admin --username=$MONGO_INITDB_ROOT_USERNAME --password=$MONGO_INITDB_ROOT_PASSWORD --quiet --eval "db.adminCommand({ shutdown: 1 })" || true
+          Liveness Probe:
+            Exec:
+              Command:
+                /bin/bash
+                -c
+                MAXCONN=$(grep -oP 'maxIncomingConnections: ([0-9]+)' /data/configdb/mongod.conf | sed 's/maxIncomingConnections: //g'); if [[ -z '$MAXCONN' || $MAXCONN -eq 0 ]]; then MAXCONN=65536; fi; MAXCONNTEST=$((MAXCONN * 1/100)); ESTAB=$(ss -tn -o state established | grep -v 'Recv-Q' | wc -l); if [[ $ESTAB -ge $MAXCONNTEST ]]; then exit 0; fi; if [[ $(mongo admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin --quiet --eval "db.adminCommand('ping').ok" ) -eq '1' ]]; then exit 0; fi; printf 'Mongo NOK [%d ESTAB TCP; MAXCONN %d; MAXCONNTEST %d]' $ESTAB $MAXCONN $MAXCONNTEST; exit 1;
+          Priority Class Name:  uc-priority-6
+          Readiness Probe:
+            Exec:
+              Command:
+                /bin/bash
+                -c
+                MAXCONN=$(grep -oP 'maxIncomingConnections: ([0-9]+)' /data/configdb/mongod.conf | sed 's/maxIncomingConnections: //g'); if [[ -z '$MAXCONN' || $MAXCONN -eq 0 ]]; then MAXCONN=65536; fi; MAXCONNTEST=$((MAXCONN * 1/100)); ESTAB=$(ss -tn -o state established | grep -v 'Recv-Q' | wc -l); if [[ $ESTAB -ge $MAXCONNTEST ]]; then exit 0; fi; if [[ $(mongo admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin --quiet --eval "db.adminCommand('ping').ok" ) -eq '1' ]]; then exit 0; fi; printf 'Mongo NOK [%d ESTAB TCP; MAXCONN %d; MAXCONNTEST %d]' $ESTAB $MAXCONN $MAXCONNTEST; exit 1;
+          Resources:
+            Limits:
+              Cpu:     8
+              Memory:  24Gi
+            Requests:
+              Cpu:     1250m
+              Memory:  8Gi
+          Security Context:
+            Fs Group:         1001
+            Run As Group:     0
+            Run As Non Root:  true
+            Run As User:      1001
+            Sysctls:
+              Name:              net.core.somaxconn
+              Value:             4096
+              Name:              net.ipv4.tcp_max_syn_backlog
+              Value:             4096
+              Name:              net.ipv4.tcp_fin_timeout
+              Value:             30
+              Name:              net.ipv4.tcp_keepalive_intvl
+              Value:             30
+              Name:              net.ipv4.tcp_keepalive_time
+              Value:             120
+          Service Account Name:  fed-db-mongo-ram
+      Replicas:                  36
+    Shard:
+      Config Secret:
+        Name:  mongod-config
+      Pod Template:
+        Controller:
+        Metadata:
+        Spec:
+          Affinity:
+            Pod Anti Affinity:
+              Preferred During Scheduling Ignored During Execution:
+                Pod Affinity Term:
+                  Label Selector:
+                    Match Labels:
+                      app.kubernetes.io/instance:     fed-db-mongo-ram
+                      app.kubernetes.io/managed-by:   kubedb.com
+                      app.kubernetes.io/name:         mongodbs.kubedb.com
+                      mongodb.kubedb.com/node.shard:  fed-db-mongo-ram-shard${SHARD_INDEX}
+                  Topology Key:                       kubernetes.io/hostname
+                Weight:                               100
+                Pod Affinity Term:
+                  Label Selector:
+                    Match Labels:
+                      app.kubernetes.io/instance:     fed-db-mongo-ram
+                      app.kubernetes.io/managed-by:   kubedb.com
+                      app.kubernetes.io/name:         mongodbs.kubedb.com
+                      mongodb.kubedb.com/node.shard:  fed-db-mongo-ram-shard${SHARD_INDEX}
+                  Topology Key:                       topology.kubernetes.io/rack
+                Weight:                               100
+          Args:
+            --transitionToAuth
+            --listenBacklog=4096
+          Container Security Context:
+            Allow Privilege Escalation:  false
+            Capabilities:
+              Add:
+                NET_ADMIN
+              Drop:
+                ALL
+            Privileged:  false
+          Liveness Probe:
+            Exec:
+              Command:
+                /bin/bash
+                -c
+                MAXCONN=$(grep -oP 'maxIncomingConnections: ([0-9]+)' /data/configdb/mongod.conf | sed 's/maxIncomingConnections: //g'); if [[ -z '$MAXCONN' || $MAXCONN -eq 0 ]]; then MAXCONN=65536; fi; MAXCONNTEST=$((MAXCONN * 1/100)); ESTAB=$(ss -tn -o state established | grep -v 'Recv-Q' | wc -l); if [[ $ESTAB -ge $MAXCONNTEST ]]; then exit 0; fi; if [[ $(mongo admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin --quiet --eval "db.adminCommand('ping').ok" ) -eq '1' ]]; then exit 0; fi; printf 'Mongo NOK [%d ESTAB TCP; MAXCONN %d; MAXCONNTEST %d]' $ESTAB $MAXCONN $MAXCONNTEST; exit 1;
+          Priority Class Name:  uc-priority-2
+          Readiness Probe:
+            Exec:
+              Command:
+                /bin/bash
+                -c
+                MAXCONN=$(grep -oP 'maxIncomingConnections: ([0-9]+)' /data/configdb/mongod.conf | sed 's/maxIncomingConnections: //g'); if [[ -z '$MAXCONN' || $MAXCONN -eq 0 ]]; then MAXCONN=65536; fi; MAXCONNTEST=$((MAXCONN * 1/100)); ESTAB=$(ss -tn -o state established | grep -v 'Recv-Q' | wc -l); if [[ $ESTAB -ge $MAXCONNTEST ]]; then exit 0; fi; if [[ $(mongo admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin --quiet --eval "db.adminCommand('ping').ok" ) -eq '1' ]]; then exit 0; fi; printf 'Mongo NOK [%d ESTAB TCP; MAXCONN %d; MAXCONNTEST %d]' $ESTAB $MAXCONN $MAXCONNTEST; exit 1;
+          Resources:
+            Limits:
+              Cpu:     16
+              Memory:  17Gi
+            Requests:
+              Cpu:     1500m
+              Memory:  17Gi
+          Security Context:
+            Fs Group:         1001
+            Run As Group:     0
+            Run As Non Root:  true
+            Run As User:      1001
+            Sysctls:
+              Name:              net.core.somaxconn
+              Value:             4096
+              Name:              net.ipv4.tcp_max_syn_backlog
+              Value:             4096
+              Name:              net.ipv4.tcp_fin_timeout
+              Value:             30
+              Name:              net.ipv4.tcp_keepalive_intvl
+              Value:             30
+              Name:              net.ipv4.tcp_keepalive_time
+              Value:             120
+          Service Account Name:  fed-db-mongo-ram
+      Replicas:                  3
+      Shards:                    24
+  Ssl Mode:                      disabled
+  Storage Engine:                inMemory
+  Storage Type:                  Ephemeral
+  Termination Policy:            WipeOut
+  Version:                       4.0.25
+Status:
+  Conditions:
+    Last Transition Time:  2023-07-11T22:39:07Z
+    Message:               The KubeDB operator has started the provisioning of MongoDB: fed-db-mongo-ram/fed-db-mongo-ram
+    Reason:                DatabaseProvisioningStartedSuccessfully
+    Status:                True
+    Type:                  ProvisioningStarted
+    Last Transition Time:  2023-10-04T09:49:44Z
+    Message:               All desired replicas are ready.
+    Reason:                AllReplicasReady
+    Status:                True
+    Type:                  ReplicaReady
+    Last Transition Time:  2023-10-04T08:49:46Z
+    Message:               The MongoDB: fed-db-mongo-ram/fed-db-mongo-ram is not accepting client requests. error: unable to check read/write of the mongos, error: failed to write on database with error: (ShardNotFound) unable to initialize targeter for write op for collection kubedb-system.health-check :: caused by :: Database kubedb-system not found :: caused by :: No shards found
+    Observed Generation:   2
+    Reason:                DatabaseNotAcceptingConnectionRequest
+    Status:                False
+    Type:                  AcceptingConnection
+    Last Transition Time:  2023-10-04T08:29:10Z
+    Message:               The MongoDB: fed-db-mongo-ram/fed-db-mongo-ram is not ready.
+    Observed Generation:   2
+    Reason:                ReadinessCheckFailed
+    Status:                False
+    Type:                  Ready
+    Last Transition Time:  2023-10-04T08:25:22Z
+    Message:               MongoDBOpsRequest mgops-redeploy is in process
+    Observed Generation:   2
+    Reason:                Paused
+    Status:                True
+    Type:                  Paused
+  Observed Generation:     2
+  Phase:                   Provisioning
+Events:
+  Type    Reason      Age    From                        Message
+  ----    ------      ----   ----                        -------
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  60m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  59m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  58m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  57m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  56m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  54m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  53m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  52m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  51m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  50m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  49m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  48m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  47m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  44m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  43m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  42m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  41m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  39m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  38m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  37m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  36m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  34m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  33m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  32m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  31m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  29m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  28m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  27m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  26m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  24m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  23m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  22m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  21m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  19m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  18m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  17m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  16m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  14m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  13m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  12m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  11m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10m    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m56s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m55s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m51s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m50s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m46s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m45s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m41s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m40s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m36s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m35s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m31s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m30s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m26s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m25s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m21s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m20s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m16s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m15s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m11s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m10s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m6s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m5s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  9m1s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  9m     KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m56s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m55s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m51s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m50s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m46s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m45s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m41s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m40s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m36s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m35s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m31s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m30s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m26s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m25s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m21s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m20s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m16s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m15s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m11s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m10s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m6s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m5s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  8m1s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  8m     KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m56s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m55s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m51s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m50s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m46s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m45s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m41s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m40s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m36s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m35s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m31s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m30s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m26s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m25s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m21s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m20s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m16s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m15s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m11s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m10s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m6s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m5s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  7m1s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  7m     KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m56s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m55s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m51s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m50s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m46s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m45s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m41s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m40s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m36s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m35s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m31s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m30s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m26s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m25s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m21s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m20s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m16s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m15s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m11s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m10s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m6s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m5s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6m1s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  6m     KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m56s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m55s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m51s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m50s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m46s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m45s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m41s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m40s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m36s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m35s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m31s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m30s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m26s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m25s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m21s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m20s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m16s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m15s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m10s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m10s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m6s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m5s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  5m1s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5m     KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m56s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m55s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m51s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m50s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m46s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m45s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m41s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m40s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m36s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m35s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m31s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m30s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m26s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m25s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m21s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m20s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m16s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m15s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m11s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m10s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m6s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m5s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  4m1s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  4m     KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m56s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m55s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m51s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m50s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m46s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m45s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m41s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m40s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m36s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m35s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m31s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m30s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m26s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m25s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m21s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m20s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m16s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m15s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m11s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m10s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m6s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m5s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  3m1s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  3m     KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m56s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m55s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m51s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m50s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m46s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m45s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m41s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m40s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m36s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m35s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m31s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m30s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m26s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m25s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m21s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m20s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m16s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m15s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m11s  KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m10s  KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m6s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m5s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  2m1s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  2m     KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  116s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  115s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  111s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  110s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  106s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  105s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  101s   KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  100s   KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  96s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  95s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  91s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  90s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  86s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  85s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  81s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  80s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  76s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  75s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  71s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  70s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  66s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  65s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  61s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  60s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  56s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  55s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  50s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  46s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  45s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  41s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  40s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  36s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  35s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  31s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  30s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  26s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  25s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  21s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  20s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  16s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  15s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  11s    KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  10s    KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  6s     KubeDB Enterprise Operator  Successfully patched Primary Service
+  Normal  Successful  5s     KubeDB Enterprise Operator  Successfully patched MongoDB
+  Normal  Successful  1s     KubeDB Enterprise Operator  Successfully patched Primary Service

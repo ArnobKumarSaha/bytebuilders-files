@@ -1,0 +1,38 @@
+
+What happened as per the analysis : 
+- As cluster was in unstable situation for a certain period of time because of the etcd issue, Database pings were being failed. starting in 8:14. Which get the db into NotReady status.
+- At 8:18:32, for the 5th time the redeployer script see that db is in NotReady status.  It creates the Reprovision opsRequest.
+- Enterprise operator reconcile this opsReq at 8:18:32. It does 2 changes (2 different patch) on mongodb status section. 
+i) Set the `Pause` condition to true. 
+ii) Remove the `Provisioned` condition.
+But for etcd slowness, the first info was not actually persisted.
+- 8:24:44 forcing resync (fresh list calls to the apiServer) happended in community operator, 8:25:04 forcing resync happended in enterprise operator. These syncs happened in every 10 minutes. To ensure that, they didn't miss any cluster events.
+- health check (pinging from one pod to another) is happening in the mean time internally every 10 seconds (specified in mongodb.spec.healthCheck.periodSeconds), which explains lots of healthcheck errors on logs.
+- On the community's resync (8:24:44), It sees the `Provisioned` contidion is gone. So it updated the status to Provisioning.
+- Redeployer, which is running every minute, finds the db status as Provisioning at 8:24:41.
+- On enterprise resync, It sees db is not paused yet. It pauses the db at 8:25:22.  And also deletes all the statefulsets. 
+- In the mean time just before some milliseconds, the db object was already in processing state at 08:25:22.628894 in the communinty.
+- As community sees, statefulets are not present, it creates them (8:25:22 -> 8:25:25). Note that, it didn't create the mongos sts. as the configSvr & shards sts are not ready yet.
+- At 8:26:37, as the configSvr & shards pods were running, Enterprise creates the mongos sts.
+- From this time to the last, enterprise called `Reconcile()` after each 5 seconds(default retry interval), but those mongos pods didn't get in running state. Which explains why we see the db state as`Provisioning` till the end, in the redoployer scrpit.
+- Why those mongos pods were not in running state ?  We don't know, because there is not enough information. May be cluster didn't have enough resources, may be something else.
+
+
+
+Root Causes : 
+- etcd slowness issue
+- sync failed between the community & enterprise operator. They were trying to change same objects concurrently. That why `the object has been modified; please apply your changes to the latest version and try again` this error shown.
+
+
+Our approach : 
+- Nothing to do from our side on etcd issue.
+- To resolve the syncing issue between commnity & operator, we will set the `paused` condition to `false` in enterprise. Will make the paused condition to `true` from community operator. And only after finding that condition to true (which is the confirmation from community operator, that it will not do anything with this db), we will do further things in enterprise.
+
+
+
+ETA : 
+This change should be done by a day or two.
+
+
+Suggestion from our side : 
+- the redeployer script should be modified so that it doesn't create a `Reprovision` opsRequest in case of some k8s-cluster issues. Redeploying the db on a broken cluster does'nt seem right thing to do. 

@@ -4,12 +4,12 @@ metadata:
   name: os-test-2
   namespace: demo
 spec:
-  version: opensearch-2.5.0
+  version: xpack-7.17.10 # opensearch-2.5.0
   enableSSL: true
   replicas: 3
   storageType: Durable
   storage:
-    storageClassName: "do-block-storage"
+    # storageClassName: "do-block-storage"
     accessModes:
     - ReadWriteOnce
     resources:

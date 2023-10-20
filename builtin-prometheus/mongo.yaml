@@ -1,0 +1,23 @@
+apiVersion: kubedb.com/v1alpha2
+kind: MongoDB
+metadata:
+  name: single
+  namespace: demo
+spec:
+  version: "4.4.6"
+  terminationPolicy: WipeOut
+  storage:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+  # monitor:
+  #   agent: prometheus.io/operator
+  #   prometheus:
+  #     serviceMonitor:
+  #       labels:
+  #         release: kube-prometheus-stack
+  #       interval: 10s
+  # monitor:
+  #   agent: prometheus.io/builtin

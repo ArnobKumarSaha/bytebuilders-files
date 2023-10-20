@@ -196,3 +196,11 @@ admin> db.currentOp(true).inprog.forEach(function(d){if(d.active)printjson(d)})
   waitingForFlowControl: false,
   flowControlStats: {}
 }
+
+
+db.adminCommand({
+    currentOp: true,
+    "$or": [{ "client": "conn246" }]
+})
+
+tcpdump -w hello.pcap -i eth0 -v
