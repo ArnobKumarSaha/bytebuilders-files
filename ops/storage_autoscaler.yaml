@@ -1,11 +1,11 @@
 apiVersion: autoscaling.kubedb.com/v1alpha1
 kind: MongoDBAutoscaler
 metadata:
-  name: mg-as-sh
+  name: rwo-as
   namespace: demo
 spec:
   databaseRef:
-    name: single
+    name: rwo
   storage:
     standalone:
       trigger: "On"

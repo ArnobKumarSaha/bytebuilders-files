@@ -36,3 +36,5 @@ spec:
           name: prometheus-config
       - name: prometheus-storage
         emptyDir: {}
+
+# kubectl expose deployment prometheus -n monitoring --port=9090 --target-port=9090

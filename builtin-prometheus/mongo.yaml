@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: single
+  name: simple
   namespace: demo
 spec:
   version: "4.4.6"
@@ -12,6 +12,7 @@ spec:
     resources:
       requests:
         storage: 1Gi
+    # storageClassName: standard-rwo
   # monitor:
   #   agent: prometheus.io/operator
   #   prometheus:
@@ -19,5 +20,5 @@ spec:
   #       labels:
   #         release: kube-prometheus-stack
   #       interval: 10s
-  # monitor:
-  #   agent: prometheus.io/builtin
+  monitor:
+    agent: prometheus.io/builtin
