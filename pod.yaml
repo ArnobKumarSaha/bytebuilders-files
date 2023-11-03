@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: ferret
+  name: ferret
+spec:
+  containers:
+  - image: ghcr.io/ferretdb/ferretdb
+    name: ferret
+    resources: {}
+    # args: ["/bin/sh", "-c", 'while true; do now=$(date +"%T"); echo time=${now}; sleep 5; done']
+    volumeMounts:
+    - name: xyz
+      mountPath: /xyz
+  volumes:  
+  - configMap:
+      defaultMode: 420
+      name: xyz
+    name: xyz
+
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+
+
+sudo su postgres
+psql -h 127.0.0.1 -p 5433 -d ferretdb -U username -W

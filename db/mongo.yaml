@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: single
+  name: mg4
   namespace: demo
 spec:
   allowedSchemas:
@@ -15,9 +15,9 @@ spec:
         "schema.kubedb.com": "mongo"
   version: "4.4.6"
   terminationPolicy: WipeOut
-  # replicas: 3
-  # replicaSet:
-  #   name: "rs"
+  replicas: 3
+  replicaSet:
+    name: "rs"
   storage:
     accessModes:
     - ReadWriteOnce
@@ -59,15 +59,15 @@ spec:
   #     kind: Issuer
   #     name: mongo-ca-issuer
   # clusterAuthMode: x509
-  # monitor:
-  #   agent: prometheus.io/operator
-  #   prometheus:
-  #     serviceMonitor:
-  #       labels:
-  #         release: kube-prometheus-stack
-  #       interval: 10s
   monitor:
-    agent: prometheus.io/builtin
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: prometheus
+        interval: 10s
+  # monitor:
+  #   agent: prometheus.io/builtin
 
 
 # sudo apt-get install -y 

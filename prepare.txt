@@ -1,0 +1,8 @@
+On Linode VM which holds a PV
+$ lsblk
+NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+sda    8:0    0  80G  0 disk /
+sdb    8:16   0  10G  0 disk /var/lib/kubelet/pods/3b8bafa4-4f86-4134-afbf-3dbca6c9fbd7/volumes/kubernetes.io~csi/pvc-5eb8aa3119bf45f8/mount
+
+$ mount (with grep)
+/dev/sdb on /var/lib/kubelet/pods/3b8bafa4-4f86-4134-afbf-3dbca6c9fbd7/volumes/kubernetes.io~csi/pvc-5eb8aa3119bf45f8/mount type ext4 (rw,relatime)

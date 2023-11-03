@@ -7,12 +7,30 @@ spec:
   version: "4.4.6"
   terminationPolicy: WipeOut
   storage:
-    storageClassName: linode-block-storage # topolvm-provisioner
     accessModes:
     - ReadWriteOnce
     resources:
       requests:
         storage: 1Gi
+  podTemplate:
+    spec:
+      initContainers:
+      - name: hello
+        image: alpine
+        args: ["/bin/sh", "-c", "echo hello-world"]
+  # podTemplate:
+  #   spec:
+  #     volumeMounts:
+  #     - name: users
+  #       mountPath: /users
+  #     volumes:
+  #     - name: users
+  #       secret:
+  #         secretName: user-info
+  # init:
+  #   script:
+  #     configMap:
+  #       name: mg-init-script
   # sslMode: requireSSL
   # tls:
   #   issuerRef:
@@ -36,3 +54,29 @@ spec:
 # app.kubernetes.io/managed-by=kubestash.com,
 # kubestash.com/invoker-name=sample,
 # kubestash.com/invoker-namespace=demo
+
+
+
+
+
+
+
+  # list.js: |
+  #   const fs = require('fs');
+  #   const { execSync } = require('child_process');
+
+  #   fs.readdir('/users', (err, files) => {
+  #     if (err) {
+  #       console.error('Error reading directory:', err);
+  #       return;
+  #     }
+
+  #     files.forEach(file => {
+  #       if (file.startsWith('user')) {
+  #         const filePath = `/users/${file}`;
+  #         console.log(`file = ${filePath}`)
+  #       }
+  #     });
+  #   });
+  #   db = db.getSiblingDB('demodb');
+  #   db.createCollection("dummy")
