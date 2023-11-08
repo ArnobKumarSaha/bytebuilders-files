@@ -19,6 +19,7 @@ spec:
   replicaSet:
     name: "rs"
   storage:
+    storageClassName: updated-rwo
     accessModes:
     - ReadWriteOnce
     resources:
@@ -59,13 +60,13 @@ spec:
   #     kind: Issuer
   #     name: mongo-ca-issuer
   # clusterAuthMode: x509
-  monitor:
-    agent: prometheus.io/operator
-    prometheus:
-      serviceMonitor:
-        labels:
-          release: prometheus
-        interval: 10s
+  # monitor:
+  #   agent: prometheus.io/operator
+  #   prometheus:
+  #     serviceMonitor:
+  #       labels:
+  #         release: prometheus
+  #       interval: 10s
   # monitor:
   #   agent: prometheus.io/builtin
 
@@ -77,8 +78,3 @@ spec:
 # mongodb-org-shell=<version> 
 # mongodb-org-mongos=<version> 
 # mongodb-org-tools=<version>
-
-# nodeports
-# single 1 
-# try 2
-# tls 3

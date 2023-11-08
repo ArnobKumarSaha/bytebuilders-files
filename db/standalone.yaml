@@ -12,12 +12,12 @@ spec:
     resources:
       requests:
         storage: 1Gi
-  podTemplate:
-    spec:
-      initContainers:
-      - name: hello
-        image: alpine
-        args: ["/bin/sh", "-c", "echo hello-world"]
+  # podTemplate:
+  #   spec:
+  #     initContainers:
+  #     - name: hello
+  #       image: alpine
+  #       args: ["/bin/sh", "-c", "echo hello-world"]
   # podTemplate:
   #   spec:
   #     volumeMounts:
@@ -27,10 +27,10 @@ spec:
   #     - name: users
   #       secret:
   #         secretName: user-info
-  # init:
-  #   script:
-  #     configMap:
-  #       name: mg-init-script
+  init:
+    script:
+      configMap:
+        name: mg-init-script
   # sslMode: requireSSL
   # tls:
   #   issuerRef:
