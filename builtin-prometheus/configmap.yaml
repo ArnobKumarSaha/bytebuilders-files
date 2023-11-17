@@ -14,7 +14,7 @@ data:
   prometheus.yml: |-
     global:
       scrape_interval: 30s
-      scrape_timeout: 10s
+      scrape_timeout: 20s
     scrape_configs:
     #------------- configuration to collect pods metrics -------------------
     - job_name: 'kubernetes-pods'
@@ -120,6 +120,25 @@ data:
         regex: (.+)
         target_label: __metrics_path__
         replacement: /api/v1/nodes/${1}/proxy/metrics
+        #--------------- configuration to collect metrics from nodes -----------------------
+    - job_name: 'kubernetes-nodes-cadvisor'
+      honor_labels: true
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+      kubernetes_sd_configs:
+      - role: node
+      relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - target_label: __address__
+        replacement: kubernetes.default.svc:443
+      - source_labels: [__meta_kubernetes_node_name]
+        regex: (.+)
+        target_label: __metrics_path__
+        replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
     #--------------- configuration to collect metrics from database -----------------------
     - job_name: 'kubedb-databases'
       honor_labels: true
@@ -175,4 +194,11 @@ data:
         action: replace
       # add stats service's labels to the scraped metrics
       - action: labelmap
-        regex: __meta_kubernetes_service_label_(.+)  
+        regex: __meta_kubernetes_service_label_(.+) 
+      # extras
+      - source_labels: [__meta_kubernetes_pod_name]
+        separator: ;
+        regex: (.*)
+        target_label: pod
+        replacement: $1
+        action: replace

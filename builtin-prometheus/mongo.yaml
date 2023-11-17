@@ -13,12 +13,15 @@ spec:
       requests:
         storage: 1Gi
     # storageClassName: standard-rwo
+  replicas: 3
+  replicaSet:
+    name: "rs1"
   # monitor:
   #   agent: prometheus.io/operator
   #   prometheus:
   #     serviceMonitor:
   #       labels:
-  #         release: kube-prometheus-stack
+  #         release: prometheus
   #       interval: 10s
   monitor:
     agent: prometheus.io/builtin
