@@ -1,0 +1,378 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: 7344686481b017cddc7642409360933ecf7eda58b49fa4f399085e20368b96cf
+    cni.projectcalico.org/podIP: 10.2.1.3/32
+    cni.projectcalico.org/podIPs: 10.2.1.3/32
+  creationTimestamp: "2023-11-24T10:34:15Z"
+  generateName: mg-rs-
+  labels:
+    app.kubernetes.io/component: database
+    app.kubernetes.io/instance: mg-rs
+    app.kubernetes.io/managed-by: kubedb.com
+    app.kubernetes.io/name: mongodbs.kubedb.com
+    archiver: "true"
+    controller-revision-hash: mg-rs-695cd8b6c
+    statefulset.kubernetes.io/pod-name: mg-rs-0
+  name: mg-rs-0
+  namespace: demo
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: mg-rs
+    uid: 2eab6afc-8588-4b13-b51d-c1a4e6fce770
+  resourceVersion: "1689"
+  uid: bed4fae2-c27a-4f97-9cdd-b932a962b562
+spec:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/instance: mg-rs
+              app.kubernetes.io/managed-by: kubedb.com
+              app.kubernetes.io/name: mongodbs.kubedb.com
+          namespaces:
+          - demo
+          topologyKey: kubernetes.io/hostname
+        weight: 100
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/instance: mg-rs
+              app.kubernetes.io/managed-by: kubedb.com
+              app.kubernetes.io/name: mongodbs.kubedb.com
+          namespaces:
+          - demo
+          topologyKey: failure-domain.beta.kubernetes.io/zone
+        weight: 50
+  containers:
+  - args:
+    - --dbpath=/data/db
+    - --auth
+    - --port=27017
+    - --ipv6
+    - --bind_ip=::,0.0.0.0
+    - --tlsMode=disabled
+    - --replSet=rs
+    - --keyFile=/data/configdb/key.txt
+    - --clusterAuthMode=keyFile
+    command:
+    - mongod
+    env:
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: REPLICA_SET
+      value: rs
+    - name: AUTH
+      value: "true"
+    - name: CLUSTER_AUTH_MODE
+      value: keyFile
+    - name: SSL_MODE
+      value: disabled
+    - name: MONGO_INITDB_ROOT_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: mg-rs-auth
+    - name: MONGO_INITDB_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mg-rs-auth
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    image: mongo:4.4.6@sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      postStart:
+        exec:
+          command:
+          - /bin/bash
+          - -c
+          - /init-scripts/peer-finder -on-start=/init-scripts/replicaset.sh -service=mg-rs-pods
+            >> /proc/1/fd/1
+    livenessProbe:
+      exec:
+        command:
+        - bash
+        - -c
+        - "set -x; if [[ $(mongo admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME
+          --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin --quiet
+          --eval \"db.adminCommand('ping').ok\" ) -eq \"1\" ]]; then \n          exit
+          0\n        fi\n        exit 1"
+      failureThreshold: 3
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    name: mongodb
+    ports:
+    - containerPort: 27017
+      name: db
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - bash
+        - -c
+        - "set -x; if [[ $(mongo admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME
+          --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin --quiet
+          --eval \"db.adminCommand('ping').ok\" ) -eq \"1\" ]]; then \n          exit
+          0\n        fi\n        exit 1"
+      failureThreshold: 3
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        memory: 500Mi
+      requests:
+        cpu: 500m
+        memory: 500Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 999
+      seccompProfile:
+        type: RuntimeDefault
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /work-dir
+      name: workdir
+    - mountPath: /data/configdb
+      name: config
+    - mountPath: /init-scripts
+      name: init-scripts
+    - mountPath: /data/db
+      name: datadir
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-4qtcr
+      readOnly: true
+  - args:
+    - run
+    - --db-name=mg-rs
+    - --db-kind=MongoDB
+    - --logtostderr=true
+    - --alsologtostderr=false
+    - --v=3
+    - --stderrthreshold=2
+    env:
+    - name: MONGO_INITDB_ROOT_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: mg-rs-auth
+    - name: MONGO_INITDB_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mg-rs-auth
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    image: ghcr.io/kubedb/replication-mode-detector:v0.24.0@sha256:f50e3223ec32d0e938538aa5a7cf6199d5c70553850ba723a9666475a7f56391
+    imagePullPolicy: IfNotPresent
+    name: replication-mode-detector
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 999
+      seccompProfile:
+        type: RuntimeDefault
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-4qtcr
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: mg-rs-0
+  initContainers:
+  - args:
+    - -c
+    - "\n\t\t\techo \"running install.sh\"\n\t\t\t/scripts/install.sh"
+    command:
+    - /bin/sh
+    env:
+    - name: SSL_MODE
+      value: disabled
+    image: arnobkumarsaha/mongodb-init:4.2-v9_linux_amd64@sha256:92057a6e7709c68e66662a9d0cb516567422139a150dacef9c823af76857e4de
+    imagePullPolicy: IfNotPresent
+    name: copy-config
+    resources:
+      limits:
+        memory: 500Mi
+      requests:
+        cpu: 500m
+        memory: 500Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 999
+      seccompProfile:
+        type: RuntimeDefault
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data/configdb
+      name: config
+    - mountPath: /init-scripts
+      name: init-scripts
+    - mountPath: /var/run/mongodb/tls
+      name: certdir
+    - mountPath: /keydir-readonly
+      name: keydir
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-4qtcr
+      readOnly: true
+  nodeName: lke143589-210892-34b644a10000
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: mg-rs
+  serviceAccountName: mg-rs
+  subdomain: mg-rs-pods
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: datadir
+    persistentVolumeClaim:
+      claimName: datadir-mg-rs-0
+  - emptyDir: {}
+    name: config
+  - emptyDir: {}
+    name: init-scripts
+  - emptyDir: {}
+    name: certdir
+  - name: keydir
+    secret:
+      defaultMode: 420
+      secretName: mg-rs-key
+  - emptyDir: {}
+    name: workdir
+  - name: kube-api-access-4qtcr
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-11-24T10:34:44Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-11-24T10:34:24Z"
+    message: 'containers with unready status: [mongodb]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-11-24T10:34:24Z"
+    message: 'containers with unready status: [mongodb]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-11-24T10:34:24Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://a4394b3682950ef8f184e404ed51cdc7ef61141be1bbac5470a62b698992e178
+    image: sha256:61ea24dc52c6396df1a77f7e1a00c1019b4dd7873228f1916de40628677e8824
+    imageID: docker.io/library/mongo@sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b
+    lastState:
+      terminated:
+        containerID: containerd://a4394b3682950ef8f184e404ed51cdc7ef61141be1bbac5470a62b698992e178
+        exitCode: 100
+        finishedAt: "2023-11-24T10:37:57Z"
+        reason: Error
+        startedAt: "2023-11-24T10:37:57Z"
+    name: mongodb
+    ready: false
+    restartCount: 5
+    started: false
+    state:
+      waiting:
+        message: back-off 2m40s restarting failed container=mongodb pod=mg-rs-0_demo(bed4fae2-c27a-4f97-9cdd-b932a962b562)
+        reason: CrashLoopBackOff
+  - containerID: containerd://3fdf29ef23b7658618b75f4ea60f39ffc01087a4f87f437c5b02f4ea376d975b
+    image: sha256:262dc79520a5093a87e828572c33eb13405f01e10bedafbe595ee4d3bfe22851
+    imageID: ghcr.io/kubedb/replication-mode-detector@sha256:f50e3223ec32d0e938538aa5a7cf6199d5c70553850ba723a9666475a7f56391
+    lastState: {}
+    name: replication-mode-detector
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-11-24T10:35:01Z"
+  hostIP: 192.168.135.61
+  initContainerStatuses:
+  - containerID: containerd://7500794152fafc6973c2699d6c11ef029b94130b6d496ad64c9af44c9dc5cd5a
+    image: sha256:badf140dc7adbfe80a2815ac5262460bfddf8a3194505d106770de3860622b74
+    imageID: docker.io/arnobkumarsaha/mongodb-init@sha256:92057a6e7709c68e66662a9d0cb516567422139a150dacef9c823af76857e4de
+    lastState: {}
+    name: copy-config
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: containerd://7500794152fafc6973c2699d6c11ef029b94130b6d496ad64c9af44c9dc5cd5a
+        exitCode: 0
+        finishedAt: "2023-11-24T10:34:44Z"
+        reason: Completed
+        startedAt: "2023-11-24T10:34:44Z"
+  phase: Running
+  podIP: 10.2.1.3
+  podIPs:
+  - ip: 10.2.1.3
+  qosClass: Burstable
+  startTime: "2023-11-24T10:34:24Z"

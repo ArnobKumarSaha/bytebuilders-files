@@ -1,0 +1,38 @@
+apiVersion: kubedb.com/v1alpha2
+kind: MongoDB
+metadata:
+  name: mg-rs-restored
+  namespace: demo
+spec:
+  version: "4.4.6"
+  replicaSet:
+    name: "rs"
+  replicas: 3
+  podTemplate:
+    spec:
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "500Mi"
+  storage:
+    storageClassName: longhorn
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+  init:
+    archiver:
+      recoveryTimestamp: "2023-11-22T14:50:29Z"
+      fullDBRestore:
+        repository:
+          name: mg-rs-full
+          namespace: demo
+      manifestRestore:
+        repository:
+          name: mg-rs-manifest
+          namespace: demo
+        encryptionSecret:
+          name: encrypt-secret
+          namespace: demo
+  terminationPolicy: WipeOut

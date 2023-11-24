@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg4
+  name: simple
   namespace: demo
 spec:
   allowedSchemas:
@@ -13,11 +13,14 @@ spec:
     selector:
       matchLabels:
         "schema.kubedb.com": "mongo"
-  version: "4.4.6"
+  version: "6.0.5"
   terminationPolicy: WipeOut
-  replicas: 3
-  replicaSet:
-    name: "rs"
+  # replicas: 3
+  authSecret:
+    name: mg-auth-secret
+    externallyManaged: true
+  # replicaSet:
+  #   name: "rs"
   # podTemplate:
   #   spec:
   #     containerSecurityContext:
@@ -55,9 +58,9 @@ spec:
   #       nodePort: 30001
   #       port: 27017
   #     type: LoadBalancer
-  hidden:
-    podTemplate:
-      spec:
+  # hidden:
+  #   podTemplate:
+  #     spec:
         # containerSecurityContext:
         #   allowPrivilegeEscalation: false
         #   capabilities:
@@ -67,19 +70,19 @@ spec:
         #   runAsUser: 999
         #   seccompProfile:
         #     type: RuntimeDefault
-        resources:
-          requests:
-            cpu: "400m"
-            memory: "400Mi"
-    replicas: 1
-    storage:
-      # storageClassName: "longhorn"
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 2Gi
-  arbiter: {}
+        # resources:
+        #   requests:
+        #     cpu: "400m"
+        #     memory: "400Mi"
+    # replicas: 1
+    # storage:
+    #   # storageClassName: "longhorn"
+    #   accessModes:
+    #     - ReadWriteOnce
+    #   resources:
+    #     requests:
+    #       storage: 2Gi
+  # arbiter: {}
     # podTemplate:
     #   spec:
     #     containerSecurityContext:
@@ -107,8 +110,8 @@ spec:
   #       labels:
   #         release: prometheus
   #       interval: 10s
-  monitor:
-    agent: prometheus.io/builtin
+  # monitor:
+  #   agent: prometheus.io/builtin
     # prometheus:
     #   exporter:
     #     securityContext:

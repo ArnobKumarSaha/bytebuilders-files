@@ -1,0 +1,282 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test
+  namespace: demo
+spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: mg-rs
+      app.kubernetes.io/managed-by: kubedb.com
+      app.kubernetes.io/name: mongodbs.kubedb.com
+  serviceName: mg-rs-pods
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/component: database
+        app.kubernetes.io/instance: mg-rs
+        app.kubernetes.io/managed-by: kubedb.com
+        app.kubernetes.io/name: mongodbs.kubedb.com
+        archiver: "true"
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: mg-rs
+                  app.kubernetes.io/managed-by: kubedb.com
+                  app.kubernetes.io/name: mongodbs.kubedb.com
+              namespaces:
+              - demo
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: mg-rs
+                  app.kubernetes.io/managed-by: kubedb.com
+                  app.kubernetes.io/name: mongodbs.kubedb.com
+              namespaces:
+              - demo
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 50
+      containers:
+      - args:
+        - --dbpath=/data/db
+        - --auth
+        - --port=27017
+        - --ipv6
+        - --bind_ip=::,0.0.0.0
+        - --tlsMode=disabled
+        - --replSet=rs
+        - --keyFile=/data/configdb/key.txt
+        - --clusterAuthMode=keyFile
+        command:
+        - mongod
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: REPLICA_SET
+          value: rs
+        - name: AUTH
+          value: "true"
+        - name: CLUSTER_AUTH_MODE
+          value: keyFile
+        - name: SSL_MODE
+          value: disabled
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: mg-rs-auth
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: mg-rs-auth
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: mongo:4.4.6@sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b
+        imagePullPolicy: IfNotPresent
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - /init-scripts/peer-finder -on-start=/init-scripts/replicaset.sh -service=mg-rs-pods
+                >> /proc/1/fd/1
+        livenessProbe:
+          exec:
+            command:
+            - bash
+            - -c
+            - "set -x; if [[ $(mongo admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME
+              --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin
+              --quiet --eval \"db.adminCommand('ping').ok\" ) -eq \"1\" ]]; then \n
+              \         exit 0\n        fi\n        exit 1"
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: mongodb
+        ports:
+        - containerPort: 27017
+          name: db
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - bash
+            - -c
+            - "set -x; if [[ $(mongo admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME
+              --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin
+              --quiet --eval \"db.adminCommand('ping').ok\" ) -eq \"1\" ]]; then \n
+              \         exit 0\n        fi\n        exit 1"
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        # securityContext:
+        #   allowPrivilegeEscalation: false
+        #   capabilities:
+        #     drop:
+        #     - ALL
+        #   runAsNonRoot: true
+        #   runAsUser: 999
+        #   seccompProfile:
+        #     type: RuntimeDefault
+        resources:
+          limits:
+            memory: 500Mi
+          requests:
+            cpu: 500m
+            memory: 500Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /work-dir
+          name: workdir
+        - mountPath: /data/configdb
+          name: config
+        - mountPath: /init-scripts
+          name: init-scripts
+        - mountPath: /data/db
+          name: test
+      - args:
+        - run
+        - --db-name=mg-rs
+        - --db-kind=MongoDB
+        - --logtostderr=true
+        - --alsologtostderr=false
+        - --v=3
+        - --stderrthreshold=2
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: mg-rs-auth
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: mg-rs-auth
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: ghcr.io/kubedb/replication-mode-detector:v0.24.0@sha256:f50e3223ec32d0e938538aa5a7cf6199d5c70553850ba723a9666475a7f56391
+        imagePullPolicy: IfNotPresent
+        name: replication-mode-detector
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 999
+          seccompProfile:
+            type: RuntimeDefault
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - args:
+        - -c
+        - "\n\t\t\techo \"running install.sh\"\n\t\t\t/scripts/install.sh"
+        command:
+        - /bin/sh
+        env:
+        - name: SSL_MODE
+          value: disabled
+        image: arnobkumarsaha/mongodb-init:4.2-v9_linux_amd64@sha256:92057a6e7709c68e66662a9d0cb516567422139a150dacef9c823af76857e4de
+        imagePullPolicy: IfNotPresent
+        name: copy-config
+        resources:
+          limits:
+            memory: 500Mi
+          requests:
+            cpu: 500m
+            memory: 500Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /data/configdb
+          name: config
+        - mountPath: /init-scripts
+          name: init-scripts
+        - mountPath: /var/run/mongodb/tls
+          name: certdir
+        - mountPath: /keydir-readonly
+          name: keydir
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 999
+          seccompProfile:
+            type: RuntimeDefault
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: mg-rs
+      serviceAccountName: mg-rs
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: config
+      - emptyDir: {}
+        name: init-scripts
+      - emptyDir: {}
+        name: certdir
+      - name: keydir
+        secret:
+          defaultMode: 420
+          secretName: mg-rs-key
+      - emptyDir: {}
+        name: workdir
+  updateStrategy:
+    type: OnDelete
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      creationTimestamp: null
+      name: test
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+      volumeMode: Filesystem
+    status:
+      phase: Pending
+status:
+  availableReplicas: 0
+  collisionCount: 0
+  currentRevision: mg-rs-695cd8b6c
+  observedGeneration: 2
+  replicas: 1
+  updateRevision: mg-rs-77cb66dcd5
+  updatedReplicas: 1
