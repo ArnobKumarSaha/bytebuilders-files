@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ee-retain
+spec:
+  serviceName: "example"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+      - name: ee
+        image: ubuntu
+        args: ["/bin/sh", "-c", "sleep 3000"]
+        volumeMounts:
+        - name: data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: linode-block-storage-retain
+      resources:
+        requests:
+          storage: 1Gi

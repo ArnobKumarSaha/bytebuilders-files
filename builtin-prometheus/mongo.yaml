@@ -4,7 +4,7 @@ metadata:
   name: simple
   namespace: demo
 spec:
-  version: "6.0.5"
+  version: "4.4.6"
   terminationPolicy: WipeOut
   storage:
     accessModes:
@@ -12,7 +12,7 @@ spec:
     resources:
       requests:
         storage: 1Gi
-    # storageClassName: standard-rwo
+    storageClassName: standard-rwo
   replicas: 3
   replicaSet:
     name: "rs1"
@@ -25,3 +25,6 @@ spec:
   #       interval: 10s
   monitor:
     agent: prometheus.io/builtin
+    prometheus:
+      exporter:
+        args: ["--compatible-mode"]

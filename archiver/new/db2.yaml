@@ -23,16 +23,16 @@ spec:
         storage: 1Gi
   init:
     archiver:
-      recoveryTimestamp: "2023-11-22T14:50:29Z"
-      fullDBRestore:
-        repository:
-          name: mg-rs-full
-          namespace: demo
-      manifestRestore:
-        repository:
-          name: mg-rs-manifest
-          namespace: demo
-        encryptionSecret:
-          name: encrypt-secret
-          namespace: demo
+      recoveryTimestamp: "2023-11-29T06:10:01Z"
+      encryptionSecret:
+        name: encrypt-secret
+        namespace: demo
+      fullDBRepository:
+        name: mg-rs-full
+        namespace: demo
+      manifestRepository:
+        name: mg-rs-manifest
+        namespace: demo
   terminationPolicy: WipeOut
+
+   # restore.go:392] 2023-11-28 15:50:02 +0000 UTC 2023-11-28 21:35:01 +0000 UTC ;;; 2023-11-28T15:50:02Z 2023-11-28T21:35:01Z

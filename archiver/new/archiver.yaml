@@ -14,19 +14,20 @@ spec:
   retentionPolicy:
     name: mongodb-retention-policy
     namespace: demo
+  encryptionSecret:
+    name: encrypt-secret
+    namespace: demo
   fullBackup:
     driver: VolumeSnapshotter
-    csiSnapshotter:
-      volumeSnapshotClassName: longhorn-vsc
+    task:
+      params:
+        volumeSnapshotClassName: longhorn-vsc  
     scheduler:
       successfulJobsHistoryLimit: 1
       failedJobsHistoryLimit: 1
-      schedule: "*/5 * * * *"
+      schedule: "*/50 * * * *"
     sessionHistoryLimit: 2
   manifestBackup:
-    encryptionSecret:
-      name: encrypt-secret
-      namespace: demo
     scheduler:
       successfulJobsHistoryLimit: 1
       failedJobsHistoryLimit: 1

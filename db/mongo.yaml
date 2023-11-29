@@ -1,9 +1,22 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: simple
+  name: standalone
   namespace: demo
 spec:
+  podTemplate:
+    spec:
+      volumeMounts:
+      - name: users
+        mountPath: /users
+      volumes:
+      - name: users
+        secret:
+          secretName: user-info
+  init:
+    script:
+      configMap:
+        name: mg-init-script
   allowedSchemas:
     namespaces:
       from: Selector
@@ -16,14 +29,14 @@ spec:
   version: "6.0.5"
   terminationPolicy: WipeOut
   # replicas: 3
-  authSecret:
-    name: mg-auth-secret
-    externallyManaged: true
   # replicaSet:
   #   name: "rs"
+  # authSecret:
+  #   name: mg-auth-secret
+  #   externallyManaged: true
   # podTemplate:
-  #   spec:
-  #     containerSecurityContext:
+    # spec:
+      # containerSecurityContext:
   #       allowPrivilegeEscalation: false
   #       capabilities:
   #         drop:
@@ -31,19 +44,19 @@ spec:
   #       # readOnlyRootFilesystem: true
   #       runAsNonRoot: true
   #       runAsUser: 999
-  #       seccompProfile:
-  #         type: RuntimeDefault
+        # seccompProfile:
+        #   type: RuntimeDefault
   # coordinator:
-  #   securityContext:
+    # securityContext:
   #     allowPrivilegeEscalation: false
   #     capabilities:
   #       drop:
   #       - ALL
   #     runAsNonRoot: true
-  #     seccompProfile:
-  #       type: RuntimeDefault
+      # seccompProfile:
+      #   type: RuntimeDefault
   storage:
-    storageClassName: standard
+    # storageClassName: standard
     accessModes:
     - ReadWriteOnce
     resources:
@@ -61,15 +74,15 @@ spec:
   # hidden:
   #   podTemplate:
   #     spec:
-        # containerSecurityContext:
+  #       containerSecurityContext:
         #   allowPrivilegeEscalation: false
         #   capabilities:
         #     drop:
         #     - ALL
         #   runAsNonRoot: true
         #   runAsUser: 999
-        #   seccompProfile:
-        #     type: RuntimeDefault
+          # seccompProfile:
+          #   type: RuntimeDefault
         # resources:
         #   requests:
         #     cpu: "400m"
@@ -82,18 +95,18 @@ spec:
     #   resources:
     #     requests:
     #       storage: 2Gi
-  # arbiter: {}
-    # podTemplate:
-    #   spec:
-    #     containerSecurityContext:
+  # arbiter: 
+  #   podTemplate:
+  #     spec:
+  #       containerSecurityContext:
     #       allowPrivilegeEscalation: false
     #       capabilities:
     #         drop:
     #         - ALL
     #       runAsNonRoot: true
     #       runAsUser: 999
-    #       seccompProfile:
-    #         type: RuntimeDefault
+          # seccompProfile:
+          #   type: RuntimeDefault
   # configSecret:
   #   name: mg-configuration
   # sslMode: preferSSL
@@ -111,18 +124,23 @@ spec:
   #         release: prometheus
   #       interval: 10s
   # monitor:
-  #   agent: prometheus.io/builtin
-    # prometheus:
-    #   exporter:
-    #     securityContext:
-    #       allowPrivilegeEscalation: false
-    #       capabilities:
-    #         drop:
-    #         - ALL
-    #       runAsNonRoot: true
-    #       runAsUser: 999
-    #       seccompProfile:
-    #         type: RuntimeDefault
+  #   # agent: prometheus.io/builtin
+  #   agent: prometheus.io/operator
+  #   prometheus:
+  #     serviceMonitor:
+  #       labels:
+  #         release: prometheus
+  #     exporter:
+  #       args: ["--compatible-mode"]
+  #       securityContext:
+  #   #       allowPrivilegeEscalation: false
+  #   #       capabilities:
+  #   #         drop:
+  #   #         - ALL
+  #   #       runAsNonRoot: true
+  #   #       runAsUser: 999
+  #         seccompProfile:
+  #           type: RuntimeDefault
 
 
 # sudo apt-get install -y 
