@@ -119,11 +119,12 @@ data:
       - source_labels: [__meta_kubernetes_node_name]
         regex: (.+)
         target_label: __metrics_path__
-        replacement: /api/v1/nodes/${1}/proxy/metrics
-        #--------------- configuration to collect metrics from nodes -----------------------
+        replacement: /api/v1/nodes/${1}/proxy/metrics  
+    #--------------- configuration to collect metrics from nodes -----------------------
     - job_name: 'kubernetes-nodes-cadvisor'
       honor_labels: true
       scheme: https
+      metrics_path: /metrics/cadvisor
       tls_config:
         ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -139,6 +140,11 @@ data:
         regex: (.+)
         target_label: __metrics_path__
         replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
+      - source_labels: [__meta_kubernetes_node_name]
+        regex: (.+)
+        target_label: metrics_path
+        action: replace
+        replacement: /metrics/cadvisor
     #--------------- configuration to collect metrics from database -----------------------
     - job_name: 'kubedb-databases'
       honor_labels: true
