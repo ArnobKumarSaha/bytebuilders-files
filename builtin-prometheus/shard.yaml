@@ -1,0 +1,47 @@
+
+
+apiVersion: kubedb.com/v1alpha2
+kind: MongoDB
+metadata:
+  name: mongo
+  namespace: demo
+spec:
+  version: "4.4.6"
+  storageType: Durable
+  shardTopology:
+    configServer:
+      storage:
+        resources:
+          requests:
+            storage: 1Gi
+      replicas: 2
+    mongos:
+      replicas: 2
+    shard:
+      storage:
+        resources:
+          requests:
+            storage: 1Gi
+      replicas: 2
+      shards: 1
+      podTemplate:
+        spec:
+          resources:
+            requests:
+              "cpu": 0.5
+              "memory": 500Mi
+            limits:
+              "cpu": 0.8
+              "memory": 1Gi
+      storage:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+  terminationPolicy: WipeOut
+  monitor:
+    agent: prometheus.io/builtin
+    prometheus:
+      exporter:
+        args: ["--compatible-mode"]

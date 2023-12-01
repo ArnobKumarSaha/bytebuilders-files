@@ -4,19 +4,6 @@ metadata:
   name: standalone
   namespace: demo
 spec:
-  podTemplate:
-    spec:
-      volumeMounts:
-      - name: users
-        mountPath: /users
-      volumes:
-      - name: users
-        secret:
-          secretName: user-info
-  init:
-    script:
-      configMap:
-        name: mg-init-script
   allowedSchemas:
     namespaces:
       from: Selector
@@ -28,12 +15,12 @@ spec:
         "schema.kubedb.com": "mongo"
   version: "6.0.5"
   terminationPolicy: WipeOut
-  # replicas: 3
-  # replicaSet:
-  #   name: "rs"
-  # authSecret:
-  #   name: mg-auth-secret
-  #   externallyManaged: true
+  replicas: 3
+  replicaSet:
+    name: "rs"
+  authSecret:
+    name: mg-auth-secret
+    externallyManaged: true
   # podTemplate:
     # spec:
       # containerSecurityContext:
@@ -150,3 +137,9 @@ spec:
 # mongodb-org-shell=<version> 
 # mongodb-org-mongos=<version> 
 # mongodb-org-tools=<version>
+
+
+
+https://bind.appscode.com/callback?
+code=pDtxgb6RkfYZ69gzJQRg-SBhVZDeZgf3Ctmibg-3omk%3D&
+state=eyJyZWRpcmVjdFVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDA4NDUvY2FsbGJhY2siLCJzaWQiOiI0Y2dwY3kiLCJjaWQiOiJPWG15U2wifQ%3D%3D
