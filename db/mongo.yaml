@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: standalone
+  name: rs2
   namespace: demo
 spec:
   allowedSchemas:
@@ -13,14 +13,14 @@ spec:
     selector:
       matchLabels:
         "schema.kubedb.com": "mongo"
-  version: "6.0.5"
+  version: "4.4.6"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
     name: "rs"
-  authSecret:
-    name: mg-auth-secret
-    externallyManaged: true
+  # authSecret:
+  #   name: mg-auth-secret
+  #   externallyManaged: true
   # podTemplate:
     # spec:
       # containerSecurityContext:
@@ -140,6 +140,6 @@ spec:
 
 
 
-https://bind.appscode.com/callback?
-code=pDtxgb6RkfYZ69gzJQRg-SBhVZDeZgf3Ctmibg-3omk%3D&
-state=eyJyZWRpcmVjdFVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDA4NDUvY2FsbGJhY2siLCJzaWQiOiI0Y2dwY3kiLCJjaWQiOiJPWG15U2wifQ%3D%3D
+# https://bind.appscode.com/callback?
+# code=pDtxgb6RkfYZ69gzJQRg-SBhVZDeZgf3Ctmibg-3omk%3D&
+# state=eyJyZWRpcmVjdFVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDA4NDUvY2FsbGJhY2siLCJzaWQiOiI0Y2dwY3kiLCJjaWQiOiJPWG15U2wifQ%3D%3D

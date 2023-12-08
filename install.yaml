@@ -1,0 +1,33 @@
+
+helm install kubedb appscode/kubedb \
+    --version v2023.11.2 \
+    --namespace kubedb --create-namespace \
+    --set kubedb-provisioner.enabled=true \
+    --set kubedb-ops-manager.enabled=true \
+    --set kubedb-autoscaler.enabled=true \
+    --set-file global.license=/home/arnob/yamls/license/remote/kubedb.txt
+
+
+kubectl apply -f https://github.com/kubedb/installer/raw/v2023.12.11/crds/kubedb-catalog-crds.yaml
+
+helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
+  --version v2023.12.11 \
+  --namespace kubedb --create-namespace \
+  --set-file global.license=/home/arnob/yamls/license/remote/kubedb.txt \
+  --set kubedb-kubestash-catalog.enabled=true --wait --burst-limit=10000 --debug
+
+
+kubectl apply -f ~/yamls/4.4.6.yaml
+# kubectl patch mg -n demo rs --type='json' -p='[{"op": "add", "path": "/metadata/labels", "value": {"a": "b"}}]'
+# kubectl patch mg -n demo sh --type='json' -p='[{"op": "add", "path": "/metadata/labels", "value": {"a": "b"}}]'
+
+# --v=5
+# Always
+# arnobkumarsaha/kubedb-ops-manager:v0.25.0_linux_amd64
+
+
+helm install kubestash oci://ghcr.io/appscode-charts/kubestash \
+  --version v2023.12.1 \
+  --namespace kubestash --create-namespace \
+  --set-file global.license=/home/arnob/yamls/license/remote/kubedb.txt
+

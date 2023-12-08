@@ -27,10 +27,10 @@ spec:
   #     - name: users
   #       secret:
   #         secretName: user-info
-  init:
-    script:
-      configMap:
-        name: mg-init-script
+  # init:
+  #   script:
+  #     configMap:
+  #       name: mg-init-script
   # sslMode: requireSSL
   # tls:
   #   issuerRef:

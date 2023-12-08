@@ -1,18 +1,18 @@
 apiVersion: ops.kubedb.com/v1alpha1
 kind: MongoDBOpsRequest
 metadata:
-  name: update
+  name: sh
   namespace: demo
 spec:
   type: UpdateVersion
   databaseRef:
-    name: mg
+    name: sh
   updateVersion:
-    targetVersion: 4.4.6
-  readinessCriteria:
-    oplogMaxLagSeconds: 20
-    objectsCountDiffPercentage: 10
-  timeout: 5m
+    targetVersion: 4.4.26
+  # readinessCriteria:
+  #   oplogMaxLagSeconds: 20
+  #   objectsCountDiffPercentage: 10
+  # timeout: 10m
   apply: IfReady
 # status:
 #   conditions:

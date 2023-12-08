@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mongo
+  name: sh
   namespace: demo
 spec:
   version: "4.4.6"
@@ -29,7 +29,7 @@ spec:
           requests:
             storage: 1Gi
       replicas: 2
-      shards: 1
+      shards: 2
       podTemplate:
         spec:
           resources:
@@ -71,5 +71,5 @@ spec:
   #       labels:
   #         release: prometheus
   #       interval: 10s
-  monitor:
-    agent: prometheus.io/builtin
+  # monitor:
+  #   agent: prometheus.io/builtin
