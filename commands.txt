@@ -1,0 +1,11 @@
+
+# show node's taints
+kubectl get nodes gke-dataloop-small-b1fd6889-dwwq -ojsonpath={.spec.taints}
+
+
+# pod list scheduled in a node
+kubectl get pods -A --field-selector spec.nodeName=gke-dataloop-small-b1fd6889-dwwq
+
+
+# show pod's tolerations
+kubectl get pods -n kube-system gke-metrics-agent-p8jl9 -ojsonpath={.spec.tolerations} | jq

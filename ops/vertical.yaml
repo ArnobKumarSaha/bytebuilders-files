@@ -6,22 +6,47 @@ metadata:
 spec:
   type: VerticalScaling
   databaseRef:
-    name: shard
+    name: repl
   verticalScaling:
-    shard:
-      requests:
-        memory: "200Mi"
-        cpu: "0.2"
-      limits:
-        memory: "300Mi"
-        cpu: "0.3"
-    # replicaSet:
+    standalone:
+      resources:
+        requests:
+          memory: "1200Mi"
+          cpu: "0.6"
+        limits:
+          memory: "1200Mi"
+          cpu: "0.6"
+      nodeSelectionPolicy: Taint # LabelSelector
+      topology:
+        key: nodepool # cloud.google.com/gke-nodepool
+        value: medium
+    # shard:
     #   requests:
-    #     memory: "1300Mi"
-    #     cpu: "0.6"
+    #     memory: "200Mi"
+    #     cpu: "0.2"
     #   limits:
-    #     memory: "1300Mi"
-    #     cpu: "0.6"
+    #     memory: "300Mi"
+    #     cpu: "0.3"
+    # replicaSet:
+    #   resources:
+    #     requests:
+    #       memory: "1300Mi"
+    #       cpu: "0.6"
+    #     limits:
+    #       memory: "1300Mi"
+    #       cpu: "0.6"
+    #   nodeSelectionPolicy: LabelSelector
+    #   topology:
+    #     key: cloud.google.com/gke-nodepool
+    #     value: medium
+    # exporter:
+    #   resources:
+    #     requests:
+    #       memory: "1000Mi"
+    #       cpu: "0.6"
+    #     limits:
+    #       memory: "1000Mi"
+    #       cpu: "0.6"
     # arbiter:
     #   requests:
     #     memory: "1000Mi"

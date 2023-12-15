@@ -1,12 +1,12 @@
 apiVersion: ops.kubedb.com/v1alpha1
 kind: MongoDBOpsRequest
 metadata:
-  name: sh
+  name: rs
   namespace: demo
 spec:
   type: UpdateVersion
   databaseRef:
-    name: sh
+    name: rs
   updateVersion:
     targetVersion: 4.4.26
   # readinessCriteria:

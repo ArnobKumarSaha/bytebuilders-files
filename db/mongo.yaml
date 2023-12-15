@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: rs2
+  name: repl
   namespace: demo
 spec:
   allowedSchemas:
@@ -13,7 +13,7 @@ spec:
     selector:
       matchLabels:
         "schema.kubedb.com": "mongo"
-  version: "4.4.6"
+  version: "4.4.26"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
@@ -110,15 +110,15 @@ spec:
   #       labels:
   #         release: prometheus
   #       interval: 10s
-  # monitor:
-  #   # agent: prometheus.io/builtin
-  #   agent: prometheus.io/operator
-  #   prometheus:
-  #     serviceMonitor:
-  #       labels:
-  #         release: prometheus
-  #     exporter:
-  #       args: ["--compatible-mode"]
+  monitor:
+  #   agent: prometheus.io/builtin
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: prometheus
+      exporter:
+        args: ["--compatible-mode"]
   #       securityContext:
   #   #       allowPrivilegeEscalation: false
   #   #       capabilities:

@@ -1,9 +1,8 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: ee-retain
+  name: medium
 spec:
-  serviceName: "example"
   replicas: 1
   selector:
     matchLabels:
@@ -16,16 +15,30 @@ spec:
       containers:
       - name: ee
         image: ubuntu
-        args: ["/bin/sh", "-c", "sleep 3000"]
+        args: ["/bin/sh", "-c", "sleep 30000"]
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "100m"
+          limits:
+            memory: "300Mi"
+            cpu: "300m"
         volumeMounts:
         - name: data
           mountPath: /data
+      tolerations:
+      - effect: NoSchedule
+        key: nodepool
+        operator: Equal
+        value: medium
+      nodeSelector:
+        cloud.google.com/gke-nodepool: medium
   volumeClaimTemplates:
   - metadata:
       name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: linode-block-storage-retain
+      # storageClassName: linode-block-storage-retain
       resources:
         requests:
           storage: 1Gi

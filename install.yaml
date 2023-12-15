@@ -5,7 +5,7 @@ helm install kubedb appscode/kubedb \
     --set kubedb-provisioner.enabled=true \
     --set kubedb-ops-manager.enabled=true \
     --set kubedb-autoscaler.enabled=true \
-    --set-file global.license=/home/arnob/yamls/license/remote/kubedb.txt
+    --set-file global.license=/home/arnob/yamls/license/test.txt
 
 
 kubectl apply -f https://github.com/kubedb/installer/raw/v2023.12.11/crds/kubedb-catalog-crds.yaml
@@ -13,11 +13,12 @@ kubectl apply -f https://github.com/kubedb/installer/raw/v2023.12.11/crds/kubedb
 helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
   --version v2023.12.11 \
   --namespace kubedb --create-namespace \
-  --set-file global.license=/home/arnob/yamls/license/remote/kubedb.txt \
-  --set kubedb-kubestash-catalog.enabled=true --wait --burst-limit=10000 --debug
+  --set-file global.license=/home/arnob/yamls/license/gke.txt \
+  --set kubedb-kubestash-catalog.enabled=true --wait --burst-limit=10000 --debug \
+  --set kubedb-catalog.skipDeprecated=false 
 
 
-kubectl apply -f ~/yamls/4.4.6.yaml
+# kubectl apply -f ~/yamls/4.4.6.yaml
 # kubectl patch mg -n demo rs --type='json' -p='[{"op": "add", "path": "/metadata/labels", "value": {"a": "b"}}]'
 # kubectl patch mg -n demo sh --type='json' -p='[{"op": "add", "path": "/metadata/labels", "value": {"a": "b"}}]'
 
@@ -25,9 +26,16 @@ kubectl apply -f ~/yamls/4.4.6.yaml
 # Always
 # arnobkumarsaha/kubedb-ops-manager:v0.25.0_linux_amd64
 
+# arnobkumarsaha/kubedb-provisioner:v0.38.0_linux_amd64
+# arnobkumarsaha/kubedb-webhook-server:v0.14.0_linux_amd64
+
 
 helm install kubestash oci://ghcr.io/appscode-charts/kubestash \
   --version v2023.12.1 \
   --namespace kubestash --create-namespace \
-  --set-file global.license=/home/arnob/yamls/license/remote/kubedb.txt
+  --set-file global.license=/home/arnob/yamls/license/test.txt
+
+kubectl kustomize client/config/crd | kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
+kubectl kustomize deploy/kubernetes/csi-snapshotter | kubectl create -f -
 
