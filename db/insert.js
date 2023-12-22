@@ -4,8 +4,8 @@ var persons = {
      ,"id02" : { "name": "piyo", "act_num": 100000} 
      ,"id03" : { "name": "huga", "act_num": 500000} 
      ,"id04" : { "name": "mone", "act_num": 100000}
-//      ,"id05" : { "name": "tako", "act_num": 500000}
-//      ,"id06" : { "name": "nasu", "act_num": 100000}
+     ,"id05" : { "name": "tako", "act_num": 500000}
+     // ,"id06" : { "name": "nasu", "act_num": 100000}
 //      ,"id07" : { "name": "poke", "act_num": 500000}
 //      ,"id08" : { "name": "paca", "act_num": 100000}
 //      ,"id09" : { "name": "pipi", "act_num": 500000}

@@ -17,6 +17,11 @@ helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
   --set kubedb-kubestash-catalog.enabled=true --wait --burst-limit=10000 --debug \
   --set kubedb-catalog.skipDeprecated=false 
 
+arnobkumarsaha/kubedb-autoscaler:nodepool_linux_amd64
+arnobkumarsaha/kubedb-ops-manager:nodepool_linux_amd64
+arnobkumarsaha/kubedb-webhook-server:v0.14.0_linux_amd64
+arnobkumarsaha/kubedb-provisioner:v0.38.1_linux_amd64
+
 
 # kubectl apply -f ~/yamls/4.4.6.yaml
 # kubectl patch mg -n demo rs --type='json' -p='[{"op": "add", "path": "/metadata/labels", "value": {"a": "b"}}]'
@@ -39,3 +44,37 @@ kubectl kustomize client/config/crd | kubectl create -f -
 kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
 kubectl kustomize deploy/kubernetes/csi-snapshotter | kubectl create -f -
 
+
+
+"expr": "(kubelet_volume_stats_used_bytes /
+ on(persistentvolumeclaim) group_left(pod) (kubelet_volume_stats_capacity_bytes +
+  on(persistentvolumeclaim) group_left(pod) kube_pod_spec_volumes_persistentvolumeclaims_info{pod=~\"^$app.*\",namespace=~\"$namespace\"}) )* 100"
+
+
+
+# Import Dashbords and alerts seperately
+
+# Visualization (Grafana Dashboards)
+We have some dashboards for each of the databases we support. You can import them with a simple process : 
+https://github.com/appscode/grafana-dashboards/tree/master/mongodb#import-grafana-dashboard
+
+
+# Alerts
+To fire prometheus-alerts, you need to create a prometheusRule object. You don't need write them on your own obviously.  Running 
+```
+helm upgrade -i <db-name> appscode/mongodb-alerts -n <db-namespace> --create-namespace --version=v2023.05.09
+```
+ will create the prometheusRule for you. 
+
+If you want the dashboard for alerts also, You need to set some values with the previous command. 
+
+```
+helm repo update
+helm upgrade -i <db-name> appscode/mongodb-alerts -n <db-namespace> --create-namespace --version=v2023.05.09 \ 
+    --set grafana.enabled=true \
+    --set grafana.url=<grafana server url , example:  http://grafana.monitoring.svc:80> \
+    --set grafana.apikey=<an apiKey with write permission>
+```
+
+
+Note that, You have to run the above `helm upgrade` command with the release name equals the databasename & release namespace equals the database namspace. 

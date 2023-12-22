@@ -1,0 +1,28 @@
+apiVersion: ops.kubedb.com/v1alpha1
+kind: MongoDBOpsRequest
+metadata:
+  labels:
+    app.kubernetes.io/component: database
+    app.kubernetes.io/instance: simple
+    app.kubernetes.io/managed-by: kubedb.com
+    app.kubernetes.io/name: mongodbs.kubedb.com
+  name: mops-simple-jump
+  namespace: demo
+spec:
+  apply: Always
+  databaseRef:
+    name: simple
+  timeout: 10m0s
+  type: VerticalScaling
+  verticalScaling:
+    replicaSet:
+      nodeSelectionPolicy: Taint
+      resources:
+        limits:
+          memory: 2000Mi
+        requests:
+          cpu: 1
+          memory: 1500Mi
+      topology:
+        key: nodepool
+        value: std2

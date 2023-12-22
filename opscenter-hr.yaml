@@ -1,0 +1,94 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"helm.toolkit.fluxcd.io/v2beta2","kind":"HelmRelease","metadata":{"annotations":{"meta.helm.sh/release-name":"opscenter-datastore","meta.helm.sh/release-namespace":"kubeops"},"labels":{"app.kubernetes.io/component":"kubedb-opscenter","app.kubernetes.io/instance":"opscenter-datastore","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"featuresets.ui.k8s.appscode.com","app.kubernetes.io/part-of":"opscenter-datastore"},"name":"kubedb-opscenter","namespace":"kubeops"},"spec":{"chart":{"spec":{"chart":"kubedb-opscenter","sourceRef":{"kind":"HelmRepository","name":"appscode-charts-oci","namespace":"kubeops"},"version":"v2023.12.21"}},"dependsOn":[{"name":"kubedb"},{"name":"panopticon"},{"name":"grafana-operator"}],"install":{"crds":"CreateReplace","createNamespace":true,"remediation":{"retries":-1}},"interval":"5m","releaseName":"kubedb-opscenter","storageNamespace":"kubedb","targetNamespace":"kubedb","timeout":"30m","upgrade":{"crds":"CreateReplace","remediation":{"retries":-1}},"values":{"global":{"registryFQDN":"ghcr.io"}}}}
+    meta.helm.sh/release-name: opscenter-datastore
+    meta.helm.sh/release-namespace: kubeops
+  finalizers:
+  - finalizers.fluxcd.io
+  labels:
+    app.kubernetes.io/component: kubedb-opscenter
+    app.kubernetes.io/instance: opscenter-datastore
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: featuresets.ui.k8s.appscode.com
+    app.kubernetes.io/part-of: opscenter-datastore
+  name: kubedb-opscenter
+  namespace: kubeops
+spec:
+  chart:
+    spec:
+      chart: kubedb-opscenter
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: appscode-charts-oci
+        namespace: kubeops
+      version: v2023.12.11
+  dependsOn:
+  - name: kubedb
+  - name: panopticon
+  - name: grafana-operator
+  install:
+    crds: CreateReplace
+    createNamespace: true
+    remediation:
+      retries: -1
+  interval: 5m
+  releaseName: kubedb-opscenter
+  storageNamespace: kubedb
+  targetNamespace: kubedb
+  timeout: 30m
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: -1
+  values:
+    global:
+      registryFQDN: ghcr.io
+status:
+  conditions:
+  - lastTransitionTime: "2023-12-22T05:56:09Z"
+    message: Helm upgrade succeeded for release kubedb/kubedb-opscenter.v2 with chart
+      kubedb-opscenter@v2023.12.11
+    observedGeneration: 2
+    reason: UpgradeSucceeded
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2023-12-22T05:56:09Z"
+    message: Helm upgrade succeeded for release kubedb/kubedb-opscenter.v2 with chart
+      kubedb-opscenter@v2023.12.11
+    observedGeneration: 2
+    reason: UpgradeSucceeded
+    status: "True"
+    type: Released
+  helmChart: kubeops/kubeops-kubedb-opscenter
+  history:
+  - chartName: kubedb-opscenter
+    chartVersion: v2023.12.11
+    configDigest: sha256:636825362a7f88a092bef65dd3580e108b3d1325dd11f2ada687d409cdb13fc6
+    digest: sha256:0ae9897180f7947d077b3d8dda0d0bf1845798f0efea57c4825754482b52ea42
+    firstDeployed: "2023-12-22T05:38:50Z"
+    lastDeployed: "2023-12-22T05:56:00Z"
+    name: kubedb-opscenter
+    namespace: kubedb
+    status: deployed
+    version: 2
+  - chartName: kubedb-opscenter
+    chartVersion: v2023.12.21
+    configDigest: sha256:636825362a7f88a092bef65dd3580e108b3d1325dd11f2ada687d409cdb13fc6
+    digest: sha256:122a518a8aecd777d559bb0ecda5529125832b88256e1712251c423dadb5c8ca
+    firstDeployed: "2023-12-22T05:38:50Z"
+    lastDeployed: "2023-12-22T05:38:50Z"
+    name: kubedb-opscenter
+    namespace: kubedb
+    status: superseded
+    version: 1
+  lastAppliedRevision: v2023.12.11
+  lastAttemptedConfigDigest: sha256:636825362a7f88a092bef65dd3580e108b3d1325dd11f2ada687d409cdb13fc6
+  lastAttemptedGeneration: 2
+  lastAttemptedReleaseAction: upgrade
+  lastAttemptedRevision: v2023.12.11
+  observedGeneration: 2
+  storageNamespace: kubedb

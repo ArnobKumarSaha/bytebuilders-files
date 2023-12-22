@@ -1,17 +1,38 @@
 apiVersion: kubedb.com/v1alpha2
 kind: Elasticsearch
 metadata:
-  name: os-test-2
+  name: es
   namespace: demo
 spec:
-  version: xpack-7.17.10 # opensearch-2.5.0
-  enableSSL: true
-  replicas: 3
-  storageType: Durable
-  storage:
-    # storageClassName: "do-block-storage"
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 1Gi
+  topology:
+    data:
+      replicas: 2
+      storage:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+      # nodeSelector:
+      #   kubernetes.io/hostname: lke145386-213524-26bcd9cd0000
+    ingest:
+      replicas: 1
+      storage:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+      # nodeSelector:
+      #   kubernetes.io/hostname: lke145386-213524-2ed785900000
+    master:
+      replicas: 1
+      storage:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+      # nodeSelector:
+      #   kubernetes.io/hostname: lke145386-213524-31d66e5d0000
+  version: xpack-8.5.3

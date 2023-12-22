@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: repl
+  name: simple
   namespace: demo
 spec:
   allowedSchemas:
@@ -15,24 +15,24 @@ spec:
         "schema.kubedb.com": "mongo"
   version: "4.4.26"
   terminationPolicy: WipeOut
-  replicas: 3
+  replicas: 2
   replicaSet:
     name: "rs"
   # authSecret:
   #   name: mg-auth-secret
   #   externallyManaged: true
-  # podTemplate:
-    # spec:
-      # containerSecurityContext:
-  #       allowPrivilegeEscalation: false
-  #       capabilities:
-  #         drop:
-  #         - ALL
-  #       # readOnlyRootFilesystem: true
-  #       runAsNonRoot: true
-  #       runAsUser: 999
-        # seccompProfile:
-        #   type: RuntimeDefault
+  podTemplate:
+    spec:
+      # nodeSelector:
+      #   cloud.google.com/gke-nodepool: medium
+      tolerations:
+      - key: nodepool
+        value: std4
+        effect: NoSchedule
+      resources:
+        requests:
+          "cpu": 1
+          "memory": 1500Mi
   # coordinator:
     # securityContext:
   #     allowPrivilegeEscalation: false
@@ -61,15 +61,6 @@ spec:
   # hidden:
   #   podTemplate:
   #     spec:
-  #       containerSecurityContext:
-        #   allowPrivilegeEscalation: false
-        #   capabilities:
-        #     drop:
-        #     - ALL
-        #   runAsNonRoot: true
-        #   runAsUser: 999
-          # seccompProfile:
-          #   type: RuntimeDefault
         # resources:
         #   requests:
         #     cpu: "400m"
@@ -82,18 +73,19 @@ spec:
     #   resources:
     #     requests:
     #       storage: 2Gi
-  # arbiter: 
-  #   podTemplate:
-  #     spec:
-  #       containerSecurityContext:
-    #       allowPrivilegeEscalation: false
-    #       capabilities:
-    #         drop:
-    #         - ALL
-    #       runAsNonRoot: true
-    #       runAsUser: 999
-          # seccompProfile:
-          #   type: RuntimeDefault
+  arbiter: 
+    podTemplate:
+      spec:
+        # nodeSelector:
+        #   cloud.google.com/gke-nodepool: medium
+        tolerations:
+        - key: nodepool
+          value: medium
+          effect: NoSchedule
+        resources:
+          requests:
+            "cpu": 0.4
+            "memory": 400Mi
   # configSecret:
   #   name: mg-configuration
   # sslMode: preferSSL
@@ -110,15 +102,15 @@ spec:
   #       labels:
   #         release: prometheus
   #       interval: 10s
-  monitor:
-  #   agent: prometheus.io/builtin
-    agent: prometheus.io/operator
-    prometheus:
-      serviceMonitor:
-        labels:
-          release: prometheus
-      exporter:
-        args: ["--compatible-mode"]
+  # monitor:
+  # #   agent: prometheus.io/builtin
+  #   agent: prometheus.io/operator
+  #   prometheus:
+  #     serviceMonitor:
+  #       labels:
+  #         release: prometheus
+  #     exporter:
+  #       args: ["--compatible-mode"]
   #       securityContext:
   #   #       allowPrivilegeEscalation: false
   #   #       capabilities:

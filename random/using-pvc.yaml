@@ -11,10 +11,11 @@ spec:
     command:
     - sleep
     - "3600"
-    # volumeMounts:
-    # - name: datadir
-    #   mountPath: /data/db
-  # volumes:
-  # - name: datadir
-  #   persistentVolumeClaim:
-  #     claimName: datadir-rs-1
+    volumeMounts:
+    - name: datadir
+      mountPath: /data/db
+      readOnly: true
+  volumes:
+  - name: datadir
+    persistentVolumeClaim:
+      claimName: datadir-simple-0

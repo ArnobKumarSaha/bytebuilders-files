@@ -12,32 +12,48 @@ spec:
       labels:
         app: example
     spec:
+      # initContainers:
+      # - name: ii
+      #   image: ubuntu
+      #   args: ["/bin/sh", "-c", "chmod -R 440 /data"]
+      #   volumeMounts:
+      #   - name: data
+      #     mountPath: /data
+      #   securityContext:
+      #     runAsUser: 65534
+      #     runAsGroup: 65534
       containers:
       - name: ee
-        image: ubuntu
+        image: arnobkumarsaha/perm
         args: ["/bin/sh", "-c", "sleep 30000"]
-        resources:
-          requests:
-            memory: "100Mi"
-            cpu: "100m"
-          limits:
-            memory: "300Mi"
-            cpu: "300m"
+        # resources:
+        #   requests:
+        #     memory: "100Mi"
+        #     cpu: "100m"
+        #   limits:
+        #     memory: "300Mi"
+        #     cpu: "300m"
         volumeMounts:
         - name: data
           mountPath: /data
-      tolerations:
-      - effect: NoSchedule
-        key: nodepool
-        operator: Equal
-        value: medium
-      nodeSelector:
-        cloud.google.com/gke-nodepool: medium
+          # readOnly: true
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+      securityContext:
+        fsGroup: 1000
+      # tolerations:
+      # - effect: NoSchedule
+      #   key: nodepool
+      #   operator: Equal
+      #   value: medium
+      # nodeSelector:
+      #   cloud.google.com/gke-nodepool: medium
   volumeClaimTemplates:
   - metadata:
       name: data
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes: [ "ReadOnlyMany" ]
       # storageClassName: linode-block-storage-retain
       resources:
         requests:

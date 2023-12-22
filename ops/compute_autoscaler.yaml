@@ -1,24 +1,27 @@
 apiVersion: autoscaling.kubedb.com/v1alpha1
 kind: MongoDBAutoscaler
 metadata:
-  name: mg-as
+  name: as
   namespace: demo
 spec:
   databaseRef:
-    name: shard
+    name: simple
   opsRequestOptions:
-    timeout: 3m
+    timeout: 10m
     apply: IfReady
   compute:
-    shard:
+    replicaSet:
       trigger: "On"
       podLifeTimeThreshold: 5m
       resourceDiffPercentage: 20
       minAllowed:
-        cpu: 300m
-        memory: 300Mi
+        cpu: 400m
+        memory: 400Mi
       maxAllowed:
         cpu: 1
         memory: 2Gi
       controlledResources: ["cpu", "memory"]
       containerControlledValues: "RequestsAndLimits"
+    nodeTopologyRef:
+      name: gke-pools
+
