@@ -1,0 +1,51 @@
+apiVersion: kubedb.com/v1alpha2
+kind: MongoDB
+metadata:
+  name: repl
+  namespace: demo
+spec:
+  version: "4.4.26"
+  terminationPolicy: WipeOut
+  replicas: 2
+  replicaSet:
+    name: "rs"
+  podTemplate:
+    spec:
+      # nodeSelector:
+      #   cloud.google.com/gke-nodepool: medium
+      tolerations:
+      - key: nodepool
+        value: medium
+        effect: NoSchedule
+      resources:
+        requests:
+          "cpu": 500m
+          "memory": 1.5Gi
+  storage:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+  # arbiter: 
+  #   podTemplate:
+  #     spec:
+  #       # nodeSelector:
+  #       #   cloud.google.com/gke-nodepool: medium
+  #       tolerations:
+  #       - key: nodepool
+  #         value: medium
+  #         effect: NoSchedule
+  #       resources:
+  #         requests:
+  #           "cpu": 0.4
+  #           "memory": 400Mi
+  # monitor:
+  # #   agent: prometheus.io/builtin
+  #   agent: prometheus.io/operator
+  #   prometheus:
+  #     serviceMonitor:
+  #       labels:
+  #         release: prometheus
+  #     exporter:
+  #       args: ["--compatible-mode"]
