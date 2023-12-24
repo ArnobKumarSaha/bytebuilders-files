@@ -1,5 +1,0 @@
-
-
-.status.vpas.recommendation
-watch "kubectl get mgscaler -n demo mongodb-rs-compute-as -o=yaml | yq '.spec.compute.replicaSet'"
-watch 'kubectl get mgscaler -n demo mongodb-rs-compute-as -ojsonpath={.spec.compute.replicaSet} | yq'

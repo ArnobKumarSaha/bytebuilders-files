@@ -1,0 +1,31 @@
+
+# yq 
+watch "kubectl get mgscaler -n demo compute -o=yaml | yq '.status.vpas[0]'"
+watch "kubectl get mgscaler -n demo compute -o=yaml | yq '.status.checkpoints[0]'"
+
+# json 
+# watch 'kubectl get mgscaler -n demo mongodb-rs-compute-as -ojsonpath={.status.vpas[0].recommendation} | yq'
+
+
+# loop through all the containers of podmetricses and show the usage for mongodb container only
+watch "kubectl get podmetrics -n demo -oyaml | yq eval '(.items[].containers[])'"
+
+# better, sorted
+watch "kubectl get podmetrics -n demo -oyaml | yq eval '.items |= sort_by(.metadata.name) | (.items[].containers |= sort_by(.name)) | (.items[].containers[])' -"
+
+
+# kubectl get podmetrics -n demo -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .containers[?(@.name=="mongodb")]}{.usage}{"\n"}{end}'
+
+
+
+
+AT 12:59 AM
+NAME                                 CPU         MEMORY      WINDOW
+podmetrics.metrics.k8s.io/simple-0   25475358n   1220584Ki   10.123s
+podmetrics.metrics.k8s.io/simple-1   27323145n   161032Ki    14.848s
+podmetrics.metrics.k8s.io/simple-2   24318997n   168872Ki    15.77s
+
+
+The memory usages is still increasing after 5 minutes of stopping the dd script. 
+
+

@@ -1,4 +1,4 @@
-cat > /tmp/load_test.sh
+cat > /tmp/load.sh
 
 #!/bin/bash
 
