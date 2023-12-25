@@ -12,17 +12,17 @@ spec:
   podTemplate:
     spec:
       nodeSelector:
-        beta.kubernetes.io/instance-type: g6-standard-2
+        node.kubernetes.io/instance-type: g6-standard-2
       # tolerations:
       # - key: nodepool
       #   value: medium
       #   effect: NoSchedule
       resources:
         requests:
-          "cpu": 1200m
-          "memory": 2.5Gi
+          "cpu": "1"
+          "memory": 1900Mi
         limits:
-          "cpu": 1900m
+          "cpu": "2"
           "memory": 3.9Gi
   storage:
     accessModes:
@@ -31,8 +31,6 @@ spec:
       requests:
         storage: 10Gi
 
-# beta.kubernetes.io/instance-type=g6-standard-2 (1/2/4/6)
 # recommender/input/cluster_feeder.go -> updatePodMemory() -> pod.Containers[i] = cnt
-
 # go wait.Until(c.Recommender.RunOnce, c.Opts.MetricsFetcherInterval, stopCh)
 # for {c.Recommender.RunOnce(); time.Sleep(c.Opts.MetricsFetcherInterval) }

@@ -8,19 +8,19 @@ spec:
   nodeGroups: # capacities here are actually slightly less than the allocatable resources.
   - topologyValue: g6-standard-1
     capacity:
-      cpu: 950m
+      cpu: "1"
       memory: 1.9Gi
   - topologyValue: g6-standard-2
     capacity:
-      cpu: 1950m
+      cpu: "2"
       memory: 3.9Gi
   - topologyValue: g6-standard-4
     capacity:
-      cpu: "3.9"
+      cpu: "4"
       memory: 8Gi
   - topologyValue: g6-standard-6
     capacity:
-      cpu: "5.8"
+      cpu: "6"
       memory: 16Gi
 
 

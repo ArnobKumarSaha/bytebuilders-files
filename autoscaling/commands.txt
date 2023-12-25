@@ -26,13 +26,17 @@ watch "kubectl get vpa -oyaml redis-vpa | yq '.status.recommendation.containerRe
 
 
 
-AT 12:59 AM
-NAME                                 CPU         MEMORY      WINDOW
-podmetrics.metrics.k8s.io/simple-0   25475358n   1220584Ki   10.123s
-podmetrics.metrics.k8s.io/simple-1   27323145n   161032Ki    14.848s
-podmetrics.metrics.k8s.io/simple-2   24318997n   168872Ki    15.77s
+# show node's taints
+kubectl get nodes gke-dataloop-small-b1fd6889-dwwq -ojsonpath={.spec.taints}
 
 
-The memory usages is still increasing after 5 minutes of stopping the dd script. 
+# pod list scheduled in a node
+kubectl get pods -A --field-selector spec.nodeName=gke-dataloop-small-b1fd6889-dwwq
+
+
+# show pod's tolerations
+kubectl get pods -n kube-system gke-metrics-agent-p8jl9 -ojsonpath={.spec.tolerations} | jq
+
+
 
 
