@@ -25,10 +25,10 @@ spec:
     spec:
       # nodeSelector:
       #   cloud.google.com/gke-nodepool: medium
-      tolerations:
-      - key: nodepool
-        value: std4
-        effect: NoSchedule
+      # tolerations:
+      # - key: nodepool
+      #   value: std4
+      #   effect: NoSchedule
       resources:
         requests:
           "cpu": 1
@@ -73,19 +73,19 @@ spec:
     #   resources:
     #     requests:
     #       storage: 2Gi
-  arbiter: 
-    podTemplate:
-      spec:
-        # nodeSelector:
-        #   cloud.google.com/gke-nodepool: medium
-        tolerations:
-        - key: nodepool
-          value: medium
-          effect: NoSchedule
-        resources:
-          requests:
-            "cpu": 0.4
-            "memory": 400Mi
+  # arbiter: 
+  #   podTemplate:
+  #     spec:
+  #       # nodeSelector:
+  #       #   cloud.google.com/gke-nodepool: medium
+  #       tolerations:
+  #       - key: nodepool
+  #         value: medium
+  #         effect: NoSchedule
+  #       resources:
+  #         requests:
+  #           "cpu": 0.4
+  #           "memory": 400Mi
   # configSecret:
   #   name: mg-configuration
   # sslMode: preferSSL

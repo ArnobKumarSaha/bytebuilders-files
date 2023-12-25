@@ -7,7 +7,7 @@ consume_memory() {
     echo "Consuming memory..."
     array=()
     while true; do
-        array+=($(seq 1 1000000))
+        array+=($(seq 1 10000))
     done
 }
 

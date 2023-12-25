@@ -19,6 +19,13 @@ watch "kubectl get podmetrics -n demo -oyaml | yq eval '.items |= sort_by(.metad
 
 
 
+
+----------
+watch "kubectl get vpacheckpoint -oyaml redis-vpa-master | yq '.status'"
+watch "kubectl get vpa -oyaml redis-vpa | yq '.status.recommendation.containerRecommendations'"
+
+
+
 AT 12:59 AM
 NAME                                 CPU         MEMORY      WINDOW
 podmetrics.metrics.k8s.io/simple-0   25475358n   1220584Ki   10.123s
