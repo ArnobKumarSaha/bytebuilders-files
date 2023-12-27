@@ -17,10 +17,10 @@ helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
   --set kubedb-kubestash-catalog.enabled=true --wait --burst-limit=10000 --debug \
   --set kubedb-catalog.skipDeprecated=false 
 
-arnobkumarsaha/kubedb-autoscaler:nodepool_linux_amd64
-arnobkumarsaha/kubedb-ops-manager:nodepool_linux_amd64
-arnobkumarsaha/kubedb-webhook-server:v0.14.0_linux_amd64
-arnobkumarsaha/kubedb-provisioner:v0.38.1_linux_amd64
+arnobkumarsaha/kubedb-provisioner:v0.39.0_linux_amd64
+arnobkumarsaha/kubedb-ops-manager:v0.26.0_linux_amd64
+arnobkumarsaha/kubedb-webhook-server:v0.15.0_linux_amd64
+arnobkumarsaha/kubedb-autoscaler:topo_linux_amd64
 
 
 # kubectl apply -f ~/yamls/4.4.6.yaml

@@ -23,7 +23,7 @@ spec:
           "memory": 1900Mi
         limits:
           "cpu": "2"
-          "memory": 3.9Gi
+          "memory": 3900Mi
   storage:
     accessModes:
     - ReadWriteOnce

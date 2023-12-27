@@ -7,21 +7,32 @@ spec:
   topologyKey: "node.kubernetes.io/instance-type"
   nodeGroups: # capacities here are actually slightly less than the allocatable resources.
   - topologyValue: g6-standard-1
-    capacity:
+    allocatable:
       cpu: "1"
-      memory: 1.9Gi
+      memory: 1900Mi
   - topologyValue: g6-standard-2
-    capacity:
+    allocatable:
       cpu: "2"
-      memory: 3.9Gi
+      memory: 3900Mi
   - topologyValue: g6-standard-4
-    capacity:
+    allocatable:
       cpu: "4"
       memory: 8Gi
   - topologyValue: g6-standard-6
-    capacity:
+    allocatable:
       cpu: "6"
       memory: 16Gi
+
+
+# 1500m
+# 3.11Gi
+
+# I1226 07:30:07.503010       1 nodepool.go:159] Recommended NodeGroup is 1 Calculated new NodeGroup index is 2 
+# I1226 07:30:07.503016       1 nodepool.go:107] MidPoints :: 
+# I1226 07:30:07.503023       1 nodepool.go:127] 0 map[cpu:{i:{value:500 scale:-3} d:{Dec:<nil>} s:500m Format:DecimalSI} memory:{i:{value:1020054732800 scale:-3} d:{Dec:<nil>} s:1020054732800m Format:DecimalSI}] 
+# I1226 07:30:07.503047       1 nodepool.go:127] 1 map[cpu:{i:{value:1500 scale:-3} d:{Dec:<nil>} s:1500m Format:DecimalSI} memory:{i:{value:3113851289600 scale:-3} d:{Dec:<nil>} s:3113851289600m Format:DecimalSI}] 
+# I1226 07:30:07.503057       1 nodepool.go:127] 2 map[cpu:{i:{value:3000 scale:-3} d:{Dec:<nil>} s: Format:DecimalSI} memory:{i:{value:6388763852800 scale:-3} d:{Dec:<nil>} s:6388763852800m Format:DecimalSI}] 
+# I1226 07:30:07.503065       1 nodepool.go:127] 3 map[cpu:{i:{value:5000 scale:-3} d:{Dec:<nil>} s: Format:DecimalSI} memory:{i:{value:12884901888000 scale:-3} d:{Dec:<nil>} s: Format:DecimalSI}] 
 
 
 # g6-standard-1

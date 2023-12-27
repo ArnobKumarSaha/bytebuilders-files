@@ -6,22 +6,26 @@ spec:
   nodeSelectionPolicy: Taint
   topologyKey: "nodepool"
   nodeGroups:
-  - topologyValue: small
-    capacity:
-      cpu: 940m
-      memory: 1.4Gi
+  # - topologyValue: small
+  #   allocatable:
+  #     cpu: 940m
+  #     memory: 1.4Gi
   - topologyValue: medium
-    capacity:
+    allocatable:
       cpu: 940m
       memory: 2.8Gi
   - topologyValue: std2
-    capacity:
+    allocatable:
       cpu: 1930m
       memory: 6Gi
   - topologyValue: std4
-    capacity:
+    allocatable:
       cpu: 3920m
       memory: 13.5Gi
+  - topologyValue: std8
+    allocatable:
+      cpu: 7900m
+      memory: 29Gi
 
 
 ---

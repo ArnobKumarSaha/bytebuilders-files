@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLUSTER_NAME=test
+CLUSTER_NAME=arnob
 ZONE=us-central1-c
 
 gcloud container clusters create "${CLUSTER_NAME}" \

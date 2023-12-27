@@ -1,26 +1,29 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: repl
+  name: simple
   namespace: demo
 spec:
   version: "4.4.26"
   terminationPolicy: WipeOut
-  replicas: 2
+  replicas: 3
   replicaSet:
     name: "rs"
   podTemplate:
     spec:
-      # nodeSelector:
-      #   cloud.google.com/gke-nodepool: medium
+      nodeSelector:
+        database-only:true
       tolerations:
       - key: nodepool
         value: medium
         effect: NoSchedule
       resources:
         requests:
-          "cpu": 500m
-          "memory": 1.5Gi
+          "cpu": 470m
+          "memory": 1.4Gi
+        limits:
+          "cpu": 940m
+          "memory": 2.8Gi
   storage:
     accessModes:
     - ReadWriteOnce

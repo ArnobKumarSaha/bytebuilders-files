@@ -13,7 +13,7 @@ spec:
     replicaSet:
       trigger: "On"
       podLifeTimeThreshold: 5m
-      resourceDiffPercentage: 100
+      resourceDiffPercentage: 50
       minAllowed:
         cpu: "1"
         memory: 1900Mi
@@ -24,18 +24,11 @@ spec:
       containerControlledValues: "RequestsAndLimits"
     nodeTopology:
       name: lke-pools
-      scaleUpDiffPercentage: 10
-      scaleDownDiffPercentage: 25
+      # scaleUpDiffPercentage: 15
+      # scaleDownDiffPercentage: 25
 
-
-# "uncappedTarget": {
-#   "cpu": "1168m",
-#   "memory": "3861631195"
-# }
-# 110%
-
-# I1225 19:02:31.896134       1 nodepool.go:107] midPoints =====> 
-# I1225 19:02:31.896139       1 nodepool.go:126] 0  0-- 1020054733 
-# I1225 19:02:31.896144       1 nodepool.go:126] 1  1000-- 3113851290 
-# I1225 19:02:31.896149       1 nodepool.go:126] 2  3000-- 6388763853 
-# I1225 19:02:31.896152       1 nodepool.go:126] 3  5000-- 12884901888 
+# Sorted NodePools
+# 0 map[cpu:{i:{value:500 scale:-3} d:{Dec:<nil>} s:500m Format:DecimalSI} memory:{i:{value:996147200 scale:0} d:{Dec:<nil>} s:950Mi Format:BinarySI}] 
+# 1 map[cpu:{i:{value:1500 scale:-3} d:{Dec:<nil>} s:1500m Format:DecimalSI} memory:{i:{value:3040870400 scale:0} d:{Dec:<nil>} s:2900Mi Format:BinarySI}] 
+# 2 map[cpu:{i:{value:3000 scale:-3} d:{Dec:<nil>} s: Format:DecimalSI} memory:{i:{value:6239027200 scale:0} d:{Dec:<nil>} s:5950Mi Format:BinarySI}] 
+# 3 map[cpu:{i:{value:5000 scale:-3} d:{Dec:<nil>} s: Format:DecimalSI} memory:{i:{value:12582912000 scale:0} d:{Dec:<nil>} s: Format:BinarySI}] 
