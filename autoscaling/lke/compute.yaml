@@ -13,7 +13,7 @@ spec:
     replicaSet:
       trigger: "On"
       podLifeTimeThreshold: 5m
-      resourceDiffPercentage: 50
+      resourceDiffPercentage: 30
       minAllowed:
         cpu: "1"
         memory: 1900Mi

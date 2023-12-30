@@ -19,7 +19,7 @@ gcloud container node-pools create medium \
   --min-nodes=0 \
   --max-nodes=3 \
   --node-taints=nodepool=medium:NoSchedule \
-  --labels=database-only=true
+  --node-labels=database=yes
 
 gcloud container node-pools create std4 \
   --cluster="${CLUSTER_NAME}" \
@@ -30,7 +30,7 @@ gcloud container node-pools create std4 \
   --min-nodes=0 \
   --max-nodes=3 \
   --node-taints=nodepool=std4:NoSchedule \
-  --labels=database-only=true
+  --node-labels=database=yes
 
 gcloud container node-pools create std8 \
   --cluster="${CLUSTER_NAME}" \
@@ -41,7 +41,7 @@ gcloud container node-pools create std8 \
   --min-nodes=0 \
   --max-nodes=3 \
   --node-taints=nodepool=std8:NoSchedule \
-  --labels=database-only=true
+  --node-labels=database=yes
 
 # gcloud container node-pools update default-pool \
 #   --cluster="${CLUSTER_NAME}" \

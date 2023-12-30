@@ -10,22 +10,26 @@ spec:
   #   allocatable:
   #     cpu: 940m
   #     memory: 1.4Gi
-  - topologyValue: medium
-    allocatable:
-      cpu: 940m
-      memory: 2.8Gi
+  # - topologyValue: medium
+  #   allocatable:
+  #     cpu: 940m
+  #     memory: 2.8Gi
   - topologyValue: std2
     allocatable:
       cpu: 1930m
-      memory: 6Gi
+      memory: 5.89Gi
   - topologyValue: std4
     allocatable:
       cpu: 3920m
-      memory: 13.5Gi
+      memory: 12.97Gi
   - topologyValue: std8
     allocatable:
-      cpu: 7900m
-      memory: 29Gi
+      cpu: 7910m
+      memory: 27.74Gi
+  - topologyValue: std16
+    allocatable:
+      cpu: 15890m
+      memory: 57.27Gi
 
 
 ---

@@ -12,14 +12,14 @@ spec:
   compute:
     replicaSet:
       trigger: "On"
-      # podLifeTimeThreshold: 5m
-      # resourceDiffPercentage: 200
+      podLifeTimeThreshold: 10m
+      resourceDiffPercentage: 30
       minAllowed:
-        cpu: 470m
-        memory: 1.4Gi
+        cpu: 868m
+        memory: 2.65Gi
       maxAllowed:
-        cpu: 7900m
-        memory: 29Gi
+        cpu: 15890m
+        memory: 57.27Gi
       controlledResources: ["cpu", "memory"]
       containerControlledValues: "RequestsAndLimits"
     nodeTopology:

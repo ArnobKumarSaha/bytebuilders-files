@@ -12,18 +12,18 @@ spec:
   podTemplate:
     spec:
       nodeSelector:
-        database-only:true
+        database: "yes"
       tolerations:
       - key: nodepool
-        value: medium
+        value: std2
         effect: NoSchedule
       resources:
         requests:
-          "cpu": 470m
-          "memory": 1.4Gi
+          "cpu": 965m
+          "memory": 2.95Gi
         limits:
-          "cpu": 940m
-          "memory": 2.8Gi
+          "cpu": 1930
+          "memory": 5.89Gi
   storage:
     accessModes:
     - ReadWriteOnce
