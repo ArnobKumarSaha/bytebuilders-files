@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: medium
+  name: xx
+  namespace: demo
 spec:
   replicas: 1
   selector:
@@ -12,30 +13,20 @@ spec:
       labels:
         app: example
     spec:
-      # initContainers:
-      # - name: ii
-      #   image: ubuntu
-      #   args: ["/bin/sh", "-c", "chmod -R 440 /data"]
-      #   volumeMounts:
-      #   - name: data
-      #     mountPath: /data
-      #   securityContext:
-      #     runAsUser: 65534
-      #     runAsGroup: 65534
+      nodeName: lke148540-218049-56079bea0000
       containers:
       - name: ee
         image: arnobkumarsaha/perm
         args: ["/bin/sh", "-c", "sleep 30000"]
-        # resources:
-        #   requests:
-        #     memory: "100Mi"
-        #     cpu: "100m"
-        #   limits:
-        #     memory: "300Mi"
-        #     cpu: "300m"
         volumeMounts:
-        - name: data
-          mountPath: /data
+        # - name: data
+        #   mountPath: /data
+        - name: hello
+          mountPath: /hello
+        - name: empty
+          mountPath: /empty
+        # - name: test
+        #   mountPath: /test
           # readOnly: true
         securityContext:
           runAsUser: 1000
@@ -49,12 +40,22 @@ spec:
       #   value: medium
       # nodeSelector:
       #   cloud.google.com/gke-nodepool: medium
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes: [ "ReadOnlyMany" ]
-      # storageClassName: linode-block-storage-retain
-      resources:
-        requests:
-          storage: 1Gi
+      volumes:
+      - name: hello
+        nfs:
+          path: /exports
+          server: 10.128.182.254
+      - name: empty
+        emptyDir: {}
+      # - name: test
+      #   persistentVolumeClaim: 
+      #     claimName: my-pvc
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: data
+  #   spec:
+  #     accessModes: [ "ReadOnlyMany" ]
+  #     # storageClassName: linode-block-storage-retain
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
