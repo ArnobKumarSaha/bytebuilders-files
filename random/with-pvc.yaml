@@ -13,7 +13,7 @@ spec:
       labels:
         app: example
     spec:
-      nodeName: lke148540-218049-56079bea0000
+      nodeName: lke148540-218049-20fcb5680000
       containers:
       - name: ee
         image: arnobkumarsaha/perm
@@ -25,14 +25,17 @@ spec:
           mountPath: /hello
         - name: empty
           mountPath: /empty
-        # - name: test
-        #   mountPath: /test
-          # readOnly: true
+        - name: my-nfs-pvc
+          mountPath: /my-nfs-pvc
+        - name: my-long-pvc
+          mountPath: /my-long-pvc
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
       securityContext:
         fsGroup: 1000
+        # supplementalGroups: 
+        # - 1000
       # tolerations:
       # - effect: NoSchedule
       #   key: nodepool
@@ -44,12 +47,15 @@ spec:
       - name: hello
         nfs:
           path: /exports
-          server: 10.128.182.254
+          server: 10.128.103.11
       - name: empty
         emptyDir: {}
-      # - name: test
-      #   persistentVolumeClaim: 
-      #     claimName: my-pvc
+      - name: my-nfs-pvc
+        persistentVolumeClaim: 
+          claimName: nfs-try
+      - name: my-long-pvc
+        persistentVolumeClaim: 
+          claimName: long-try
   # volumeClaimTemplates:
   # - metadata:
   #     name: data
