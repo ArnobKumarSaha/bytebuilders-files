@@ -48,3 +48,13 @@ sanitizeMongoDB()
   - check local.oplog.rs exists
   - check duplicate rs name
   - set IncrSyncShardKey
+selectSyncMode()
+if syncMode all : 
+	serializeDocumentOplog()
+		startDocumentReplication()
+			get all ns those need to be synced
+			get current newest timestamp
+			create ns transformer
+			StartDropDestCollection()
+			fetch indexes, index sync
+			

@@ -78,3 +78,7 @@ helm upgrade -i <db-name> appscode/mongodb-alerts -n <db-namespace> --create-nam
 
 
 Note that, You have to run the above `helm upgrade` command with the release name equals the databasename & release namespace equals the database namspace. 
+
+
+
+linode machine pass : 123abc-456ABC-789

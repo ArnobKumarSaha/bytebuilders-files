@@ -1,10 +1,10 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: sh
+  name: sh7
   namespace: demo
 spec:
-  version: "4.4.6"
+  version: "7.0.4"
   storageType: Durable
   shardTopology:
     configServer:
@@ -57,13 +57,13 @@ spec:
   # arbiter:
   #   podTemplate: {}
   terminationPolicy: WipeOut
-  # sslMode: requireSSL
-  # tls:
-  #   issuerRef:
-  #     apiGroup: "cert-manager.io"
-  #     kind: Issuer
-  #     name: mongo-ca-issuer
-  # clusterAuthMode: x509
+  sslMode: requireSSL
+  tls:
+    issuerRef:
+      apiGroup: "cert-manager.io"
+      kind: Issuer
+      name: mongo-ca-issuer
+  clusterAuthMode: x509
   # monitor:
   #   agent: prometheus.io/operator
   #   prometheus:
