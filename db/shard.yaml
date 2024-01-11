@@ -29,7 +29,7 @@ spec:
           requests:
             storage: 1Gi
       replicas: 2
-      shards: 2
+      shards: 1
       podTemplate:
         spec:
           resources:
@@ -45,17 +45,17 @@ spec:
         resources:
           requests:
             storage: 1Gi
-  # hidden:
-  #   podTemplate: {}
-  #   replicas: 1
-  #   storage:
-  #     accessModes:
-  #       - ReadWriteOnce
-  #     resources:
-  #       requests:
-  #         storage: 1Gi
-  # arbiter:
-  #   podTemplate: {}
+  hidden:
+    podTemplate: {}
+    replicas: 1
+    storage:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+  arbiter:
+    podTemplate: {}
   terminationPolicy: WipeOut
   sslMode: requireSSL
   tls:

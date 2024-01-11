@@ -1,8 +1,8 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: simple
-  namespace: demo
+  name: mongo-tls
+  namespace: poc
 spec:
   allowedSchemas:
     namespaces:
@@ -13,9 +13,9 @@ spec:
     selector:
       matchLabels:
         "schema.kubedb.com": "mongo"
-  version: "4.4.26"
+  version: "4.4.6"
   terminationPolicy: WipeOut
-  replicas: 2
+  replicas: 3
   replicaSet:
     name: "rs"
   # authSecret:
@@ -49,15 +49,15 @@ spec:
     resources:
       requests:
         storage: 1Gi
-  # serviceTemplates:
-  # - alias: primary
-  #   metadata: {}
-  #   spec:
-  #     ports:
-  #     - name: db
-  #       nodePort: 30001
-  #       port: 27017
-  #     type: LoadBalancer
+  serviceTemplates:
+  - alias: primary
+    metadata: {}
+    spec:
+      ports:
+      - name: db
+        nodePort: 30304
+        port: 27017
+      type: LoadBalancer
   # hidden:
   #   podTemplate:
   #     spec:
@@ -86,9 +86,9 @@ spec:
   #         requests:
   #           "cpu": 0.4
   #           "memory": 400Mi
-  # configSecret:
-  #   name: mg-configuration
-  sslMode: preferSSL
+  configSecret:
+    name: mg-configuration
+  sslMode: requireSSL
   tls:
     issuerRef:
       apiGroup: "cert-manager.io"

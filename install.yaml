@@ -36,7 +36,7 @@ arnobkumarsaha/kubedb-autoscaler:topo_linux_amd64
 
 
 helm install kubestash oci://ghcr.io/appscode-charts/kubestash \
-  --version v2023.12.1 \
+  --version v2023.12.28 \
   --namespace kubestash --create-namespace \
   --set-file global.license=/home/arnob/yamls/license/test.txt
 

@@ -1,0 +1,39 @@
+apiVersion: kubedb.com/v1alpha2
+kind: MongoDB
+metadata:
+  name: per-5
+  namespace: demo
+spec:
+  allowedSchemas:
+    namespaces:
+      from: Selector
+      selector:
+        matchExpressions:
+        - {key: kubernetes.io/metadata.name, operator: In, values: [dev]}
+    selector:
+      matchLabels:
+        "schema.kubedb.com": "mongo"
+  terminationPolicy: WipeOut
+  # version: percona-5.0.23 
+  version: percona-6.0.11
+  # version: percona-6.0.12-6
+  replicaSet:
+    name: "replicaset"
+  podTemplate:
+    spec:
+      resources:
+        requests:
+          cpu: "600m"
+          memory: "600Mi"
+  replicas: 3
+  storageEngine: inMemory
+  storageType: Ephemeral
+  ephemeralStorage:
+    sizeLimit: "900Mi"
+  # sslMode: requireSSL
+  # tls:
+  #   issuerRef:
+  #     apiGroup: "cert-manager.io"
+  #     kind: Issuer
+  #     name: mongo-ca-issuer
+  # clusterAuthMode: x509

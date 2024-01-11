@@ -70,16 +70,16 @@
 apiVersion: ops.kubedb.com/v1alpha1
 kind: MongoDBOpsRequest
 metadata:
-  name: tls
+  name: add
   namespace: demo
 spec:
   type: ReconfigureTLS
   databaseRef:
-    name: mg
+    name: sh7
   tls:
-    remove: true
-  readinessCriteria:
-    oplogMaxLagSeconds: 20
-    objectsCountDiffPercentage: 10
+    issuerRef:
+      name: mongo-ca-issuer
+      kind: Issuer
+      apiGroup: "cert-manager.io"
   timeout: 5m
   apply: IfReady

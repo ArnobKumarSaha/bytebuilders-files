@@ -1,11 +1,20 @@
 apiVersion: catalog.kubedb.com/v1alpha1
 kind: MongoDBVersion
 metadata:
-  name: 7.0.4
+  annotations:
+    meta.helm.sh/release-name: kubedb
+    meta.helm.sh/release-namespace: kubedb
+  labels:
+    app.kubernetes.io/instance: kubedb
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kubedb-catalog
+    app.kubernetes.io/version: v2023.11.2
+    helm.sh/chart: kubedb-catalog-v2023.11.2
+  name: percona-6.0.11
 spec:
   db:
-    image: mongo:7.0.4
-  distribution: Official
+    image: percona/percona-server-mongodb:6.0.11
+  distribution: Percona
   exporter:
     image: ghcr.io/kubedb/mongodb_exporter:v0.32.0
   initContainer:
@@ -20,4 +29,4 @@ spec:
         name: mongodb-backup-6.0.5
       restoreTask:
         name: mongodb-restore-6.0.5
-  version: 7.0.4
+  version: 6.0.11

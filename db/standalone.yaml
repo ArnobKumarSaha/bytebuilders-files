@@ -1,11 +1,19 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: s4
+  name: p6
   namespace: demo
 spec:
-  version: "4.4.6"
+  version: "percona-4.4.10"
+  # version: "percona-6.0.12" 
+  replicas: 3
+  replicaSet:
+    name: xyz
   terminationPolicy: WipeOut
+  # storageEngine: inMemory
+  # storageType: Ephemeral
+  # ephemeralStorage:
+  #   sizeLimit: "900Mi"
   storage:
     accessModes:
     - ReadWriteOnce
@@ -80,3 +88,8 @@ spec:
   #   });
   #   db = db.getSiblingDB('demodb');
   #   db.createCollection("dummy")
+
+
+  # sayedppqq/mongodb-init:6.0-v9_linux_amd64
+
+  

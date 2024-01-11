@@ -51,10 +51,44 @@ sanitizeMongoDB()
 selectSyncMode()
 if syncMode all : 
 	serializeDocumentOplog()
-		startDocumentReplication()
-			get all ns those need to be synced
-			get current newest timestamp
-			create ns transformer
-			StartDropDestCollection()
-			fetch indexes, index sync
-			
+		
+
+startDocumentReplication() =>
+	get all ns those need to be synced
+	get current newest timestamp
+	create ns transformer
+	StartDropDestCollection()
+	fetch indexes, index sync
+	dbSyncer.Start() goroutines
+
+dbSyncer.Start() =>
+	filter ns with NewDocFilterList()
+	<FullSyncReaderCollectionParallel 6>
+	call collectionSync() in parallel for all ns
+
+collectionSync() => < single collection >
+	colExecutor.Start()
+	NewDocumentSplitter()
+	<FullSyncReaderParallelThread 1>
+	<-splitter.readerChan
+	splitSync()
+	colExecutor.Wait()
+
+colExecutor.Start() => 
+	<FullSyncReaderWriteDocumentParallel 8>
+	docExecutor.Start()
+
+NewDocumentSplitter() => 
+	collStats
+	documentSplitter.Run()
+
+documentSplitter.Run() => 
+
+
+docExecutor.Start() =>
+	docs, ok := <- colExecutor.docBatch
+	doSync(docs)
+
+doSync() =>
+	InsertOneModel
+	bulkWrite
