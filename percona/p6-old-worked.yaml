@@ -10,10 +10,10 @@ metadata:
     app.kubernetes.io/name: kubedb-catalog
     app.kubernetes.io/version: v2023.11.2
     helm.sh/chart: kubedb-catalog-v2023.11.2
-  name: percona-6.0.11
+  name: percona-6.0.12
 spec:
   db:
-    image: percona/percona-server-mongodb:6.0.11
+    image: percona/percona-server-mongodb:6.0.12
   distribution: Percona
   exporter:
     image: ghcr.io/kubedb/mongodb_exporter:v0.32.0
@@ -29,4 +29,4 @@ spec:
         name: mongodb-backup-6.0.5
       restoreTask:
         name: mongodb-restore-6.0.5
-  version: 6.0.11
+  version: 6.0.12

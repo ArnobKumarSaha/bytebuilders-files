@@ -1,8 +1,8 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mongo-tls
-  namespace: poc
+  name: rs7
+  namespace: demo
 spec:
   allowedSchemas:
     namespaces:
@@ -13,7 +13,7 @@ spec:
     selector:
       matchLabels:
         "schema.kubedb.com": "mongo"
-  version: "4.4.6"
+  version: "7.0.4"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
@@ -49,15 +49,15 @@ spec:
     resources:
       requests:
         storage: 1Gi
-  serviceTemplates:
-  - alias: primary
-    metadata: {}
-    spec:
-      ports:
-      - name: db
-        nodePort: 30304
-        port: 27017
-      type: LoadBalancer
+  # serviceTemplates:
+  # - alias: primary
+  #   metadata: {}
+  #   spec:
+  #     ports:
+  #     - name: db
+  #       nodePort: 30304
+  #       port: 27017
+  #     type: LoadBalancer
   # hidden:
   #   podTemplate:
   #     spec:
@@ -86,8 +86,8 @@ spec:
   #         requests:
   #           "cpu": 0.4
   #           "memory": 400Mi
-  configSecret:
-    name: mg-configuration
+  # configSecret:
+  #   name: mg-configuration
   sslMode: requireSSL
   tls:
     issuerRef:

@@ -22,14 +22,16 @@ spec:
     image: ghcr.io/kubedb/mongodb_exporter:v0.32.0
   gitSyncer:
     image: registry.k8s.io/git-sync/git-sync:v4.1.0
+  # initContainer:
+  #   image: ghcr.io/kubedb/mongodb-init:6.0-v10
   initContainer:
-    image: ghcr.io/kubedb/mongodb-init:6.0-v9 # arnobkumarsaha/mongodb-init:_linux_amd64
+    image: arnobkumarsaha/mongodb-init:6.0-v10_linux_amd64
   podSecurityPolicies:
     databasePolicyName: mongodb-db
   replicationModeDetector:
     image: ghcr.io/kubedb/replication-mode-detector:v0.28.0-beta.0
   securityContext:
-    runAsUser: 999
+    runAsUser: 1001
   stash:
     addon:
       backupTask:
