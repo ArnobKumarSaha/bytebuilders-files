@@ -1,10 +1,10 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: sh7
+  name: dest
   namespace: demo
 spec:
-  version: 7.0.4
+  version: 4.4.6
   storageType: Durable
   shardTopology:
     configServer:
@@ -33,17 +33,17 @@ spec:
         spec:
           resources:
             requests:
-              "cpu": 0.5
-              "memory": 500Mi
+              "cpu": 1.5
+              "memory": 2500Mi
             limits:
-              "cpu": 0.8
-              "memory": 1Gi
+              "cpu": 1.8
+              "memory": 3Gi
       storage:
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 1Gi
+            storage: 5Gi
   # hidden:
   #   podTemplate: {}
   #   replicas: 1
@@ -53,16 +53,16 @@ spec:
   #     resources:
   #       requests:
   #         storage: 1Gi
-  arbiter:
-    podTemplate: {}
+  # arbiter:
+  #   podTemplate: {}
   terminationPolicy: WipeOut
-  sslMode: requireSSL
-  tls:
-    issuerRef:
-      apiGroup: "cert-manager.io"
-      kind: Issuer
-      name: mongo-ca-issuer
-  clusterAuthMode: x509
+  # sslMode: requireSSL
+  # tls:
+  #   issuerRef:
+  #     apiGroup: "cert-manager.io"
+  #     kind: Issuer
+  #     name: mongo-ca-issuer
+  # clusterAuthMode: x509
   # monitor:
   #   agent: prometheus.io/operator
   #   prometheus:

@@ -1,19 +1,19 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: rs7
+  name: mg
   namespace: demo
 spec:
-  allowedSchemas:
-    namespaces:
-      from: Selector
-      selector:
-        matchExpressions:
-        - {key: kubernetes.io/metadata.name, operator: In, values: [dev]}
-    selector:
-      matchLabels:
-        "schema.kubedb.com": "mongo"
-  version: "7.0.4"
+  # allowedSchemas:
+  #   namespaces:
+  #     from: Selector
+  #     selector:
+  #       matchExpressions:
+  #       - {key: kubernetes.io/metadata.name, operator: In, values: [dev]}
+  #   selector:
+  #     matchLabels:
+  #       "schema.kubedb.com": "mongo"
+  version: "5.0.3"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
@@ -88,13 +88,13 @@ spec:
   #           "memory": 400Mi
   # configSecret:
   #   name: mg-configuration
-  sslMode: requireSSL
-  tls:
-    issuerRef:
-      apiGroup: "cert-manager.io"
-      kind: Issuer
-      name: mongo-ca-issuer
-  clusterAuthMode: x509
+  # sslMode: requireSSL
+  # tls:
+  #   issuerRef:
+  #     apiGroup: "cert-manager.io"
+  #     kind: Issuer
+  #     name: mongo-ca-issuer
+  # clusterAuthMode: x509
   # monitor:
   #   agent: prometheus.io/operator
   #   prometheus:

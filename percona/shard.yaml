@@ -1,10 +1,10 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: per6
+  name: per5
   namespace: demo
 spec:
-  version: percona-6.0.12-6
+  version: percona-4.2.24
   storageEngine: inMemory
   storageType: Ephemeral
   shardTopology:
