@@ -35,4 +35,15 @@ spec:
             storage: 1Gi
       # nodeSelector:
       #   kubernetes.io/hostname: lke145386-213524-31d66e5d0000
-  version: xpack-8.5.3
+  version: xpack-8.8.0
+  monitor:
+#   agent: prometheus.io/builtin
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: prometheus
+
+
+
+  # kubectl get pod -n kubedb -l 'app.kubernetes.io/name=kubedb-community' -o=jsonpath='{.items[0].status.containerStatuses[0].imageID}'

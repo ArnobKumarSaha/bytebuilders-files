@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg
+  name: mg6
   namespace: demo
 spec:
   # allowedSchemas:
@@ -17,7 +17,7 @@ spec:
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
-    name: "rs"
+    name: "rs1"
   # authSecret:
   #   name: mg-auth-secret
   #   externallyManaged: true
@@ -103,14 +103,14 @@ spec:
   #         release: prometheus
   #       interval: 10s
   # monitor:
-  # #   agent: prometheus.io/builtin
-  #   agent: prometheus.io/operator
-  #   prometheus:
-  #     serviceMonitor:
-  #       labels:
-  #         release: prometheus
-  #     exporter:
-  #       args: ["--compatible-mode"]
+  #   agent: prometheus.io/builtin
+    # agent: prometheus.io/operator
+    # prometheus:
+    #   serviceMonitor:
+    #     labels:
+    #       release: prometheus
+      # exporter:
+      #   args: ["--compatible-mode"]
   #       securityContext:
   #   #       allowPrivilegeEscalation: false
   #   #       capabilities:

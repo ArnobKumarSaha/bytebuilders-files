@@ -11,14 +11,21 @@ helm install kubedb appscode/kubedb \
 kubectl apply -f https://github.com/kubedb/installer/raw/v2023.12.11/crds/kubedb-catalog-crds.yaml
 
 helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
-    --version v2024.1.19-beta.1 \
+    --version v2024.1.28-rc.1 \
     --namespace kubedb --create-namespace \
     --set-file global.license=/home/arnob/yamls/license/kind.txt \
     --set kubedb-provisioner.operator.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-webhook-server.server.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-ops-manager.operator.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-autoscaler.operator.securityContext.seccompProfile.type=RuntimeDefault \
-    --set global.featureGates.Singlestore=true
+    --set global.featureGates.Elasticsearch=false \
+    --set global.featureGates.Kafka=false \
+    --set global.featureGates.MariaDB=false \
+    --set global.featureGates.MongoDB=true \
+    --set global.featureGates.MySQL=false \
+    --set global.featureGates.Postgres=false \
+    --set global.featureGates.Redis=false
+
 
 --set kubedb-catalog.skipDeprecated=false \
 --set kubedb-kubestash-catalog.enabled=true --wait --burst-limit=10000 --debug \

@@ -1,12 +1,14 @@
+# kubectl create secret generic -n demo new-custom-config --from-file=./mongod.conf
+
 apiVersion: ops.kubedb.com/v1alpha1
 kind: MongoDBOpsRequest
 metadata:
-  name: up-mem
+  name: up
   namespace: demo
 spec:
   type: VerticalScaling
   databaseRef:
-    name: mg
+    name: mg6
   verticalScaling:
     replicaSet:
       resources:
@@ -16,8 +18,13 @@ spec:
         limits:
           memory: "900Mi"
           cpu: "0.9"
-  readinessCriteria:
-    oplogMaxLagSeconds: 20
-    objectsCountDiffPercentage: 10
+  #     nodeSelectionPolicy: Taint  # Or LabelSelector
+  #     topology:
+  #       key: nodepool
+  #       value: medium
+  # configuration:
+  #   replicaSet:
+  #     configSecret:
+  #       name: new-custom-config
   timeout: 5m
   apply: Always
