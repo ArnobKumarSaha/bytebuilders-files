@@ -33,24 +33,28 @@ dashboard:
     title: false
     # If true, datasource will be hardcoded in the dashboard
     datasource: false
-  alerts: false
+  alerts: true
   replacements: {}
-#     job=\"kube-state-metrics\": job=\"kubernetes-service-endpoints\"
-#     job=\"kubelet\": job=\"kubernetes-nodes-cadvisor\"
-#     job=\"$app-stats\": job=\"kubedb-databases\"
+    # job=\"kube-state-metrics\": job=\"kubernetes-service-endpoints\"
+    # job=\"kubelet\": job=\"kubernetes-nodes-cadvisor\"
+    # job=\"$app-stats\": job=\"kubedb-databases\"
 
 grafana:
   # Name of Grafana Appbinding where these dashboards are applied
   name: ""
   # Namespace of Grafana Appbinding where these dashboards are applied
   namespace: ""
-  version: 7.5.5
+  version: 8.0.7
+  # builtin
+  # url: "http://grafana.monitoring.svc:80"
+  # apikey: "eyJrIjoiS1pieXlFRVlyWUxnSjVaVUFYc21tMXVNNGpERmlubkMiLCJuIjoiYXJub2IiLCJpZCI6MX0="
+  # operator
   url: "http://prometheus-grafana.monitoring.svc:80"
-  apikey: "eyJrIjoiQTQ5NEM5MDI0OUR6TnEyNU1wSElvUFdxcHFXZDR6SVkiLCJuIjoiYXJub2IiLCJpZCI6MX0="
+  apikey: "eyJrIjoiZGlaaWZEYTNkSkJVQWgwOTFoaUNoTHF2dTBRMlFtaEciLCJuIjoiYXJub2IiLCJpZCI6MX0="
 
 app:
-  name: simple
-  namespace: "demo"
+  name: mg4
+  namespace: demo
 
 
 # curl -H "Authorization: Bearer eyJrIjoiQTQ5NEM5MDI0OUR6TnEyNU1wSElvUFdxcHFXZDR6SVkiLCJuIjoiYXJub2IiLCJpZCI6MX0=" http://localhost:9091/api/dashboards/home

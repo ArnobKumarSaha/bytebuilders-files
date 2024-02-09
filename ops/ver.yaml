@@ -3,21 +3,21 @@
 apiVersion: ops.kubedb.com/v1alpha1
 kind: MongoDBOpsRequest
 metadata:
-  name: up
+  name: up2
   namespace: demo
 spec:
   type: VerticalScaling
   databaseRef:
-    name: mg6
+    name: mg4
   verticalScaling:
     replicaSet:
-      resources:
-        requests:
-          memory: "800Mi"
-          cpu: "0.8"
-        limits:
-          memory: "900Mi"
-          cpu: "0.9"
+      resources: {}
+      #   requests:
+      #     memory: "900Mi"
+      #     cpu: "0.9"
+      #   limits:
+      #     memory: "900Mi"
+      #     cpu: "0.9"
   #     nodeSelectionPolicy: Taint  # Or LabelSelector
   #     topology:
   #       key: nodepool
@@ -28,3 +28,6 @@ spec:
   #       name: new-custom-config
   timeout: 5m
   apply: Always
+
+
+  # https://hooks.slack.com/services/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

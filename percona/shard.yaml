@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: per5
+  name: per4
   namespace: demo
 spec:
   version: percona-4.2.24

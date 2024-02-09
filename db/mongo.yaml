@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg6
+  name: mg4
   namespace: demo
 spec:
   # allowedSchemas:
@@ -13,7 +13,7 @@ spec:
   #   selector:
   #     matchLabels:
   #       "schema.kubedb.com": "mongo"
-  version: "6.0.12"
+  version: "4.4.26"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
@@ -31,8 +31,8 @@ spec:
       #   effect: NoSchedule
       resources:
         requests:
-          "cpu": "0.5"
-          "memory": 500Mi
+          "cpu": "0.6"
+          "memory": 600Mi
   # coordinator:
     # securityContext:
   #     allowPrivilegeEscalation: false
@@ -102,15 +102,15 @@ spec:
   #       labels:
   #         release: prometheus
   #       interval: 10s
-  # monitor:
-  #   agent: prometheus.io/builtin
-    # agent: prometheus.io/operator
-    # prometheus:
-    #   serviceMonitor:
-    #     labels:
-    #       release: prometheus
-      # exporter:
-      #   args: ["--compatible-mode"]
+  monitor:
+    # agent: prometheus.io/builtin
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: prometheus
+      exporter:
+        args: ["--compatible-mode"]
   #       securityContext:
   #   #       allowPrivilegeEscalation: false
   #   #       capabilities:

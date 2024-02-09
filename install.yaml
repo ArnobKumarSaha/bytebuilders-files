@@ -11,7 +11,7 @@ helm install kubedb appscode/kubedb \
 kubectl apply -f https://github.com/kubedb/installer/raw/v2023.12.11/crds/kubedb-catalog-crds.yaml
 
 helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
-    --version v2024.1.28-rc.1 \
+    --version v2024.1.31 \
     --namespace kubedb --create-namespace \
     --set-file global.license=/home/arnob/yamls/license/kind.txt \
     --set kubedb-provisioner.operator.securityContext.seccompProfile.type=RuntimeDefault \
@@ -24,7 +24,9 @@ helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
     --set global.featureGates.MongoDB=true \
     --set global.featureGates.MySQL=false \
     --set global.featureGates.Postgres=false \
-    --set global.featureGates.Redis=false
+    --set global.featureGates.Redis=false \
+    --set global.featureGates.Singlestore=true \
+    --set kubedb-kubestash-catalog.enabled=true
 
 
 --set kubedb-catalog.skipDeprecated=false \
