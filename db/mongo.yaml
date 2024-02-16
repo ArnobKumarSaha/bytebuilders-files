@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg4
+  name: mg5
   namespace: demo
 spec:
   # allowedSchemas:
@@ -13,7 +13,7 @@ spec:
   #   selector:
   #     matchLabels:
   #       "schema.kubedb.com": "mongo"
-  version: "4.4.26"
+  version: "5.0.23"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
@@ -95,13 +95,6 @@ spec:
   #     kind: Issuer
   #     name: mongo-ca-issuer
   # clusterAuthMode: x509
-  # monitor:
-  #   agent: prometheus.io/operator
-  #   prometheus:
-  #     serviceMonitor:
-  #       labels:
-  #         release: prometheus
-  #       interval: 10s
   monitor:
     # agent: prometheus.io/builtin
     agent: prometheus.io/operator

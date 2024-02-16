@@ -23,10 +23,11 @@ spec:
       params:
         volumeSnapshotClassName: longhorn-vsc  
     scheduler:
-      successfulJobsHistoryLimit: 1
-      failedJobsHistoryLimit: 1
-      schedule: "*/50 * * * *"
-    sessionHistoryLimit: 2
+      successfulJobsHistoryLimit: 2
+      failedJobsHistoryLimit: 2
+      schedule: "*/7 * * * *"
+    sessionHistoryLimit: 3
+  walBackup: {}
   manifestBackup:
     scheduler:
       successfulJobsHistoryLimit: 1

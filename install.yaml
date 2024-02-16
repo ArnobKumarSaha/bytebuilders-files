@@ -11,13 +11,17 @@ helm install kubedb appscode/kubedb \
 kubectl apply -f https://github.com/kubedb/installer/raw/v2023.12.11/crds/kubedb-catalog-crds.yaml
 
 helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
-    --version v2024.1.31 \
+    --version v2024.2.14 \
     --namespace kubedb --create-namespace \
-    --set-file global.license=/home/arnob/yamls/license/kind.txt \
+    --set-file global.license=/home/arnob/yamls/license/arnob.txt \
     --set kubedb-provisioner.operator.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-webhook-server.server.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-ops-manager.operator.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-autoscaler.operator.securityContext.seccompProfile.type=RuntimeDefault \
+    --set kubedb-kubestash-catalog.enabled=true \
+    --set global.featureGates.Pgpool=true \
+    --set global.featureGates.ProxySQL=true 
+
     --set global.featureGates.Elasticsearch=false \
     --set global.featureGates.Kafka=false \
     --set global.featureGates.MariaDB=false \
@@ -25,17 +29,11 @@ helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
     --set global.featureGates.MySQL=false \
     --set global.featureGates.Postgres=false \
     --set global.featureGates.Redis=false \
-    --set global.featureGates.Singlestore=true \
-    --set kubedb-kubestash-catalog.enabled=true
+    --set global.featureGates.RabbitMQ=true \
 
 
 --set kubedb-catalog.skipDeprecated=false \
---set kubedb-kubestash-catalog.enabled=true --wait --burst-limit=10000 --debug \
-
-arnobkumarsaha/kubedb-provisioner:v0.39.0_linux_amd64
-arnobkumarsaha/kubedb-ops-manager:v0.26.0_linux_amd64
-arnobkumarsaha/kubedb-webhook-server:v0.15.0_linux_amd64
-arnobkumarsaha/kubedb-autoscaler:topo_linux_amd64
+--wait --burst-limit=10000 --debug \
 
 
 # kubectl apply -f ~/yamls/4.4.6.yaml
@@ -51,9 +49,9 @@ arnobkumarsaha/kubedb-autoscaler:topo_linux_amd64
 
 
 helm install kubestash oci://ghcr.io/appscode-charts/kubestash \
-  --version v2023.12.28 \
+  --version v2024.2.5 \
   --namespace kubestash --create-namespace \
-  --set-file global.license=/home/arnob/yamls/license/test.txt
+  --set-file global.license=/home/arnob/yamls/license/arnob.txt
 
 kubectl kustomize client/config/crd | kubectl create -f -
 kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -

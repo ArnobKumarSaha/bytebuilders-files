@@ -35,7 +35,7 @@ spec:
             storage: 1Gi
       # nodeSelector:
       #   kubernetes.io/hostname: lke145386-213524-31d66e5d0000
-  version: xpack-8.8.0
+  version: xpack-8.2.3
   monitor:
 #   agent: prometheus.io/builtin
     agent: prometheus.io/operator

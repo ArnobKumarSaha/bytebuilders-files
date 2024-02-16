@@ -11,7 +11,7 @@ spec:
       bucket: arnob
       region: us-east-1
       prefix: ya
-      secret: linode-secret 
+      secretName: linode-secret 
   usagePolicy:
     allowedNamespaces:
       from: All
