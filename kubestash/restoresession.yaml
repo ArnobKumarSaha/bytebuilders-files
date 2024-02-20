@@ -17,12 +17,12 @@ spec:
   #     authSecret: true
   #     configSecret: true
   dataSource:
-    snapshot: linode-repo-db-backup-frequent-backup-1692959160
+    snapshot: linode-repo-db-backup-wow-backup-1708423800 
     repository: linode-repo
     encryptionSecret:
       name: encrypt-secret # some addon may not support encryption
       namespace: demo
   addon:
-    name: mongodb-backup-restore-addon
+    name: mongodb-addon
     tasks:
-      - name: mongodb-restore-task
+      - name: logical-backup-restore

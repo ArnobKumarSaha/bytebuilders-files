@@ -13,7 +13,6 @@ spec:
       labels:
         app: example
     spec:
-      nodeName: lke148540-218049-20fcb5680000
       containers:
       - name: ee
         image: arnobkumarsaha/perm
@@ -21,14 +20,14 @@ spec:
         volumeMounts:
         # - name: data
         #   mountPath: /data
-        - name: hello
-          mountPath: /hello
-        - name: empty
-          mountPath: /empty
-        - name: my-nfs-pvc
-          mountPath: /my-nfs-pvc
-        - name: my-long-pvc
-          mountPath: /my-long-pvc
+        # - name: hello
+        #   mountPath: /hello
+        # - name: empty
+        #   mountPath: /empty
+        # - name: my-nfs-pvc
+        #   mountPath: /my-nfs-pvc
+        # - name: my-long-pvc
+        #   mountPath: /my-long-pvc
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000

@@ -8,24 +8,22 @@ spec:
     apiGroup: kubedb.com
     kind: MongoDB
     namespace: demo
-    name: standalone
+    name: sh
   backends:
     - name: linode-backend
       storageRef:
-        apiGroup: storage.kubestash.com
         namespace: demo
-        kind: BackupStorage
-        name: linode
+        name: s3-storage
       retentionPolicy:
-        name: rp
+        name: mongodb-retention-policy
         namespace: demo
   sessions:
-    - name: frequent-backup
+    - name: wow-backup
       sessionHistoryLimit: 3
       scheduler:
-        schedule: "*/2 * * * *"
-        successfulJobsHistoryLimit: 10
-        failedJobsHistoryLimit: 10
+        schedule: "*/3 * * * *"
+        successfulJobsHistoryLimit: 2
+        failedJobsHistoryLimit: 2
         jobTemplate:
           backoffLimit: 1
       repositories:
@@ -36,7 +34,7 @@ spec:
            name: encrypt-secret # some addon may not support encryption
            namespace: demo
       addon:
-        name: mongodb-backup-restore-addon
+        name: mongodb-addon
         tasks:
-          - name: mongodb-backup-task
+          - name: logical-backup
 # NB: Deleting the backupConfiguration will delete not delete the created repositories & snapshots
