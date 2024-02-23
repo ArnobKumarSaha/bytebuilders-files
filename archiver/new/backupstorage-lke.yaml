@@ -10,7 +10,7 @@ spec:
       endpoint: us-east-1.linodeobjects.com
       bucket: arnob
       region: us-east-1
-      prefix: ya
+      prefix: kubestash
       secretName: linode-secret 
   usagePolicy:
     allowedNamespaces:

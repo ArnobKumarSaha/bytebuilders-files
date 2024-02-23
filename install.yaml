@@ -13,15 +13,23 @@ kubectl apply -f https://github.com/kubedb/installer/raw/v2023.12.11/crds/kubedb
 helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
     --version v2024.2.14 \
     --namespace kubedb --create-namespace \
-    --set-file global.license=/home/arnob/yamls/license/arnob.txt \
+    --set-file global.license=/home/arnob/yamls/license/gke.txt \
     --set kubedb-provisioner.operator.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-webhook-server.server.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-ops-manager.operator.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-autoscaler.operator.securityContext.seccompProfile.type=RuntimeDefault \
-    --set kubedb-kubestash-catalog.enabled=true \
+    --set global.featureGates.RabbitMQ=true \
+    --set global.featureGates.ZooKeeper=true \
+    --set global.featureGates.Solr=true \ 
+    --set global.featureGates.Singlestore=true \
+    --set global.featureGates.Druid=true \
     --set global.featureGates.Pgpool=true \
-    --set global.featureGates.ProxySQL=true 
+    --set global.featureGates.FerretDB=true
 
+
+v2024.2.14
+
+--set-file global.license=/home/arnob/yamls/license/crd-test.txt \
     --set global.featureGates.Elasticsearch=false \
     --set global.featureGates.Kafka=false \
     --set global.featureGates.MariaDB=false \
@@ -31,7 +39,7 @@ helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
     --set global.featureGates.Redis=false \
     --set global.featureGates.RabbitMQ=true \
 
-
+--set kubedb-kubestash-catalog.enabled=true \
 --set kubedb-catalog.skipDeprecated=false \
 --wait --burst-limit=10000 --debug \
 
@@ -94,4 +102,7 @@ Note that, You have to run the above `helm upgrade` command with the release nam
 
 
 
-linode machine pass : 123abc-456ABC-789
+sidekicks.apps.k8s.appscode.com                   2024-02-22T04:23:14Z
+nodetopologies.node.k8s.appscode.com              2024-02-22T04:23:15Z
+recommendations.supervisor.appscode.com           2024-02-22T04:23:15Z
+appbindings.appcatalog.appscode.com               2024-02-22T04:25:16Z
