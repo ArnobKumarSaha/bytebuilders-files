@@ -1,19 +1,17 @@
 apiVersion: kubedb.com/v1alpha2
 kind: Postgres
 metadata:
-  name: built
-  namespace: gg
+  name: pg
+  namespace: demo
 spec:
   version: "15.5"
   replicas: 3
   storageType: Durable
   storage:
-    storageClassName: "longhorn"
+    # storageClassName: "longhorn"
     accessModes:
     - ReadWriteOnce
     resources:
       requests:
         storage: 1Gi
   terminationPolicy: Delete
-  monitor:
-    agent: prometheus.io/builtin
