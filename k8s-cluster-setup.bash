@@ -68,6 +68,19 @@ helm install kubestash oci://ghcr.io/appscode-charts/kubestash \
 kubectl apply -f ~/go/src/github.com/random/external-snapshotter/client/config/crd/ || true
 kubectl apply -f ~/go/src/github.com/random/external-snapshotter/deploy/kubernetes/snapshot-controller/ || true
 kubectl apply -f ~/go/src/github.com/random/external-snapshotter/deploy/kubernetes/csi-snapshotter/ || true
+
+sleep 5
+kubectl create ns demo || true
+kubectl apply -f ~/yamls/archiver/new/volumesnapshotclass.yaml
+kubectl create secret generic -n demo linode-secret \
+  --from-literal=AWS_ACCESS_KEY_ID=${LINODE_ACCESS_KEY_ID} \
+  --from-literal=AWS_SECRET_ACCESS_KEY=${LINODE_SECRET_ACCESS_KEY} \
+  --from-literal=AWS_ENDPOINT=https://us-east-1.linodeobjects.com
+kubectl apply -f ~/yamls/archiver/new/retention-policy.yaml
+kubectl apply -f ~/yamls/archiver/new/encrypt-secret.yaml
+kubectl apply -f ~/yamls/archiver/new/backupstorage-lke.yaml
+kubectl apply -f ~/yamls/archiver/new/archiver.yaml
+kubectl apply -f ~/yamls/archiver/new/db1.yaml
 fi
 
 
