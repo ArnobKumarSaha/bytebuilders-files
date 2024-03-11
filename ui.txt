@@ -41,3 +41,18 @@ Backend:
 9) UnusualLockCheckError in mongodhealth-check : 
 10) Failed to check cluster  Write Access for Elasticsearch: elastic/cluster with: Failed to perform write request
 11)
+
+
+
+
+
+Orange cli Issue : 
+
+# wrong prometheus
+./db_cli monitor check-connection postgres postgresql-db-qa -n postgresql-db-qa-15-5 --prom-svc-name=cattle-project-p-8vzrm-mon-prometheus --prom-svc-namespace=cattle-project-p-8vzrm-monitoring
+
+# right prometheus
+./db_cli monitor check-connection postgres postgresql-db-qa -n postgresql-db-qa-15-5 --prom-svc-name=rancher-monitoring-prometheus --prom-svc-namespace=cattle-monitoring-system
+
+
+curl http://rancher-monitoring-prometheus.cattle-monitoring-system:9090/api/v1/query?query=container_cpu_usage_seconds_total

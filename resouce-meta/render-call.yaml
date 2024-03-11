@@ -1,0 +1,42 @@
+apiVersion: meta.k8s.appscode.com/v1alpha1
+kind: Render
+request:
+  convertToTable: true
+  layoutName: kubedb.com-v1alpha2-mongodbs-kubedb
+  renderBlocks:
+  - Connection
+  source:
+    ref:
+      name: mgrs
+      namespace: mongo
+    resource:
+      group: kubedb.com
+      name: mongodbs
+      version: v1alpha2
+
+
+singlestore:
+  monitoring, backup, 8.5.7, studio(ui)
+
+kafka:
+  monitoring, autoscaler, 3.6.1, 3.5.2
+
+zookeeper:
+  monitoring
+
+solr: 
+  bug fix
+
+pgpool:
+  monitoring
+
+-----------
+
+mariadb:
+  archiver
+
+mongodb: 
+  improvement
+
+es-dashboard:
+  backup 
