@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: mg5
+  name: s7
   namespace: demo
 spec:
   # allowedSchemas:
@@ -13,13 +13,13 @@ spec:
   #   selector:
   #     matchLabels:
   #       "schema.kubedb.com": "mongo"
-  version: "5.0.23"
+  version: "7.0.5"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
     name: "rs1"
   # authSecret:
-  #   name: mg-auth-secret
+  #   name: s7-auth
   #   externallyManaged: true
   podTemplate:
     spec:

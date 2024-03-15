@@ -39,11 +39,17 @@ spec:
   # tls:
   #   issuerRef:
   #     apiGroup: "cert-manager.io"
-  #     kind: Issuer
-  #     name: mongo-ca-issuer
+  #     kind: ClusterIssuer
+  #     name: vault-issuer
   # clusterAuthMode: x509
   # configSecret:
   #   name: mg-custom-config
+  monitor:
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: kube-prometheus-stack
 
 
 # > restoreSession

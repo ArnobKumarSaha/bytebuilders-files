@@ -12,14 +12,14 @@ fullnameOverride: ""
 
 # List of resources for which dashboards will be applied
 resources: # +doc-gen:break
-  - mongodb
+- connectcluster
 #  - elasticsearch
 #  - kafka
 #  - mariadb
 #  - mongodb
 #  - mysql
 #  - perconaxtradb
-#  - postgres
+#- postgres
 #  - proxysql
 #  - redis
 
@@ -34,10 +34,10 @@ dashboard:
     # If true, datasource will be hardcoded in the dashboard
     datasource: false
   alerts: true
-  replacements: {}
-    # job=\"kube-state-metrics\": job=\"kubernetes-service-endpoints\"
-    # job=\"kubelet\": job=\"kubernetes-nodes-cadvisor\"
-    # job=\"$app-stats\": job=\"kubedb-databases\"
+  replacements:
+    job=\"kube-state-metrics\": job=\"kubernetes-service-endpoints\"
+    job=\"kubelet\": job=\"kubernetes-nodes-cadvisor\"
+    job=\"$app-stats\": job=\"kubedb-databases\"
 
 grafana:
   # Name of Grafana Appbinding where these dashboards are applied
@@ -46,15 +46,15 @@ grafana:
   namespace: ""
   version: 8.0.7
   # builtin
-  # url: "http://grafana.monitoring.svc:80"
+  url: "http://grafana.monitoring.svc:80"
   # apikey: "eyJrIjoiS1pieXlFRVlyWUxnSjVaVUFYc21tMXVNNGpERmlubkMiLCJuIjoiYXJub2IiLCJpZCI6MX0="
   # operator
-  url: "http://prometheus-grafana.monitoring.svc:80"
-  apikey: "eyJrIjoiZGlaaWZEYTNkSkJVQWgwOTFoaUNoTHF2dTBRMlFtaEciLCJuIjoiYXJub2IiLCJpZCI6MX0="
+  # url: "http://prometheus-grafana.monitoring.svc:80"
+  apikey: "<>"
 
 app:
-  name: mg4
-  namespace: demo
+  name: "dfdf"
+  namespace: "fdfd"
 
 
 # curl -H "Authorization: Bearer eyJrIjoiQTQ5NEM5MDI0OUR6TnEyNU1wSElvUFdxcHFXZDR6SVkiLCJuIjoiYXJub2IiLCJpZCI6MX0=" http://localhost:9091/api/dashboards/home

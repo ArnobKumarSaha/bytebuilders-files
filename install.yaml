@@ -13,7 +13,7 @@ kubectl apply -f https://github.com/kubedb/installer/raw/v2023.12.11/crds/kubedb
 helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
     --version v2024.3.9-rc.0 \
     --namespace kubedb --create-namespace \
-    --set-file global.license=/home/arnob/yamls/license/gke.txt \
+    --set-file global.license=/home/arnob/yamls/license/kind.txt \
     --set kubedb-provisioner.operator.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-webhook-server.server.securityContext.seccompProfile.type=RuntimeDefault \
     --set kubedb-ops-manager.operator.securityContext.seccompProfile.type=RuntimeDefault \

@@ -56,3 +56,24 @@ Orange cli Issue :
 
 
 curl http://rancher-monitoring-prometheus.cattle-monitoring-system:9090/api/v1/query?query=container_cpu_usage_seconds_total
+
+
+kc port-forward -n postgresql-db-qa-15-5 svc/postgresql-db-qa-stats 8083:56790
+curl localhost:8083/metrics | grep pg_up
+
+
+
+----------------------------------------------------------------
+3) Give a description in `Enable Monitoring`
+5) namespace list : color
+6) Show the toaster when model api failed in kubedb-ui
+7) No need to refer stash-opscenter in the kubedb-ui `Backup` page
+9) redis health check doesn't get periodically updated. Pod is in Terminating, But DB is Ready scenario.
+11) https://github.com/kubedb/ops-manager/blob/6320384bf4463fc8ad7d609014ddd725b9dde03b/pkg/recommendation/database/shared.go#L506
+13) Show <form, yaml, json> in cluster-ui
+14) Why add a quotation in the secret key (Vue openAPISchema)
+16) Some serious issue on mariadbOps : upg -> ver -> hor -> expansion(failed) -> restart(progressing) . ops-manager log says : 0th pod not found 
+17) Setting podTopology in one node, changes the others : key-values 
+18) Why not doing api calls in VerticalScale Preview for es, mongo 
+19) 
+
