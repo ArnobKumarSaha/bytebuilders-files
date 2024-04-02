@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: s7
+  name: dest
   namespace: demo
 spec:
   # allowedSchemas:
@@ -13,14 +13,14 @@ spec:
   #   selector:
   #     matchLabels:
   #       "schema.kubedb.com": "mongo"
-  version: "7.0.5"
+  version: "6.0.12"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
     name: "rs1"
-  # authSecret:
-  #   name: s7-auth
-  #   externallyManaged: true
+  authSecret:
+    name: dest-auth
+    externallyManaged: true
   podTemplate:
     spec:
       # nodeSelector:
@@ -31,8 +31,8 @@ spec:
       #   effect: NoSchedule
       resources:
         requests:
-          "cpu": "0.6"
-          "memory": 600Mi
+          "cpu": "1"
+          "memory": 2Gi
   # coordinator:
     # securityContext:
   #     allowPrivilegeEscalation: false
@@ -48,7 +48,7 @@ spec:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 1Gi
+        storage: 10Gi
   # serviceTemplates:
   # - alias: primary
   #   metadata: {}
@@ -86,8 +86,8 @@ spec:
   #         requests:
   #           "cpu": 0.4
   #           "memory": 400Mi
-  # configSecret:
-  #   name: mg-configuration
+  configSecret:
+    name: mg-configuration
   # sslMode: requireSSL
   # tls:
   #   issuerRef:

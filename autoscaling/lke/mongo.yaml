@@ -1,36 +1,26 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: prefer-with
+  name: sample
   namespace: demo
 spec:
   version: "4.4.26"
   terminationPolicy: WipeOut
-  replicas: 1
-  # replicaSet:
-  #   name: "rs"
-  # sslMode: requireSSL
-  sslMode: preferSSL
-  tls:
-    issuerRef:
-      apiGroup: "cert-manager.io"
-      kind: Issuer
-      name: mongo-ca-issuer
-  # clusterAuthMode: x509
-  configSecret:
-    name: mg-configuration
+  replicas: 3
+  replicaSet:
+    name: "rs"
   podTemplate:
     spec:
-      # nodeSelector:
-      #   node.kubernetes.io/instance-type: g6-standard-2
+      nodeSelector:
+        node.kubernetes.io/instance-type: g6-standard-2
       # tolerations:
       # - key: nodepool
       #   value: medium
       #   effect: NoSchedule
       resources:
         requests:
-          "cpu": "0.5"
-          "memory": 500Mi
+          "cpu": "1"
+          "memory": 1950Mi
         limits:
           "cpu": "2"
           "memory": 3900Mi
@@ -39,7 +29,7 @@ spec:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 1Gi
+        storage: 2Gi
 
 # recommender/input/cluster_feeder.go -> updatePodMemory() -> pod.Containers[i] = cnt
 # go wait.Until(c.Recommender.RunOnce, c.Opts.MetricsFetcherInterval, stopCh)

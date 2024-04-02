@@ -5,18 +5,18 @@ metadata:
   namespace: demo
 spec:
   databaseRef:
-    name: simple
+    name: sample
   opsRequestOptions:
     timeout: 10m
     apply: IfReady
   compute:
     replicaSet:
       trigger: "On"
-      podLifeTimeThreshold: 5m
+      podLifeTimeThreshold: 10m
       resourceDiffPercentage: 30
       minAllowed:
-        cpu: "1"
-        memory: 1900Mi
+        cpu: "450m"
+        memory: 855Mi
       maxAllowed:
         cpu: 6
         memory: 16Gi
