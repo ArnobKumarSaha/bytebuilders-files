@@ -2,9 +2,13 @@ module insert
 
 go 1.22.0
 
-require go.mongodb.org/mongo-driver v1.14.0
+require (
+	go.mongodb.org/mongo-driver v1.14.0
+	gomodules.xyz/go-sh v0.1.0
+)
 
 require (
+	github.com/codegangsta/inject v0.0.0-20150114235600-33e0aa1cb7c0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect

@@ -1,14 +1,36 @@
 
+helm uninstall -n kubedb kubedb
+
+kubectl delete crds -l app.kubernetes.io/name=kubedb
+
 helm install kubedb appscode/kubedb \
     --version v2023.11.2 \
     --namespace kubedb --create-namespace \
     --set kubedb-provisioner.enabled=true \
     --set kubedb-ops-manager.enabled=true \
     --set kubedb-autoscaler.enabled=true \
-    --set-file global.license=/home/arnob/yamls/license/test.txt
+    --set-file global.license=/home/arnob/yamls/license/kind.txt
+
+kubectl apply -f ~/yamls/all-dbs.yaml
 
 
-kubectl apply -f https://github.com/kubedb/installer/raw/v2023.12.11/crds/kubedb-catalog-crds.yaml
+kubectl apply -f https://github.com/kubedb/installer/raw/v2024.3.16/crds/kubedb-catalog-crds.yaml
+
+helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \
+    --version v2024.3.16 \
+    --namespace kubedb --create-namespace \
+    --set kubedb-catalog.skipDeprecated=false \
+    --set-file global.license=/home/arnob/yamls/license/kind.txt
+
+kubectl patch deploy -n kubedb kubedb-kubedb-ops-manager -p '{"spec":{"template":{"spec":{"containers":[{"name":"operator","image":"arnobkumarsaha/kubedb-ops-manager:mg-user_linux_amd64"}]}}}}'
+
+kubectl patch mgversion 4.0.11-v1 --type="merge" --patch='{"spec": {"deprecated": false}}'
+kubectl patch mgversion 4.4.6 --type="merge" --patch='{"spec": {"deprecated": false}}'
+
+
+kubectl apply -f ~/yamls/ops/version-update.yaml
+
+----------------------------------------------
 
 
 helm upgrade -i kubedb oci://ghcr.io/appscode-charts/kubedb \

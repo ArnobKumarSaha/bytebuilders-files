@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha2
 kind: MongoDB
 metadata:
-  name: dest
+  name: mg5
   namespace: demo
 spec:
   # allowedSchemas:
@@ -13,14 +13,15 @@ spec:
   #   selector:
   #     matchLabels:
   #       "schema.kubedb.com": "mongo"
-  version: "6.0.12"
+  # version: "4.0.11-v1"
+  version: "5.0.23"
   terminationPolicy: WipeOut
   replicas: 3
   replicaSet:
     name: "rs1"
-  authSecret:
-    name: dest-auth
-    externallyManaged: true
+  # authSecret:
+  #   name: source-auth
+  #   externallyManaged: true
   podTemplate:
     spec:
       # nodeSelector:
@@ -31,8 +32,8 @@ spec:
       #   effect: NoSchedule
       resources:
         requests:
-          "cpu": "1"
-          "memory": 2Gi
+          "cpu": "700m"
+          "memory": 700Mi
   # coordinator:
     # securityContext:
   #     allowPrivilegeEscalation: false
@@ -86,8 +87,8 @@ spec:
   #         requests:
   #           "cpu": 0.4
   #           "memory": 400Mi
-  configSecret:
-    name: mg-configuration
+  # configSecret:
+  #   name: mg-configuration
   # sslMode: requireSSL
   # tls:
   #   issuerRef:
@@ -95,13 +96,13 @@ spec:
   #     kind: Issuer
   #     name: mongo-ca-issuer
   # clusterAuthMode: x509
-  # monitor:
-  #   # agent: prometheus.io/builtin
-  #   agent: prometheus.io/operator
-  #   prometheus:
-  #     serviceMonitor:
-  #       labels:
-  #         release: prometheus
+  monitor:
+    # agent: prometheus.io/builtin
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: prometheus
   #     exporter:
   #       args: ["--compatible-mode"]
   #       securityContext:

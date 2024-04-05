@@ -12,7 +12,7 @@ spec:
   compute:
     replicaSet:
       trigger: "On"
-      podLifeTimeThreshold: 10m
+      podLifeTimeThreshold: 6m
       resourceDiffPercentage: 30
       minAllowed:
         cpu: "450m"

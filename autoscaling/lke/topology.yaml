@@ -9,11 +9,11 @@ spec:
   - topologyValue: g6-standard-1
     allocatable:
       cpu: "1"
-      memory: 1900Mi
+      memory: 2021654528456m # 1928Mi
   - topologyValue: g6-standard-2
     allocatable:
       cpu: "2"
-      memory: 3900Mi
+      memory: 4103083008321m # 3913Mi
   - topologyValue: g6-standard-4
     allocatable:
       cpu: "4"

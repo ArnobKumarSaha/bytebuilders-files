@@ -5,12 +5,12 @@ metadata:
   namespace: demo
 spec:
   databaseRef:
-    name: simple
+    name: mg4
   opsRequestOptions:
     timeout: 10m
     apply: IfReady
   compute:
-    standalone:
+    replicaSet:
       trigger: "On"
       podLifeTimeThreshold: 5m
       resourceDiffPercentage: 20

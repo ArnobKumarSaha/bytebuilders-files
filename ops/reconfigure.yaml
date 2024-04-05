@@ -11,11 +11,11 @@ metadata:
 spec:
   type: Reconfigure
   databaseRef:
-    name: standalone
+    name: mg4
   configuration:
-    standalone:
+    replicaSet:
       configSecret:
-        name: mg-custom-config
+        name: new-custom-config
   timeout: 5m
   apply: IfReady
 # status:

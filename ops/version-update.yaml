@@ -1,14 +1,15 @@
 apiVersion: ops.kubedb.com/v1alpha1
 kind: MongoDBOpsRequest
 metadata:
-  name: to7
-  namespace: demo
+  name: three # mongo -u root -p $MONGO_INITDB_ROOT_PASSWORD
+  namespace: demo # rs.status()
 spec:
   type: UpdateVersion
   databaseRef:
-    name: mgrs
+    name: three
   updateVersion:
-    targetVersion: 7.0.5
+    targetVersion: 4.0.11-v1
+    # targetVersion: 4.4.6
   # readinessCriteria:
   #   oplogMaxLagSeconds: 20
   #   objectsCountDiffPercentage: 10
