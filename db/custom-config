@@ -1,7 +1,0 @@
-
-net:
-   maxIncomingConnections: 20000
-   tls:
-      allowConnectionsWithoutCertificates: true
-
-kubectl create secret generic -n demo mg-configuration --from-file=./mongod.conf
