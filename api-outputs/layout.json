@@ -1,0 +1,3011 @@
+{
+    "apiVersion": "meta.k8s.appscode.com/v1alpha1",
+    "kind": "ResourceLayout",
+    "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+            "k8s.io/group": "kubedb.com",
+            "k8s.io/kind": "MongoDB",
+            "k8s.io/resource": "mongodbs",
+            "k8s.io/version": "v1alpha2"
+        },
+        "name": "kubedb.com-v1alpha2-mongodbs-kubedb"
+    },
+    "spec": {
+        "defaultLayout": false,
+        "header": {
+            "actions": {
+                "create": "Never"
+            },
+            "displayMode": "Field",
+            "kind": "Connection",
+            "query": {
+                "byLabel": "view",
+                "type": "GraphQL"
+            },
+            "ref": {
+                "group": "core.k8s.appscode.com",
+                "kind": "GenericResource"
+            },
+            "requiredFeatureSets": {
+                "opscenter-datastore": [
+                    "kubedb"
+                ]
+            },
+            "view": {
+                "columns": [
+                    {
+                        "name": "Namespace",
+                        "pathTemplate": "{{ .metadata.namespace }}",
+                        "priority": 3,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Version",
+                        "pathTemplate": "{{ .spec.version }}",
+                        "priority": 3,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Mode",
+                        "pathTemplate": "{{ .spec.mode }}",
+                        "priority": 3,
+                        "type": "string"
+                    },
+                    {
+                        "format": "resource-map",
+                        "name": "CPU",
+                        "pathTemplate": "{{- printf `{ \"request\": \"%s\", \"limit\": \"%s\" }` (dig \"requests\" \"cpu\" \"\" .spec.appResource) (dig \"limits\" \"cpu\" \"\" .spec.appResource) -}}",
+                        "priority": 3,
+                        "type": "object"
+                    },
+                    {
+                        "format": "resource-map",
+                        "name": "Memory",
+                        "pathTemplate": "{{- printf `{ \"request\": \"%s\", \"limit\": \"%s\" }` (dig \"requests\" \"memory\" \"\" .spec.appResource) (dig \"limits\" \"memory\" \"\" .spec.appResource) -}}",
+                        "priority": 3,
+                        "type": "object"
+                    },
+                    {
+                        "format": "resource-map",
+                        "name": "Storage",
+                        "pathTemplate": "{{- printf `{ \"request\": \"%s\", \"limit\": \"%s\" }` (dig \"requests\" \"storage\" \"\" .spec.appResource) (dig \"limits\" \"storage\" \"\" .spec.appResource) -}}",
+                        "priority": 3,
+                        "type": "object"
+                    },
+                    {
+                        "color": {
+                            "template": "{{ $status := .status.phase }}\n{{ $color := \"gray\" }}\n{{ if list \"Provisioning\" \"DataRestoring\" | has $status }}\n  {{ $color = \"info\" }}\n{{ else if list \"Ready\" | has $status }}\n  {{ $color = \"success\" }}\n{{ else if list \"Critical\" | has $status }}\n  {{ $color = \"warning\" }}\n{{ else if list \"NotReady\" | has $status }}\n  {{ $color = \"danger\" }}\n{{ else if list \"Halted\" | has $status }}\n  {{ $color = \"gray\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                        },
+                        "name": "Status",
+                        "pathTemplate": "{{ .status.phase }}",
+                        "priority": 3,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "pages": [
+            {
+                "name": "Overview",
+                "sections": [
+                    {
+                        "blocks": [
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "fieldPath": "{.response.dashboards[0].panels}",
+                                "kind": "Connection",
+                                "query": {
+                                    "raw": "request:\n  embeddedLink: true\n  dashboards:\n  - title: \"KubeDB / MongoDB / Summary\"\n    vars:\n    - name: namespace\n      value: {{ .namespace }}\n    - name: app\n      value: {{ .name }}\n    panels:\n      - { \"title\": \"CPU Usage\", \"width\": 12 }\n      - { \"title\": \"Memory Usage\", \"width\": 12 }\n      - { \"title\": \"Disk Usage\", \"width\": 6 }\n      - { \"title\": \"Disk R/W Info\", \"width\": 6 }\n      - { \"title\": \"IOPS (Reads+Writes)\", \"width\": 6 }\n      - { \"title\": \"ThroughPut (Read+Write)\", \"width\": 6 }\n      - { \"title\": \"Receive Bandwidth\", \"width\": 6 }\n      - { \"title\": \"Transmit Bandwidth\", \"width\": 6 }\n",
+                                    "type": "REST"
+                                },
+                                "ref": {
+                                    "group": "ui.openviz.dev",
+                                    "kind": "DashboardGroup"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-datastore": [
+                                        "kubedb",
+                                        "kubedb-opscenter"
+                                    ],
+                                    "opscenter-monitoring": [
+                                        "monitoring-operator"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Title",
+                                            "pathTemplate": "{{ .title }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "URL",
+                                            "pathTemplate": "{{ .url }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Width",
+                                            "pathTemplate": "{{ .width }}",
+                                            "priority": 3,
+                                            "type": "integer"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Nodes",
+                                "query": {
+                                    "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    offshoot(group: \"\", kind: \"Pod\") {\n      refs: view(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n  }\n}",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "core.k8s.appscode.com",
+                                    "kind": "PodView"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-datastore": [
+                                        "kubedb"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "format": "name",
+                                            "link": {
+                                                "template": "{{ $name := .metadata.name }}\n{{ $namespace := .metadata.namespace }}\n{{- printf \"/${username}/${clustername}/core/v1/pods/%s?namespace=%s\" $name $namespace -}}\n"
+                                            },
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.name }}",
+                                                "type": "string"
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Role",
+                                            "pathTemplate": "{{ index .metadata.labels `kubedb.com/role` | default `-` | upper}}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "CPU (usage/limit)",
+                                            "pathTemplate": "{{ if .spec.resources.usage.cpu }}{{.spec.resources.usage.cpu}} / {{ default `*` .spec.resources.limits.cpu }}{{ end }}",
+                                            "priority": 3,
+                                            "textAlign": "center",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Memory (usage/limit)",
+                                            "pathTemplate": "{{ if .spec.resources.usage.memory }}{{.spec.resources.usage.memory}} / {{default `*` .spec.resources.limits.memory}}{{ end }}",
+                                            "priority": 3,
+                                            "textAlign": "center",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Storage (usage/limit)",
+                                            "pathTemplate": "{{ if .spec.resources.usage.storage }}{{.spec.resources.usage.storage}} / {{default `*` .spec.resources.limits.storage}}{{ end }}",
+                                            "priority": 3,
+                                            "textAlign": "center",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "color": {
+                                                "template": "{{ $status := .status.phase }}\n{{ $color := \"gray\" }}\n{{ if list \"Running\" \"Succeeded\" | has $status }}\n  {{ $color = \"success\" }}\n{{ else if list \"Pending\" | has $status }}\n  {{ $color = \"info\" }}\n{{ else if list \"Failed\" | has $status }}\n  {{ $color = \"danger\" }}\n{{ else if list \"Unknown\" | has $status }}\n  {{ $color = \"warning\" }}\n{{ end }}\n{{- printf \"%s is-light\" $color -}}\n"
+                                            },
+                                            "name": "Status",
+                                            "pathTemplate": "{{ .status.phase }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        },
+                                        {
+                                            "dashboard": {
+                                                "name": "kubedb.com-v1alpha2-mongodbs-pod"
+                                            },
+                                            "name": "Dashboard",
+                                            "priority": 4,
+                                            "textAlign": "center",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "exec": {
+                                                "command": [
+                                                    "bash",
+                                                    "-c",
+                                                    "mongo admin -u \"$MONGO_INITDB_ROOT_USERNAME\" -p \"$MONGO_INITDB_ROOT_PASSWORD\""
+                                                ],
+                                                "container": "mongodb",
+                                                "help": "show dbs;\n"
+                                            },
+                                            "name": "Connect",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 4,
+                                            "textAlign": "center",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "info": {
+                            "actions": {
+                                "create": "Never"
+                            },
+                            "displayMode": "List",
+                            "kind": "Connection",
+                            "query": {
+                                "byLabel": "connect_via",
+                                "type": "GraphQL"
+                            },
+                            "ref": {
+                                "group": "appcatalog.appscode.com",
+                                "kind": "AppBinding"
+                            },
+                            "requiredFeatureSets": {
+                                "opscenter-datastore": [
+                                    "kubedb"
+                                ]
+                            },
+                            "view": {
+                                "columns": [
+                                    {
+                                        "name": "Name",
+                                        "pathTemplate": "{{ .metadata.name }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Namespace",
+                                        "pathTemplate": "{{ .metadata.namespace }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Labels",
+                                        "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                        "priority": 3,
+                                        "type": "object"
+                                    },
+                                    {
+                                        "name": "Annotations",
+                                        "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                        "priority": 1,
+                                        "type": "object"
+                                    },
+                                    {
+                                        "name": "Type",
+                                        "pathTemplate": "{{ .spec.type }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Version",
+                                        "pathTemplate": "{{ .spec.version }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Service",
+                                        "pathTemplate": "{{ .spec.clientConfig.service.name }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Secret",
+                                        "pathTemplate": "{{ .spec.secret.name }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Backup Task",
+                                        "pathTemplate": "{{ .spec.parameters.stash.addon.backupTask.name }}",
+                                        "priority": 1,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Restore Task",
+                                        "pathTemplate": "{{ .spec.parameters.stash.addon.restoreTask.name }}",
+                                        "priority": 1,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Age",
+                                        "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                        "priority": 3,
+                                        "sort": {
+                                            "enable": true,
+                                            "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                            "type": "integer"
+                                        },
+                                        "type": "date"
+                                    }
+                                ]
+                            }
+                        },
+                        "insight": {
+                            "actions": {
+                                "create": "Never"
+                            },
+                            "displayMode": "Field",
+                            "kind": "Connection",
+                            "query": {
+                                "byLabel": "view",
+                                "type": "GraphQL"
+                            },
+                            "ref": {
+                                "group": "ui.kubedb.com",
+                                "kind": "MongoDBInsight"
+                            },
+                            "requiredFeatureSets": {
+                                "opscenter-datastore": [
+                                    "kubedb",
+                                    "kubedb-opscenter"
+                                ]
+                            },
+                            "view": {
+                                "columns": [
+                                    {
+                                        "name": "Current Connections",
+                                        "pathTemplate": "{{ .spec.connections.currentConnections }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Total Connections",
+                                        "pathTemplate": "{{ .spec.connections.totalConnections }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Available Connections",
+                                        "pathTemplate": "{{ .spec.connections.availableConnections }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Active Connections",
+                                        "pathTemplate": "{{ .spec.connections.activeConnections }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Total Collections",
+                                        "pathTemplate": "{{ .spec.dbStats.totalCollections }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Data Size",
+                                        "pathTemplate": "{{ .spec.dbStats.dataSize }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Total Indexes",
+                                        "pathTemplate": "{{ .spec.dbStats.totalIndexes }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Index Size",
+                                        "pathTemplate": "{{ .spec.dbStats.indexSize }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Number Of Shards",
+                                        "pathTemplate": "{{ .spec.shardsInfo.numberOfShards }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Replicas Per Shards",
+                                        "pathTemplate": "{{ .spec.shardsInfo.replicasPerShards }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Number Of Chunks",
+                                        "pathTemplate": "{{ .spec.shardsInfo.numberOfChunks }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Balancer Enabled",
+                                        "pathTemplate": "{{ .spec.shardsInfo.balancerEnabled }}",
+                                        "priority": 3,
+                                        "type": "boolean"
+                                    },
+                                    {
+                                        "name": "Chunks Balanced",
+                                        "pathTemplate": "{{ .spec.shardsInfo.chunksBalanced }}",
+                                        "priority": 3,
+                                        "type": "boolean"
+                                    },
+                                    {
+                                        "name": "Replicas",
+                                        "pathTemplate": "{{ .spec.replicaSetInfo.numberOfReplicas }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Insights",
+                "requiredFeatureSets": {
+                    "opscenter-datastore": [
+                        "kubedb",
+                        "kubedb-opscenter"
+                    ],
+                    "opscenter-monitoring": [
+                        "monitoring-operator"
+                    ]
+                },
+                "sections": [
+                    {
+                        "blocks": [
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "fieldPath": ".response.dashboards",
+                                "kind": "Connection",
+                                "name": "Grafana Dashboards",
+                                "query": {
+                                    "raw": "request:\n  sourceLocator:\n    resource:\n      group: kubedb.com\n      name: mongodbs\n      version: v1alpha2\n    ref:\n      name: {{ .name }}\n      namespace: {{ .namespace }}\n  name: kubedb.com-v1alpha2-mongodbs\n",
+                                    "type": "REST"
+                                },
+                                "ref": {
+                                    "group": "meta.k8s.appscode.com",
+                                    "kind": "RenderDashboard"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-datastore": [
+                                        "kubedb",
+                                        "kubedb-opscenter"
+                                    ],
+                                    "opscenter-monitoring": [
+                                        "monitoring-operator"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Title",
+                                            "pathTemplate": "{{ .title }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "URL",
+                                            "pathTemplate": "{{ .url }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "fieldPath": ".spec.queries",
+                                "kind": "Connection",
+                                "name": "Slow Queries",
+                                "query": {
+                                    "byLabel": "view",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "ui.kubedb.com",
+                                    "kind": "MongoDBQueries"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-datastore": [
+                                        "kubedb",
+                                        "kubedb-opscenter"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "color": {
+                                                "template": "{{ $operation := .operation | lower }}\n{{ $color := \"gray\" }}\n{{ if list \"command\" | has $operation }}\n  {{ $color = \"primary\" }}\n{{ else if list \"insert\" \"group\" | has $operation }}\n  {{ $color = \"success\" }}\n{{ else if list \"count\" \"distinct\" \"mapreduce\" | has $operation }}\n  {{ $color = \"info\" }}\n{{ else if list \"update\" \"query\" | has $operation }}\n  {{ $color = \"warning\" }}\n{{ else if list \"remove\" | has $operation }}\n  {{ $color = \"danger\" }}\n{{ else if list \"geonear\" \"getmore\" | has $operation }}\n  {{ $color = \"dark\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                                            },
+                                            "name": "Operation",
+                                            "pathTemplate": "{{ .operation | default `-` | upper }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Database Name",
+                                            "pathTemplate": "{{ .databaseName }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Collection Name",
+                                            "pathTemplate": "{{ .collectionName }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Command",
+                                            "pathTemplate": "{{ .command }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Count",
+                                            "pathTemplate": "{{ .count }}",
+                                            "priority": 3,
+                                            "type": "integer"
+                                        },
+                                        {
+                                            "name": "Avg Execution Time (msec)",
+                                            "pathTemplate": "{{ .avgExecutionTimeMilliSeconds }}",
+                                            "priority": 3,
+                                            "type": "integer"
+                                        },
+                                        {
+                                            "name": "Min Execution Time (msec)",
+                                            "pathTemplate": "{{ .minExecutionTimeMilliSeconds }}",
+                                            "priority": 3,
+                                            "type": "integer"
+                                        },
+                                        {
+                                            "name": "Max Execution Time (msec)",
+                                            "pathTemplate": "{{ .maxExecutionTimeMilliSeconds }}",
+                                            "priority": 3,
+                                            "type": "integer"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "fieldPath": ".spec.collections",
+                                "kind": "Connection",
+                                "name": "Top Collections",
+                                "query": {
+                                    "byLabel": "view",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "ui.kubedb.com",
+                                    "kind": "MongoDBSchemaOverview"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-datastore": [
+                                        "kubedb",
+                                        "kubedb-opscenter"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Total Size",
+                                            "pathTemplate": "{{ .size | join \", \" }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .size | join ` ` | add }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "insight": {
+                            "actions": {
+                                "create": "Never"
+                            },
+                            "displayMode": "Field",
+                            "kind": "Connection",
+                            "query": {
+                                "byLabel": "view",
+                                "type": "GraphQL"
+                            },
+                            "ref": {
+                                "group": "ui.kubedb.com",
+                                "kind": "MongoDBInsight"
+                            },
+                            "requiredFeatureSets": {
+                                "opscenter-datastore": [
+                                    "kubedb",
+                                    "kubedb-opscenter"
+                                ]
+                            },
+                            "view": {
+                                "columns": [
+                                    {
+                                        "name": "Current Connections",
+                                        "pathTemplate": "{{ .spec.connections.currentConnections }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Total Connections",
+                                        "pathTemplate": "{{ .spec.connections.totalConnections }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Available Connections",
+                                        "pathTemplate": "{{ .spec.connections.availableConnections }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Active Connections",
+                                        "pathTemplate": "{{ .spec.connections.activeConnections }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Total Collections",
+                                        "pathTemplate": "{{ .spec.dbStats.totalCollections }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Data Size",
+                                        "pathTemplate": "{{ .spec.dbStats.dataSize }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Total Indexes",
+                                        "pathTemplate": "{{ .spec.dbStats.totalIndexes }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Index Size",
+                                        "pathTemplate": "{{ .spec.dbStats.indexSize }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Number Of Shards",
+                                        "pathTemplate": "{{ .spec.shardsInfo.numberOfShards }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Replicas Per Shards",
+                                        "pathTemplate": "{{ .spec.shardsInfo.replicasPerShards }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Number Of Chunks",
+                                        "pathTemplate": "{{ .spec.shardsInfo.numberOfChunks }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Balancer Enabled",
+                                        "pathTemplate": "{{ .spec.shardsInfo.balancerEnabled }}",
+                                        "priority": 3,
+                                        "type": "boolean"
+                                    },
+                                    {
+                                        "name": "Chunks Balanced",
+                                        "pathTemplate": "{{ .spec.shardsInfo.chunksBalanced }}",
+                                        "priority": 3,
+                                        "type": "boolean"
+                                    },
+                                    {
+                                        "name": "Replicas",
+                                        "pathTemplate": "{{ .spec.replicaSetInfo.numberOfReplicas }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Users",
+                "sections": [
+                    {
+                        "blocks": [
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Root User",
+                                "query": {
+                                    "byLabel": "auth_secret",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "",
+                                    "kind": "Secret"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Type",
+                                            "pathTemplate": "{{ .type }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Data",
+                                            "pathTemplate": "{{ .data | map_key_count }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "AppBinding",
+                                "query": {
+                                    "byLabel": "connect_via",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "appcatalog.appscode.com",
+                                    "kind": "AppBinding"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-datastore": [
+                                        "kubedb"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Type",
+                                            "pathTemplate": "{{ .spec.type }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "pathTemplate": "{{ .spec.version }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Service",
+                                            "pathTemplate": "{{ .spec.clientConfig.service.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Secret",
+                                            "pathTemplate": "{{ .spec.secret.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "VaultServers",
+                                "query": {
+                                    "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    authz(group: \"engine.kubevault.com\", kind: \"SecretEngine\") {\n      refs: offshoot(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n }\n}",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "kubevault.com",
+                                    "kind": "VaultServer"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-secret-management": [
+                                        "kubevault"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Always"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "SecretEngines",
+                                "query": {
+                                    "byLabel": "authz",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "engine.kubevault.com",
+                                    "kind": "SecretEngine"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-secret-management": [
+                                        "kubevault"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Always"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "MongoDBRoles",
+                                "query": {
+                                    "byLabel": "authz",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "engine.kubevault.com",
+                                    "kind": "MongoDBRole"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-secret-management": [
+                                        "kubevault"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Always"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "SecretAccessRequests",
+                                "query": {
+                                    "byLabel": "authz",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "engine.kubevault.com",
+                                    "kind": "SecretAccessRequest"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-secret-management": [
+                                        "kubevault"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Operations",
+                "sections": [
+                    {
+                        "blocks": [
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Recent Operations",
+                                "query": {
+                                    "byLabel": "ops",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "ops.kubedb.com",
+                                    "kind": "MongoDBOpsRequest"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-datastore": [
+                                        "kubedb"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Type",
+                                            "pathTemplate": "{{ .spec.type }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "color": {
+                                                "template": "{{ $status := .status.phase }}\n{{ $color := \"gray\" }}\n{{ if list \"Pending\" | has $status }}\n  {{ $color = \"gray\" }}\n{{ else if list \"Progressing\" | has $status }}\n  {{ $color = \"info\" }}\n{{ else if list \"Successful\" | has $status }}\n  {{ $color = \"success\" }}\n{{ else if list \"WaitingForApproval\" | has $status }}\n  {{ $color = \"warning\" }}\n{{ else if list \"Failed\"| has $status }}\n  {{ $color = \"danger\" }}\n{{ else if list \"Approved\" | has $status }}\n  {{ $color = \"link\" }}\n{{ else if list \"Denied\"| has $status }}\n  {{ $color = \"dark\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                                            },
+                                            "name": "Status",
+                                            "pathTemplate": "{{ .status.phase }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "tooltip": {
+                                                "template": "{{ .metadata.creationTimestamp }}"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Recommendations",
+                                "query": {
+                                    "byLabel": "recommended_for",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "supervisor.appscode.com",
+                                    "kind": "Recommendation"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-datastore": [
+                                        "kubedb"
+                                    ],
+                                    "opscenter-tools": [
+                                        "supervisor"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Description",
+                                            "pathTemplate": "{{ .spec.description }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "color": {
+                                                "template": "{{ $outdated := .status.outdated }}\n{{ $color := \"gray\" }}\n{{ if list true | has $outdated }}\n  {{ $color = \"gray\" }}\n{{ else if list false | has $outdated }}\n  {{ $color = \"transparent\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                                            },
+                                            "name": "Outdated",
+                                            "pathTemplate": "{{ $outdated := .status.outdated }}\n{{ $ans := \"-\" }}\n{{ if list true | has $outdated }}\n  {{ $ans = \"OUTDATED\" }}\n{{ end }}\n{{- printf \"%s\" $ans -}}\n",
+                                            "priority": 3,
+                                            "textAlign": "center",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "color": {
+                                                "template": "{{ $status := .status.phase }}\n{{ $color := \"gray\" }}\n{{ if list \"Pending\" | has $status }}\n  {{ $color = \"gray\" }}\n{{ else if list \"InProgress\" | has $status }}\n  {{ $color = \"primary\" }}\n{{ else if list \"Succeeded\" | has $status }}\n  {{ $color = \"success\" }}\n{{ else if list \"Waiting\" | has $status }}\n  {{ $color = \"warning\" }}\n{{ else if list \"Failed\"| has $status }}\n  {{ $color = \"danger\" }}\n{{ else if list \"Skipped\"| has $status }}\n  {{ $color = \"dark\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                                            },
+                                            "name": "Status",
+                                            "pathTemplate": "{{ .status.phase }}",
+                                            "priority": 3,
+                                            "tooltip": {
+                                                "template": "{{ .status.reason }}"
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "color": {
+                                                "template": "{{ $approvalStatus := .status.approvalStatus }}\n{{ $color := \"gray\" }}\n{{ if list \"Pending\" | has $approvalStatus }}\n  {{ $color = \"gray\" }}\n{{ else if list \"Approved\" | has $approvalStatus }}\n  {{ $color = \"success\" }}\n{{ else if list \"Rejected\"| has $approvalStatus }}\n  {{ $color = \"danger\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                                            },
+                                            "name": "Approval Status",
+                                            "pathTemplate": "{{ .status.approvalStatus }}",
+                                            "priority": 3,
+                                            "tooltip": {
+                                                "template": "{{ .status.comments }}"
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "tooltip": {
+                                                "template": "{{ .metadata.creationTimestamp }}"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Backups",
+                "requiredFeatureSets": {
+                    "opscenter-backup": [
+                        "stash",
+                        "stash-opscenter"
+                    ]
+                },
+                "sections": [
+                    {
+                        "blocks": [
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Recent Backups",
+                                "query": {
+                                    "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    backup_via(group: \"stash.appscode.com\", kind: \"BackupConfiguration\") {\n      refs: offshoot(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n  }\n}",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "stash.appscode.com",
+                                    "kind": "BackupSession"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-backup": [
+                                        "stash"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {
+                                                "template": "{{ $apiVersion := .apiVersion }}\n{{ $name := .metadata.name }}\n{{ $namespace := .metadata.namespace }}\n{{- printf \"/${username}/${clustername}/%s/backupsessions/%s?namespace=%s\" $apiVersion $name $namespace -}}\n"
+                                            },
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Invoker Kind",
+                                            "pathTemplate": "{{ .spec.invoker.kind }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Invoker Name",
+                                            "pathTemplate": "{{ .spec.invoker.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "color": {
+                                                "template": "{{ $status := .status.phase }}\n{{ $color := \"gray\" }}\n{{ if list \"Succeeded\" | has $status }}\n  {{ $color = \"success\" }}\n{{ else if list \"Unknown\" | has $status }}\n  {{ $color = \"warning\" }}\n{{ else if list \"Failed\" | has $status }}\n  {{ $color = \"danger\" }}\n{{ else if list \"Pending\" | has $status }}\n  {{ $color = \"dark\" }}\n{{ else if list \"Skipped\" | has $status }}\n  {{ $color = \"link\" }}\n{{ else if list \"Running\" | has $status }}\n  {{ $color = \"info\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                                            },
+                                            "name": "Phase",
+                                            "pathTemplate": "{{ .status.phase }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Duration",
+                                            "pathTemplate": "{{ .status.sessionDuration }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Recent Restores",
+                                "query": {
+                                    "byLabel": "restore_into",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "stash.appscode.com",
+                                    "kind": "RestoreSession"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-backup": [
+                                        "stash"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {
+                                                "template": "{{ $apiVersion := .apiVersion }}\n{{ $name := .metadata.name }}\n{{ $namespace := .metadata.namespace }}\n{{- printf \"/${username}/${clustername}/%s/restoresessions/%s?namespace=%s\" $apiVersion $name $namespace -}}\n"
+                                            },
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Driver",
+                                            "pathTemplate": "{{ .spec.driver }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Repository",
+                                            "pathTemplate": "{{ .spec.repository.name }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Target",
+                                            "pathTemplate": "{{ .spec.target.ref.kind }}/{{ .spec.target.ref.name }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Duration",
+                                            "pathTemplate": "{{ .status.sessionDuration }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "color": {
+                                                "template": "{{ $status := .status.phase }}\n{{ $color := \"gray\" }}\n{{ if list \"Running\" | has $status }}\n  {{ $color = \"info\" }}\n{{ else if list \"Succeeded\" | has $status }}\n  {{ $color = \"success\" }}\n{{ else if list \"Unknown\" | has $status }}\n  {{ $color = \"warning\" }}\n{{ else if list \"Failed\" \"Invalid\" | has $status }}\n  {{ $color = \"danger\" }}\n{{ else if list \"Pending\" | has $status }}\n  {{ $color = \"gray\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                                            },
+                                            "name": "Status",
+                                            "pathTemplate": "{{ .status.phase }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "info": {
+                            "actions": {
+                                "create": "Never"
+                            },
+                            "displayMode": "Field",
+                            "kind": "Connection",
+                            "query": {
+                                "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    backup_via(group: \"stash.appscode.com\", kind: \"BackupConfiguration\") {\n      refs: view(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n  }\n}",
+                                "type": "GraphQL"
+                            },
+                            "ref": {
+                                "group": "ui.stash.appscode.com",
+                                "kind": "BackupOverview"
+                            },
+                            "requiredFeatureSets": {
+                                "opscenter-backup": [
+                                    "stash",
+                                    "stash-opscenter"
+                                ]
+                            },
+                            "view": {
+                                "columns": [
+                                    {
+                                        "name": "Name",
+                                        "pathTemplate": "{{ .metadata.name }}",
+                                        "priority": 3,
+                                        "sort": {
+                                            "enable": true,
+                                            "type": ""
+                                        },
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Namespace",
+                                        "pathTemplate": "{{ .metadata.namespace }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Labels",
+                                        "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                        "priority": 3,
+                                        "type": "object"
+                                    },
+                                    {
+                                        "name": "Annotations",
+                                        "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                        "priority": 3,
+                                        "type": "object"
+                                    },
+                                    {
+                                        "name": "Age",
+                                        "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                        "priority": 3,
+                                        "sort": {
+                                            "enable": true,
+                                            "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                            "type": "integer"
+                                        },
+                                        "type": "date"
+                                    },
+                                    {
+                                        "name": "Schedule",
+                                        "pathTemplate": "{{ .spec.schedule }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "color": {
+                                            "template": "{{ $status := .spec.status }}\n{{ $color := \"gray\" }}\n{{ if list \"Active\" | has $status }}\n  {{ $color = \"success\" }}\n{{ else if list \"Paused\" | has $status }}\n  {{ $color = \"warning\" }}\n{{ end }}\n{{- printf \"%s is-light\" $color -}}\n"
+                                        },
+                                        "name": "Status",
+                                        "pathTemplate": "{{ .spec.status }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Last Backup Time",
+                                        "pathTemplate": "{{ .spec.lastBackupTime }}",
+                                        "priority": 3,
+                                        "tooltip": {
+                                            "template": "{{ .spec.lastBackupTime }}"
+                                        },
+                                        "type": "date"
+                                    },
+                                    {
+                                        "name": "Upcoming Backup Time",
+                                        "pathTemplate": "{{ .spec.upcomingBackupTime }}",
+                                        "priority": 3,
+                                        "tooltip": {
+                                            "template": "{{ .spec.upcomingBackupTime }}"
+                                        },
+                                        "type": "date"
+                                    },
+                                    {
+                                        "link": {
+                                            "template": "{{ $name := .spec.repository }}\n{{ $namespace := .metadata.namespace }}\n{{- printf \"/${username}/${clustername}/stash.appscode.com/v1alpha1/repositories/%s?namespace=%s\" $name $namespace -}}\n"
+                                        },
+                                        "name": "Repository",
+                                        "pathTemplate": "{{ .spec.repository }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Data Size",
+                                        "pathTemplate": "{{ .spec.dataSize }}",
+                                        "priority": 3,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "Number Of Snapshots",
+                                        "pathTemplate": "{{ .spec.numberOfSnapshots }}",
+                                        "priority": 3,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "Data Integrity",
+                                        "pathTemplate": "{{ .spec.dataIntegrity }}",
+                                        "priority": 3,
+                                        "type": "boolean"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Backups 2.0",
+                "requiredFeatureSets": {
+                    "opscenter-backup": [
+                        "kubestash"
+                    ]
+                },
+                "sections": [
+                    {
+                        "blocks": [
+                            {
+                                "actions": {
+                                    "create": "Always"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Recent Backups",
+                                "query": {
+                                    "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    backup_via(group: \"core.kubestash.com\", kind: \"BackupConfiguration\") {\n      refs: source(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n  }\n}",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "core.kubestash.com",
+                                    "kind": "BackupSession"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Always"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Recent Restores",
+                                "query": {
+                                    "byLabel": "restore_into",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "core.kubestash.com",
+                                    "kind": "RestoreSession"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "IfEmpty"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Backup Configuration",
+                                "query": {
+                                    "byLabel": "backup_via",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "core.kubestash.com",
+                                    "kind": "BackupConfiguration"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "IfEmpty"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Repository",
+                                "query": {
+                                    "byLabel": "backup_via",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "storage.kubestash.com",
+                                    "kind": "Repository"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "CronJobs",
+                                "query": {
+                                    "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    backup_via(group: \"core.kubestash.com\", kind: \"BackupConfiguration\") {\n      refs: offshoot(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n  }\n}",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "batch",
+                                    "kind": "CronJob"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Schedule",
+                                            "pathTemplate": "{{ .spec.schedule }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Suspend",
+                                            "pathTemplate": "{{ .spec.suspend }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Active",
+                                            "pathTemplate": "{{ jp \"{.status.Active}\" . | len }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Last Schedule",
+                                            "pathTemplate": "{{ .status.lastScheduleTime }}",
+                                            "priority": 3,
+                                            "type": "date"
+                                        },
+                                        {
+                                            "name": "Images",
+                                            "pathTemplate": "{{ .spec.jobTemplate.spec.template.spec.containers | k8s_container_images }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Security",
+                "sections": [
+                    {
+                        "blocks": [
+                            {
+                                "kind": "Custom",
+                                "name": "CVE Report"
+                            }
+                        ],
+                        "name": "CVE Report",
+                        "requiredFeatureSets": {
+                            "opscenter-security": [
+                                "scanner"
+                            ]
+                        }
+                    },
+                    {
+                        "blocks": [
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Service Account",
+                                "query": {
+                                    "byLabel": "authn",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "",
+                                    "kind": "ServiceAccount"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Secrets",
+                                            "pathTemplate": "{{ jp \"{range .secrets[*]}{.name}{\\\" \\\"}{end}\" . }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "ClusterRoles",
+                                "query": {
+                                    "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    authn(group: \"\", kind: \"ServiceAccount\") {\n      refs: authz(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n  }\n}",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "rbac.authorization.k8s.io",
+                                    "kind": "ClusterRole"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "ClusterRoleBindings",
+                                "query": {
+                                    "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    authn(group: \"\", kind: \"ServiceAccount\") {\n      refs: authz(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n  }\n}",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "rbac.authorization.k8s.io",
+                                    "kind": "ClusterRoleBinding"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Role Ref",
+                                            "pathTemplate": "{{ .roleRef.kind }}/{{ .roleRef.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Subjects",
+                                            "pathTemplate": "{{ .subjects | rbac_subjects}}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Roles",
+                                "query": {
+                                    "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    authn(group: \"\", kind: \"ServiceAccount\") {\n      refs: authz(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n  }\n}",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "rbac.authorization.k8s.io",
+                                    "kind": "Role"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "RoleBindings",
+                                "query": {
+                                    "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    authn(group: \"\", kind: \"ServiceAccount\") {\n      refs: authz(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n  }\n}",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "rbac.authorization.k8s.io",
+                                    "kind": "RoleBinding"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Role Ref",
+                                            "pathTemplate": "{{ .roleRef.kind }}/{{ .roleRef.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Subjects",
+                                            "pathTemplate": "{{ .subjects | rbac_subjects}}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "name": "Access Control"
+                    },
+                    {
+                        "blocks": [
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Certificates",
+                                "query": {
+                                    "byLabel": "cert_issuer",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "cert-manager.io",
+                                    "kind": "Certificate"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-security": [
+                                        "cert-manager"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Issuer",
+                                "query": {
+                                    "byLabel": "cert_issuer",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "cert-manager.io",
+                                    "kind": "Issuer"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-security": [
+                                        "cert-manager"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Cluster Issuer",
+                                "query": {
+                                    "byLabel": "cert_issuer",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "cert-manager.io",
+                                    "kind": "ClusterIssuer"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-security": [
+                                        "cert-manager"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "link": {},
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "type": ""
+                                            },
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 2,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 2,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 2,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Secrets",
+                                "query": {
+                                    "raw": "query Find($src: String!, $targetGroup: String!, $targetKind: String!) {\n  find(oid: $src) {\n    offshoot(group: \"apps\", kind: \"StatefulSet\") {\n      refs: config(group: $targetGroup, kind: $targetKind) {\n        namespace\n        name\n      }\n    }\n }\n}",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "",
+                                    "kind": "Secret"
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "pathTemplate": "{{ .metadata.name }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Namespace",
+                                            "pathTemplate": "{{ .metadata.namespace }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Labels",
+                                            "pathTemplate": "{{ .metadata.labels | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Annotations",
+                                            "pathTemplate": "{{ .metadata.annotations | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Type",
+                                            "pathTemplate": "{{ .type }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Data",
+                                            "pathTemplate": "{{ .data | map_key_count }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Age",
+                                            "pathTemplate": "{{ .metadata.creationTimestamp }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .metadata.creationTimestamp | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "name": "TLS",
+                        "requiredFeatureSets": {
+                            "opscenter-security": [
+                                "cert-manager"
+                            ]
+                        }
+                    },
+                    {
+                        "blocks": [
+                            {
+                                "kind": "Custom",
+                                "name": "Policy Report",
+                                "requiredFeatureSets": {
+                                    "opscenter-security": [
+                                        "gatekeeper",
+                                        "gatekeeper-constraints",
+                                        "gatekeeper-grafana-dashboards",
+                                        "gatekeeper-templates"
+                                    ]
+                                }
+                            }
+                        ],
+                        "name": "Policies",
+                        "requiredFeatureSets": {
+                            "opscenter-security": [
+                                "gatekeeper",
+                                "gatekeeper-templates",
+                                "gatekeeper-constraints",
+                                "gatekeeper-grafana-dashboards"
+                            ]
+                        }
+                    },
+                    {
+                        "blocks": [
+                            {
+                                "actions": {
+                                    "create": "Never"
+                                },
+                                "displayMode": "List",
+                                "kind": "Connection",
+                                "name": "Falco Events",
+                                "query": {
+                                    "byLabel": "event",
+                                    "type": "GraphQL"
+                                },
+                                "ref": {
+                                    "group": "falco.appscode.com",
+                                    "kind": "FalcoEvent"
+                                },
+                                "requiredFeatureSets": {
+                                    "opscenter-security": [
+                                        "falco",
+                                        "falco-ui-server"
+                                    ]
+                                },
+                                "view": {
+                                    "columns": [
+                                        {
+                                            "name": "Rule",
+                                            "pathTemplate": "{{ .spec.rule }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Source",
+                                            "pathTemplate": "{{ .spec.source }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Priority",
+                                            "pathTemplate": "{{ .spec.priority }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Pod",
+                                            "pathTemplate": "{{ dig \"outputFields\" \"k8s.pod.name\" \"\" .spec }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Output",
+                                            "pathTemplate": "{{ .spec.output }}",
+                                            "priority": 3,
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "Output Fields",
+                                            "pathTemplate": "{{ .spec.outputFields | toRawJson }}",
+                                            "priority": 3,
+                                            "type": "object"
+                                        },
+                                        {
+                                            "name": "Last Seen",
+                                            "pathTemplate": "{{ .spec.time }}",
+                                            "priority": 3,
+                                            "sort": {
+                                                "enable": true,
+                                                "template": "{{ .spec.time | toDate \"2006-01-02T15:04:05Z07:00\" | unixEpoch }}",
+                                                "type": "integer"
+                                            },
+                                            "type": "date"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "name": "Runtime Security",
+                        "requiredFeatureSets": {
+                            "opscenter-security": [
+                                "falco",
+                                "falco-ui-server"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "resource": {
+            "group": "kubedb.com",
+            "kind": "MongoDB",
+            "name": "mongodbs",
+            "scope": "Namespaced",
+            "version": "v1alpha2"
+        },
+        "tabBar": {
+            "actions": {
+                "create": "Never"
+            },
+            "displayMode": "Field",
+            "kind": "Connection",
+            "query": {
+                "byLabel": "view",
+                "type": "GraphQL"
+            },
+            "ref": {
+                "group": "core.k8s.appscode.com",
+                "kind": "GenericResourceService"
+            },
+            "view": {
+                "columns": [
+                    {
+                        "color": {
+                            "template": "{{ $status := .spec.facilities.exposed.usage }}\n{{ $color := \"info\" }}\n{{ if eq $status \"Used\" }}\n  {{ $color = \"danger\" }}\n{{ else if eq $status \"Unused\" }}\n  {{ $color = \"success\" }}\n{{ else if eq $status \"Unknown\" }}\n  {{ $color = \"gray\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                        },
+                        "name": "Exposed",
+                        "pathTemplate": "{{ .spec.facilities.exposed.usage }}",
+                        "priority": 3,
+                        "type": "string"
+                    },
+                    {
+                        "color": {
+                            "template": "{{ $status := .spec.facilities.tls.usage }}\n{{ $color := \"info\" }}\n{{ if eq $status \"Used\" }}\n  {{ $color = \"success\" }}\n{{ else if eq $status \"Unused\" }}\n  {{ $color = \"danger\" }}\n{{ else if eq $status \"Unknown\" }}\n  {{ $color = \"neutral\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                        },
+                        "name": "TLS",
+                        "pathTemplate": "{{ .spec.facilities.tls.usage }}",
+                        "priority": 3,
+                        "type": "string"
+                    },
+                    {
+                        "color": {
+                            "template": "{{ $status := .spec.facilities.backup.usage }}\n{{ $color := \"info\" }}\n{{ if eq $status \"Used\" }}\n  {{ $color = \"success\" }}\n{{ else if eq $status \"Unused\" }}\n  {{ $color = \"danger\" }}\n{{ else if eq $status \"Unknown\" }}\n  {{ $color = \"neutral\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                        },
+                        "name": "Backup",
+                        "pathTemplate": "{{ .spec.facilities.backup.usage }}",
+                        "priority": 3,
+                        "type": "string"
+                    },
+                    {
+                        "color": {
+                            "template": "{{ $status := .spec.facilities.monitoring.usage }}\n{{ $color := \"info\" }}\n{{ if eq $status \"Used\" }}\n  {{ $color = \"success\" }}\n{{ else if eq $status \"Unused\" }}\n  {{ $color = \"danger\" }}\n{{ else if eq $status \"Unknown\" }}\n  {{ $color = \"neutral\" }}\n{{ end }}\n{{- printf \"%s\" $color -}}\n"
+                        },
+                        "name": "Monitoring",
+                        "pathTemplate": "{{ .spec.facilities.monitoring.usage }}",
+                        "priority": 3,
+                        "type": "string"
+                    },
+                    {
+                        "exec": {},
+                        "name": "Connect",
+                        "pathTemplate": "{{ .spec.facilities.exec | toRawJson }}",
+                        "priority": 4,
+                        "type": "object"
+                    }
+                ]
+            }
+        },
+        "ui": {
+            "actions": [
+                {
+                    "items": [
+                        {
+                            "editor": {
+                                "name": "kubedbcom-mongodb-editor",
+                                "sourceRef": {
+                                    "apiGroup": "source.toolkit.fluxcd.io",
+                                    "kind": "HelmRepository",
+                                    "name": "appscode-charts-oci",
+                                    "namespace": "kubeops"
+                                },
+                                "version": "v0.4.18"
+                            },
+                            "enforceQuota": false,
+                            "flow": "standalone-edit",
+                            "icons": [
+                                {
+                                    "src": "https://cdn.appscode.com/k8s/icons/action-icons/backup.svg",
+                                    "type": "image/svg+xml"
+                                }
+                            ],
+                            "name": "Backup",
+                            "operationId": "edit-self-backupconfiguration"
+                        },
+                        {
+                            "editor": {
+                                "name": "stashappscodecom-restoresession-editor-options",
+                                "sourceRef": {
+                                    "apiGroup": "source.toolkit.fluxcd.io",
+                                    "kind": "HelmRepository",
+                                    "name": "appscode-charts-oci",
+                                    "namespace": "kubeops"
+                                },
+                                "version": "v0.4.18"
+                            },
+                            "enforceQuota": false,
+                            "flow": "standalone-create",
+                            "icons": [
+                                {
+                                    "src": "https://cdn.appscode.com/k8s/icons/action-icons/restore.svg",
+                                    "type": "image/svg+xml"
+                                }
+                            ],
+                            "name": "Restore",
+                            "operationId": "create-restoresession"
+                        }
+                    ],
+                    "name": "Backups"
+                },
+                {
+                    "items": [
+                        {
+                            "editor": {
+                                "name": "opskubedbcom-mongodbopsrequest-editor",
+                                "sourceRef": {
+                                    "apiGroup": "source.toolkit.fluxcd.io",
+                                    "kind": "HelmRepository",
+                                    "name": "appscode-charts-oci",
+                                    "namespace": "kubeops"
+                                },
+                                "version": "v0.4.18"
+                            },
+                            "enforceQuota": false,
+                            "flow": "standalone-create",
+                            "icons": [
+                                {
+                                    "src": "https://cdn.appscode.com/k8s/icons/action-icons/version.svg",
+                                    "type": "image/svg+xml"
+                                }
+                            ],
+                            "name": "Update Version",
+                            "operationId": "create-opsrequest-upgrade"
+                        },
+                        {
+                            "editor": {
+                                "name": "opskubedbcom-mongodbopsrequest-editor",
+                                "sourceRef": {
+                                    "apiGroup": "source.toolkit.fluxcd.io",
+                                    "kind": "HelmRepository",
+                                    "name": "appscode-charts-oci",
+                                    "namespace": "kubeops"
+                                },
+                                "version": "v0.4.18"
+                            },
+                            "enforceQuota": false,
+                            "flow": "standalone-create",
+                            "icons": [
+                                {
+                                    "src": "https://cdn.appscode.com/k8s/icons/action-icons/restart.svg",
+                                    "type": "image/svg+xml"
+                                }
+                            ],
+                            "name": "Restart",
+                            "operationId": "create-opsrequest-restart"
+                        },
+                        {
+                            "editor": {
+                                "name": "opskubedbcom-mongodbopsrequest-editor",
+                                "sourceRef": {
+                                    "apiGroup": "source.toolkit.fluxcd.io",
+                                    "kind": "HelmRepository",
+                                    "name": "appscode-charts-oci",
+                                    "namespace": "kubeops"
+                                },
+                                "version": "v0.4.18"
+                            },
+                            "enforceQuota": false,
+                            "flow": "standalone-create",
+                            "icons": [
+                                {
+                                    "src": "https://cdn.appscode.com/k8s/icons/action-icons/reconfigure.svg",
+                                    "type": "image/svg+xml"
+                                }
+                            ],
+                            "name": "Reconfigure",
+                            "operationId": "create-opsrequest-reconfigure"
+                        }
+                    ],
+                    "name": "Operations"
+                },
+                {
+                    "items": [
+                        {
+                            "disabledTemplate": "{{ not (or (hasKey .spec \"shardTopology\") ( hasKey .spec \"replicaSet\"))}}\n",
+                            "editor": {
+                                "name": "opskubedbcom-mongodbopsrequest-editor",
+                                "sourceRef": {
+                                    "apiGroup": "source.toolkit.fluxcd.io",
+                                    "kind": "HelmRepository",
+                                    "name": "appscode-charts-oci",
+                                    "namespace": "kubeops"
+                                },
+                                "version": "v0.4.18"
+                            },
+                            "enforceQuota": true,
+                            "flow": "standalone-create",
+                            "icons": [
+                                {
+                                    "src": "https://cdn.appscode.com/k8s/icons/action-icons/horizontal_scale.svg",
+                                    "type": "image/svg+xml"
+                                }
+                            ],
+                            "name": "Horizontal Scale",
+                            "operationId": "create-opsrequest-horizontalscaling"
+                        },
+                        {
+                            "editor": {
+                                "name": "opskubedbcom-mongodbopsrequest-editor",
+                                "sourceRef": {
+                                    "apiGroup": "source.toolkit.fluxcd.io",
+                                    "kind": "HelmRepository",
+                                    "name": "appscode-charts-oci",
+                                    "namespace": "kubeops"
+                                },
+                                "version": "v0.4.18"
+                            },
+                            "enforceQuota": true,
+                            "flow": "standalone-create",
+                            "icons": [
+                                {
+                                    "src": "https://cdn.appscode.com/k8s/icons/action-icons/vertical_scale.svg",
+                                    "type": "image/svg+xml"
+                                }
+                            ],
+                            "name": "Vertical Scale",
+                            "operationId": "create-opsrequest-verticalscaling"
+                        },
+                        {
+                            "editor": {
+                                "name": "opskubedbcom-mongodbopsrequest-editor",
+                                "sourceRef": {
+                                    "apiGroup": "source.toolkit.fluxcd.io",
+                                    "kind": "HelmRepository",
+                                    "name": "appscode-charts-oci",
+                                    "namespace": "kubeops"
+                                },
+                                "version": "v0.4.18"
+                            },
+                            "enforceQuota": true,
+                            "flow": "standalone-create",
+                            "icons": [
+                                {
+                                    "src": "https://cdn.appscode.com/k8s/icons/action-icons/expand.svg",
+                                    "type": "image/svg+xml"
+                                }
+                            ],
+                            "name": "Expand Volume",
+                            "operationId": "create-opsrequest-volumeexpansion"
+                        }
+                    ],
+                    "name": "Scaling"
+                },
+                {
+                    "items": [
+                        {
+                            "editor": {
+                                "name": "opskubedbcom-mongodbopsrequest-editor",
+                                "sourceRef": {
+                                    "apiGroup": "source.toolkit.fluxcd.io",
+                                    "kind": "HelmRepository",
+                                    "name": "appscode-charts-oci",
+                                    "namespace": "kubeops"
+                                },
+                                "version": "v0.4.18"
+                            },
+                            "enforceQuota": false,
+                            "flow": "standalone-create",
+                            "icons": [
+                                {
+                                    "src": "https://cdn.appscode.com/k8s/icons/action-icons/configure.svg",
+                                    "type": "image/svg+xml"
+                                }
+                            ],
+                            "name": "TLS Configure",
+                            "operationId": "create-opsrequest-reconfiguretls"
+                        },
+                        {
+                            "editor": {
+                                "name": "kubedbcom-mongodb-editor",
+                                "sourceRef": {
+                                    "apiGroup": "source.toolkit.fluxcd.io",
+                                    "kind": "HelmRepository",
+                                    "name": "appscode-charts-oci",
+                                    "namespace": "kubeops"
+                                },
+                                "version": "v0.4.18"
+                            },
+                            "enforceQuota": false,
+                            "flow": "standalone-edit",
+                            "icons": [
+                                {
+                                    "src": "https://cdn.appscode.com/k8s/icons/action-icons/monitor.svg",
+                                    "type": "image/svg+xml"
+                                }
+                            ],
+                            "name": "Monitoring",
+                            "operationId": "edit-self-monitoring"
+                        }
+                    ],
+                    "name": "Security \u0026 Monitoring"
+                }
+            ],
+            "editor": {
+                "name": "kubedbcom-mongodb-editor",
+                "sourceRef": {
+                    "apiGroup": "source.toolkit.fluxcd.io",
+                    "kind": "HelmRepository",
+                    "name": "appscode-charts-oci",
+                    "namespace": "kubeops"
+                },
+                "version": "v0.4.18"
+            },
+            "enforceQuota": true,
+            "options": {
+                "name": "kubedbcom-mongodb-editor-options",
+                "sourceRef": {
+                    "apiGroup": "source.toolkit.fluxcd.io",
+                    "kind": "HelmRepository",
+                    "name": "appscode-charts-oci",
+                    "namespace": "kubeops"
+                },
+                "version": "v0.4.18"
+            }
+        }
+    }
+}

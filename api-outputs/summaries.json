@@ -1,0 +1,397 @@
+{
+    "metadata": {},
+    "columns": [
+        {
+            "name": "Database Type",
+            "type": "string",
+            "priority": 3,
+            "icon": true
+        },
+        {
+            "name": "Instances",
+            "type": "integer",
+            "priority": 3,
+            "textAlign": "center"
+        },
+        {
+            "name": "CPU (request/limit)",
+            "type": "string",
+            "priority": 2,
+            "textAlign": "center"
+        },
+        {
+            "name": "Memory (request/limit)",
+            "type": "string",
+            "priority": 2,
+            "textAlign": "center"
+        },
+        {
+            "name": "Storage (request/limit)",
+            "type": "string",
+            "priority": 2,
+            "textAlign": "center"
+        }
+    ],
+    "rows": [
+        {
+            "cells": [
+                {
+                    "data": "Druid",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/druids.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "Elasticsearch",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/elasticsearches.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "Kafka",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/kafkas.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "MariaDB",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/mariadbs.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "Memcached",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/memcacheds.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "MongoDB",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/mongodbs.svg"
+                },
+                {
+                    "data": 1
+                },
+                {
+                    "data": "3 / 3"
+                },
+                {
+                    "data": "3Gi / 3Gi"
+                },
+                {
+                    "data": "30Gi / 30Gi"
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "MySQL",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/mysqls.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "PerconaXtraDB",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/perconaxtradbs.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "PgBouncer",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/pgbouncers.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "Pgpool",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/pgpools.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "Postgres",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/postgreses.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "ProxySQL",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/proxysqls.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "RabbitMQ",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/rabbitmqs.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "Redis",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/redises.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "RedisSentinel",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/redissentinels.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "Singlestore",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/singlestores.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "Solr",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/solrs.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        },
+        {
+            "cells": [
+                {
+                    "data": "ZooKeeper",
+                    "icon": "https://cdn.appscode.com/k8s/icons/kubedb.com/zookeepers.svg"
+                },
+                {
+                    "data": 0
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                },
+                {
+                    "data": ""
+                }
+            ]
+        }
+    ]
+}

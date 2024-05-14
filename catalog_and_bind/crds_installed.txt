@@ -1,0 +1,79 @@
+# vault (secret management)
+vaultserverversions.catalog.kubevault.com             2024-05-13T04:54:39Z
+awsroles.engine.kubevault.com                         2024-05-13T04:54:42Z
+gcproles.engine.kubevault.com                         2024-05-13T04:54:42Z
+pkiroles.engine.kubevault.com                         2024-05-13T04:54:42Z
+azureroles.engine.kubevault.com                       2024-05-13T04:54:42Z
+mysqlroles.engine.kubevault.com                       2024-05-13T04:54:42Z
+redisroles.engine.kubevault.com                       2024-05-13T04:54:42Z
+mariadbroles.engine.kubevault.com                     2024-05-13T04:54:42Z
+mongodbroles.engine.kubevault.com                     2024-05-13T04:54:42Z
+postgresroles.engine.kubevault.com                    2024-05-13T04:54:42Z
+secretengines.engine.kubevault.com                    2024-05-13T04:54:42Z
+elasticsearchroles.engine.kubevault.com               2024-05-13T04:54:42Z
+secretrolebindings.engine.kubevault.com               2024-05-13T04:54:42Z
+secretaccessrequests.engine.kubevault.com             2024-05-13T04:54:42Z
+vaultservers.kubevault.com                            2024-05-13T04:54:43Z
+vaultopsrequests.ops.kubevault.com                    2024-05-13T04:54:44Z
+vaultpolicies.policy.kubevault.com                    2024-05-13T04:54:44Z
+vaultpolicybindings.policy.kubevault.com              2024-05-13T04:54:44Z
+
+
+
+# external-dns, gateway-api (networking addons)
+externaldnses.external-dns.appscode.com               2024-05-13T04:57:50Z
+gateways.gateway.networking.k8s.io                    2024-05-13T04:59:48Z
+httproutes.gateway.networking.k8s.io                  2024-05-13T04:59:48Z
+gatewayclasses.gateway.networking.k8s.io              2024-05-13T04:59:48Z
+referencegrants.gateway.networking.k8s.io             2024-05-13T04:59:48Z
+
+
+# cert-manager, cert-manager-ace (security)
+issuers.cert-manager.io                               2024-05-13T05:00:40Z
+orders.acme.cert-manager.io                           2024-05-13T05:00:40Z
+certificates.cert-manager.io                          2024-05-13T05:00:40Z
+clusterissuers.cert-manager.io                        2024-05-13T05:00:40Z
+challenges.acme.cert-manager.io                       2024-05-13T05:00:40Z
+certificaterequests.cert-manager.io                   2024-05-13T05:00:40Z
+
+
+# service-gateway, service-presets (native saas)
+# service-gateway is actually the voyager-gateway https://github.com/voyagermesh/installer/tree/master/charts()
+kafkaroutes.gateway.voyagermesh.com                   2024-05-13T05:22:41Z
+mysqlroutes.gateway.voyagermesh.com                   2024-05-13T05:22:41Z
+redisroutes.gateway.voyagermesh.com                   2024-05-13T05:22:41Z
+mongodbroutes.gateway.voyagermesh.com                 2024-05-13T05:22:41Z
+postgresroutes.gateway.voyagermesh.com                2024-05-13T05:22:41Z
+backendtlspolicies.gateway.networking.k8s.io          2024-05-13T05:22:41Z
+grpcroutes.gateway.networking.k8s.io                  2024-05-13T05:22:42Z
+envoyproxies.gateway.envoyproxy.io                    2024-05-13T05:22:46Z
+tcproutes.gateway.networking.k8s.io                   2024-05-13T05:22:46Z
+tlsroutes.gateway.networking.k8s.io                   2024-05-13T05:22:46Z
+udproutes.gateway.networking.k8s.io                   2024-05-13T05:22:46Z
+envoypatchpolicies.gateway.envoyproxy.io              2024-05-13T05:22:46Z
+clienttrafficpolicies.gateway.envoyproxy.io           2024-05-13T05:22:46Z
+backendtrafficpolicies.gateway.envoyproxy.io          2024-05-13T05:22:46Z
+securitypolicies.gateway.envoyproxy.io                2024-05-13T05:22:47Z
+externaldns.external-dns.appscode.com                 2024-05-13T05:23:38Z
+caproviderclasses.cacerts.csi.cert-manager.io         2024-05-13T05:23:38Z
+
+
+# service-provider, catalog-manager (native saas)
+# service-provider is actually the kube-bind-provider
+druidbindings.catalog.appscode.com                    2024-05-13T05:48:53Z
+ferretdbbindings.catalog.appscode.com                 2024-05-13T05:48:53Z
+clusterbindings.kube-bind.appscode.com                2024-05-13T05:48:53Z
+memcachedbindings.catalog.appscode.com                2024-05-13T05:48:53Z
+apiserviceexports.kube-bind.appscode.com              2024-05-13T05:48:53Z
+apiservicebindings.kube-bind.appscode.com             2024-05-13T05:48:53Z
+apiservicenamespaces.kube-bind.appscode.com           2024-05-13T05:48:53Z
+apiserviceexportrequests.kube-bind.appscode.com       2024-05-13T05:48:53Z
+solrbindings.catalog.appscode.com                     2024-05-13T05:48:54Z
+pgpoolbindings.catalog.appscode.com                   2024-05-13T05:48:54Z
+proxysqlbindings.catalog.appscode.com                 2024-05-13T05:48:54Z
+rabbitmqbindings.catalog.appscode.com                 2024-05-13T05:48:54Z
+pgbouncerbindings.catalog.appscode.com                2024-05-13T05:48:54Z
+zookeeperbindings.catalog.appscode.com                2024-05-13T05:48:54Z
+mssqlserverbindings.catalog.appscode.com              2024-05-13T05:48:54Z
+singlestorebindings.catalog.appscode.com              2024-05-13T05:48:54Z
+perconaxtradbbindings.catalog.appscode.com            2024-05-13T05:48:54Z

@@ -1,0 +1,114 @@
+{
+    "metadata": {},
+    "columns": [
+        {
+            "name": "Name",
+            "type": "string",
+            "priority": 3,
+            "sort": {
+                "enable": true
+            },
+            "link": true
+        },
+        {
+            "name": "Namespace",
+            "type": "string",
+            "priority": 3
+        },
+        {
+            "name": "Type",
+            "type": "string",
+            "priority": 3
+        },
+        {
+            "name": "Mode",
+            "type": "string",
+            "priority": 3
+        },
+        {
+            "name": "Version",
+            "type": "string",
+            "priority": 3
+        },
+        {
+            "name": "Replicas",
+            "type": "integer",
+            "priority": 3
+        },
+        {
+            "name": "CPU (request/limit)",
+            "type": "string",
+            "priority": 2,
+            "textAlign": "center"
+        },
+        {
+            "name": "Memory (request/limit)",
+            "type": "string",
+            "priority": 2,
+            "textAlign": "center"
+        },
+        {
+            "name": "Storage (request/limit)",
+            "type": "string",
+            "priority": 2,
+            "textAlign": "center"
+        },
+        {
+            "name": "Status",
+            "type": "string",
+            "priority": 3
+        },
+        {
+            "name": "Age",
+            "type": "date",
+            "priority": 3,
+            "sort": {
+                "enable": true,
+                "type": "integer"
+            }
+        }
+    ],
+    "rows": [
+        {
+            "cells": [
+                {
+                    "data": "repl6",
+                    "link": "/${username}/stash-linode/kubedb.com/v1alpha2/mongodbs/repl6?namespace=demo"
+                },
+                {
+                    "data": "demo"
+                },
+                {
+                    "data": "MongoDB"
+                },
+                {
+                    "data": "ReplicaSet"
+                },
+                {
+                    "data": "6.0.12"
+                },
+                {
+                    "data": 3
+                },
+                {
+                    "data": "3 / 3"
+                },
+                {
+                    "data": "3Gi / 3Gi"
+                },
+                {
+                    "data": "30Gi / 30Gi"
+                },
+                {
+                    "data": "Ready",
+                    "color": "success"
+                },
+                {
+                    "data": "17h",
+                    "sort": 1715596314
+                }
+            ],
+            "namespace": "demo"
+        }
+    ]
+}

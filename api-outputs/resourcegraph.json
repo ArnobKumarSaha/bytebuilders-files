@@ -1,0 +1,602 @@
+{
+    "apiVersion": "meta.k8s.appscode.com/v1alpha1",
+    "kind": "ResourceGraph",
+    "request": {
+        "source": {
+            "ref": {
+                "name": "repl6",
+                "namespace": "demo"
+            },
+            "resource": {
+                "group": "kubedb.com",
+                "name": "mongodbs",
+                "version": "v1alpha2"
+            }
+        }
+    },
+    "response": {
+        "connections": [
+            {
+                "labels": [
+                    "config"
+                ],
+                "source": {
+                    "name": "repl6-1",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6-auth",
+                    "namespace": "demo",
+                    "resourceID": 4
+                }
+            },
+            {
+                "labels": [
+                    "exposed_by"
+                ],
+                "source": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 5
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 7
+                }
+            },
+            {
+                "labels": [
+                    "located_on"
+                ],
+                "source": {
+                    "name": "lke178732-259283-4264f43e0000",
+                    "namespace": "",
+                    "resourceID": 1
+                },
+                "target": {
+                    "name": "repl6-1",
+                    "namespace": "demo",
+                    "resourceID": 3
+                }
+            },
+            {
+                "labels": [
+                    "offshoot"
+                ],
+                "source": {
+                    "name": "repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 8
+                }
+            },
+            {
+                "labels": [
+                    "connect_via"
+                ],
+                "source": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 7
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 10
+                }
+            },
+            {
+                "labels": [
+                    "exposed_by"
+                ],
+                "source": {
+                    "name": "repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 5
+                }
+            },
+            {
+                "labels": [
+                    "storage"
+                ],
+                "source": {
+                    "name": "datadir-repl6-1",
+                    "namespace": "demo",
+                    "resourceID": 2
+                },
+                "target": {
+                    "name": "repl6-1",
+                    "namespace": "demo",
+                    "resourceID": 3
+                }
+            },
+            {
+                "labels": [
+                    "offshoot"
+                ],
+                "source": {
+                    "name": "repl6-2",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 8
+                }
+            },
+            {
+                "labels": [
+                    "authn"
+                ],
+                "source": {
+                    "name": "repl6-2",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 6
+                }
+            },
+            {
+                "labels": [
+                    "auth_secret"
+                ],
+                "source": {
+                    "name": "repl6-auth",
+                    "namespace": "demo",
+                    "resourceID": 4
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 10
+                }
+            },
+            {
+                "labels": [
+                    "config"
+                ],
+                "source": {
+                    "name": "repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6-auth",
+                    "namespace": "demo",
+                    "resourceID": 4
+                }
+            },
+            {
+                "labels": [
+                    "policy"
+                ],
+                "source": {
+                    "name": "repl6-1",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 11
+                }
+            },
+            {
+                "labels": [
+                    "storage"
+                ],
+                "source": {
+                    "name": "datadir-repl6-2",
+                    "namespace": "demo",
+                    "resourceID": 2
+                },
+                "target": {
+                    "name": "repl6-2",
+                    "namespace": "demo",
+                    "resourceID": 3
+                }
+            },
+            {
+                "labels": [
+                    "config"
+                ],
+                "source": {
+                    "name": "repl6-1",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6-key",
+                    "namespace": "demo",
+                    "resourceID": 4
+                }
+            },
+            {
+                "labels": [
+                    "exposed_by"
+                ],
+                "source": {
+                    "name": "repl6-1",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6-pods",
+                    "namespace": "demo",
+                    "resourceID": 5
+                }
+            },
+            {
+                "labels": [
+                    "storage"
+                ],
+                "source": {
+                    "name": "datadir-repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 2
+                },
+                "target": {
+                    "name": "repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 3
+                }
+            },
+            {
+                "labels": [
+                    "offshoot"
+                ],
+                "source": {
+                    "name": "repl6-1",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 8
+                }
+            },
+            {
+                "labels": [
+                    "authn"
+                ],
+                "source": {
+                    "name": "repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 6
+                }
+            },
+            {
+                "labels": [
+                    "catalog"
+                ],
+                "source": {
+                    "name": "6.0.12",
+                    "namespace": "",
+                    "resourceID": 9
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 10
+                }
+            },
+            {
+                "labels": [
+                    "config"
+                ],
+                "source": {
+                    "name": "kube-root-ca.crt",
+                    "namespace": "demo",
+                    "resourceID": 0
+                },
+                "target": {
+                    "name": "repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 3
+                }
+            },
+            {
+                "labels": [
+                    "config"
+                ],
+                "source": {
+                    "name": "repl6-2",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6-key",
+                    "namespace": "demo",
+                    "resourceID": 4
+                }
+            },
+            {
+                "labels": [
+                    "policy"
+                ],
+                "source": {
+                    "name": "repl6-2",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 11
+                }
+            },
+            {
+                "labels": [
+                    "offshoot"
+                ],
+                "source": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 8
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 10
+                }
+            },
+            {
+                "labels": [
+                    "config"
+                ],
+                "source": {
+                    "name": "repl6-2",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6-auth",
+                    "namespace": "demo",
+                    "resourceID": 4
+                }
+            },
+            {
+                "labels": [
+                    "exposed_by"
+                ],
+                "source": {
+                    "name": "repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6-pods",
+                    "namespace": "demo",
+                    "resourceID": 5
+                }
+            },
+            {
+                "labels": [
+                    "located_on"
+                ],
+                "source": {
+                    "name": "lke178732-259283-216995c80000",
+                    "namespace": "",
+                    "resourceID": 1
+                },
+                "target": {
+                    "name": "repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 3
+                }
+            },
+            {
+                "labels": [
+                    "located_on"
+                ],
+                "source": {
+                    "name": "lke178732-259283-43faa3010000",
+                    "namespace": "",
+                    "resourceID": 1
+                },
+                "target": {
+                    "name": "repl6-2",
+                    "namespace": "demo",
+                    "resourceID": 3
+                }
+            },
+            {
+                "labels": [
+                    "policy"
+                ],
+                "source": {
+                    "name": "repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 11
+                }
+            },
+            {
+                "labels": [
+                    "authn"
+                ],
+                "source": {
+                    "name": "repl6-1",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6",
+                    "namespace": "demo",
+                    "resourceID": 6
+                }
+            },
+            {
+                "labels": [
+                    "config"
+                ],
+                "source": {
+                    "name": "kube-root-ca.crt",
+                    "namespace": "demo",
+                    "resourceID": 0
+                },
+                "target": {
+                    "name": "repl6-1",
+                    "namespace": "demo",
+                    "resourceID": 3
+                }
+            },
+            {
+                "labels": [
+                    "config"
+                ],
+                "source": {
+                    "name": "repl6-0",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6-key",
+                    "namespace": "demo",
+                    "resourceID": 4
+                }
+            },
+            {
+                "labels": [
+                    "config"
+                ],
+                "source": {
+                    "name": "kube-root-ca.crt",
+                    "namespace": "demo",
+                    "resourceID": 0
+                },
+                "target": {
+                    "name": "repl6-2",
+                    "namespace": "demo",
+                    "resourceID": 3
+                }
+            },
+            {
+                "labels": [
+                    "exposed_by"
+                ],
+                "source": {
+                    "name": "repl6-2",
+                    "namespace": "demo",
+                    "resourceID": 3
+                },
+                "target": {
+                    "name": "repl6-pods",
+                    "namespace": "demo",
+                    "resourceID": 5
+                }
+            }
+        ],
+        "resources": [
+            {
+                "group": "",
+                "kind": "ConfigMap",
+                "name": "configmaps",
+                "scope": "Namespaced",
+                "version": "v1"
+            },
+            {
+                "group": "",
+                "kind": "Node",
+                "name": "nodes",
+                "scope": "Cluster",
+                "version": "v1"
+            },
+            {
+                "group": "",
+                "kind": "PersistentVolumeClaim",
+                "name": "persistentvolumeclaims",
+                "scope": "Namespaced",
+                "version": "v1"
+            },
+            {
+                "group": "",
+                "kind": "Pod",
+                "name": "pods",
+                "scope": "Namespaced",
+                "version": "v1"
+            },
+            {
+                "group": "",
+                "kind": "Secret",
+                "name": "secrets",
+                "scope": "Namespaced",
+                "version": "v1"
+            },
+            {
+                "group": "",
+                "kind": "Service",
+                "name": "services",
+                "scope": "Namespaced",
+                "version": "v1"
+            },
+            {
+                "group": "",
+                "kind": "ServiceAccount",
+                "name": "serviceaccounts",
+                "scope": "Namespaced",
+                "version": "v1"
+            },
+            {
+                "group": "appcatalog.appscode.com",
+                "kind": "AppBinding",
+                "name": "appbindings",
+                "scope": "Namespaced",
+                "version": "v1alpha1"
+            },
+            {
+                "group": "apps",
+                "kind": "StatefulSet",
+                "name": "statefulsets",
+                "scope": "Namespaced",
+                "version": "v1"
+            },
+            {
+                "group": "catalog.kubedb.com",
+                "kind": "MongoDBVersion",
+                "name": "mongodbversions",
+                "scope": "Cluster",
+                "version": "v1alpha1"
+            },
+            {
+                "group": "kubedb.com",
+                "kind": "MongoDB",
+                "name": "mongodbs",
+                "scope": "Namespaced",
+                "version": "v1alpha2"
+            },
+            {
+                "group": "policy",
+                "kind": "PodDisruptionBudget",
+                "name": "poddisruptionbudgets",
+                "scope": "Namespaced",
+                "version": "v1"
+            }
+        ]
+    }
+}

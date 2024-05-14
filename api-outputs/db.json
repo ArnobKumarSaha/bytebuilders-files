@@ -1,0 +1,335 @@
+{
+    "apiVersion": "kubedb.com/v1alpha2",
+    "kind": "MongoDB",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"kubedb.com/v1alpha2\",\"kind\":\"MongoDB\",\"metadata\":{\"annotations\":{\"meta.helm.sh/release-name\":\"repl6\",\"meta.helm.sh/release-namespace\":\"demo\"},\"labels\":{\"app.kubernetes.io/instance\":\"repl6\",\"app.kubernetes.io/managed-by\":\"Helm\",\"app.kubernetes.io/name\":\"mongodbs.kubedb.com\"},\"name\":\"repl6\",\"namespace\":\"demo\"},\"spec\":{\"clusterAuthMode\":\"keyFile\",\"podTemplate\":{\"spec\":{\"resources\":{\"limits\":{\"cpu\":\"1\",\"memory\":\"1024Mi\"}}}},\"replicaSet\":{\"name\":\"rs0\"},\"replicas\":3,\"sslMode\":\"disabled\",\"storage\":{\"accessModes\":[\"ReadWriteOnce\"],\"resources\":{\"requests\":{\"storage\":\"10Gi\"}},\"storageClassName\":\"linode-block-storage\"},\"storageType\":\"Durable\",\"terminationPolicy\":\"WipeOut\",\"version\":\"6.0.12\"}}\n",
+            "meta.helm.sh/release-name": "repl6",
+            "meta.helm.sh/release-namespace": "demo"
+        },
+        "creationTimestamp": "2024-05-13T10:31:54Z",
+        "finalizers": [
+            "kubedb.com"
+        ],
+        "generation": 3,
+        "labels": {
+            "app.kubernetes.io/instance": "repl6",
+            "app.kubernetes.io/managed-by": "Helm",
+            "app.kubernetes.io/name": "mongodbs.kubedb.com"
+        },
+        "managedFields": [
+            {
+                "apiVersion": "kubedb.com/v1alpha2",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:annotations": {
+                            ".": {},
+                            "f:kubectl.kubernetes.io/last-applied-configuration": {},
+                            "f:meta.helm.sh/release-name": {},
+                            "f:meta.helm.sh/release-namespace": {}
+                        },
+                        "f:labels": {
+                            ".": {},
+                            "f:app.kubernetes.io/instance": {},
+                            "f:app.kubernetes.io/managed-by": {},
+                            "f:app.kubernetes.io/name": {}
+                        }
+                    },
+                    "f:spec": {
+                        ".": {},
+                        "f:allowedSchemas": {
+                            ".": {},
+                            "f:namespaces": {
+                                ".": {},
+                                "f:from": {}
+                            }
+                        },
+                        "f:clusterAuthMode": {},
+                        "f:healthChecker": {
+                            ".": {},
+                            "f:failureThreshold": {},
+                            "f:periodSeconds": {},
+                            "f:timeoutSeconds": {}
+                        },
+                        "f:podTemplate": {
+                            ".": {},
+                            "f:spec": {
+                                ".": {},
+                                "f:resources": {
+                                    ".": {},
+                                    "f:limits": {
+                                        ".": {},
+                                        "f:cpu": {},
+                                        "f:memory": {}
+                                    }
+                                }
+                            }
+                        },
+                        "f:replicaSet": {
+                            ".": {},
+                            "f:name": {}
+                        },
+                        "f:replicas": {},
+                        "f:sslMode": {},
+                        "f:storage": {
+                            ".": {},
+                            "f:accessModes": {},
+                            "f:resources": {
+                                ".": {},
+                                "f:requests": {
+                                    ".": {},
+                                    "f:storage": {}
+                                }
+                            },
+                            "f:storageClassName": {}
+                        },
+                        "f:storageType": {},
+                        "f:terminationPolicy": {},
+                        "f:version": {}
+                    }
+                },
+                "manager": "Go-http-client",
+                "operation": "Update",
+                "time": "2024-05-13T10:31:54Z"
+            },
+            {
+                "apiVersion": "kubedb.com/v1alpha2",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:finalizers": {
+                            ".": {},
+                            "v:\"kubedb.com\"": {}
+                        }
+                    },
+                    "f:spec": {
+                        "f:authSecret": {},
+                        "f:keyFileSecret": {}
+                    }
+                },
+                "manager": "kubedb-provisioner",
+                "operation": "Update",
+                "time": "2024-05-13T10:31:54Z"
+            },
+            {
+                "apiVersion": "kubedb.com/v1alpha2",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:status": {
+                        ".": {},
+                        "f:conditions": {},
+                        "f:observedGeneration": {},
+                        "f:phase": {}
+                    }
+                },
+                "manager": "kubedb-provisioner",
+                "operation": "Update",
+                "subresource": "status",
+                "time": "2024-05-14T04:08:19Z"
+            }
+        ],
+        "name": "repl6",
+        "namespace": "demo",
+        "uid": "27c66131-59b0-4919-a563-f83cfc120e77"
+    },
+    "spec": {
+        "allowedSchemas": {
+            "namespaces": {
+                "from": "Same"
+            }
+        },
+        "authSecret": {
+            "name": "repl6-auth"
+        },
+        "autoOps": {},
+        "clusterAuthMode": "keyFile",
+        "coordinator": {
+            "resources": {},
+            "securityContext": {
+                "allowPrivilegeEscalation": false,
+                "capabilities": {
+                    "drop": [
+                        "ALL"
+                    ]
+                },
+                "runAsGroup": 999,
+                "runAsNonRoot": true,
+                "runAsUser": 999,
+                "seccompProfile": {
+                    "type": "RuntimeDefault"
+                }
+            }
+        },
+        "healthChecker": {
+            "failureThreshold": 1,
+            "periodSeconds": 10,
+            "timeoutSeconds": 10
+        },
+        "keyFileSecret": {
+            "name": "repl6-key"
+        },
+        "podTemplate": {
+            "controller": {},
+            "metadata": {},
+            "spec": {
+                "affinity": {
+                    "podAntiAffinity": {
+                        "preferredDuringSchedulingIgnoredDuringExecution": [
+                            {
+                                "podAffinityTerm": {
+                                    "labelSelector": {
+                                        "matchLabels": {
+                                            "app.kubernetes.io/instance": "repl6",
+                                            "app.kubernetes.io/managed-by": "kubedb.com",
+                                            "app.kubernetes.io/name": "mongodbs.kubedb.com"
+                                        }
+                                    },
+                                    "namespaces": [
+                                        "demo"
+                                    ],
+                                    "topologyKey": "kubernetes.io/hostname"
+                                },
+                                "weight": 100
+                            },
+                            {
+                                "podAffinityTerm": {
+                                    "labelSelector": {
+                                        "matchLabels": {
+                                            "app.kubernetes.io/instance": "repl6",
+                                            "app.kubernetes.io/managed-by": "kubedb.com",
+                                            "app.kubernetes.io/name": "mongodbs.kubedb.com"
+                                        }
+                                    },
+                                    "namespaces": [
+                                        "demo"
+                                    ],
+                                    "topologyKey": "failure-domain.beta.kubernetes.io/zone"
+                                },
+                                "weight": 50
+                            }
+                        ]
+                    }
+                },
+                "containerSecurityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "capabilities": {
+                        "drop": [
+                            "ALL"
+                        ]
+                    },
+                    "runAsGroup": 999,
+                    "runAsNonRoot": true,
+                    "runAsUser": 999,
+                    "seccompProfile": {
+                        "type": "RuntimeDefault"
+                    }
+                },
+                "livenessProbe": {
+                    "exec": {
+                        "command": [
+                            "bash",
+                            "-c",
+                            "set -x; if [[ $(mongosh admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin --quiet --eval \"db.adminCommand('ping').ok\" ) -eq \"1\" ]]; then \n          exit 0\n        fi\n        exit 1"
+                        ]
+                    },
+                    "failureThreshold": 3,
+                    "periodSeconds": 10,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 5
+                },
+                "readinessProbe": {
+                    "exec": {
+                        "command": [
+                            "bash",
+                            "-c",
+                            "set -x; if [[ $(mongosh admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin --quiet --eval \"db.adminCommand('ping').ok\" ) -eq \"1\" ]]; then \n          exit 0\n        fi\n        exit 1"
+                        ]
+                    },
+                    "failureThreshold": 3,
+                    "periodSeconds": 10,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 5
+                },
+                "resources": {
+                    "limits": {
+                        "cpu": "1",
+                        "memory": "1Gi"
+                    },
+                    "requests": {
+                        "cpu": "1",
+                        "memory": "1Gi"
+                    }
+                },
+                "securityContext": {
+                    "fsGroup": 999
+                },
+                "serviceAccountName": "repl6"
+            }
+        },
+        "replicaSet": {
+            "name": "rs0"
+        },
+        "replicas": 3,
+        "sslMode": "disabled",
+        "storage": {
+            "accessModes": [
+                "ReadWriteOnce"
+            ],
+            "resources": {
+                "requests": {
+                    "storage": "10Gi"
+                }
+            },
+            "storageClassName": "linode-block-storage"
+        },
+        "storageEngine": "wiredTiger",
+        "storageType": "Durable",
+        "terminationPolicy": "WipeOut",
+        "version": "6.0.12"
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastTransitionTime": "2024-05-13T10:31:54Z",
+                "message": "The KubeDB operator has started the provisioning of MongoDB: demo/repl6",
+                "reason": "DatabaseProvisioningStartedSuccessfully",
+                "status": "True",
+                "type": "ProvisioningStarted"
+            },
+            {
+                "lastTransitionTime": "2024-05-14T04:08:19Z",
+                "message": "The MongoDB: demo/repl6 secondary is synced.",
+                "observedGeneration": 3,
+                "status": "True",
+                "type": "ReplicaReady"
+            },
+            {
+                "lastTransitionTime": "2024-05-13T10:38:09Z",
+                "message": "The MongoDB: demo/repl6 is accepting client requests.",
+                "observedGeneration": 3,
+                "reason": "DatabaseAcceptingConnectionRequest",
+                "status": "True",
+                "type": "AcceptingConnection"
+            },
+            {
+                "lastTransitionTime": "2024-05-13T10:38:09Z",
+                "message": "The MongoDB: demo/repl6 is ready.",
+                "observedGeneration": 3,
+                "reason": "ReadinessCheckSucceeded",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastTransitionTime": "2024-05-13T10:38:18Z",
+                "message": "The MongoDB: demo/repl6 is successfully provisioned.",
+                "observedGeneration": 3,
+                "reason": "DatabaseSuccessfullyProvisioned",
+                "status": "True",
+                "type": "Provisioned"
+            }
+        ],
+        "observedGeneration": 3,
+        "phase": "Ready"
+    }
+}
