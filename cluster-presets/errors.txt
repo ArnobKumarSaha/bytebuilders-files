@@ -1,0 +1,6 @@
+1) Node label 'app.kubernetes.io/instance: demo/repl4' does not meet syntax and character specifications. Please see https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+2) For Kubernetes version greater than or equal to 1.16, node label keys in the 'kubernetes.io' or 'k8s.io' namespace must begin with an allowed prefix (kubelet.kubernetes.io, node.kubernetes.io).
+    # https://github.com/Azure/AKS/issues/2866
+3) 
+
+

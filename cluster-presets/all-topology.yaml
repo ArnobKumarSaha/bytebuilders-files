@@ -1,0 +1,1080 @@
+apiVersion: v1
+items:
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:39Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: shared
+    name: a-family
+    resourceVersion: "65370"
+    uid: 19310050-ad32-4b1b-8798-58c496196cb8
+  spec:
+    description: Entry-level economical
+    nodeGroups:
+    - allocatable:
+        memory: 1Gi
+      resources:
+        limits:
+          memory: 1Gi
+        requests:
+          cpu: "1"
+          memory: 1Gi
+      topologyValue: a.nano
+    - allocatable:
+        memory: 2Gi
+      resources:
+        limits:
+          memory: 2Gi
+        requests:
+          cpu: "1"
+          memory: 2Gi
+      topologyValue: a.small
+    - allocatable:
+        memory: 4Gi
+      resources:
+        limits:
+          memory: 4Gi
+        requests:
+          cpu: "2"
+          memory: 4Gi
+      topologyValue: a.large
+    - allocatable:
+        memory: 8Gi
+      resources:
+        limits:
+          memory: 8Gi
+        requests:
+          cpu: "4"
+          memory: 8Gi
+      topologyValue: a.xlarge
+    - allocatable:
+        memory: 16Gi
+      resources:
+        limits:
+          memory: 16Gi
+        requests:
+          cpu: "8"
+          memory: 16Gi
+      topologyValue: a.2xlarge
+    - allocatable:
+        memory: 32Gi
+      resources:
+        limits:
+          memory: 32Gi
+        requests:
+          cpu: "16"
+          memory: 32Gi
+      topologyValue: a.4xlarge
+    topologyKey: ""
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:39Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: shared
+    name: b-family
+    resourceVersion: "65371"
+    uid: 91846c94-8828-4a8b-9551-652c3224a1f2
+  spec:
+    description: Burstable
+    nodeGroups:
+    - allocatable:
+        memory: 2Gi
+      resources:
+        limits:
+          memory: 2Gi
+        requests:
+          cpu: "1"
+          memory: 1Gi
+      topologyValue: b.small
+    - allocatable:
+        memory: 4Gi
+      resources:
+        limits:
+          memory: 4Gi
+        requests:
+          cpu: "1"
+          memory: 2Gi
+      topologyValue: b.medium
+    - allocatable:
+        memory: 8Gi
+      resources:
+        limits:
+          memory: 8Gi
+        requests:
+          cpu: "2"
+          memory: 4Gi
+      topologyValue: b.large
+    - allocatable:
+        memory: 16Gi
+      resources:
+        limits:
+          memory: 16Gi
+        requests:
+          cpu: "4"
+          memory: 8Gi
+      topologyValue: b.xlarge
+    - allocatable:
+        memory: 32Gi
+      resources:
+        limits:
+          memory: 32Gi
+        requests:
+          cpu: "8"
+          memory: 16Gi
+      topologyValue: b.2xlarge
+    - allocatable:
+        memory: 64Gi
+      resources:
+        limits:
+          memory: 64Gi
+        requests:
+          cpu: "16"
+          memory: 32Gi
+      topologyValue: b.4xlarge
+    topologyKey: ""
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:39Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: shared
+    name: d-family
+    resourceVersion: "65372"
+    uid: 9617dbc9-e254-4613-8c32-ce4c444f8513
+  spec:
+    description: |-
+      Enterprise-grade applications
+      Relational databases
+      In-memory caching
+      Data analytics
+    nodeGroups:
+    - allocatable:
+        memory: 2Gi
+      resources:
+        limits:
+          memory: 2Gi
+        requests:
+          cpu: "1"
+          memory: 2Gi
+      topologyValue: d.small
+    - allocatable:
+        memory: 4Gi
+      resources:
+        limits:
+          memory: 4Gi
+        requests:
+          cpu: "1"
+          memory: 4Gi
+      topologyValue: d.medium
+    - allocatable:
+        memory: 8Gi
+      resources:
+        limits:
+          memory: 8Gi
+        requests:
+          cpu: "2"
+          memory: 8Gi
+      topologyValue: d.large
+    - allocatable:
+        memory: 16Gi
+      resources:
+        limits:
+          memory: 16Gi
+        requests:
+          cpu: "4"
+          memory: 16Gi
+      topologyValue: d.xlarge
+    - allocatable:
+        memory: 32Gi
+      resources:
+        limits:
+          memory: 32Gi
+        requests:
+          cpu: "8"
+          memory: 32Gi
+      topologyValue: d.2xlarge
+    - allocatable:
+        memory: 64Gi
+      resources:
+        limits:
+          memory: 64Gi
+        requests:
+          cpu: "16"
+          memory: 64Gi
+      topologyValue: d.4xlarge
+    topologyKey: ""
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:43Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: dedicated
+    name: standard-basv2-family
+    resourceVersion: "65418"
+    uid: 50d99e37-da19-4afd-817c-8726f679ee02
+  spec:
+    description: standardBasv2Family
+    nodeGroups:
+    - allocatable:
+        memory: 800Mi
+      cost:
+        price: "6.86"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 800Mi
+        requests:
+          cpu: 1600m
+          memory: 800Mi
+      topologyValue: Standard_B2ats_v2
+    - allocatable:
+        memory: 3200Mi
+      cost:
+        price: "27.45"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 3200Mi
+        requests:
+          cpu: 1600m
+          memory: 3200Mi
+      topologyValue: Standard_B2als_v2
+    - allocatable:
+        memory: 6400Mi
+      cost:
+        price: "54.90"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 6400Mi
+        requests:
+          cpu: 1600m
+          memory: 6400Mi
+      topologyValue: Standard_B2as_v2
+    - allocatable:
+        memory: 6400Mi
+      cost:
+        price: "97.09"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 6400Mi
+        requests:
+          cpu: 3200m
+          memory: 6400Mi
+      topologyValue: Standard_B4als_v2
+    - allocatable:
+        memory: 12800Mi
+      cost:
+        price: "109.50"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 12800Mi
+        requests:
+          cpu: 3200m
+          memory: 12800Mi
+      topologyValue: Standard_B4as_v2
+    - allocatable:
+        memory: 12800Mi
+      cost:
+        price: "194.18"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 12800Mi
+        requests:
+          cpu: 6400m
+          memory: 12800Mi
+      topologyValue: Standard_B8als_v2
+    - allocatable:
+        memory: 25Gi
+      cost:
+        price: "219.73"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 25Gi
+        requests:
+          cpu: 6400m
+          memory: 25Gi
+      topologyValue: Standard_B8as_v2
+    - allocatable:
+        memory: 25Gi
+      cost:
+        price: "389.09"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 25Gi
+        requests:
+          cpu: 12800m
+          memory: 25Gi
+      topologyValue: Standard_B16als_v2
+    - allocatable:
+        memory: 50Gi
+      cost:
+        price: "439.46"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 50Gi
+        requests:
+          cpu: 12800m
+          memory: 50Gi
+      topologyValue: Standard_B16as_v2
+    - allocatable:
+        memory: 50Gi
+      cost:
+        price: "777.45"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 50Gi
+        requests:
+          cpu: 25600m
+          memory: 50Gi
+      topologyValue: Standard_B32als_v2
+    - allocatable:
+        memory: 100Gi
+      cost:
+        price: "878.19"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 100Gi
+        requests:
+          cpu: 25600m
+          memory: 100Gi
+      topologyValue: Standard_B32as_v2
+    nodeSelectionPolicy: Taint
+    topologyKey: nodepool-type
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:43Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: dedicated
+    name: standard-bpsv2-family
+    resourceVersion: "65422"
+    uid: ab0b520a-f43c-436c-8772-2a3e8b00b8f5
+  spec:
+    description: standardBpsv2Family
+    nodeGroups:
+    - allocatable:
+        memory: 800Mi
+      cost:
+        price: "6.13"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 800Mi
+        requests:
+          cpu: 1600m
+          memory: 800Mi
+      topologyValue: Standard_B2pts_v2
+    - allocatable:
+        memory: 3200Mi
+      cost:
+        price: "24.53"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 3200Mi
+        requests:
+          cpu: 1600m
+          memory: 3200Mi
+      topologyValue: Standard_B2pls_v2
+    - allocatable:
+        memory: 6400Mi
+      cost:
+        price: "49.06"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 6400Mi
+        requests:
+          cpu: 1600m
+          memory: 6400Mi
+      topologyValue: Standard_B2ps_v2
+    - allocatable:
+        memory: 6400Mi
+      cost:
+        price: "86.87"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 6400Mi
+        requests:
+          cpu: 3200m
+          memory: 6400Mi
+      topologyValue: Standard_B4pls_v2
+    - allocatable:
+        memory: 12800Mi
+      cost:
+        price: "97.82"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 12800Mi
+        requests:
+          cpu: 3200m
+          memory: 12800Mi
+      topologyValue: Standard_B4ps_v2
+    - allocatable:
+        memory: 12800Mi
+      cost:
+        price: "173.74"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 12800Mi
+        requests:
+          cpu: 6400m
+          memory: 12800Mi
+      topologyValue: Standard_B8pls_v2
+    - allocatable:
+        memory: 25Gi
+      cost:
+        price: "196.37"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 25Gi
+        requests:
+          cpu: 6400m
+          memory: 25Gi
+      topologyValue: Standard_B8ps_v2
+    - allocatable:
+        memory: 25Gi
+      cost:
+        price: "347.48"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 25Gi
+        requests:
+          cpu: 12800m
+          memory: 25Gi
+      topologyValue: Standard_B16pls_v2
+    - allocatable:
+        memory: 50Gi
+      cost:
+        price: "392.74"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 50Gi
+        requests:
+          cpu: 12800m
+          memory: 50Gi
+      topologyValue: Standard_B16ps_v2
+    nodeSelectionPolicy: Taint
+    topologyKey: nodepool-type
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:43Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: dedicated
+    name: standard-dcsv2-family
+    resourceVersion: "65420"
+    uid: 9481798e-72a1-4a2f-994e-a2221f4cd285
+  spec:
+    description: standardDCSv2Family
+    nodeGroups:
+    - allocatable:
+        memory: 3200Mi
+      cost:
+        price: "70.08"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 3200Mi
+        requests:
+          cpu: "0"
+          memory: 3200Mi
+      topologyValue: Standard_DC1s_v2
+    nodeSelectionPolicy: Taint
+    topologyKey: nodepool-type
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:43Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: dedicated
+    name: standard-dpdsv5-family
+    resourceVersion: "65419"
+    uid: 601ea59a-103e-401a-a61a-a1fe1b4ceaaa
+  spec:
+    description: standardDPDSv5Family
+    nodeGroups:
+    - allocatable:
+        memory: 6400Mi
+      cost:
+        price: "65.99"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 6400Mi
+        requests:
+          cpu: 1600m
+          memory: 6400Mi
+      topologyValue: Standard_D2pds_v5
+    - allocatable:
+        memory: 12800Mi
+      cost:
+        price: "132.13"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 12800Mi
+        requests:
+          cpu: 3200m
+          memory: 12800Mi
+      topologyValue: Standard_D4pds_v5
+    - allocatable:
+        memory: 25Gi
+      cost:
+        price: "264.26"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 25Gi
+        requests:
+          cpu: 6400m
+          memory: 25Gi
+      topologyValue: Standard_D8pds_v5
+    - allocatable:
+        memory: 50Gi
+      cost:
+        price: "527.79"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 50Gi
+        requests:
+          cpu: 12800m
+          memory: 50Gi
+      topologyValue: Standard_D16pds_v5
+    - allocatable:
+        memory: 100Gi
+      cost:
+        price: "1055.58"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 100Gi
+        requests:
+          cpu: 25600m
+          memory: 100Gi
+      topologyValue: Standard_D32pds_v5
+    - allocatable:
+        memory: 150Gi
+      cost:
+        price: "1584.10"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 150Gi
+        requests:
+          cpu: 38400m
+          memory: 150Gi
+      topologyValue: Standard_D48pds_v5
+    - allocatable:
+        memory: 166400Mi
+      cost:
+        price: "2111.89"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 166400Mi
+        requests:
+          cpu: 51200m
+          memory: 166400Mi
+      topologyValue: Standard_D64pds_v5
+    nodeSelectionPolicy: Taint
+    topologyKey: nodepool-type
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:43Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: dedicated
+    name: standard-dpldsv5-family
+    resourceVersion: "65415"
+    uid: 122a1f78-560a-4aba-8381-446ace0c8575
+  spec:
+    description: standardDPLDSv5Family
+    nodeGroups:
+    - allocatable:
+        memory: 3200Mi
+      cost:
+        price: "56.06"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 3200Mi
+        requests:
+          cpu: 1600m
+          memory: 3200Mi
+      topologyValue: Standard_D2plds_v5
+    - allocatable:
+        memory: 6400Mi
+      cost:
+        price: "112.42"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 6400Mi
+        requests:
+          cpu: 3200m
+          memory: 6400Mi
+      topologyValue: Standard_D4plds_v5
+    - allocatable:
+        memory: 12800Mi
+      cost:
+        price: "224.11"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 12800Mi
+        requests:
+          cpu: 6400m
+          memory: 12800Mi
+      topologyValue: Standard_D8plds_v5
+    - allocatable:
+        memory: 25Gi
+      cost:
+        price: "448.22"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 25Gi
+        requests:
+          cpu: 12800m
+          memory: 25Gi
+      topologyValue: Standard_D16plds_v5
+    - allocatable:
+        memory: 50Gi
+      cost:
+        price: "897.17"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 50Gi
+        requests:
+          cpu: 25600m
+          memory: 50Gi
+      topologyValue: Standard_D32plds_v5
+    - allocatable:
+        memory: 75Gi
+      cost:
+        price: "1345.39"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 75Gi
+        requests:
+          cpu: 38400m
+          memory: 75Gi
+      topologyValue: Standard_D48plds_v5
+    - allocatable:
+        memory: 100Gi
+      cost:
+        price: "1794.34"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 100Gi
+        requests:
+          cpu: 51200m
+          memory: 100Gi
+      topologyValue: Standard_D64plds_v5
+    nodeSelectionPolicy: Taint
+    topologyKey: nodepool-type
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:43Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: dedicated
+    name: standard-dplsv5-family
+    resourceVersion: "65423"
+    uid: 48f7c7e5-512c-4007-8ccc-e717493a2361
+  spec:
+    description: standardDPLSv5Family
+    nodeGroups:
+    - allocatable:
+        memory: 3200Mi
+      cost:
+        price: "49.64"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 3200Mi
+        requests:
+          cpu: 1600m
+          memory: 3200Mi
+      topologyValue: Standard_D2pls_v5
+    - allocatable:
+        memory: 6400Mi
+      cost:
+        price: "99.28"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 6400Mi
+        requests:
+          cpu: 3200m
+          memory: 6400Mi
+      topologyValue: Standard_D4pls_v5
+    - allocatable:
+        memory: 12800Mi
+      cost:
+        price: "198.56"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 12800Mi
+        requests:
+          cpu: 6400m
+          memory: 12800Mi
+      topologyValue: Standard_D8pls_v5
+    - allocatable:
+        memory: 25Gi
+      cost:
+        price: "397.12"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 25Gi
+        requests:
+          cpu: 12800m
+          memory: 25Gi
+      topologyValue: Standard_D16pls_v5
+    - allocatable:
+        memory: 50Gi
+      cost:
+        price: "794.24"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 50Gi
+        requests:
+          cpu: 25600m
+          memory: 50Gi
+      topologyValue: Standard_D32pls_v5
+    - allocatable:
+        memory: 75Gi
+      cost:
+        price: "1191.36"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 75Gi
+        requests:
+          cpu: 38400m
+          memory: 75Gi
+      topologyValue: Standard_D48pls_v5
+    - allocatable:
+        memory: 100Gi
+      cost:
+        price: "1588.48"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 100Gi
+        requests:
+          cpu: 51200m
+          memory: 100Gi
+      topologyValue: Standard_D64pls_v5
+    nodeSelectionPolicy: Taint
+    topologyKey: nodepool-type
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:43Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: dedicated
+    name: standard-dpsv5-family
+    resourceVersion: "65416"
+    uid: 2044fb24-7d2b-4f5c-9bbc-b9b61195a313
+  spec:
+    description: standardDPSv5Family
+    nodeGroups:
+    - allocatable:
+        memory: 6400Mi
+      cost:
+        price: "56.21"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 6400Mi
+        requests:
+          cpu: 1600m
+          memory: 6400Mi
+      topologyValue: Standard_D2ps_v5
+    - allocatable:
+        memory: 12800Mi
+      cost:
+        price: "112.42"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 12800Mi
+        requests:
+          cpu: 3200m
+          memory: 12800Mi
+      topologyValue: Standard_D4ps_v5
+    - allocatable:
+        memory: 25Gi
+      cost:
+        price: "224.84"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 25Gi
+        requests:
+          cpu: 6400m
+          memory: 25Gi
+      topologyValue: Standard_D8ps_v5
+    - allocatable:
+        memory: 50Gi
+      cost:
+        price: "449.68"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 50Gi
+        requests:
+          cpu: 12800m
+          memory: 50Gi
+      topologyValue: Standard_D16ps_v5
+    - allocatable:
+        memory: 100Gi
+      cost:
+        price: "899.36"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 100Gi
+        requests:
+          cpu: 25600m
+          memory: 100Gi
+      topologyValue: Standard_D32ps_v5
+    - allocatable:
+        memory: 150Gi
+      cost:
+        price: "1349.04"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 150Gi
+        requests:
+          cpu: 38400m
+          memory: 150Gi
+      topologyValue: Standard_D48ps_v5
+    - allocatable:
+        memory: 166400Mi
+      cost:
+        price: "1798.72"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 166400Mi
+        requests:
+          cpu: 51200m
+          memory: 166400Mi
+      topologyValue: Standard_D64ps_v5
+    nodeSelectionPolicy: Taint
+    topologyKey: nodepool-type
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:43Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: dedicated
+    name: standard-epdsv5-family
+    resourceVersion: "65421"
+    uid: a1a4aa90-6a07-46e6-b71e-c50e9023e203
+  spec:
+    description: standardEPDSv5Family
+    nodeGroups:
+    - allocatable:
+        memory: 12800Mi
+      cost:
+        price: "83.95"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 12800Mi
+        requests:
+          cpu: 1600m
+          memory: 12800Mi
+      topologyValue: Standard_E2pds_v5
+    - allocatable:
+        memory: 25Gi
+      cost:
+        price: "167.90"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 25Gi
+        requests:
+          cpu: 3200m
+          memory: 25Gi
+      topologyValue: Standard_E4pds_v5
+    - allocatable:
+        memory: 50Gi
+      cost:
+        price: "336.53"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 50Gi
+        requests:
+          cpu: 6400m
+          memory: 50Gi
+      topologyValue: Standard_E8pds_v5
+    - allocatable:
+        memory: 100Gi
+      cost:
+        price: "673.06"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 100Gi
+        requests:
+          cpu: 12800m
+          memory: 100Gi
+      topologyValue: Standard_E16pds_v5
+    - allocatable:
+        memory: 125Gi
+      cost:
+        price: "840.96"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 125Gi
+        requests:
+          cpu: "16"
+          memory: 125Gi
+      topologyValue: Standard_E20pds_v5
+    - allocatable:
+        memory: 166400Mi
+      cost:
+        price: "1345.39"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 166400Mi
+        requests:
+          cpu: 25600m
+          memory: 166400Mi
+      topologyValue: Standard_E32pds_v5
+    nodeSelectionPolicy: Taint
+    topologyKey: nodepool-type
+- apiVersion: node.k8s.appscode.com/v1alpha1
+  kind: NodeTopology
+  metadata:
+    creationTimestamp: "2024-07-01T07:16:43Z"
+    generation: 1
+    labels:
+      node.k8s.appscode.com/tenancy: dedicated
+    name: standard-epsv5-family
+    resourceVersion: "65417"
+    uid: e568f844-ee35-4737-917e-0327b2084904
+  spec:
+    description: standardEPSv5Family
+    nodeGroups:
+    - allocatable:
+        memory: 12800Mi
+      cost:
+        price: "73.73"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 12800Mi
+        requests:
+          cpu: 1600m
+          memory: 12800Mi
+      topologyValue: Standard_E2ps_v5
+    - allocatable:
+        memory: 25Gi
+      cost:
+        price: "147.46"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 25Gi
+        requests:
+          cpu: 3200m
+          memory: 25Gi
+      topologyValue: Standard_E4ps_v5
+    - allocatable:
+        memory: 50Gi
+      cost:
+        price: "294.19"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 50Gi
+        requests:
+          cpu: 6400m
+          memory: 50Gi
+      topologyValue: Standard_E8ps_v5
+    - allocatable:
+        memory: 100Gi
+      cost:
+        price: "588.38"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 100Gi
+        requests:
+          cpu: 12800m
+          memory: 100Gi
+      topologyValue: Standard_E16ps_v5
+    - allocatable:
+        memory: 125Gi
+      cost:
+        price: "735.84"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 125Gi
+        requests:
+          cpu: "16"
+          memory: 125Gi
+      topologyValue: Standard_E20ps_v5
+    - allocatable:
+        memory: 166400Mi
+      cost:
+        price: "1177.49"
+        unit: Monthly Cost(USD)
+      resources:
+        limits:
+          memory: 166400Mi
+        requests:
+          cpu: 25600m
+          memory: 166400Mi
+      topologyValue: Standard_E32ps_v5
+    nodeSelectionPolicy: Taint
+    topologyKey: nodepool-type
+kind: List
+metadata:
+  resourceVersion: ""

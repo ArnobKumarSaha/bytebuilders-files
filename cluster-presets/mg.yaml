@@ -1,0 +1,150 @@
+apiVersion: kubedb.com/v1alpha2
+kind: MongoDB
+metadata:
+  name: repl4
+  namespace: demo
+  annotations:
+    hello: world
+spec:
+  version: "4.4.26"
+  terminationPolicy: WipeOut
+  replicas: 2
+  replicaSet:
+    name: "rs1"
+  storage:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+  podTemplate:
+    spec:
+      resources:
+        requests:
+          cpu: 500m
+          memory: 1Gi
+        limits:
+          cpu: 500m
+          memory: 1Gi
+      nodeSelector:
+        app: mongodbs.kubedb.com
+        instance: repl4
+        namespace: demo
+        capacity-type: on-demand
+        nodepool: m16.xlarge
+      tolerations:
+        - key: app
+          operator: "Equal"
+          value: "mongodbs.kubedb.com"
+          effect: "NoSchedule"
+        - key: instance
+          operator: "Equal"
+          value: repl4
+          effect: "NoSchedule"
+        - key: namespace
+          operator: "Equal"
+          value: demo
+          effect: "NoSchedule"
+        - key: capacity-type
+          operator: "Equal"
+          value: on-demand
+          effect: "NoSchedule"
+        - key: nodepool
+          operator: "Equal"
+          value: m16.xlarge
+          effect: "NoSchedule"
+  terminationPolicy: WipeOut
+
+# app: mongodbs.kubedb.com
+# instance: <db-name>
+# namespace: <ns>
+# catacity-type: ondemand
+# nodepool: m16.xlarge
+
+# nodeSelector:
+#   kuebdb.dev/name: mongodbs.kubedb.com
+#   kuebdb.dev/instance: demo__repl4
+#   capacity-type: on-demand
+#   nodepool-type: m16
+# tolerations:
+#   - key: kuebdb.dev/name
+#     operator: "Equal"
+#     value: "mongodbs.kubedb.com"
+#     effect: "NoSchedule"
+#   - key: kuebdb.dev/instance
+#     operator: "Equal"
+#     value: demo__repl4
+#     effect: "NoSchedule"
+#   - key: capacity-type
+#     operator: "Equal"
+#     value: on-demand
+#     effect: "NoSchedule"
+#   - key: nodepool-type
+#     operator: "Equal"
+#     value: m16
+#     effect: "NoSchedule"
+
+
+# ------------------------Taken from cluster--------------------------------
+# agentpool=np59fghv,
+# beta.kubernetes.io/arch=amd64,
+# beta.kubernetes.io/instance-type=Standard_B2als_v2,
+# beta.kubernetes.io/os=linux,
+# failure-domain.beta.kubernetes.io/region=eastus,
+# failure-domain.beta.kubernetes.io/zone=0,
+# kubernetes.azure.com/agentpool=np59fghv,
+# kubernetes.azure.com/cluster=MC_arnob-presets_arnob-presets_eastus,
+# kubernetes.azure.com/consolidated-additional-properties=6041fa3c-378d-11ef-919b-32795285d0dd,
+# kubernetes.azure.com/kubelet-identity-client-id=1c656f27-27d9-43ea-836f-729573619cd1,
+# kubernetes.azure.com/mode=user,
+# kubernetes.azure.com/node-image-version=AKSUbuntu-2204gen2containerd-202406.19.0,
+# kubernetes.azure.com/nodepool-type=VirtualMachineScaleSets,
+# kubernetes.azure.com/os-sku=Ubuntu,
+# kubernetes.azure.com/role=agent,
+# kubernetes.azure.com/storageprofile=managed,
+# kubernetes.azure.com/storagetier=Premium_LRS,
+# kubernetes.io/arch=amd64,
+# kubernetes.io/hostname=aks-np59fghv-53079063-vmss000000,
+# kubernetes.io/os=linux,
+# node.kubernetes.io/instance-type=Standard_B2als_v2,
+# storageprofile=managed,
+# storagetier=Premium_LRS,
+# topology.disk.csi.azure.com/zone=,
+# topology.kubernetes.io/region=eastus,
+# topology.kubernetes.io/zone=0
+# app=mongodbs.kubedb.com,
+# capacity-type=on-demand,
+# instance=repl4,
+# namespace=demo,
+# nodepool=m16.xlarge,
+
+# taints:
+# - effect: NoSchedule
+#   key: app
+#   value: mongodbs.kubedb.com
+# - effect: NoSchedule
+#   key: instance
+#   value: repl4
+# - effect: NoSchedule
+#   key: namespace
+#   value: demo
+# - effect: NoSchedule
+#   key: capacity-type
+#   value: on-demand
+# - effect: NoSchedule
+#   key: nodepool
+#   value: m16.xlarge
+# - effect: NoSchedule
+#   key: nodetopology/standard-basv2-family
+#   value: Standard_B2als_v2
+
+
+# kube-ui-server (in values)
+# platform:
+#   baseURL: https://api.appscode.com
+#   token: 77024def20a7037298f50f49a099afc448bdd443
+
+
+# platform:
+#   baseURL: http://api.bb.test:3003/
+#   token: cbf1b37b791def145c25996a43de8f8446c1d400

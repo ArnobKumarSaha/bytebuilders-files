@@ -1,0 +1,40 @@
+apiVersion: node.k8s.appscode.com/v1alpha1
+kind: NodeTopology
+metadata:
+  labels:
+    node.k8s.appscode.com/tenancy: dedicated
+  name: self-created-family
+spec:
+  description: Burstable
+  nodeGroups:
+  - allocatable:
+      memory: 4Gi
+    resources:
+      limits:
+        memory: 4Gi
+    topologyValue: Standard_B2pls_v2
+  - allocatable:
+      memory: 8Gi
+    resources:
+      limits:
+        memory: 8Gi
+    topologyValue: Standard_B2ps_v2
+  # - allocatable:
+  #     memory: 8Gi
+  #   resources:
+  #     limits:
+  #       memory: 8Gi
+  #     requests:
+  #       cpu: "2"
+  #       memory: 4Gi
+  #   topologyValue: Standard_B2als_v2
+  # - allocatable:
+  #     memory: 16Gi
+  #   resources:
+  #     limits:
+  #       memory: 16Gi
+  #     requests:
+  #       cpu: "4"
+  #       memory: 8Gi
+  #   topologyValue: Standard_B2als_v2
+  topologyKey: ""
