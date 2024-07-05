@@ -3,8 +3,10 @@ kind: MongoDB
 metadata:
   name: repl4
   namespace: demo
+  labels:
+    kubedb.com/archiver: "true"
   annotations:
-    hello: world
+    app.kubernetes.io/cluster-tier: GeneralPurpose
 spec:
   version: "4.4.26"
   terminationPolicy: WipeOut
@@ -31,7 +33,7 @@ spec:
         instance: repl4
         namespace: demo
         capacity-type: on-demand
-        nodepool: m16.xlarge
+        nodeTopology: standard-basv2-family
       tolerations:
         - key: app
           operator: "Equal"
@@ -49,9 +51,9 @@ spec:
           operator: "Equal"
           value: on-demand
           effect: "NoSchedule"
-        - key: nodepool
+        - key: nodeTopology
           operator: "Equal"
-          value: m16.xlarge
+          value: standard-basv2-family
           effect: "NoSchedule"
   terminationPolicy: WipeOut
 
