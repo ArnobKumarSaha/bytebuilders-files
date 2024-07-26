@@ -1,0 +1,25 @@
+apiVersion: autoscaling.kubedb.com/v1alpha1
+kind: MongoDBAutoscaler
+metadata:
+  name: as2
+  namespace: demo
+spec:
+  databaseRef:
+    name: repl2
+  opsRequestOptions:
+    timeout: 10m
+    apply: IfReady
+  compute:
+    standalone:
+      trigger: "On"
+      podLifeTimeThreshold: 10m
+      resourceDiffPercentage: 20
+      minAllowed:
+        cpu: 400m
+        memory: 400Mi
+      maxAllowed:
+        cpu: 1
+        memory: 2Gi
+
+# `OldDBs`: Elasticsearch, Kafka, MariaDB, Memcached, MongoDB, MySQL, PerconaXtraDB, PgBouncer,  Postgres, ProxySQL, Redis
+# `NewDBs`: ClickHouse, Druid, FerretDB, MSSQLServer, Pgpool, RabbitMQ,  Singlestore, Solr, ZooKeeper

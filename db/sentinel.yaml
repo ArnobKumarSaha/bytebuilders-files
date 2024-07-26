@@ -1,0 +1,24 @@
+apiVersion: kubedb.com/v1
+kind: RedisSentinel
+metadata:
+  name: xyz
+  namespace: demo
+spec:
+  version: 7.2.4
+  replicas: 3
+  storageType: Durable
+  storage:
+    resources:
+      requests:
+        storage: 1Gi
+    accessModes:
+    - ReadWriteOnce
+  podTemplate:
+    spec:
+      containers:
+      - name: redissentinel
+        resources:
+          requests:
+            cpu: 300m
+            memory: 300Mi
+  deletionPolicy: WipeOut

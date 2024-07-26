@@ -1,0 +1,49 @@
+
+# CRDs to be installed on featureset saas-core (kubernetes Native Service)
+
+apiservicebindings.kube-bind.appscode.com             2024-07-24T06:19:48Z
+externaldnses.external-dns.appscode.com               2024-07-24T06:20:42Z
+
+kafkaroutes.gateway.voyagermesh.com                   2024-07-24T06:19:49Z
+mysqlroutes.gateway.voyagermesh.com                   2024-07-24T06:19:49Z
+mongodbroutes.gateway.voyagermesh.com                 2024-07-24T06:19:49Z
+redisroutes.gateway.voyagermesh.com                   2024-07-24T06:19:50Z
+postgresroutes.gateway.voyagermesh.com                2024-07-24T06:19:50Z
+
+clusterbindings.kube-bind.appscode.com                2024-07-24T06:19:49Z
+apiserviceexports.kube-bind.appscode.com              2024-07-24T06:19:49Z
+apiservicenamespaces.kube-bind.appscode.com           2024-07-24T06:19:49Z
+apiserviceexportrequests.kube-bind.appscode.com       2024-07-24T06:19:49Z
+
+backendtlspolicies.gateway.networking.k8s.io          2024-07-24T06:19:51Z
+grpcroutes.gateway.networking.k8s.io                  2024-07-24T06:19:54Z
+tcproutes.gateway.networking.k8s.io                   2024-07-24T06:19:57Z
+tlsroutes.gateway.networking.k8s.io                   2024-07-24T06:19:57Z
+udproutes.gateway.networking.k8s.io                   2024-07-24T06:19:58Z
+
+envoyproxies.gateway.envoyproxy.io                    2024-07-24T06:19:58Z
+securitypolicies.gateway.envoyproxy.io                2024-07-24T06:19:58Z
+envoypatchpolicies.gateway.envoyproxy.io              2024-07-24T06:19:58Z
+clienttrafficpolicies.gateway.envoyproxy.io           2024-07-24T06:19:58Z
+backendtrafficpolicies.gateway.envoyproxy.io          2024-07-24T06:19:58Z
+
+druidbindings.catalog.appscode.com                    2024-07-24T06:20:46Z
+ferretdbbindings.catalog.appscode.com                 2024-07-24T06:20:46Z
+memcachedbindings.catalog.appscode.com                2024-07-24T06:20:46Z
+solrbindings.catalog.appscode.com                     2024-07-24T06:20:47Z
+pgpoolbindings.catalog.appscode.com                   2024-07-24T06:20:47Z
+proxysqlbindings.catalog.appscode.com                 2024-07-24T06:20:47Z
+rabbitmqbindings.catalog.appscode.com                 2024-07-24T06:20:47Z
+pgbouncerbindings.catalog.appscode.com                2024-07-24T06:20:47Z
+zookeeperbindings.catalog.appscode.com                2024-07-24T06:20:47Z
+mssqlserverbindings.catalog.appscode.com              2024-07-24T06:20:47Z
+singlestorebindings.catalog.appscode.com              2024-07-24T06:20:47Z
+perconaxtradbbindings.catalog.appscode.com            2024-07-24T06:20:47Z
+
+# Keda
+scaledjobs.keda.sh                                    2024-07-24T06:33:18Z
+scaledobjects.keda.sh                                 2024-07-24T06:33:18Z
+triggerauthentications.keda.sh                        2024-07-24T06:33:18Z
+cloudeventsources.eventing.keda.sh                    2024-07-24T06:33:18Z
+clustertriggerauthentications.keda.sh                 2024-07-24T06:33:18Z
+httpscaledobjects.http.keda.sh                        2024-07-24T06:34:14Z

@@ -1,0 +1,426 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Machine
+metadata:
+  annotations:
+    pre-terminate.delete.hook.machine.cluster.x-k8s.io/rke-bootstrap-cleanup: rke-bootstrap-controller
+  creationTimestamp: '2024-07-05T06:51:13Z'
+  finalizers:
+    - machine.cluster.x-k8s.io
+  generation: 2
+  labels:
+    cattle.io/os: linux
+    cluster.x-k8s.io/cluster-name: test
+    cluster.x-k8s.io/control-plane: 'true'
+    cluster.x-k8s.io/deployment-name: test-pool1
+    cluster.x-k8s.io/set-name: test-pool1-6cd785976bxqs8ch
+    machine-template-hash: 2783415326-xzjmq
+    rke.cattle.io/cluster-name: test
+    rke.cattle.io/control-plane-role: 'true'
+    rke.cattle.io/etcd-role: 'true'
+    rke.cattle.io/machine-id: 4d9a59cc9f1747f0c8c17cf1d7f3e0fadad550d31738680a5f8c02cf302f08c
+    rke.cattle.io/rke-machine-pool-name: pool1
+    rke.cattle.io/worker-role: 'true'
+  managedFields:
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:cattle.io/os: {}
+            f:cluster.x-k8s.io/cluster-name: {}
+            f:cluster.x-k8s.io/control-plane: {}
+            f:cluster.x-k8s.io/deployment-name: {}
+            f:cluster.x-k8s.io/set-name: {}
+            f:machine-template-hash: {}
+            f:rke.cattle.io/cluster-name: {}
+            f:rke.cattle.io/control-plane-role: {}
+            f:rke.cattle.io/etcd-role: {}
+            f:rke.cattle.io/rke-machine-pool-name: {}
+            f:rke.cattle.io/worker-role: {}
+          f:ownerReferences:
+            k:{"uid":"171d2fec-e5cf-423c-ac21-d46e69e98c67"}: {}
+        f:spec:
+          f:bootstrap:
+            f:configRef: {}
+          f:clusterName: {}
+          f:infrastructureRef: {}
+      manager: capi-machineset
+      operation: Apply
+      time: '2024-07-05T06:51:13Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"machine.cluster.x-k8s.io": {}
+        f:spec:
+          f:bootstrap:
+            f:dataSecretName: {}
+      manager: manager
+      operation: Update
+      time: '2024-07-05T06:51:13Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pre-terminate.delete.hook.machine.cluster.x-k8s.io/rke-bootstrap-cleanup: {}
+          f:labels:
+            f:rke.cattle.io/machine-id: {}
+      manager: rancher
+      operation: Update
+      time: '2024-07-05T06:52:24Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:bootstrapReady: {}
+          f:conditions: {}
+          f:lastUpdated: {}
+          f:observedGeneration: {}
+          f:phase: {}
+      manager: manager
+      operation: Update
+      subresource: status
+      time: '2024-07-05T06:52:30Z'
+  name: test-pool1-6cd785976bxqs8ch-4gjkj
+  namespace: fleet-default
+  ownerReferences:
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MachineSet
+      name: test-pool1-6cd785976bxqs8ch
+      uid: 171d2fec-e5cf-423c-ac21-d46e69e98c67
+  resourceVersion: '5891074'
+  uid: 5bac4a09-65dc-44b2-9c32-d9b2b5aa56ac
+spec:
+  bootstrap:
+    configRef:
+      apiVersion: rke.cattle.io/v1
+      kind: RKEBootstrap
+      name: test-bootstrap-template-r5bv6
+      namespace: fleet-default
+      uid: 8ffcfac0-225f-40b0-8762-2cfab242d455
+    dataSecretName: test-bootstrap-template-r5bv6-machine-bootstrap
+  clusterName: test
+  infrastructureRef:
+    apiVersion: rke-machine.cattle.io/v1
+    kind: HarvesterMachine
+    name: test-pool1-195e5a45-chwp9
+    namespace: fleet-default
+    uid: a244193e-3e50-47f9-8a36-d09758afd905
+  nodeDeletionTimeout: 10s
+status:
+  bootstrapReady: true
+  conditions:
+    - lastTransitionTime: '2024-07-05T06:51:13Z'
+      status: 'True'
+      type: Ready
+    - lastTransitionTime: '2024-07-05T06:51:13Z'
+      status: 'True'
+      type: BootstrapReady
+    - lastTransitionTime: '2024-07-05T06:52:30Z'
+      status: 'True'
+      type: InfrastructureReady
+    - lastTransitionTime: '2024-07-05T06:51:13Z'
+      reason: WaitingForNodeRef
+      severity: Info
+      status: 'False'
+      type: NodeHealthy
+  lastUpdated: '2024-07-05T06:51:13Z'
+  observedGeneration: 2
+  phase: Provisioning
+---
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Machine
+metadata:
+  annotations:
+    pre-terminate.delete.hook.machine.cluster.x-k8s.io/rke-bootstrap-cleanup: rke-bootstrap-controller
+  creationTimestamp: '2024-07-05T06:51:13Z'
+  finalizers:
+    - machine.cluster.x-k8s.io
+  generation: 2
+  labels:
+    cattle.io/os: linux
+    cluster.x-k8s.io/cluster-name: test
+    cluster.x-k8s.io/control-plane: 'true'
+    cluster.x-k8s.io/deployment-name: test-pool1
+    cluster.x-k8s.io/set-name: test-pool1-6cd785976bxqs8ch
+    machine-template-hash: 2783415326-xzjmq
+    rke.cattle.io/cluster-name: test
+    rke.cattle.io/control-plane-role: 'true'
+    rke.cattle.io/etcd-role: 'true'
+    rke.cattle.io/machine-id: 5a8306ab4937c7f52e3f309e3e740159d7edeb6b82fa6850b0723b6197c6a0d
+    rke.cattle.io/rke-machine-pool-name: pool1
+    rke.cattle.io/worker-role: 'true'
+  managedFields:
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:cattle.io/os: {}
+            f:cluster.x-k8s.io/cluster-name: {}
+            f:cluster.x-k8s.io/control-plane: {}
+            f:cluster.x-k8s.io/deployment-name: {}
+            f:cluster.x-k8s.io/set-name: {}
+            f:machine-template-hash: {}
+            f:rke.cattle.io/cluster-name: {}
+            f:rke.cattle.io/control-plane-role: {}
+            f:rke.cattle.io/etcd-role: {}
+            f:rke.cattle.io/rke-machine-pool-name: {}
+            f:rke.cattle.io/worker-role: {}
+          f:ownerReferences:
+            k:{"uid":"171d2fec-e5cf-423c-ac21-d46e69e98c67"}: {}
+        f:spec:
+          f:bootstrap:
+            f:configRef: {}
+          f:clusterName: {}
+          f:infrastructureRef: {}
+      manager: capi-machineset
+      operation: Apply
+      time: '2024-07-05T06:51:13Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"machine.cluster.x-k8s.io": {}
+        f:spec:
+          f:bootstrap:
+            f:dataSecretName: {}
+      manager: manager
+      operation: Update
+      time: '2024-07-05T06:51:13Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pre-terminate.delete.hook.machine.cluster.x-k8s.io/rke-bootstrap-cleanup: {}
+          f:labels:
+            f:rke.cattle.io/machine-id: {}
+      manager: rancher
+      operation: Update
+      time: '2024-07-05T06:52:27Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:bootstrapReady: {}
+          f:conditions: {}
+          f:lastUpdated: {}
+          f:observedGeneration: {}
+          f:phase: {}
+      manager: manager
+      operation: Update
+      subresource: status
+      time: '2024-07-05T06:52:35Z'
+  name: test-pool1-6cd785976bxqs8ch-8bj5r
+  namespace: fleet-default
+  ownerReferences:
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MachineSet
+      name: test-pool1-6cd785976bxqs8ch
+      uid: 171d2fec-e5cf-423c-ac21-d46e69e98c67
+  resourceVersion: '5891125'
+  uid: eeb3e39e-c81a-4256-b91c-ec35d971d8a3
+spec:
+  bootstrap:
+    configRef:
+      apiVersion: rke.cattle.io/v1
+      kind: RKEBootstrap
+      name: test-bootstrap-template-ml9j5
+      namespace: fleet-default
+      uid: 2058cb13-cfc1-4d12-a114-27ad54980b49
+    dataSecretName: test-bootstrap-template-ml9j5-machine-bootstrap
+  clusterName: test
+  infrastructureRef:
+    apiVersion: rke-machine.cattle.io/v1
+    kind: HarvesterMachine
+    name: test-pool1-195e5a45-wmjq7
+    namespace: fleet-default
+    uid: daf65726-1a4d-4190-845d-53d79f4095aa
+  nodeDeletionTimeout: 10s
+status:
+  bootstrapReady: true
+  conditions:
+    - lastTransitionTime: '2024-07-05T06:51:23Z'
+      status: 'True'
+      type: Ready
+    - lastTransitionTime: '2024-07-05T06:51:13Z'
+      status: 'True'
+      type: BootstrapReady
+    - lastTransitionTime: '2024-07-05T06:52:35Z'
+      status: 'True'
+      type: InfrastructureReady
+    - lastTransitionTime: '2024-07-05T06:51:13Z'
+      reason: WaitingForNodeRef
+      severity: Info
+      status: 'False'
+      type: NodeHealthy
+  lastUpdated: '2024-07-05T06:51:13Z'
+  observedGeneration: 2
+  phase: Provisioning
+---
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Machine
+metadata:
+  annotations:
+    pre-terminate.delete.hook.machine.cluster.x-k8s.io/rke-bootstrap-cleanup: rke-bootstrap-controller
+  creationTimestamp: '2024-07-05T06:51:13Z'
+  finalizers:
+    - machine.cluster.x-k8s.io
+  generation: 2
+  labels:
+    cattle.io/os: linux
+    cluster.x-k8s.io/cluster-name: test
+    cluster.x-k8s.io/control-plane: 'true'
+    cluster.x-k8s.io/deployment-name: test-pool1
+    cluster.x-k8s.io/set-name: test-pool1-6cd785976bxqs8ch
+    machine-template-hash: 2783415326-xzjmq
+    rke.cattle.io/cluster-name: test
+    rke.cattle.io/control-plane-role: 'true'
+    rke.cattle.io/etcd-role: 'true'
+    rke.cattle.io/machine-id: 210ad99a27690188ae50068ed30529e7fe94d4c588cd454adf713fbb6c293f2
+    rke.cattle.io/rke-machine-pool-name: pool1
+    rke.cattle.io/worker-role: 'true'
+  managedFields:
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:cattle.io/os: {}
+            f:cluster.x-k8s.io/cluster-name: {}
+            f:cluster.x-k8s.io/control-plane: {}
+            f:cluster.x-k8s.io/deployment-name: {}
+            f:cluster.x-k8s.io/set-name: {}
+            f:machine-template-hash: {}
+            f:rke.cattle.io/cluster-name: {}
+            f:rke.cattle.io/control-plane-role: {}
+            f:rke.cattle.io/etcd-role: {}
+            f:rke.cattle.io/rke-machine-pool-name: {}
+            f:rke.cattle.io/worker-role: {}
+          f:ownerReferences:
+            k:{"uid":"171d2fec-e5cf-423c-ac21-d46e69e98c67"}: {}
+        f:spec:
+          f:bootstrap:
+            f:configRef: {}
+          f:clusterName: {}
+          f:infrastructureRef: {}
+      manager: capi-machineset
+      operation: Apply
+      time: '2024-07-05T06:51:13Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"machine.cluster.x-k8s.io": {}
+        f:spec:
+          f:bootstrap:
+            f:dataSecretName: {}
+      manager: manager
+      operation: Update
+      time: '2024-07-05T06:51:13Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pre-terminate.delete.hook.machine.cluster.x-k8s.io/rke-bootstrap-cleanup: {}
+          f:labels:
+            f:rke.cattle.io/machine-id: {}
+      manager: rancher
+      operation: Update
+      time: '2024-07-05T06:52:22Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:bootstrapReady: {}
+          f:lastUpdated: {}
+          f:observedGeneration: {}
+          f:phase: {}
+      manager: manager
+      operation: Update
+      subresource: status
+      time: '2024-07-05T06:52:26Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:conditions: {}
+          f:infrastructureReady: {}
+      manager: rancher
+      operation: Update
+      subresource: status
+      time: '2024-07-05T06:54:35Z'
+  name: test-pool1-6cd785976bxqs8ch-hrqnh
+  namespace: fleet-default
+  ownerReferences:
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MachineSet
+      name: test-pool1-6cd785976bxqs8ch
+      uid: 171d2fec-e5cf-423c-ac21-d46e69e98c67
+  resourceVersion: '5892193'
+  uid: 2d412d21-70de-4c20-923f-c2459e25688d
+spec:
+  bootstrap:
+    configRef:
+      apiVersion: rke.cattle.io/v1
+      kind: RKEBootstrap
+      name: test-bootstrap-template-xs8m6
+      namespace: fleet-default
+      uid: 275445e6-3472-4248-b177-5b0f75db18ac
+    dataSecretName: test-bootstrap-template-xs8m6-machine-bootstrap
+  clusterName: test
+  infrastructureRef:
+    apiVersion: rke-machine.cattle.io/v1
+    kind: HarvesterMachine
+    name: test-pool1-195e5a45-9tt6m
+    namespace: fleet-default
+    uid: 89f66b46-8bfb-4323-b083-4d3a5e281c86
+  nodeDeletionTimeout: 10s
+status:
+  bootstrapReady: true
+  conditions:
+    - lastTransitionTime: '2024-07-05T06:51:14Z'
+      status: 'True'
+      type: Ready
+    - lastTransitionTime: '2024-07-05T06:51:13Z'
+      status: 'True'
+      type: BootstrapReady
+    - lastTransitionTime: '2024-07-05T06:52:26Z'
+      status: 'True'
+      type: InfrastructureReady
+    - lastTransitionTime: '2024-07-05T06:51:13Z'
+      reason: WaitingForNodeRef
+      severity: Info
+      status: 'False'
+      type: NodeHealthy
+    - lastTransitionTime: '2024-07-05T06:52:26Z'
+      status: 'True'
+      type: PlanApplied
+    - lastTransitionTime: '2024-07-05T06:54:35Z'
+      status: 'True'
+      type: Reconciled
+  infrastructureReady: false
+  lastUpdated: '2024-07-05T06:51:13Z'
+  observedGeneration: 2
+  phase: Provisioning

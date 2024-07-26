@@ -1,0 +1,16 @@
+apiVersion: ops.kubedb.com/v1alpha1
+kind: MongoDBOpsRequest
+metadata:
+  name: add
+  namespace: demo
+spec:
+  type: ReconfigureTLS
+  databaseRef:
+    name: repl4
+  tls:
+    issuerRef:
+      name: mongo-ca-issuer
+      kind: Issuer
+      apiGroup: "cert-manager.io"
+  timeout: 15m
+  apply: IfReady

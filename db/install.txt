@@ -1,0 +1,46 @@
+		--set registryFQDN="" \
+		--set operator.registry=$(REGISTRY)  \
+		--set operator.repository=$(BIN)   \
+		--set operator.tag=$(TAG)            \
+
+
+helm pull oci://ghcr.io/appscode-charts/kubedb --version v2024.6.4
+helm pull oci://ghcr.io/appscode-charts/kubedb --version v2024.7.11-rc.1
+kubedb-v2024.6.4.tgz  kubedb-v2024.7.11-rc.1.tgz
+
+
+kubectl delete mg,pg,mariadb -n demo --all
+helm uninstall -n kubedb kubedb
+
+---
+
+helm install kubedb kubedb-v2024.6.4.tgz \
+  --version v2024.6.4 \
+  --namespace kubedb --create-namespace \
+  --set-file global.license=/home/arnob/yamls/license/kind.txt \
+  --wait --burst-limit=10000 --debug
+
+kubectl apply -f ~/go/src/github.com/Arnobkumarsaha/bytebuilders-files/db/mongo.yaml
+kubectl apply -f ~/go/src/github.com/Arnobkumarsaha/bytebuilders-files/db/pg.yaml
+kubectl apply -f ~/go/src/github.com/Arnobkumarsaha/bytebuilders-files/db/maria.yaml
+
+
+---
+
+kubectl apply -f https://raw.githubusercontent.com/kubedb/installer/v2024.7.11-rc.1/crds/kubedb-catalog-crds.yaml
+
+kubectl create -f https://github.com/kubeops/petset/raw/v0.0.6/crds/apps.k8s.appscode.com_petsets.yaml
+kubectl apply -f https://github.com/kubeops/petset/raw/v0.0.6/crds/apps.k8s.appscode.com_placementpolicies.yaml
+
+
+helm upgrade -i kubedb kubedb-v2024.7.11-rc.1.tgz \
+  --version v2024.7.11-rc.1 \
+  --namespace kubedb --create-namespace \
+  --set-file global.license=/home/arnob/yamls/license/kind.txt \
+  --wait --burst-limit=10000 --debug
+
+#  --set kubedb-provisioner.replicaCount=0 \
+
+
+kubectl get pg -n demo pg-demo -o=jsonpath='{range .status.conditions[*]}{.type}{"\t"}{.lastTransitionTime}{.status}{"\n"}{end}'
+watch 'kubectl get pg -n demo pg-demo -oyaml | yq .metadata.resourceVersion'

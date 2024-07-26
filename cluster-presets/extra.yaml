@@ -1,0 +1,24 @@
+# kubectl apply -f https://raw.githubusercontent.com/kmodules/resource-metadata/master/crds/node.k8s.appscode.com_nodetopologies.yaml
+
+echo "
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: az-vsc
+driver: disk.csi.azure.com
+deletionPolicy: Delete" | kubectl apply -f -
+
+
+# curl 'http://api.bb.test:3003/api/v1/clusters/arnob/arnob-presets-aks/proxy/meta.k8s.appscode.com/v1alpha1/resourcelayouts/kubedb.com-v1alpha2-mongodbs-kubedb' \
+#   -H 'Accept: application/json, text/plain, */*' \
+#   -H 'Accept-Language: en-US,en;q=0.9' \
+#   -H 'Cache-Control: no-cache' \
+#   -H 'Connection: keep-alive' \
+#   -H 'Cookie: lang=en-US; twk_uuid_5821e34b18d9f16af02864b7=%7B%22uuid%22%3A%221.1UirJCquEn3feNdWbVYkjTUrFhFVsqpTt9p2t1CMkADWHqlzshobI4zBgZhhxruNNoInK4js4tCGR6fHRJbLB0oSEqJVZ6Jni3acT3HHDd0nJyD%22%2C%22version%22%3A3%2C%22domain%22%3A%22bb.test%22%2C%22ts%22%3A1719991905766%7D; i_like_bytebuilders=609cb1e66b13c454; _csrf=2cHn3nxALa9TtT4ksxLox_X2V6s6MTcxOTk5MjM2ODE3MzQwMTkyNQ; activeOrganization=arnob; activeCluster=arnob-presets-aks' \
+#   -H 'Origin: http://db.bb.test:5996' \
+#   -H 'Pragma: no-cache' \
+#   -H 'Referer: http://db.bb.test:5996/' \
+#   -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
+#   -H 'X-Requested-With: xmlhttprequest' \
+#   -H 'x-csrf-token: 2cHn3nxALa9TtT4ksxLox_X2V6s6MTcxOTk5MjM2ODE3MzQwMTkyNQ' \
+#   --insecure

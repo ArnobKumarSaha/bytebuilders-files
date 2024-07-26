@@ -1,0 +1,164 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: MachineSet
+metadata:
+  annotations:
+    machinedeployment.clusters.x-k8s.io/desired-replicas: '3'
+    machinedeployment.clusters.x-k8s.io/max-replicas: '4'
+    machinedeployment.clusters.x-k8s.io/revision: '1'
+    objectset.rio.cattle.io/applied: >-
+      H4sIAAAAAAAA/4xTX2/bPgz8Kj/w2c4vTuu1NbCXDQMGFPuDoNs7I9GpFloSJDptUPi7D3Kaws7sto+mj8fTkfcEDQlqFITqCdBaJyjG2Zg+3eYPKYkki2DcQqEI08K4/42GCsKOcsVtFAqQzULdg6WQb/c7qMAHtzfROGvsdgDZF9l/t8bqj5/fyWaxIahAKMq7sNGjSg01E0muqcaWBboMVKD+sXemoSjYeKhsy5wB44a4t2DAF6ECNrZ9fGXoPcZ7qGBVLnFZ6np1tVotP9Sbq0t1UeBSFaqsS10X5ea6uLmp6yRi8JrcO8cFHGuzqqMn1Us72vV95EYgz0ZhhOoig0hMSlyA6in1SUCh7SH1Bsds7PaX1yiUCpqYhH46NuoAFfxgnfi6DOTgE/161JDq1Hh+bh6e0JvWPctePOa765j+PhfO1vovzFkJjnPPaHtcaGkKp8mzOzRkJZ+yNuxosK/p2WeY4eA8OB5MHyNJlH4VkDLToLo3lnpBp7nT4h5c2FEYEXaD/W+ck7RT35vtbG22a6r7GHvzm0JK2jGno7BBBjtjU4LXt18+nTjuTuscH+TLjFzGgJnr7LLpszS2DhgltEraQDMyT9bMyP2KYU+J+tsRNiO59zIvbkoq8bJ8Q27vp6C0/cXiHg3jhmn9kqJlihTqw1ll8NHa6ba2j4oe1LrubwAAAP//5I6Hh24FAAA
+    objectset.rio.cattle.io/id: rke-cluster
+    objectset.rio.cattle.io/owner-gvk: provisioning.cattle.io/v1, Kind=Cluster
+    objectset.rio.cattle.io/owner-name: test
+    objectset.rio.cattle.io/owner-namespace: fleet-default
+  creationTimestamp: '2024-07-05T06:51:13Z'
+  generation: 1
+  labels:
+    cattle.io/os: linux
+    cluster.x-k8s.io/cluster-name: test
+    cluster.x-k8s.io/control-plane: 'true'
+    cluster.x-k8s.io/deployment-name: test-pool1
+    machine-template-hash: 2783415326-xzjmq
+    rke.cattle.io/cluster-name: test
+    rke.cattle.io/control-plane-role: 'true'
+    rke.cattle.io/etcd-role: 'true'
+    rke.cattle.io/rke-machine-pool-name: pool1
+    rke.cattle.io/worker-role: 'true'
+  managedFields:
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:machinedeployment.clusters.x-k8s.io/desired-replicas: {}
+            f:machinedeployment.clusters.x-k8s.io/max-replicas: {}
+            f:machinedeployment.clusters.x-k8s.io/revision: {}
+            f:objectset.rio.cattle.io/applied: {}
+            f:objectset.rio.cattle.io/id: {}
+            f:objectset.rio.cattle.io/owner-gvk: {}
+            f:objectset.rio.cattle.io/owner-name: {}
+            f:objectset.rio.cattle.io/owner-namespace: {}
+          f:labels:
+            f:cattle.io/os: {}
+            f:cluster.x-k8s.io/cluster-name: {}
+            f:cluster.x-k8s.io/control-plane: {}
+            f:cluster.x-k8s.io/deployment-name: {}
+            f:machine-template-hash: {}
+            f:rke.cattle.io/cluster-name: {}
+            f:rke.cattle.io/control-plane-role: {}
+            f:rke.cattle.io/etcd-role: {}
+            f:rke.cattle.io/rke-machine-pool-name: {}
+            f:rke.cattle.io/worker-role: {}
+          f:ownerReferences:
+            k:{"uid":"6343f9bf-3462-48b0-be4a-011006f0793a"}: {}
+        f:spec:
+          f:clusterName: {}
+          f:deletePolicy: {}
+          f:replicas: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                f:cattle.io/os: {}
+                f:cluster.x-k8s.io/cluster-name: {}
+                f:cluster.x-k8s.io/control-plane: {}
+                f:cluster.x-k8s.io/deployment-name: {}
+                f:machine-template-hash: {}
+                f:rke.cattle.io/cluster-name: {}
+                f:rke.cattle.io/control-plane-role: {}
+                f:rke.cattle.io/etcd-role: {}
+                f:rke.cattle.io/rke-machine-pool-name: {}
+                f:rke.cattle.io/worker-role: {}
+            f:spec:
+              f:bootstrap:
+                f:configRef: {}
+              f:clusterName: {}
+              f:infrastructureRef: {}
+      manager: capi-machinedeployment
+      operation: Apply
+      time: '2024-07-05T06:51:13Z'
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:fullyLabeledReplicas: {}
+          f:observedGeneration: {}
+          f:replicas: {}
+          f:selector: {}
+      manager: manager
+      operation: Update
+      subresource: status
+      time: '2024-07-05T06:51:23Z'
+  name: test-pool1-6cd785976bxqs8ch
+  namespace: fleet-default
+  ownerReferences:
+    - apiVersion: cluster.x-k8s.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MachineDeployment
+      name: test-pool1
+      uid: 6343f9bf-3462-48b0-be4a-011006f0793a
+  resourceVersion: '5890290'
+  uid: 171d2fec-e5cf-423c-ac21-d46e69e98c67
+spec:
+  clusterName: test
+  deletePolicy: Oldest
+  replicas: 3
+  selector:
+    matchLabels:
+      cluster.x-k8s.io/cluster-name: test
+      cluster.x-k8s.io/deployment-name: test-pool1
+      machine-template-hash: 2783415326-xzjmq
+  template:
+    metadata:
+      labels:
+        cattle.io/os: linux
+        cluster.x-k8s.io/cluster-name: test
+        cluster.x-k8s.io/control-plane: 'true'
+        cluster.x-k8s.io/deployment-name: test-pool1
+        machine-template-hash: 2783415326-xzjmq
+        rke.cattle.io/cluster-name: test
+        rke.cattle.io/control-plane-role: 'true'
+        rke.cattle.io/etcd-role: 'true'
+        rke.cattle.io/rke-machine-pool-name: pool1
+        rke.cattle.io/worker-role: 'true'
+    spec:
+      bootstrap:
+        configRef:
+          apiVersion: rke.cattle.io/v1
+          kind: RKEBootstrapTemplate
+          name: test-bootstrap-template
+          namespace: fleet-default
+      clusterName: test
+      infrastructureRef:
+        apiVersion: rke-machine.cattle.io/v1
+        kind: HarvesterMachineTemplate
+        name: test-pool1-195e5a45
+        namespace: fleet-default
+status:
+  conditions:
+    - lastTransitionTime: '2024-07-05T06:51:13Z'
+      message: Scaling up MachineSet to 3 replicas (actual 0)
+      reason: ScalingUp
+      severity: Warning
+      status: 'False'
+      type: Ready
+    - lastTransitionTime: '2024-07-05T06:51:14Z'
+      status: 'True'
+      type: MachinesCreated
+    - lastTransitionTime: '2024-07-05T06:51:23Z'
+      status: 'True'
+      type: MachinesReady
+    - lastTransitionTime: '2024-07-05T06:51:13Z'
+      message: Scaling up MachineSet to 3 replicas (actual 0)
+      reason: ScalingUp
+      severity: Warning
+      status: 'False'
+      type: Resized
+  fullyLabeledReplicas: 3
+  observedGeneration: 1
+  replicas: 3
+  selector: >-
+    cluster.x-k8s.io/cluster-name=test,cluster.x-k8s.io/deployment-name=test-pool1,machine-template-hash=2783415326-xzjmq

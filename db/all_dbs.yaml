@@ -1,0 +1,467 @@
+apiVersion: v1
+items:
+- apiVersion: kubedb.com/v1alpha2
+  kind: Postgres
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"kubedb.com/v1alpha2","kind":"Postgres","metadata":{"annotations":{},"name":"pg-demo","namespace":"demo"},"spec":{"coordinator":{"resources":{"requests":{"cpu":"222m","memory":"222Mi"}}},"podTemplate":{"spec":{"resources":{"requests":{"cpu":"555m","memory":"555Mi"}}}},"replicas":3,"storage":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1Gi"}},"storageClassName":"standard"},"storageType":"Durable","terminationPolicy":"WipeOut","version":"15.5"}}
+    creationTimestamp: "2024-07-26T06:38:09Z"
+    finalizers:
+    - kubedb.com
+    generation: 2
+    name: pg-demo
+    namespace: demo
+    resourceVersion: "883383"
+    uid: 88fbb12a-26b1-4f29-a707-1026b4160b22
+  spec:
+    allowedSchemas:
+      namespaces:
+        from: Same
+    arbiter:
+      resources:
+        limits:
+          memory: 256Mi
+        requests:
+          cpu: 200m
+          memory: 256Mi
+          storage: 2Gi
+    authSecret:
+      name: pg-demo-auth
+    autoOps: {}
+    clientAuthMode: md5
+    coordinator:
+      resources:
+        limits:
+          memory: 222Mi
+        requests:
+          cpu: 222m
+          memory: 222Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsGroup: 70
+        runAsNonRoot: true
+        runAsUser: 70
+        seccompProfile:
+          type: RuntimeDefault
+    healthChecker:
+      failureThreshold: 1
+      periodSeconds: 10
+      timeoutSeconds: 10
+    leaderElection:
+      electionTick: 10
+      heartbeatTick: 1
+      maximumLagBeforeFailover: 67108864
+      period: 300ms
+      transferLeadershipInterval: 1s
+      transferLeadershipTimeout: 1m0s
+    podTemplate:
+      controller: {}
+      metadata: {}
+      spec:
+        affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: pg-demo
+                    app.kubernetes.io/managed-by: kubedb.com
+                    app.kubernetes.io/name: postgreses.kubedb.com
+                namespaces:
+                - demo
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: pg-demo
+                    app.kubernetes.io/managed-by: kubedb.com
+                    app.kubernetes.io/name: postgreses.kubedb.com
+                namespaces:
+                - demo
+                topologyKey: failure-domain.beta.kubernetes.io/zone
+              weight: 50
+        containerSecurityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 70
+          runAsNonRoot: true
+          runAsUser: 70
+          seccompProfile:
+            type: RuntimeDefault
+        initContainers:
+        - name: postgres-init-container
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            runAsGroup: 70
+            runAsNonRoot: true
+            runAsUser: 70
+            seccompProfile:
+              type: RuntimeDefault
+        resources:
+          limits:
+            memory: 555Mi
+          requests:
+            cpu: 555m
+            memory: 555Mi
+        securityContext:
+          fsGroup: 70
+          runAsGroup: 70
+          runAsUser: 70
+        serviceAccountName: pg-demo
+    replicas: 3
+    replication:
+      walKeepSize: 1024
+      walLimitPolicy: WALKeepSize
+    sslMode: disable
+    storage:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+      storageClassName: standard
+    storageType: Durable
+    terminationPolicy: WipeOut
+    version: "15.5"
+  status:
+    conditions:
+    - lastTransitionTime: "2024-07-26T06:38:09Z"
+      message: 'The KubeDB operator has started the provisioning of Postgres: demo/pg-demo'
+      reason: DatabaseProvisioningStartedSuccessfully
+      status: "True"
+      type: ProvisioningStarted
+    - lastTransitionTime: "2024-07-26T06:38:33Z"
+      message: All desired replicas are ready.
+      reason: AllReplicasReady
+      status: "True"
+      type: ReplicaReady
+    - lastTransitionTime: "2024-07-26T06:47:03Z"
+      message: 'The PostgreSQL: demo/pg-demo is accepting connection '
+      observedGeneration: 2
+      reason: AcceptingConnection
+      status: "True"
+      type: AcceptingConnection
+    - lastTransitionTime: "2024-07-26T06:38:43Z"
+      message: DB is ready because of server getting Online and Running state
+      observedGeneration: 2
+      reason: AllReplicasReady
+      status: "True"
+      type: Ready
+    - lastTransitionTime: "2024-07-26T06:38:57Z"
+      message: 'The PostgreSQL: demo/pg-demo is successfully provisioned.'
+      observedGeneration: 2
+      reason: DatabaseSuccessfullyProvisioned
+      status: "True"
+      type: Provisioned
+    observedGeneration: 2
+    phase: Ready
+- apiVersion: kubedb.com/v1alpha2
+  kind: MongoDB
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"kubedb.com/v1alpha2","kind":"MongoDB","metadata":{"annotations":{},"name":"mg6","namespace":"demo"},"spec":{"coordinator":{"resources":{"requests":{"cpu":"222m","memory":"222Mi"}}},"podTemplate":{"spec":{"resources":{"requests":{"cpu":"888m","memory":"888Mi"}}}},"replicaSet":{"name":"rs1"},"replicas":3,"storage":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"2Gi"}}},"terminationPolicy":"WipeOut","version":"6.0.12"}}
+    creationTimestamp: "2024-07-26T06:38:06Z"
+    finalizers:
+    - kubedb.com
+    generation: 3
+    name: mg6
+    namespace: demo
+    resourceVersion: "883130"
+    uid: 03d42a00-8dc8-4b94-82d3-0c9c30cdd97a
+  spec:
+    allowedSchemas:
+      namespaces:
+        from: Same
+    authSecret:
+      name: mg6-auth
+    autoOps: {}
+    clusterAuthMode: keyFile
+    coordinator:
+      resources:
+        requests:
+          cpu: 222m
+          memory: 222Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsGroup: 999
+        runAsNonRoot: true
+        runAsUser: 999
+        seccompProfile:
+          type: RuntimeDefault
+    healthChecker:
+      failureThreshold: 1
+      periodSeconds: 10
+      timeoutSeconds: 10
+    keyFileSecret:
+      name: mg6-key
+    podTemplate:
+      controller: {}
+      metadata: {}
+      spec:
+        affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: mg6
+                    app.kubernetes.io/managed-by: kubedb.com
+                    app.kubernetes.io/name: mongodbs.kubedb.com
+                namespaces:
+                - demo
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: mg6
+                    app.kubernetes.io/managed-by: kubedb.com
+                    app.kubernetes.io/name: mongodbs.kubedb.com
+                namespaces:
+                - demo
+                topologyKey: failure-domain.beta.kubernetes.io/zone
+              weight: 50
+        containerSecurityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 999
+          runAsNonRoot: true
+          runAsUser: 999
+          seccompProfile:
+            type: RuntimeDefault
+        livenessProbe:
+          exec:
+            command:
+            - bash
+            - -c
+            - "set -x; if [[ $(mongosh admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME
+              --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin
+              --quiet --eval \"db.adminCommand('ping').ok\" ) -eq \"1\" ]]; then \n
+              \         exit 0\n        fi\n        exit 1"
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - bash
+            - -c
+            - "set -x; if [[ $(mongosh admin --host=localhost  --username=$MONGO_INITDB_ROOT_USERNAME
+              --password=$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase=admin
+              --quiet --eval \"db.adminCommand('ping').ok\" ) -eq \"1\" ]]; then \n
+              \         exit 0\n        fi\n        exit 1"
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            memory: 888Mi
+          requests:
+            cpu: 888m
+            memory: 888Mi
+        securityContext:
+          fsGroup: 999
+        serviceAccountName: mg6
+    replicaSet:
+      name: rs1
+    replicas: 3
+    sslMode: disabled
+    storage:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 2Gi
+    storageEngine: wiredTiger
+    storageType: Durable
+    terminationPolicy: WipeOut
+    version: 6.0.12
+  status:
+    conditions:
+    - lastTransitionTime: "2024-07-26T06:38:06Z"
+      message: 'The KubeDB operator has started the provisioning of MongoDB: demo/mg6'
+      reason: DatabaseProvisioningStartedSuccessfully
+      status: "True"
+      type: ProvisioningStarted
+    - lastTransitionTime: "2024-07-26T06:46:37Z"
+      message: 'The MongoDB: demo/mg6 secondary is synced.'
+      observedGeneration: 3
+      status: "True"
+      type: ReplicaReady
+    - lastTransitionTime: "2024-07-26T06:40:07Z"
+      message: 'The MongoDB: demo/mg6 is accepting client requests.'
+      observedGeneration: 3
+      reason: DatabaseAcceptingConnectionRequest
+      status: "True"
+      type: AcceptingConnection
+    - lastTransitionTime: "2024-07-26T06:40:07Z"
+      message: 'The MongoDB: demo/mg6 is ready.'
+      observedGeneration: 3
+      reason: ReadinessCheckSucceeded
+      status: "True"
+      type: Ready
+    - lastTransitionTime: "2024-07-26T06:40:17Z"
+      message: 'The MongoDB: demo/mg6 is successfully provisioned.'
+      observedGeneration: 3
+      reason: DatabaseSuccessfullyProvisioned
+      status: "True"
+      type: Provisioned
+    observedGeneration: 3
+    phase: Ready
+- apiVersion: kubedb.com/v1alpha2
+  kind: MariaDB
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"kubedb.com/v1alpha2","kind":"MariaDB","metadata":{"annotations":{},"name":"maria","namespace":"demo"},"spec":{"coordinator":{"resources":{"requests":{"cpu":"222m","memory":"222Mi"}}},"podTemplate":{"spec":{"resources":{"requests":{"cpu":"555m","memory":"555Mi"}}}},"replicas":3,"storage":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1Gi"}},"storageClassName":"standard"},"storageType":"Durable","terminationPolicy":"Delete","version":"11.1.3"}}
+    creationTimestamp: "2024-07-26T06:38:12Z"
+    finalizers:
+    - kubedb.com
+    generation: 2
+    name: maria
+    namespace: demo
+    resourceVersion: "881452"
+    uid: 072ca558-1d3e-404e-bfbc-72a8f57a8b87
+  spec:
+    allowedSchemas:
+      namespaces:
+        from: Same
+    authSecret:
+      name: maria-auth
+    autoOps: {}
+    coordinator:
+      resources:
+        requests:
+          cpu: 222m
+          memory: 222Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsGroup: 999
+        runAsNonRoot: true
+        runAsUser: 999
+        seccompProfile:
+          type: RuntimeDefault
+    healthChecker:
+      failureThreshold: 1
+      periodSeconds: 10
+      timeoutSeconds: 10
+    podTemplate:
+      controller: {}
+      metadata: {}
+      spec:
+        affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: maria
+                    app.kubernetes.io/managed-by: kubedb.com
+                    app.kubernetes.io/name: mariadbs.kubedb.com
+                namespaces:
+                - demo
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: maria
+                    app.kubernetes.io/managed-by: kubedb.com
+                    app.kubernetes.io/name: mariadbs.kubedb.com
+                namespaces:
+                - demo
+                topologyKey: failure-domain.beta.kubernetes.io/zone
+              weight: 50
+        containerSecurityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 999
+          runAsNonRoot: true
+          runAsUser: 999
+          seccompProfile:
+            type: RuntimeDefault
+        resources:
+          limits:
+            memory: 555Mi
+          requests:
+            cpu: 555m
+            memory: 555Mi
+        securityContext:
+          fsGroup: 999
+        serviceAccountName: maria
+    replicas: 3
+    storage:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+      storageClassName: standard
+    storageType: Durable
+    terminationPolicy: Delete
+    version: 11.1.3
+    wsrepSSTMethod: rsync
+  status:
+    conditions:
+    - lastTransitionTime: "2024-07-26T06:38:12Z"
+      message: 'The KubeDB operator has started the provisioning of MariaDB: demo/maria'
+      reason: DatabaseProvisioningStartedSuccessfully
+      status: "True"
+      type: ProvisioningStarted
+    - lastTransitionTime: "2024-07-26T06:38:23Z"
+      message: All desired replicas are ready.
+      reason: AllReplicasReady
+      status: "True"
+      type: ReplicaReady
+    - lastTransitionTime: "2024-07-26T06:39:24Z"
+      message: database maria/demo is ready
+      observedGeneration: 2
+      reason: ReadinessCheckSucceeded
+      status: "True"
+      type: Ready
+    - lastTransitionTime: "2024-07-26T06:38:54Z"
+      message: database maria/demo is accepting connection
+      observedGeneration: 2
+      reason: AcceptingConnection
+      status: "True"
+      type: AcceptingConnection
+    - lastTransitionTime: "2024-07-26T06:39:28Z"
+      message: 'The MariaDB: demo/maria is successfully provisioned.'
+      observedGeneration: 2
+      reason: DatabaseSuccessfullyProvisioned
+      status: "True"
+      type: Provisioned
+    observedGeneration: 2
+    phase: Ready
+kind: List
+metadata:
+  resourceVersion: ""
