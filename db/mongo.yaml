@@ -40,18 +40,17 @@ spec:
     name: "rs1"
   podTemplate:
     spec:
-    containers:
-    - name: "mognodb"
-      resources:
+      containers:
+      - name: "mognodb"
         resources:
           requests:
             cpu: 888m
             memory: 888Mi
-    - name: mg-coordinator
-      resources:
-        requests:
-          cpu: 222m
-          memory: 222Mi
+      - name: mg-coordinator
+        resources:
+          requests:
+            cpu: 222m
+            memory: 222Mi
   storage:
     accessModes:
     - ReadWriteOnce

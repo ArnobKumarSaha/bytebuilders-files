@@ -1,0 +1,195 @@
+apiVersion: kubedb.com/v1alpha2
+kind: Druid
+metadata:
+  labels:
+    app.kubernetes.io/instance: druidtest
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: druids.kubedb.com
+  name: druidtest
+  namespace: demo
+spec:
+  deepStorage:
+    configSecret:
+      name: deep-storage-config
+    type: s3
+  deletionPolicy: WipeOut
+  metadataStorage:
+    createTables: true
+    name: mysql-demo
+    namespace: demo
+  monitor:
+    agent: prometheus.io/operator
+    prometheus:
+      exporter:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+      serviceMonitor:
+        interval: 30s
+        labels: {}
+  # sslMode: requireSSL
+  # tls:
+  #   issuerRef:
+  #     apiGroup: cert-manager.io
+  #     kind: ClusterIssuer
+  #     name: cluster-issuer
+  topology:
+    # brokers:
+    #   podTemplate:
+    #     spec:
+    #       containers:
+    #       - name: druid
+    #         resources:
+    #           limits:
+    #             memory: 4Gi
+    #           requests:
+    #             cpu: "1"
+    #             memory: 2Gi
+    #       nodeSelector:
+    #         app: druids.kubedb.com
+    #         instance: druidtest
+    #         namespace: demo
+    #         nodepool: standard-bsv2-family
+    #       podPlacementPolicy:
+    #         name: default
+    #       tolerations:
+    #       - effect: NoSchedule
+    #         key: app
+    #         operator: Equal
+    #         value: druids.kubedb.com
+    #       - effect: NoSchedule
+    #         key: instance
+    #         operator: Equal
+    #         value: druidtest
+    #       - effect: NoSchedule
+    #         key: namespace
+    #         operator: Equal
+    #         value: demo
+    #       - effect: NoSchedule
+    #         key: nodepool
+    #         operator: Equal
+    #         value: standard-bsv2-family
+    #   replicas: 2
+    # coordinators:
+    #   podTemplate:
+    #     spec:
+    #       containers:
+    #       - name: druid
+    #         resources:
+    #           limits:
+    #             memory: 4Gi
+    #           requests:
+    #             cpu: "1"
+    #             memory: 2Gi
+    #       nodeSelector:
+    #         app: druids.kubedb.com
+    #         instance: druidtest
+    #         namespace: demo
+    #         nodepool: standard-bsv2-family
+    #       podPlacementPolicy:
+    #         name: default
+    #       tolerations:
+    #       - effect: NoSchedule
+    #         key: app
+    #         operator: Equal
+    #         value: druids.kubedb.com
+    #       - effect: NoSchedule
+    #         key: instance
+    #         operator: Equal
+    #         value: druidtest
+    #       - effect: NoSchedule
+    #         key: namespace
+    #         operator: Equal
+    #         value: demo
+    #       - effect: NoSchedule
+    #         key: nodepool
+    #         operator: Equal
+    #         value: standard-bsv2-family
+    #   replicas: 2
+    # historicals:
+    #   podTemplate:
+    #     spec:
+    #       containers:
+    #       - name: druid
+    #         resources:
+    #           limits:
+    #             memory: 1Gi
+    #           requests:
+    #             cpu: 250m
+    #             memory: 512Mi
+    #       nodeSelector:
+    #         app: druids.kubedb.com
+    #         instance: druidtest
+    #         namespace: demo
+    #         nodepool: standard-bsv2-family
+    #       podPlacementPolicy:
+    #         name: default
+    #       tolerations:
+    #       - effect: NoSchedule
+    #         key: app
+    #         operator: Equal
+    #         value: druids.kubedb.com
+    #       - effect: NoSchedule
+    #         key: instance
+    #         operator: Equal
+    #         value: druidtest
+    #       - effect: NoSchedule
+    #         key: namespace
+    #         operator: Equal
+    #         value: demo
+    #       - effect: NoSchedule
+    #         key: nodepool
+    #         operator: Equal
+    #         value: standard-bsv2-family
+    #   replicas: 3
+    #   storage:
+    #     resources:
+    #       requests:
+    #         storage: 2Gi
+    #     storageClassName: default
+    middleManagers:
+      podTemplate:
+        spec:
+          containers:
+          - name: druid
+            resources:
+              limits:
+                memory: 1Gi
+              requests:
+                cpu: 250m
+                memory: 512Mi
+          nodeSelector:
+            app: druids.kubedb.com
+            instance: druidtest
+            namespace: demo
+            nodepool: standard-bsv2-family
+          podPlacementPolicy:
+            name: default
+          tolerations:
+          - effect: NoSchedule
+            key: app
+            operator: Equal
+            value: druids.kubedb.com
+          - effect: NoSchedule
+            key: instance
+            operator: Equal
+            value: druidtest
+          - effect: NoSchedule
+            key: namespace
+            operator: Equal
+            value: demo
+          - effect: NoSchedule
+            key: nodepool
+            operator: Equal
+            value: standard-bsv2-family
+      replicas: 3
+      storage:
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: default
+  version: 28.0.1
+  zookeeperRef:
+    name: zk-demo
+    namespace: demo

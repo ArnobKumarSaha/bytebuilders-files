@@ -1,28 +1,58 @@
+# apiVersion: kubedb.com/v1alpha2
+# kind: Postgres
+# metadata:
+#   name: pgc
+#   namespace: demo
+# spec:
+#   replicas: 1
+#   podTemplate:
+#     spec:
+#       initContainers:
+#       - name: postgres-init-container
+#         securityContext:
+#           runAsGroup: 1000660000
+#           runAsUser: 1000660000
+#           capabilities:
+#             drop:
+#             - ALL
+#           runAsNonRoot: true
+#           seccompProfile:
+#             type: RuntimeDefault
+#       containerSecurityContext:
+#         runAsGroup: 1000660000
+#         runAsUser: 1000660000
+#         allowPrivilegeEscalation: false
+#         capabilities:
+#           drop:
+#           - ALL
+#         runAsNonRoot: true
+#         seccompProfile:
+#           type: RuntimeDefault
+#   storage:
+#     accessModes:
+#     - ReadWriteOnce
+#     resources:
+#       requests:
+#         storage: 1Gi
+#     # storageClassName: standard
+#   storageType: Durable
+#   terminationPolicy: WipeOut
+#   version: "15.5-bookworm"
+---
 apiVersion: kubedb.com/v1
 kind: Postgres
 metadata:
-  name: pg-demo
+  name: pgc
   namespace: demo
 spec:
-  # replicas: 1
-  # podTemplate:
-  #   spec:
-  #     resources:
-  #       requests:
-  #         cpu: 555m
-  #         memory: 555Mi
-  # coordinator:
-  #   resources:
-  #     requests:
-  #       cpu: 222m
-  #       memory: 222Mi
+  replicas: 1
   storage:
     accessModes:
     - ReadWriteOnce
     resources:
       requests:
         storage: 1Gi
-    # storageClassName: standard
+    storageClassName: default
   storageType: Durable
-  terminationPolicy: WipeOut
-  version: "15.5"
+  deletionPolicy: WipeOut
+  version: "15.5-bookworm"

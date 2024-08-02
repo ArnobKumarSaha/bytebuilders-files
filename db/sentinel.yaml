@@ -19,6 +19,6 @@ spec:
       - name: redissentinel
         resources:
           requests:
-            cpu: 300m
-            memory: 300Mi
+            cpu: 500m
+            memory: 500Mi
   deletionPolicy: WipeOut

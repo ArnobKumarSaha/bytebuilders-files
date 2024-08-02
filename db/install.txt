@@ -39,8 +39,37 @@ helm upgrade -i kubedb kubedb-v2024.7.11-rc.1.tgz \
   --set-file global.license=/home/arnob/yamls/license/kind.txt \
   --wait --burst-limit=10000 --debug
 
+helm upgrade -i kubedb-ui-server appscode/kubedb-ui-server -n kubedb --create-namespace --version=v0.23.0-rc.1
+
 #  --set kubedb-provisioner.replicaCount=0 \
 
 
 kubectl get pg -n demo pg-demo -o=jsonpath='{range .status.conditions[*]}{.type}{"\t"}{.lastTransitionTime}{.status}{"\n"}{end}'
 watch 'kubectl get pg -n demo pg-demo -oyaml | yq .metadata.resourceVersion'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------ FOR UI ---------------
+helm upgrade -i kubedb kubedb-v2024.7.11-rc.1.tgz \
+  --version v2024.7.11-rc.1 \
+  --set kubedb-kubestash-catalog.enabled=true \
+  --namespace kubedb --create-namespace -f /home/arnob/go/src/github.com/Arnobkumarsaha/bytebuilders-files/db/values.yaml
+
+  arnobkumarsaha/kubedb-provisioner:v0.47.0-rc.1_linux_amd64

@@ -1,0 +1,52 @@
+
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kubedb
+    meta.helm.sh/release-namespace: kubedb
+  labels:
+    app.kubernetes.io/instance: kubedb
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/version: v0.0.6
+    helm.sh/chart: petset-v2024.6.3
+  name: test
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    # caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCakNDQWU2Z0F3SUJBZ0lSQVB0SEIwWkxPL0NiOGNVdm1KajEreDR3RFFZSktvWklodmNOQVFFTEJRQXcKRFRFTE1Ba0dBMVVFQXhNQ1kyRXdIaGNOTWpRd056STVNVEl5TWpFM1doY05NelF3TnpJM01USXlNakUzV2pBTgpNUXN3Q1FZRFZRUURFd0pqWVRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTHVDCi9MbVlBM21wUWhnakJnUnU0OW1pLzVHTXVWUzg0QlBCU1QzdGFJYitNTmtGTU5YREFlWkFZeXhVSFdMQUF1Uk0KajRaZFNRZ1BEU1pmMXFpOXZFRUpKTGwyOHdqRTZwMW50Vm16dEYycEVRMk91bjhzUmJOYUl0TjdYTE51MGZlZQppMzJvZnF5ZE80c0NJZnNsTEpnLzlkY3orUXQreGhhdjRHR3J1S3MzcUloZ2FveEw5cDBzQVpGb2tzOFhxcUk1Cndyalpkdlo3RE9IVElvUnNJQUFFaFlwQW9qOGlCMWpDNTN2K3laU1AyeStFS0NGQzNMV0FVZzBzWmRoUzF5aXQKV2drNStqWmZPK3Z0SXVCTC9adkZ3OEhkbEFRUzBWUVpqZU1WbXJaQk5zWXplS3BqdGd1TnZBR0hJNGdvQnZNMQp2TVdUTGpieVlKZG1SUVppMEljQ0F3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXCk1CUUdDQ3NHQVFVRkJ3TUJCZ2dyQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVcKQkJUR3UremozdWRzcDNrRk1JQ1IrSS9nY0RnOE5UQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFrN2xEcmRGZgp0WFU4N3ArK20wUnBVSmFNdThmbmJ1K2tuU0tJK2xSSDhaMDZ4SHBLUGhTeU5oSG54SUFrd0t0Y0hkNUxyUjF3CnFyM0pRSjdYeEIzSmcxbUhINDZWVXRTSmhMN0dHemhvQ01sV2RLeC9rK3I2S1JPSWlwVnM3djAxTm84d25FOVAKeUE4bFp1K000a3E1ZzZRRG02ODFsVG5NNWRQaVBFYm9RcHVzbjJGbnB0d0xmbFpBais1RXVCR0pWaXVRQzBLMwpRd2JpdlZWVDFyYVc1RXV6MGtTamg3ZytEWEdTL0xsK25MaDQ0TDhwTXI0TzVBY0FvQTgrelRJNjV1b3Fkb29oClZRQjhaZE1MT0pIcS9UYUNVRDNmQVM3Nm9pbUtYQ3JzL09tMlBWMmRhemhQd0RHWGFXcEg4QlVxaXBDVkh1Q1IKNWx4L3lNdSt6U1l3Z0E9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    service:
+      name: kubedb-petset-webhook
+      namespace: kubedb
+      path: /mutate-apps-k8s-appscode-com-v1-petset
+      port: 443
+  failurePolicy: Fail
+  matchPolicy: Equivalent
+  name: petsets.apps.k8s.appscode.com
+  namespaceSelector:
+    matchExpressions:
+    - key: kubernetes.azure.com/managedby
+      operator: NotIn
+      values:
+      - aks
+    - key: control-plane
+      operator: NotIn
+      values:
+      - "true"
+  objectSelector: {}
+  reinvocationPolicy: Never
+  rules:
+  - apiGroups:
+    - apps.k8s.appscode.com
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - petsets
+    scope: '*'
+  sideEffects: None
+  timeoutSeconds: 10

@@ -1,0 +1,92 @@
+# apiVersion: kubedb.com/v1
+# kind: MySQL
+# metadata:
+#   name: mysql-demo
+#   namespace: demo
+# spec:
+#   storage:
+#     accessModes:
+#     - ReadWriteOnce
+#     resources:
+#       requests:
+#         storage: 1Gi
+#     storageClassName: default
+#   storageType: Durable
+#   deletionPolicy: Delete
+#   version: 8.0.36
+---
+apiVersion: kubedb.com/v1
+kind: MySQL
+metadata:
+  # labels:
+  #   app.kubernetes.io/instance: test
+  #   app.kubernetes.io/managed-by: Helm
+  #   app.kubernetes.io/name: mysqls.kubedb.com
+  name: my
+  namespace: demo
+spec:
+  deletionPolicy: WipeOut
+  # monitor:
+  #   agent: prometheus.io/operator
+  #   prometheus:
+  #     exporter:
+  #       resources:
+  #         requests:
+  #           cpu: 100m
+  #           memory: 128Mi
+  #     serviceMonitor:
+  #       interval: 30s
+  #       labels: {}
+  podTemplate:
+    spec:
+      containers:
+      - name: mysql
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 500m
+            memory: 1Gi
+      # nodeSelector:
+      #   app: mysqls.kubedb.com
+      #   instance: test
+      #   namespace: demo
+      #   nodepool: standard-bsv2-family
+      # podPlacementPolicy:
+      #   name: default
+      # tolerations:
+      # - effect: NoSchedule
+      #   key: app
+      #   operator: Equal
+      #   value: mysqls.kubedb.com
+      # - effect: NoSchedule
+      #   key: instance
+      #   operator: Equal
+      #   value: test
+      # - effect: NoSchedule
+      #   key: namespace
+      #   operator: Equal
+      #   value: demo
+      # - effect: NoSchedule
+      #   key: nodepool
+      #   operator: Equal
+      #   value: standard-bsv2-family
+  replicas: 3
+  # requireSSL: true
+  storage:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+    # storageClassName: default
+  storageType: Durable
+  # tls:
+  #   issuerRef:
+  #     apiGroup: cert-manager.io
+  #     kind: ClusterIssuer
+  #     name: cluster-issuer
+  topology:
+    mode: GroupReplication
+  version: 8.0.36

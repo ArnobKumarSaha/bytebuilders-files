@@ -1,0 +1,440 @@
+---
+# Source: petset/templates/rbac/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: hi-petset
+  namespace: default
+  labels:
+    helm.sh/chart: petset-v2024.6.3
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+    app.kubernetes.io/version: "v0.0.6"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: petset/templates/webhook-server/cert.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hi-petset-webhook-cert
+  namespace: default
+  labels:
+    helm.sh/chart: petset-v2024.6.3
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+    app.kubernetes.io/version: "v0.0.6"
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCakNDQWU2Z0F3SUJBZ0lSQVB2cDlLUFRzUlNNaDhKbG11eFpCVUl3RFFZSktvWklodmNOQVFFTEJRQXcKRFRFTE1Ba0dBMVVFQXhNQ1kyRXdIaGNOTWpRd09EQXhNRFEwTnpRMVdoY05NelF3TnpNd01EUTBOelExV2pBTgpNUXN3Q1FZRFZRUURFd0pqWVRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWtyCk5IbEp0ang5SnhVcndXcEJ3NjFmM083dmM0bk5FVE5tU3RCeUZkbkFjQ2xkcG44TnhySTlOSEkyb1Z2K2hFcTQKMXNUQ1lwais3UldXVitlVExSQWZrZ3k5MFE5d2xqUm5IYUdzN0lTMDFGbEwycklYVzh3VGFIS040UW1FQlo1TwpSekovR2llR1RLME54TU40L3RKd3RMRXpNOE5tVFNnU0lTSjB1MENjdVJhbnB6Qkp6dy96N0NwVVN5NzFGTUl5CkhKRTcwc2gvNytTaWFiM3NqWVNrckt4WW5pVlRmSE8vR2lsZldZdTVvaGxGaU5UMlNGQXhPcHhUMDJ4MDNBdE0KcmtNYUxaWjFkaEJ2dUlaZVBIUDB3ekMrTXdDV0tyOWhXaXNBN1RPaXBRbTlaNzFyU1pwTTUvbk9mWEVCUi9wNQpRUUw3N3BrRUl3VjlpUG1DNExNQ0F3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXCk1CUUdDQ3NHQVFVRkJ3TUJCZ2dyQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVcKQkJSbmkrSEJsREFZNjFBRFNKVjlxZkxjcUtuQnJUQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFuL2pHUnFHeApPVDU3Y3NBRjlCTnkvb2hWVTdWdCt2K3pLWVREby9VcnpQV3VOMHUwazR3MURtTmJIWlVUbC9QRnlkNUpBV3p6CithZ1dHaFFuMmtYcmY1UjJrWlU5WWtnejRwNWlvSVJzVDlGN2x5NU1vUnEwU2dqOFMrR2tjSjVxRlNSbTh1eUoKemlZeDJZeHpWY2o0bXZCV05SVGFXSWtRQ1pSQjl3VmtjOHdzR0VNdzMrRWF0bUJOc1h0TXhINi9qOXpDa1hKdgpFd0Q5WkFHT2FvSWkxVjRMeXdJRG1sVUpFeUNJVHRMamRqZ2o1UWQxNmJiT2Q4M250RmFlNGlJUElqZkNzQnhJCjF6dTlQT3VWVE5Nbk9kS3hZVXZUUUZwelVXUit4bXlXUERLeHRBQXVhMGJDNGRycDNXY0NjcVNWWXZKM1EvUEMKUk45alpWS2VyQ2RDYVE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURXakNDQWtLZ0F3SUJBZ0lRQmswMlpORk9sSUdocVJWMkVRNTVJakFOQmdrcWhraUc5dzBCQVFzRkFEQU4KTVFzd0NRWURWUVFERXdKallUQWVGdzB5TkRBNE1ERXdORFEzTkRWYUZ3MHpOREEzTXpBd05EUTNORFZhTUJ3eApHakFZQmdOVkJBTVRFV2hwTFhCbGRITmxkQzEzWldKb2IyOXJNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DCkFROEFNSUlCQ2dLQ0FRRUFzYU1jL01hVFgzNVowTWsvNElpRVNCUGVkclRValZQQ3RLNURTcVNQckNBeFptNlUKRkFqV0xweVphd3ptRmRVNTZUZUNUSjVvY2dOSFVnOGJ3MnpzM1Nxazk4bFVKMUJCU3BkQUwyNjJHaENVWFQwVAoyVVpLa1hiTjJIUWZyY3o0ZkgrNzRRMHlXdlc5T0duV0svZHFOdEZiNTNzdmhIdWZuLzRlYURpbnhHZjdTTjRKClV4SW9ZdUFZQWx0ZGV0eXI5cGlnR2VQcEFKNHYzWWNDT0NQUndoY0NVL0ZZSDY0ejZEVFFpdTBZNzlYakhBMzkKMlJmanRnbVFYWGc2TXZtZ0RNQ1NwMFVJRlA0dFVYMG51RjJBYVljYU05c3Y3OGZ6NFVzMkwyK01TdVlPSU5qWApTNWtmY3hDTTRxUWpHbWI1Vi9sOG9yemo1QmlYNnMvSUxJa0RnUUlEQVFBQm80R21NSUdqTUE0R0ExVWREd0VCCi93UUVBd0lGb0RBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjREFRWUlLd1lCQlFVSEF3SXdEQVlEVlIwVEFRSC8KQkFJd0FEQWZCZ05WSFNNRUdEQVdnQlJuaStIQmxEQVk2MUFEU0pWOXFmTGNxS25CclRCREJnTlZIUkVFUERBNgpnaGxvYVMxd1pYUnpaWFF0ZDJWaWFHOXZheTVrWldaaGRXeDBnaDFvYVMxd1pYUnpaWFF0ZDJWaWFHOXZheTVrClpXWmhkV3gwTG5OMll6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFyYjcrcE5wWGpqbEQ5Y0lmSzlROFZqcU8KRzVpS0Q3bFduOFk3WkVIT0xnaElUc0gzeWJrRzc2ZU1lN01QNzFOM1N2U2h6aWdTcWM0UVVkUlFNVVRHSHROcgo2ZjJwWkV3YmpSTVhFZ2l1Y0tDTU9ySDBuWm1ybmRHUkx2WVp1c3dIMVllOW5RQk84Qkg3L0pQTk5CZWFUVGhKClVjRHJ3SVRHVWJQM1hXdkM3NlltNG9ZUFpyN3ZCc1F4S0Z3R0swVEMvZ2dOemJwQlNySktHZVdjSjBKQjNaV2QKdDhBSFFkZlFUYmpBc0hMZ2l2VTBlWW9XdGxYenF6cWhMc0lrWEZvMWZqeHdvWmx4cnNEOUxTQXRuUEdmZ3JnMgpuei9ZTnNqODRFMm1MN28rNFpwOFFqRWNkTWswSzBsOWYwNFgrVWdFSmNCMFlCZ04ydE1MMlRSa25uTGZSZz09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBc2FNYy9NYVRYMzVaME1rLzRJaUVTQlBlZHJUVWpWUEN0SzVEU3FTUHJDQXhabTZVCkZBaldMcHlaYXd6bUZkVTU2VGVDVEo1b2NnTkhVZzhidzJ6czNTcWs5OGxVSjFCQlNwZEFMMjYyR2hDVVhUMFQKMlVaS2tYYk4ySFFmcmN6NGZIKzc0UTB5V3ZXOU9HbldLL2RxTnRGYjUzc3ZoSHVmbi80ZWFEaW54R2Y3U040SgpVeElvWXVBWUFsdGRldHlyOXBpZ0dlUHBBSjR2M1ljQ09DUFJ3aGNDVS9GWUg2NHo2RFRRaXUwWTc5WGpIQTM5CjJSZmp0Z21RWFhnNk12bWdETUNTcDBVSUZQNHRVWDBudUYyQWFZY2FNOXN2NzhmejRVczJMMitNU3VZT0lOalgKUzVrZmN4Q000cVFqR21iNVYvbDhvcnpqNUJpWDZzL0lMSWtEZ1FJREFRQUJBb0lCQUFLcFpRZk1tZXkyWWZZawo3ZFlaZFpIMjZrQnhHVFk4NlEvNEJINGIxU05KSURSZXQ4MU5ESmlLTkNwTWVTNGVrYzJTelZzRWpLQVl1SHJjClN4ZzBpNkFNd1lnTTlqdllrZ0hpSGs0WHBKYmpaTFc0OHBFdzRuRW5qSklQdTJISlRuZmZHaHVYTFFmNzRxZnoKdmdmT24wTFBCRWVGcXdLYkw1c2dIYWlHSU0xcWt3aWg0ZU13SDBFVlE0MlRjQ2FLdUw0a01HUWlBbnpIdTZ2NQowWGxGN0JnSnZ1OUZrU29rekhheFNYMm5XSU1YZU9hL2xTM2VSVG53aEtwakh4NFNMT0Q0bWJ0V0NOUVNFUlpuCndYN3U3VENxdm5VbFYzVGZXZ1lLRTJJbFFsY2FucU1ZbFoyNGRCTzVDUDUybll1SXRjdm1hbG1TNHRUWUN4TloKbWFvRGx0a0NnWUVBNld0elFRSTkrcG5FTTFpb0ZaUDhhdmJjd0QxZXdXMEc0Q1h4MUNQV0M0TStJRXYxMDRNegp5QVZLV05oek1XOE9DWnpLdEJSMHhvSmF6aytaYmJ4WWFGQk9Pd2wxbVZTZ2J6TG10Z3B1bHR2emc3cU1wbGxsCjNITUw5Ylp4cEhnOVQ5TDU2NFhQZzJkNVlLS1lrZnI2MTE1Y1pYeXIxelRPLzNOWFpFS09ScGNDZ1lFQXd0STYKcmZlclpVSjA0bHZCYmZmYXRJVjhwZWRkWGgyeldTMk1kYjcwUXQzcFVFeXNyTlZSbUZZMCtsSE5TRjNhR1pIbwpFSThUK0NENnVQUmd3SzZhTVM0K2lycU1JWThmWlZ4cG9YZVpYMzN6d0RhZk1mQmZRRUhuU2N6RWJUUG9hM3BrCk5iclNBU1hrSnFWTHNlNVlmcDliMmlaRUNpWHZhcjR6MHhITW9hY0NnWUJPYklhTnFmWXU4MmpESTU5ZG1KbnYKU2ovQzZ4dWgrMEtiSHNTUVZQWCthanIrV09jZ0NHM21YemlxZnhhODNpWW1QcUt3UEVzN3d1SkZmT0w4eHBJaApnaEcycmlmdnUwb244ajhubkh1cGZmN2tIRkpUTmFnT21DekZnbVhPTDRQU0JQMXBEMDA0UmhTMnpncGF5YXRyCm5zMkdYNHZRdzNKa3kxanFXNTQzd3dLQmdRQ2NsdVZiVnlxSUpUWlZpbkthdFJFdzcrb1VYemFJbzA2NGF3ZnUKekNFQWJlVk9DWkx4Q0RTaFFRa3IrZndLSW9WZThBdWE0NldsVnJ5dlZKMC93aGRsV0Vva3IzUmF0UE1EUVpnVgpsRS9PbFNvS1lOenNBc3hNbGF3VmdXU1FjWnhxWnVHTTNqQlZnK014dk1KdXJhaXJmZU1TSUplbm9INGpTZVhWCnpRU3hHUUtCZ0RZOFhxZ3FEVElROUMyZFJIbVJoOGNpeC8xSm1ISGhVQVlPMStRV0NYczlJejU3dGxjWjc1SnUKSmliV0UyRC9OUEhyU3kwSk45QzlxdVFGUVBBekRiSDl0SWY3YytkOWNkaHEzRTlxdk1hTnhSSGloWG1pR09qRQpxUzExQ1QyL2tNbmx4VWpuK0l4V1hsUEhwb2tpNFpMd1BtTWhJUkJVVS9ZYTJqUUpsVUx0Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+---
+# Source: petset/templates/rbac/auth_proxy.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: hi-petset-auth-proxy
+rules:
+  - apiGroups:
+      - authentication.k8s.io
+    resources:
+      - tokenreviews
+    verbs:
+      - create
+  - apiGroups:
+      - authorization.k8s.io
+    resources:
+      - subjectaccessreviews
+    verbs:
+      - create
+---
+# Source: petset/templates/rbac/cluster_role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: hi-petset
+  labels:
+    helm.sh/chart: petset-v2024.6.3
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+    app.kubernetes.io/version: "v0.0.6"
+    app.kubernetes.io/managed-by: Helm
+rules:
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs: ["get", "create", "patch", "update"]
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - mutatingwebhookconfigurations
+      - validatingwebhookconfigurations
+    verbs: ["*"]
+  - apiGroups:
+      - apps.k8s.appscode.com
+    resources:
+      - "*"
+    verbs: ["*"]
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs: ["create", "patch"]
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - persistentvolumeclaims
+    verbs: ["*"]
+  - apiGroups:
+      - apps
+    resources:
+      - controllerrevisions
+    verbs: ["*"]
+---
+# Source: petset/templates/rbac/auth_proxy.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: hi-petset-auth-proxy
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: hi-petset-auth-proxy
+subjects:
+  - kind: ServiceAccount
+    name: hi-petset
+    namespace: default
+---
+# Source: petset/templates/rbac/cluster_role_binding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: hi-petset
+  labels:
+    helm.sh/chart: petset-v2024.6.3
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+    app.kubernetes.io/version: "v0.0.6"
+    app.kubernetes.io/managed-by: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: hi-petset
+subjects:
+- kind: ServiceAccount
+  name: hi-petset
+  namespace: default
+---
+# Source: petset/templates/webhook-server/monitoring/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hi-petset
+  namespace: default
+  labels:
+    helm.sh/chart: petset-v2024.6.3
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+    app.kubernetes.io/version: "v0.0.6"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  ports:
+  - name: https
+    port: 8443
+    protocol: TCP
+    targetPort: https
+  selector:
+    app.kubernetes.io/component: webhook-server
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+---
+# Source: petset/templates/webhook-server/webhook_service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hi-petset-webhook
+  namespace: default
+  labels:
+    helm.sh/chart: petset-v2024.6.3
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+    app.kubernetes.io/version: "v0.0.6"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  selector:
+    app.kubernetes.io/component: webhook-server
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+  ports:
+  - port: 443
+    protocol: TCP
+    targetPort: 9443
+---
+# Source: petset/templates/operator.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hi-petset-operator
+  namespace: default
+  labels:
+    app.kubernetes.io/component: operator
+    helm.sh/chart: petset-v2024.6.3
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+    app.kubernetes.io/version: "v0.0.6"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: operator
+      app.kubernetes.io/name: petset
+      app.kubernetes.io/instance: hi
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/name: petset
+        app.kubernetes.io/instance: hi
+      annotations:
+    spec:
+      
+      serviceAccountName: hi-petset
+      containers:
+      - name: operator
+        image: "ghcr.io/appscode/petset:v0.0.6"
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 65534
+        args:
+          - operator
+        resources:
+          requests:
+            cpu: 100m
+      securityContext:
+        fsGroup: 65535
+      nodeSelector:
+        kubernetes.io/os: linux
+---
+# Source: petset/templates/webhook-server/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hi-petset-webhook-server
+  namespace: default
+  labels:
+    app.kubernetes.io/component: webhook-server
+    helm.sh/chart: petset-v2024.6.3
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+    app.kubernetes.io/version: "v0.0.6"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: webhook-server
+      app.kubernetes.io/name: petset
+      app.kubernetes.io/instance: hi
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: webhook-server
+        app.kubernetes.io/name: petset
+        app.kubernetes.io/instance: hi
+      annotations:
+        checksum/apiregistration.yaml: e2fc99473683a9a2ee5da1d3c09b46ddde8ab94b36c432086e0e918db7fb3a64
+    spec:
+      
+      serviceAccountName: hi-petset
+      containers:
+      - name: webhook-server
+        image: "ghcr.io/appscode/petset:v0.0.6"
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 65534
+        args:
+          - webhook
+          - --webhook-name=hi-petset
+        ports:
+        - name: webhook-server
+          containerPort: 9443
+          protocol: TCP
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        resources:
+          requests:
+            cpu: 100m
+        volumeMounts:
+        - name: serving-cert
+          mountPath: /var/serving-cert
+          readOnly: true
+      - name: kube-rbac-proxy
+        image: "ghcr.io/appscode/kube-rbac-proxy:v0.11.0"
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 65534
+        args:
+        - --secure-listen-address=0.0.0.0:8443
+        - --upstream=http://127.0.0.1:8080/
+        - --logtostderr=true
+        - --v=10
+        ports:
+        - containerPort: 8443
+          name: https
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+      volumes:
+      - name: serving-cert
+        secret:
+          defaultMode: 420
+          secretName: hi-petset-webhook-cert
+      securityContext:
+        fsGroup: 65535
+      nodeSelector:
+        kubernetes.io/os: linux
+---
+# Source: petset/templates/webhook-server/mutating_webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: hi-petset
+  labels:
+    helm.sh/chart: petset-v2024.6.3
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+    app.kubernetes.io/version: "v0.0.6"
+    app.kubernetes.io/managed-by: Helm
+webhooks:
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: hi-petset-webhook
+        namespace: default
+        path: /mutate-apps-k8s-appscode-com-v1-petset
+      caBundle: bm90LWNhLWNlcnQ=
+    failurePolicy: Fail
+    name: petsets.apps.k8s.appscode.com
+    rules:
+      - apiGroups:
+          - apps.k8s.appscode.com
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - petsets
+    sideEffects: None
+---
+# Source: petset/templates/placementpolicies/default.yaml
+apiVersion: apps.k8s.appscode.com/v1
+kind: PlacementPolicy
+metadata:
+  name: default
+spec:
+  zoneSpreadConstraint:
+    maxSkew: 1
+    whenUnsatisfiable: ScheduleAnyway
+  nodeSpreadConstraint:
+    maxSkew: 1
+    whenUnsatisfiable: ScheduleAnyway
+---
+# Source: petset/templates/webhook-server/validating_webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: hi-petset
+  labels:
+    helm.sh/chart: petset-v2024.6.3
+    app.kubernetes.io/name: petset
+    app.kubernetes.io/instance: hi
+    app.kubernetes.io/version: "v0.0.6"
+    app.kubernetes.io/managed-by: Helm
+webhooks:
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: hi-petset-webhook
+        namespace: default
+        path: /validate-apps-k8s-appscode-com-v1-petset
+      caBundle: bm90LWNhLWNlcnQ=
+    failurePolicy: Fail
+    name: petsets.apps.k8s.appscode.com
+    rules:
+      - apiGroups:
+          - apps.k8s.appscode.com
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - petsets
+    sideEffects: None
+---
+# Source: petset/templates/rbac/user_roles.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: appscode:hi-petset:edit
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+rules:
+- apiGroups:
+  - apps.k8s.appscode.com
+  resources:
+  - "*"
+  verbs: ["*"]
+---
+# Source: petset/templates/rbac/user_roles.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: appscode:hi-petset:view
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+rules:
+- apiGroups:
+  - apps.k8s.appscode.com
+  resources:
+  - "*"
+  verbs: ["get", "list", "watch"]
